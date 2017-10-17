@@ -14,10 +14,26 @@ const URL = 'http://localhost:3000';
   const page = await browser.newPage();
   await page.goto(URL, { waitUntil: 'networkidle' });
 
-
   const svgs = await page.evaluate(() => {
     const svgElements = Array.from(document.querySelectorAll('svg'));
-    return svgElements.map(element => ({ id: element.id, content: element.outerHTML }));
+    return svgElements.map(element => {
+      // Cribbed from https://github.com/lukehorvat/computed-style-to-inline-style
+      const computedStyleToInlineStyle = (element) => {
+        Array.prototype.forEach.call(element.children, function(child) {
+          computedStyleToInlineStyle(child);
+        });
+
+        var computedStyle = getComputedStyle(element, null);
+        for (var i = 0; i < computedStyle.length; i++) {
+          var property = computedStyle.item(i);
+          var value = computedStyle.getPropertyValue(property);
+          element.style[property] = value;
+        }
+      }
+
+      computedStyleToInlineStyle(element);
+      return { id: element.id, content: element.outerHTML }
+    });
   });
 
   const writeSvg = promisify(fs.writeFile);
