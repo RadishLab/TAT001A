@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import './App.css';
 import LineChart from './charts/LineChart';
 import GrowingMap from './components/GrowingMap';
 
