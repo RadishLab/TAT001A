@@ -73,9 +73,9 @@ export default class LineChart {
 
     xAxisGroup.append('text')
       .text('Year')
-      .style('font-size', '16px')
       .attr('transform', `translate(${this.width / 2}, 70)`)
-      .attr('fill', 'red');
+      .style('font-size', '16px')
+      .style('fill', 'red');
 
     const yAxis = d3axis.axisLeft(this.y);
     const yAxisGroup = this.root.append('g')
@@ -86,8 +86,8 @@ export default class LineChart {
         .attr('class', 'axis-title')
       .attr('transform', `translate(-${this.margin.left * .7}, ${this.height / 2}) rotate(-90)`)
         .style('text-anchor', 'middle')
-        .attr('fill', 'red')
         .style('font-size', '16px')
+        .style('fill', 'red')
         .text('Tonnes');
 
     this.parent.select('.axis-y .domain')
@@ -142,7 +142,6 @@ export default class LineChart {
         .attr('transform', `translate(${xOffset}, 0)`);
       legendItem.append('text')
         .text(label)
-        .style('fill', 'black')
         .style('font-size', '12px')
         .style('font-family', 'Arial')
         .attr('transform', `translate(${lineWidth + 5}, 0)`);

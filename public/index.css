@@ -4,6 +4,10 @@
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+text {
+  fill: #585857;
+}
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
