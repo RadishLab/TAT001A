@@ -104,6 +104,7 @@ export default class LineChart {
     yGuideLineGroup.append('path')
         .style('fill', 'none')
         .style('stroke', '#EDE7DF')
+        .style('stroke-width', 2)
       .attr('d', d => yGuideLine(d));
   }
 
