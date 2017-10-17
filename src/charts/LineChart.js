@@ -1,13 +1,6 @@
-import * as d3array from 'd3-array';
 import * as d3axis from 'd3-axis';
-import * as d3collection from 'd3-collection';
-import { csv as d3csv } from 'd3-request';
-import * as d3scale from 'd3-scale';
 import * as d3selection from 'd3-selection';
 import * as d3shape from 'd3-shape';
-import * as d3timeFormat from 'd3-time-format';
-
-import { schemeCategoryProblem } from '../colors';
 
 export default class LineChart {
   constructor(parent, height, width) {
@@ -18,42 +11,21 @@ export default class LineChart {
     this.root = this.parent.append('g')
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
-    this.x = d3scale.scaleTime()
-      .range([0, this.width]);
+    this.loadData()
+      .then(data => this.data = data)
+      .then(() => {
+        this.x = this.createXScale();
+        this.y = this.createYScale();
+        this.colors = this.createZScale();
+        this.line = d3shape.line()
+          .x(d => this.x(new Date(d.key)))
+          .y(d => this.y(d.value));
+        this.render();
+      });
+  }
 
-    this.y = d3scale.scaleLinear()
-      .range([this.height, 0]);
-
-    this.colors = d3scale.scaleOrdinal(schemeCategoryProblem);
-
-    this.line = d3shape.line()
-      .x(d => this.x(new Date(d.key)))
-      .y(d => this.y(d.value));
-
-    d3csv('data/growing.csv', (csvData) => {
-      const filteredData = csvData
-        .filter(row => row.element === 'Production')
-        .map(row => {
-          row.year = d3timeFormat.timeParse('%Y')(row.year);
-          return row;
-        });
-      const nest = d3collection.nest()
-        .key(d => d.incomegroup)
-        .key(d => d.year)
-          .rollup(leaves => d3array.sum(leaves, d => d.value))
-        .entries(filteredData);
-      this.data = nest;
-
-      // Flatten nest to get extents
-      const values = this.data.reduce((valueArray, value) => valueArray.concat(value.values), []);
-      this.x.domain(d3array.extent(values, d => new Date(d.key)));
-
-      let yExtent = d3array.extent(values, d => d.value);
-      yExtent[0] = Math.min(0, yExtent[0]);
-      this.y.domain(yExtent);
-
-      this.render();
-    });
+  loadData() {
+    // noop, must be implemented by subclass
   }
 
   renderAxes() {
@@ -72,7 +44,7 @@ export default class LineChart {
       .attr('transform', (d, e) => `translate(${this.x(d)}, 15) rotate(-90)`);
 
     xAxisGroup.append('text')
-      .text('Year')
+      .text(this.xLabel)
       .attr('transform', `translate(${this.width / 2}, 70)`)
       .style('font-size', '16px')
       .style('fill', 'red');
@@ -88,7 +60,7 @@ export default class LineChart {
         .style('text-anchor', 'middle')
         .style('font-size', '16px')
         .style('fill', 'red')
-        .text('Tonnes');
+        .text(this.yLabel);
 
     this.parent.select('.axis-y .domain')
       .attr('stroke', 'none');
@@ -132,13 +104,7 @@ export default class LineChart {
     const lineWidth = 25;
     let xOffset = 0;
 
-    const legendItems = [
-      { label: 'Low Income Countries', value: 'LOW' },
-      { label: 'Middle Income Countries', value: 'MIDDLE' },
-      { label: 'High Income Countries', value: 'HIGH' },
-    ];
-
-    legendItems.forEach(({ label, value }) => {
+    this.legendItems.forEach(({ label, value }) => {
       const legendItem = legend.append('g')
         .attr('transform', `translate(${xOffset}, 0)`);
       legendItem.append('text')
