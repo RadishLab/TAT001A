@@ -32,6 +32,7 @@ class WorldMap extends Component {
     return (
       <div className="world-map">
         <svg
+          id='1-map'
           ref={(svg) => { this.svgRoot = svg; }}
           style={{ height: `${this.props.height}px`, width: `${this.props.width}` }}
           width={this.props.width}
