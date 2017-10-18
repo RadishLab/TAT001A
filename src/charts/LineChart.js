@@ -1,10 +1,10 @@
-import * as d3axis from 'd3-axis';
-import * as d3selection from 'd3-selection';
-import * as d3shape from 'd3-shape';
+import { axisBottom, axisLeft } from 'd3-axis';
+import { select } from 'd3-selection';
+import { line } from 'd3-shape';
 
 export default class LineChart {
   constructor(parent, height, width) {
-    this.parent = d3selection.select(parent);
+    this.parent = select(parent);
     this.margin = {top: 20, right: 20, bottom: 150, left: 100};
     this.width = width - this.margin.left - this.margin.right;
     this.height = height - this.margin.top - this.margin.bottom;
@@ -17,7 +17,7 @@ export default class LineChart {
         this.x = this.createXScale();
         this.y = this.createYScale();
         this.colors = this.createZScale();
-        this.line = d3shape.line()
+        this.line = line()
           .x(d => this.x(new Date(d.key)))
           .y(d => this.y(d.value));
         this.render();
@@ -29,7 +29,7 @@ export default class LineChart {
   }
 
   renderAxes() {
-    const xAxis = d3axis.axisBottom(this.x);
+    const xAxis = axisBottom(this.x);
     const xAxisGroup = this.root.append('g')
       .attr('class', 'axis axis-x');
     xAxisGroup
@@ -49,7 +49,7 @@ export default class LineChart {
       .style('font-size', '16px')
       .style('fill', 'red');
 
-    const yAxis = d3axis.axisLeft(this.y);
+    const yAxis = axisLeft(this.y);
     const yAxisGroup = this.root.append('g')
       .attr('class', 'axis axis-y');
     yAxisGroup
@@ -66,7 +66,7 @@ export default class LineChart {
       .attr('stroke', 'none');
     this.parent.select('.axis-y').selectAll('.tick line').remove();
 
-    const yGuideLine = d3shape.line()
+    const yGuideLine = line()
       .x(d => this.x(d[0]))
       .y(d => this.y(d[1]));
     const yGuideLines = this.root.append('g');
@@ -94,7 +94,7 @@ export default class LineChart {
   }
 
   renderLegend() {
-    const legendLine = d3shape.line()
+    const legendLine = line()
       .x(d => d[0])
       .y(d => d[1]);
     const legend = this.root.append('g')
