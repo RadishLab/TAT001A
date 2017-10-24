@@ -8,8 +8,8 @@ import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
 
 export default class Chart1 extends LineChart {
-  constructor(parent, height, width) {
-    super(parent, height, width);
+  constructor(parent, width, height) {
+    super(parent, width, height);
     this.xLabel = 'Year';
     this.yLabel = 'Tonnes';
     this.legendItems = [
@@ -41,7 +41,7 @@ export default class Chart1 extends LineChart {
   createXScale() {
     const values = this.data.reduce((valueArray, value) => valueArray.concat(value.values), []);
     return scaleTime()
-      .range([0, this.width])
+      .range([0, this.chartWidth])
       .domain(extent(values, d => new Date(d.key)));
   }
 
@@ -49,8 +49,9 @@ export default class Chart1 extends LineChart {
     const values = this.data.reduce((valueArray, value) => valueArray.concat(value.values), []);
     let yExtent = extent(values, d => d.value);
     yExtent[0] = Math.min(0, yExtent[0]);
+    console.log(this.chartHeight);
     return scaleLinear()
-      .range([this.height, 0])
+      .range([this.chartHeight, 0])
       .domain(yExtent);
   }
 
