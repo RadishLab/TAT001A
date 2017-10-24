@@ -7,6 +7,7 @@ export default class LineChart {
     this.width = width;
     this.height = height;
     this.parent = select(parent)
+      .classed('line-chart', true)
       .attr('height', this.height)
       .attr('width', this.width)
       .attr('viewBox', `0 0 ${this.width} ${this.height}`);
@@ -41,49 +42,35 @@ export default class LineChart {
   renderAxes() {
     const xAxis = axisBottom(this.x);
     const xAxisGroup = this.root.append('g')
-      .attr('class', 'axis axis-x');
+      .classed('axis axis-x', true);
     xAxisGroup
       .attr('transform', `translate(0, ${this.chartHeight})`)
       .call(xAxis);
 
-    this.parent.select('.axis-x .domain')
-      .attr('stroke', 'none');
-    this.parent.select('.axis-x').selectAll('.tick line').remove();
+    this.parent.select('.axis-x .domain');
     this.parent.select('.axis-x').selectAll('.tick')
-      .attr('text-anchor', 'middle')
       .attr('transform', (d, e) => `translate(${this.x(d)}, 5)`);
     this.parent.select('.axis-x').selectAll('.tick text')
-      .style('font-size', '6px')
       .attr('transform', (d, i, nodes) => {
         return `translate(0, -${nodes[i].getBBox().height / 2})`;
       });
 
     let xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().width + 15;
     xAxisGroup.append('text')
+      .classed('axis-title', true)
       .text(this.xLabel)
-      .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`)
-      .style('font-size', '6px')
-      .style('fill', 'red');
+      .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
 
     const yAxis = axisLeft(this.y)
       .ticks(5);
     const yAxisGroup = this.root.append('g')
-      .attr('class', 'axis axis-y');
+      .classed('axis axis-y', true);
     yAxisGroup
       .call(yAxis)
       .append('text')
-        .attr('class', 'axis-title')
+        .classed('axis-title', true)
         .attr('transform', `translate(-${this.margin.left * .8}, ${this.chartHeight / 2}) rotate(-90)`)
-        .style('text-anchor', 'middle')
-        .style('font-size', '6px')
-        .style('fill', 'red')
         .text(this.yLabel);
-
-    this.parent.select('.axis-y .domain')
-      .attr('stroke', 'none');
-    this.parent.select('.axis-y').selectAll('.tick line').remove();
-    this.parent.select('.axis-y').selectAll('.tick text')
-      .style('font-size', '6px');
 
     const yGuideLine = line()
       .x(d => this.x(d[0]))
@@ -91,11 +78,8 @@ export default class LineChart {
     const yGuideLines = this.root.append('g');
     const yGuideLineGroup = yGuideLines.selectAll('.y-guide-line')
       .data(this.y.ticks(5).map(tick => [[this.x.domain()[0], tick], [this.x.domain()[1], tick]]))
-      .enter().append('g').attr('class', 'y-guide-line');
+      .enter().append('g').classed('y-guide-line', true);
     yGuideLineGroup.append('path')
-        .style('fill', 'none')
-        .style('stroke', '#EDE7DF')
-        .style('stroke-width', 1)
       .attr('d', d => yGuideLine(d));
   }
 
@@ -103,12 +87,10 @@ export default class LineChart {
     const line = this.root.selectAll('.line')
       .data(this.data)
       .enter().append('g')
-        .attr('class', 'line');
+        .classed('line', true);
 
     line.append('path')
-      .style('fill', 'none')
       .style('stroke', d => this.colors(d.key))
-      .style('stroke-width', 1)
       .attr('d', d => this.line(d.values));
   }
 
@@ -121,7 +103,7 @@ export default class LineChart {
       .x(d => d[0])
       .y(d => d[1]);
     const legend = this.parent.append('g')
-      .attr('class', 'legend')
+      .classed('legend', true)
       .attr('transform', () => {
         let xOffset = 10;
         let yOffset = this.chartHeight + 40; // TODO generalize
@@ -137,12 +119,10 @@ export default class LineChart {
         .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
         .text(label)
-        .style('font-size', '6px')
         .attr('transform', `translate(${lineWidth + 5}, 0)`);
       legendItem.append('path')
         .datum([[0, 0], [lineWidth, 0]])
         .style('stroke', this.colors(value))
-        .style('stroke-width', 2)
         .attr('transform', 'translate(0, -2)')
         .attr('d', d => legendLine(d));
 

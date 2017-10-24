@@ -1,16 +1,56 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 *, text {
-  font-family: 'Source Sans Pro', sans-serif;
-}
+  font-family: 'Source Sans Pro', sans-serif; }
 
 text {
-  fill: #585857;
-}
+  fill: #585857; }
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-}
+  font-family: sans-serif; }
+
+.y-guide-line path {
+  fill: none;
+  stroke: #EDE7DF;
+  stroke-width: 1; }
+
+.axis-y .axis-title {
+  fill: red;
+  font-size: 6px;
+  text-anchor: middle; }
+
+.axis-y .domain {
+  stroke: none; }
+
+.axis-y .tick {
+  font-size: 6px; }
+
+.axis-y .tick line {
+  display: none; }
+
+.axis-x .axis-title {
+  fill: red;
+  font-size: 6px;
+  text-anchor: middle; }
+
+.axis-x .domain {
+  stroke: none; }
+
+.axis-x .tick {
+  font-size: 6px;
+  text-anchor: middle; }
+
+.axis-x .tick line {
+  display: none; }
+
+.legend {
+  font-size: 6px; }
+
+.legend path {
+  stroke-width: 2; }
+
+.line-chart .line {
+  fill: none;
+  stroke-width: 1; }

@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import '_variables';
+
+*, text {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+text {
+  fill: $text-color;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.y-guide-line path {
+  fill: none;
+  stroke: $guide-line-color;
+  stroke-width: 1;
+}
+
+.axis-y .axis-title {
+  fill: red;
+  font-size: $export-font-size;
+  text-anchor: middle;
+}
+
+.axis-y .domain {
+  stroke: none;
+}
+
+.axis-y .tick {
+  font-size: $export-font-size;
+}
+
+.axis-y .tick line {
+  display: none;
+}
+
+.axis-x .axis-title {
+  fill: red;
+  font-size: $export-font-size;
+  text-anchor: middle;
+}
+
+.axis-x .domain {
+  stroke: none;
+}
+
+.axis-x .tick {
+  font-size: $export-font-size;
+  text-anchor: middle;
+}
+
+.axis-x .tick line {
+  display: none;
+}
+
+.legend {
+  font-size: $export-font-size;
+}
+
+.legend path {
+  stroke-width: 2;
+}
+
+// Import specific charts here so we can override above styles
+@import '_lineChart';

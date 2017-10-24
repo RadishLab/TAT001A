@@ -20,9 +20,11 @@
     "topojson-client": "^3.0.0"
   },
   "scripts": {
+    "build-css": "node-sass-chokidar --include-path ./node_modules ./src/styles/index.scss -o ./public",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./node_modules ./src/styles/index.scss -o ./public --watch --recursive",
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p start-js",
-    "build": "npm react-scripts build",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "make-svgs": "babel-node scripts/tosvg.js"
@@ -30,6 +32,7 @@
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
+    "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.1",
     "puppeteer": "^0.12.0"
   }
