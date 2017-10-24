@@ -28,8 +28,8 @@ export default class LineChart {
         this.y = this.createYScale();
         this.colors = this.createZScale();
         this.line = line()
-          .x(d => this.x(new Date(d.key)))
-          .y(d => this.y(d.value));
+          .x(this.lineXAccessor.bind(this))
+          .y(this.lineYAccessor.bind(this));
         this.render();
       });
   }

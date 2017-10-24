@@ -38,6 +38,14 @@ export default class Chart1 extends LineChart {
     });
   }
 
+  lineXAccessor(d) {
+    return this.x(new Date(d.key));
+  }
+
+  lineYAccessor(d) {
+    return this.y(d.value);
+  }
+
   createXScale() {
     const values = this.data.reduce((valueArray, value) => valueArray.concat(value.values), []);
     return scaleTime()
@@ -49,7 +57,6 @@ export default class Chart1 extends LineChart {
     const values = this.data.reduce((valueArray, value) => valueArray.concat(value.values), []);
     let yExtent = extent(values, d => d.value);
     yExtent[0] = Math.min(0, yExtent[0]);
-    console.log(this.chartHeight);
     return scaleLinear()
       .range([this.chartHeight, 0])
       .domain(yExtent);
