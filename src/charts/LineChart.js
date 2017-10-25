@@ -1,4 +1,5 @@
 import { axisBottom, axisLeft } from 'd3-axis';
+import { format } from 'd3-format';
 import { select } from 'd3-selection';
 import { line } from 'd3-shape';
 
@@ -14,8 +15,8 @@ export default class LineChart {
     this.margin = {
       top: 0,
       right: 0,
-      bottom: this.legendOrientation() === 'horizontal' ? 40 : 64,
-      left: 45
+      bottom: this.legendOrientation() === 'horizontal' ? 40 : 60,
+      left: 30
     };
     this.chartWidth = this.width - this.margin.left - this.margin.right;
     this.chartHeight = this.height - this.margin.top - this.margin.bottom;
@@ -62,14 +63,15 @@ export default class LineChart {
       .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
 
     const yAxis = axisLeft(this.y)
-      .ticks(5);
+      .ticks(5)
+      .tickFormat(format('.2s'));
     const yAxisGroup = this.root.append('g')
       .classed('axis axis-y', true);
     yAxisGroup
       .call(yAxis)
       .append('text')
         .classed('axis-title', true)
-        .attr('transform', `translate(-${this.margin.left * .8}, ${this.chartHeight / 2}) rotate(-90)`)
+        .attr('transform', `translate(-${(this.margin.left - 6)}, ${this.chartHeight / 2}) rotate(-90)`)
         .text(this.yLabel);
 
     const yGuideLine = line()
@@ -105,7 +107,7 @@ export default class LineChart {
     const legend = this.parent.append('g')
       .classed('legend', true)
       .attr('transform', () => {
-        let xOffset = 10;
+        let xOffset = 15;
         let yOffset = this.chartHeight + 40; // TODO generalize
         return `translate(${xOffset}, ${yOffset})`;
       });
