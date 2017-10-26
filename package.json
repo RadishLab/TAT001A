@@ -28,7 +28,8 @@
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "make-svgs": "babel-node scripts/tosvg.js"
+    "make-svgs": "babel-node scripts/tosvg.js",
+    "gather-data": "babel-node scripts/gatherdata.js"
   },
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
