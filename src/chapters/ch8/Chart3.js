@@ -17,13 +17,6 @@ export class Chart3 extends BarChart {
     ];
   }
 
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = 40;
-    margin.top = 5;
-    return margin;
-  }
-
   loadData() {
     return new Promise((resolve, reject) => {
       csv('data/8-3.csv', (csvData) => {

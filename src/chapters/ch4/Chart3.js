@@ -13,13 +13,6 @@ export class Chart3 extends BarChart {
     this.legendItems = [];
   }
 
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = 40;
-    margin.top = 5;
-    return margin;
-  }
-
   loadData() {
     return new Promise((resolve, reject) => {
       csv('data/4-3.csv', (csvData) => {
