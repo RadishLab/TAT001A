@@ -5,10 +5,6 @@
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-text {
-  fill: $text-color;
-}
-
 body {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
@@ -16,15 +12,51 @@ body {
   font-family: sans-serif;
 }
 
+.tick {
+  color: $text-color;
+
+  &.date {
+    color: $tick-text-color;
+
+    text {
+      fill: $tick-text-color;
+    }
+  }
+
+  &.number {
+    color: $tick-number-color;
+
+    text {
+      fill: $tick-number-color;
+    }
+  }
+
+  &.text {
+    color: $tick-text-color;
+
+    text {
+      fill: $tick-text-color;
+    }
+  }
+
+  tspan {
+    text-anchor: middle;
+  }
+}
+
+.axis-x .tick {
+  text-align: center;
+}
+
 .y-guide-line path {
   fill: none;
   stroke: $guide-line-color;
-  stroke-width: 1;
+  stroke-width: 0.5;
 }
 
 .axis-y .axis-title {
-  fill: red;
-  font-size: $export-font-size;
+  fill: $axis-label-color;
+  font-size: $axis-label-font-size;
   text-anchor: middle;
 }
 
@@ -41,8 +73,8 @@ body {
 }
 
 .axis-x .axis-title {
-  fill: red;
-  font-size: $export-font-size;
+  fill: $axis-label-color;
+  font-size: $axis-label-font-size;
   text-anchor: middle;
 }
 
@@ -61,6 +93,10 @@ body {
 
 .legend {
   font-size: $export-font-size;
+
+  text {
+    fill: $text-color;
+  }
 }
 
 .legend path {

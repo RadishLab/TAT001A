@@ -2,11 +2,10 @@ import { max } from 'd3-array';
 import { geoPath } from 'd3-geo';
 import { geoGinzburg5 } from 'd3-geo-projection';
 import { json as d3json } from 'd3-request';
-import { scaleSequential } from 'd3-scale';
-import { interpolateOranges } from 'd3-scale-chromatic';
 import { select } from 'd3-selection';
 import * as topojson from 'topojson-client';
 
+import { mapNoData, mapCircleOverlay } from '../colors';
 import { loadCachedData } from '../dataService';
 
 export default class WorldMap {
@@ -14,18 +13,27 @@ export default class WorldMap {
     this.parent = select(parent)
       .attr('height', height)
       .attr('width', width);
+    this.parent
+      .append('defs')
+      .append('pattern')
+        .attr('id', 'dots')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', 4)
+        .attr('height', 4)
+      .append('circle')
+        .attr('cx', 2)
+        .attr('cy', 2)
+        .attr('r', 0.25)
+        .attr('fill', mapCircleOverlay);
     this.projection = geoGinzburg5();
     this.path = geoPath()
       .projection(this.projection);
     this.root = this.parent.append('g');
 
-    // TODO color ramps
-    this.colorScale = scaleSequential(interpolateOranges);
-
     Promise.all([this.loadCountries(), this.loadJoinData()])
       .then(([countries, joinData]) => {
         this.countriesGeojson = this.join(countries, joinData);
-        this.maxValue = max(this.countriesGeojson.features, d => d.properties.joined ? parseFloat(d.properties.joined.value) : undefined);
+        this.maxValue = max(this.countriesGeojson.features, d => d.properties.joined ? parseFloat(d.properties.joined[this.valueField]) : undefined);
         this.render();
       });
   }
@@ -40,16 +48,31 @@ export default class WorldMap {
 
   renderPaths() {
     this.countries = this.root.append('g');
-    this.countries.selectAll('path')
+    const country = this.countries.selectAll('.country')
       .data(this.countriesGeojson.features)
-      .enter().append('path')
-        .style('fill', d => {
-          if (d.properties.joined) {
-            return this.colorScale(d.properties.joined.value / this.maxValue);
+      .enter()
+        .append('g')
+        .classed('country', true);
+
+    country.append('path')
+      .style('fill', d => {
+        if (d.properties.joined) {
+          return this.colorScale(d.properties.joined[this.valueField] / this.maxValue);
+        }
+        return mapNoData;
+      })
+      .attr('d', this.path);
+
+    country.append('path')
+      .style('fill', d => {
+        if (d.properties.joined) {
+          if (d.properties.joined[this.symbolField]) {
+            return 'url(#dots)';
           }
-          return 'lightgray';
-        })
-        .attr('d', this.path);
+        }
+        return 'none';
+      })
+      .attr('d', this.path);
   }
 
   renderLabels() {

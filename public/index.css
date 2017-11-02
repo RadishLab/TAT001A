@@ -2,23 +2,40 @@
 *, text {
   font-family: 'Source Sans Pro', sans-serif; }
 
-text {
-  fill: #585857; }
-
 body {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
   padding: 0;
   font-family: sans-serif; }
 
+.tick {
+  color: #585857; }
+  .tick.date {
+    color: #585857; }
+    .tick.date text {
+      fill: #585857; }
+  .tick.number {
+    color: #585857; }
+    .tick.number text {
+      fill: #585857; }
+  .tick.text {
+    color: #585857; }
+    .tick.text text {
+      fill: #585857; }
+  .tick tspan {
+    text-anchor: middle; }
+
+.axis-x .tick {
+  text-align: center; }
+
 .y-guide-line path {
   fill: none;
   stroke: #EDE7DF;
-  stroke-width: 1; }
+  stroke-width: 0.5; }
 
 .axis-y .axis-title {
-  fill: red;
-  font-size: 6px;
+  fill: #a29d98;
+  font-size: 7px;
   text-anchor: middle; }
 
 .axis-y .domain {
@@ -31,8 +48,8 @@ body {
   display: none; }
 
 .axis-x .axis-title {
-  fill: red;
-  font-size: 6px;
+  fill: #a29d98;
+  font-size: 7px;
   text-anchor: middle; }
 
 .axis-x .domain {
@@ -47,10 +64,12 @@ body {
 
 .legend {
   font-size: 6px; }
+  .legend text {
+    fill: #585857; }
 
 .legend path {
   stroke-width: 2; }
 
 .line-chart .line {
   fill: none;
-  stroke-width: 1; }
+  stroke-width: 1.5; }

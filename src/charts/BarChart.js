@@ -6,38 +6,29 @@ import isNumber from 'lodash.isnumber';
 import isString from 'lodash.isstring';
 
 import Chart from './Chart';
+import wrap from '../wrap';
 
-export default class LineChart extends Chart {
+
+export default class BarChart extends Chart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.parent
-      .classed('line-chart', true)
+      .classed('bar-chart', true);
     this.loadData()
       .then(data => this.data = data)
-      .then(data => this.onDataLoaded(data));
-  }
-
-  onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
-    this.colors = this.createZScale();
-    this.line = line()
-      .x(this.lineXAccessor.bind(this))
-      .y(this.lineYAccessor.bind(this));
-    this.render();
-  }
-
-  createMargin() {
-    return {
-      top: 0,
-      right: 0,
-      bottom: this.legendOrientation() === 'horizontal' ? 40 : 60,
-      left: 30
-    };
+      .then(() => {
+        this.x = this.createXScale();
+        this.y = this.createYScale();
+        this.colors = this.createZScale();
+        this.render();
+      });
   }
 
   renderAxes() {
     const xAxis = axisBottom(this.x);
+    if (this.xAxisTickFormat) {
+      xAxis.tickFormat(this.xAxisTickFormat);
+    }
     const xAxisGroup = this.root.append('g')
       .classed('axis axis-x', true);
     xAxisGroup
@@ -46,23 +37,27 @@ export default class LineChart extends Chart {
 
     this.parent.select('.axis-x .domain');
     this.parent.select('.axis-x').selectAll('.tick')
-      .attr('transform', (d, e) => `translate(${this.x(d)}, 5)`)
+      .attr('transform', (d, e) => `translate(${this.x(d) + this.x.bandwidth() / 2}, 5)`)
       .classed('date', d => isDate(d))
       .classed('number', d => isNumber(d))
       .classed('text', d => isString(d));
     this.parent.select('.axis-x').selectAll('.tick text')
+      .call(wrap, this.x.bandwidth())
       .attr('transform', (d, i, nodes) => {
         return `translate(0, -${nodes[i].getBBox().height / 2})`;
       });
 
-    let xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().width + 15;
-    xAxisGroup.append('text')
-      .classed('axis-title', true)
-      .text(this.xLabel)
-      .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
+    // TODO move to chart?
+    if (this.xLabel) {
+      let xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().width + 15;
+      xAxisGroup.append('text')
+        .classed('axis-title', true)
+        .text(this.xLabel)
+        .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
+    }
 
     const yAxis = axisLeft(this.y)
-      .ticks(5)
+      .ticks(this.yTicks)
       .tickFormat(this.yAxisTickFormat ? this.yAxisTickFormat : format('.2s'));
     const yAxisGroup = this.root.append('g')
       .classed('axis axis-y', true);
@@ -77,26 +72,29 @@ export default class LineChart extends Chart {
       .classed('number', d => isNumber(d))
       .classed('text', d => isString(d));
 
+    // TODO make this more generic, pull it up to Chart
     const yGuideLine = line()
-      .x(d => this.x(d[0]))
-      .y(d => this.y(d[1]));
+      .x(d => d[0])
+      .y(d => d[1]);
     const yGuideLines = this.root.append('g');
     const yGuideLineGroup = yGuideLines.selectAll('.y-guide-line')
-      .data(this.y.ticks(5).map(tick => [[this.x.domain()[0], tick], [this.x.domain()[1], tick]]))
+      .data(this.y.ticks(this.yTicks).map(tick => [
+        [0, this.y(tick)],
+        [this.chartWidth, this.y(tick)]
+      ]))
       .enter().append('g').classed('y-guide-line', true);
     yGuideLineGroup.append('path')
       .attr('d', d => yGuideLine(d));
   }
 
-  renderLines() {
-    const line = this.root.selectAll('.line')
+  createBarGroups() {
+    return this.root.selectAll('.bar')
       .data(this.data)
-      .enter().append('g')
-        .classed('line', true);
+      .enter().append('g');
+  }
 
-    line.append('path')
-      .style('stroke', d => this.colors(d.key))
-      .attr('d', d => this.line(d.values));
+  renderBars() {
+    this.createBarGroups();
   }
 
   legendOrientation() {
@@ -104,6 +102,7 @@ export default class LineChart extends Chart {
   }
 
   renderLegend() {
+    // TODO move up to Chart?
     const legendLine = line()
       .x(d => d[0])
       .y(d => d[1]);
@@ -111,7 +110,7 @@ export default class LineChart extends Chart {
       .classed('legend', true)
       .attr('transform', () => {
         let xOffset = 15;
-        let yOffset = this.chartHeight + 40; // TODO generalize
+        let yOffset = this.chartHeight + 25;
         return `translate(${xOffset}, ${yOffset})`;
       });
 
@@ -141,6 +140,6 @@ export default class LineChart extends Chart {
 
   render() {
     super.render();
-    this.renderLines();
+    this.renderBars();
   }
 }
