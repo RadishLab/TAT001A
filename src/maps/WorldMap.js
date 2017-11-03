@@ -18,12 +18,12 @@ export default class WorldMap {
       .append('pattern')
         .attr('id', 'dots')
         .attr('patternUnits', 'userSpaceOnUse')
-        .attr('width', 2.5)
-        .attr('height', 2.5)
+        .attr('width', 2)
+        .attr('height', 2)
       .append('circle')
         .attr('cx', 2)
         .attr('cy', 2)
-        .attr('r', 0.25)
+        .attr('r', 0.22)
         .attr('fill', mapCircleOverlay);
     this.projection = geoGinzburg5();
     this.path = geoPath()
