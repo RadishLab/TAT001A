@@ -7,6 +7,14 @@ const INPUT_DATA_DIR = '$HOME/Dropbox/TA6/Chapters';
 const OUTPUT_DATA_DIR = './public/data';
 
 const FILES = {
+  '1 Growing/TA6 Growing Map - Print - 2014 Production by Tonne.xlsx': '1-map.csv',
+  '1 Growing/TA6 Growing - Inset 1 - Production by HDI group.xlsx': '1-1.csv',
+  '1 Growing/TA6 Growing - Inset 3 - Farmer profits - 5-country.xlsx': '1-3.csv',
+  '1 Growing/TA6 Growing - Inset 4 - Sales of other crops.xlsx': '1-4.csv',
+  '2 Manufacturing/TA6 Manufacturing Data-Main Map Largest Factories.xlsx': '2-map.csv',
+  '2 Manufacturing/TA6 Manufacturing Data-Insert 4 - Factory Consolidation.xlsx': '2-4.csv',
+  '3 Marketing/TA6 Marketing Data - Map.xlsx': '3-map.csv',
+  '3 Marketing/TA6 Marketing Data - Insert 1.xlsx': '3-1.csv',
   '4 Prevalence/TA6 Prevalence Inset 1_Distribution of smokers by HDI.xlsx': '4-1.csv',
   '4 Prevalence/TA6 Prevalence Inset 2_Trend.xlsx': '4-2.csv',
   '4 Prevalence/TA6 Prevalence Inset 3-Monitoring.xlsx': '4-3.csv',
