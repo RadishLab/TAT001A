@@ -43,6 +43,8 @@ const FILES = {
   '12 Taxes/TA6 Tax Inset 2 tax is powerful.xlsx': '12-2.csv',
   '12 Taxes/TA6 Tax Inset 3 substitution.xlsx': '12-3.csv',
   '12 Taxes/TA6 Tax Inset 4 tax and illicit.xlsx': '12-4.csv',
+  '13 Smokefree/High achieving smoke-free countries.xlsx': '13-map.csv',
+  '13 Smokefree/Smokefree inset 1.xlsx': '13-1.csv',
 };
 
 const execPromise = promisify(exec);
