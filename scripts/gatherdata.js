@@ -36,6 +36,9 @@ const FILES = {
   '10 Global Strategy/TA6 Strategy MAP Map 2017.xlsx': '10-map.csv',
   '10 Global Strategy/TA6 Strategy Inset 1.xlsx': '10-1.csv',
   '10 Global Strategy/TA6 Strategy Inset 3_HDI classification.xlsx': '10-3.csv',
+  '11 Quitting/TA6 Quitting Map.xlsx': '11-map.csv',
+  '11 Quitting/TA6 Quitting Inset 2 Smokers want to quit_2017.xlsx': '11-2.csv',
+  '11 Quitting/TA6 Quitting Inset 3 Risk of Lung Cancer Declines After Quitting.csv': '11-3.csv',
 };
 
 const execPromise = promisify(exec);
