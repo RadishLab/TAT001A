@@ -16,16 +16,23 @@ export default class Chart1 extends LineChart {
       { label: 'Low Income Countries', value: 'LOW' },
       { label: 'Middle Income Countries', value: 'MIDDLE' },
       { label: 'High Income Countries', value: 'HIGH' },
+      { label: 'China', value: 'MED' },
     ];
+  }
+
+  createMargin() {
+    const margin = super.createMargin();
+    margin.bottom = this.legendOrientation() === 'horizontal' ? 40 : 65;
+    return margin;
   }
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/growing.csv', (csvData) => {
+      csv('data/1-1.csv', (csvData) => {
         const filteredData = csvData
-          .filter(row => row.element === 'Production')
           .map(row => {
-            row.year = timeParse('%Y')(row.year);
+            row.value = +row.Tonnes;
+            row.year = timeParse('%Y')(row.Year);
             return row;
           });
         const nestedData = nest()
