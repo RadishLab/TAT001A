@@ -14,10 +14,8 @@ export default class Map1 extends WorldMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(dataUrl('growing.csv'), (csvData) => {
-        // Just get 2014 production rows 
-        const filteredCsvData = csvData.filter(row => row.year === '2014' && row.element === 'Production');
-        resolve(filteredCsvData);
+      csv(dataUrl('1-map.csv'), (csvData) => {
+        resolve(csvData);
       });
     });
   }
