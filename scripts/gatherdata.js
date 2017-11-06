@@ -39,6 +39,10 @@ const FILES = {
   '11 Quitting/TA6 Quitting Map.xlsx': '11-map.csv',
   '11 Quitting/TA6 Quitting Inset 2 Smokers want to quit_2017.xlsx': '11-2.csv',
   '11 Quitting/TA6 Quitting Inset 3 Risk of Lung Cancer Declines After Quitting.csv': '11-3.csv',
+  '12 Taxes/TA6 Tax Map.xlsx': '12-map.csv',
+  '12 Taxes/TA6 Tax Inset 2 tax is powerful.xlsx': '12-2.csv',
+  '12 Taxes/TA6 Tax Inset 3 substitution.xlsx': '12-3.csv',
+  '12 Taxes/TA6 Tax Inset 4 tax and illicit.xlsx': '12-4.csv',
 };
 
 const execPromise = promisify(exec);
