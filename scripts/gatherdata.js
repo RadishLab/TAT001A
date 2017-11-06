@@ -33,6 +33,9 @@ const FILES = {
   '9 Societal Harms/TA6 Societal Inset2 Jamaica.xlsx': '9-2.csv',
   '9 Societal Harms/TA6 Societal Inset3.xlsx': '9-3.csv',
   '9 Societal Harms/TA6 Societal Map.xlsx': '9-map.csv',
+  '10 Global Strategy/TA6 Strategy MAP Map 2017.xlsx': '10-map.csv',
+  '10 Global Strategy/TA6 Strategy Inset 1.xlsx': '10-1.csv',
+  '10 Global Strategy/TA6 Strategy Inset 3_HDI classification.xlsx': '10-3.csv',
 };
 
 const execPromise = promisify(exec);
