@@ -1,14 +1,19 @@
 import { csv } from 'd3-request';
-import { scaleSequential } from 'd3-scale';
-import { interpolateOranges } from 'd3-scale-chromatic';
+import { scaleLinear } from 'd3-scale';
 
+import { schemeCategoryProblemMap } from '../../colors';
 import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map1 extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.colorScale = scaleSequential(interpolateOranges);
+    this.colorScale = scaleLinear()
+      .domain([0, 1])
+      .range([
+        schemeCategoryProblemMap[0],
+        schemeCategoryProblemMap.slice(-1)[0],
+      ]);
     this.valueField = 'value';
   }
 
