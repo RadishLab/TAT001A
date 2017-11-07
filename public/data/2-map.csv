@@ -1,15 +1,15 @@
-Company,City,Country,Products,Production,Unit,Source,Note
-JTI,St. Petersburg,RUS,Cigarettes,100000000000,sticks,Euromonitor,This is a guess!
-Hongyun Honghe,"Kunming, Yunnan",CHN,Cigarettes,105652000000,sticks,China Tobacco Yearbook 2015,"Yunyan, Hongshancha"
-Yuxi Hongta,"Yuxi, Yunnan",CHN,Cigarettes,105652000000,sticks,China Tobacco Yearbook 2015,"Yuxi, Hongtashan, Hongmei, Citadels sez this was largest in the world at some point"
-China Tobacco Hunan,"Changsha, Hunan",CHN,Cigarettes,109000000000,sticks,Euromonitor,BaiSha
-Altria,"Richmond, VA",USA,Cigarettes,124000000000,sticks,Euromonitor,PM USA
-Shanghai Tobacco,Shanghai,CHN,Cigarettes,86759000000,sticks,China Tobacco Yearbook 2015,
-BAT,"Winston-Salem, NC",USA,Cigarettes,90000000000,sticks,Euromonitor,Formerly RJR
-PMI,Krasnodar,RUS,Cigarettes,70000000000,sticks,Euromonitor,capacity
-Imperial,"Greensboro, NC",USA,Cigarettes,73000000000,sticks,Euromonitor,Formerly Lorillard
-Hongyun Honghe,"Honghe, Yunnan",CHN,Cigarettes,74400000000,sticks,Euromonitor,Honghe
-Swisher,"Jacksonville, FL",USA,Cigars,5000000000,Cigars,swisher.com,Claims title of world's largest cigar factory
-Multiple,Shenzen,CHN,E-Cigarettes,,,China Tobacco Yearbook 2015,90% of global production
-PMI,Bologna,ITA,Heat-Not-Burn,,,Euromonitor,World's largest facility part of global 100 billion stick capacity
-Mangalore Ganesh Beedi Works,Tamil Nadu,IND,Bidi,20000000000,sticks,"CTFK, 2010",Have 30% of the manufactured sector share
+Company,City,Country,Latitude,Longitude,Products,Production,Unit,Source,Note
+JTI,St. Petersburg,RUS,59.95,30.3,Cigarettes,100000000000,sticks,Euromonitor,This is a guess!
+Hongyun Honghe,"Kunming, Yunnan",CHN,25.1,102.7,Cigarettes,105652000000,sticks,China Tobacco Yearbook 2015,"Yunyan, Hongshancha"
+Yuxi Hongta,"Yuxi, Yunnan",CHN,24.35,102.5,Cigarettes,105652000000,sticks,China Tobacco Yearbook 2015,"Yuxi, Hongtashan, Hongmei, Citadels sez this was largest in the world at some point"
+China Tobacco Hunan,"Changsha, Hunan",CHN,28.2,113,Cigarettes,109000000000,sticks,Euromonitor,BaiSha
+Altria,"Richmond, VA",USA,35.5,-77.5,Cigarettes,124000000000,sticks,Euromonitor,PM USA
+Shanghai Tobacco,Shanghai,CHN,31.2,121.5,Cigarettes,86759000000,sticks,China Tobacco Yearbook 2015,
+BAT,"Winston-Salem, NC",USA,36.1,-80.3,Cigarettes,90000000000,sticks,Euromonitor,Formerly RJR
+PMI,Krasnodar ,RUS,45,39,Cigarettes,70000000000,sticks,Euromonitor,capacity
+Imperial,"Greensboro, NC",USA,36.1,-79.8,Cigarettes,73000000000,sticks,Euromonitor,Formerly Lorillard
+Hongyun Honghe,"Honghe, Yunnan",CHN,20.2,106.6,Cigarettes,74400000000,sticks,Euromonitor,Honghe
+Swisher,"Jacksonville, FL",USA,30.3,-81.7,Cigars,5000000000,Cigars,swisher.com,Claims title of world's largest cigar factory
+Multiple,Shenzen,CHN,22.6,114.1,E-Cigarettes,,,China Tobacco Yearbook 2015,90% of global production
+PMI,Bologna,ITA,44.5,11.4,Heat-Not-Burn,,,Euromonitor,World's largest facility part of global 100 billion stick capacity
+Mangalore Ganesh Beedi Works,Tamil Nadu,IND,13.1,80.3,Bidi,20000000000,sticks,"CTFK, 2010",Have 30% of the manufactured sector share
