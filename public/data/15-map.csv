@@ -1,4 +1,4 @@
-COUNTRY,ISO3 CODE,REGION,Organization,Prevent20 Status (Members = #fc0d1b; Friends = #fd9426),"Prevent20 Status (0 - none, 1 - Friend, 2 - Member)"
+COUNTRY,ISO3,REGION,Organization,Prevent20 Status (Members = #fc0d1b; Friends = #fd9426),"Prevent20 Status (0 - none, 1 - Friend, 2 - Member)"
 Afghanistan,AFG,EMRO,,,0
 Albania,ALB,EURO,,,0
 Algeria,DZA,AFRO,,,0
@@ -208,6 +208,3 @@ West Bank/Gaza Strip,PSE,,,,0
 Yemen,YEM,EMRO,,,0
 Zambia,ZMB,AFRO,Zambian Cancer Society,Member,2
 Zimbabwe,ZWE,AFRO,The Cancer Association of Zimbabwe,Member,2
-,,,,,
-,,,,,
-,,,,,
