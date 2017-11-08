@@ -1,81 +1,81 @@
 Crop,Current/Former,Up/low-land,Dry/wet,Sales
 Cassava/Sweet Potato,current ,upland ,dry,31.95682
-Cassava/Sweet Potato,current ,lowland,dry,173.22045500000002
-Cassava/Sweet Potato,current ,upland ,dry,50.68052
-Cassava/Sweet Potato,current ,lowland,dry,35.29373
-Cassava/Sweet Potato,former ,upland ,wet,50.14227
-Cassava/Sweet Potato,former ,lowland,wet,66.26278
+Cassava/Sweet Potato,current ,lowland,dry,173.220455
+Cassava/Sweet Potato,current ,upland ,wet,50.68052
+Cassava/Sweet Potato,current ,lowland,wet,35.29373
+Cassava/Sweet Potato,former ,upland ,dry,50.14227
+Cassava/Sweet Potato,former ,lowland,dry,66.26278
 Cassava/Sweet Potato,former ,upland ,wet,
 Cassava/Sweet Potato,former ,lowland,wet,465.8077
 Ground Nut,current ,upland ,dry,
 Ground Nut,current ,lowland,dry,34.41541
-Ground Nut,current ,upland ,dry,256.4285
-Ground Nut,current ,lowland,dry,103.7711
-Ground Nut,former ,upland ,wet,
-Ground Nut,former ,lowland,wet,122.7783
+Ground Nut,current ,upland ,wet,256.4285
+Ground Nut,current ,lowland,wet,103.7711
+Ground Nut,former ,upland ,dry,
+Ground Nut,former ,lowland,dry,122.7783
 Ground Nut,former ,upland ,wet,.
 Ground Nut,former ,lowland,wet,243.6821
 Cashew and other Nuts,current ,upland ,dry,84.13726
 Cashew and other Nuts,current ,lowland,dry,118.08695
-Cashew and other Nuts,current ,upland ,dry,111.95743999999999
-Cashew and other Nuts,current ,lowland,dry,169.27585
-Cashew and other Nuts,former ,upland ,wet,332.01682999999997
-Cashew and other Nuts,former ,lowland,wet,82.8104
+Cashew and other Nuts,current ,upland ,wet,111.95744
+Cashew and other Nuts,current ,lowland,wet,169.27585
+Cashew and other Nuts,former ,upland ,dry,332.01683
+Cashew and other Nuts,former ,lowland,dry,82.8104
 Cashew and other Nuts,former ,upland ,wet,94.6986
 Cashew and other Nuts,former ,lowland,wet,248.6494
 Corn,current ,upland ,dry,143.5563
 Corn,current ,lowland,dry,174.7707
-Corn,current ,upland ,dry,68.54068
-Corn,current ,lowland,dry,127.279
-Corn,former ,upland ,wet,211.4854
-Corn,former ,lowland,wet,455.3192
+Corn,current ,upland ,wet,68.54068
+Corn,current ,lowland,wet,127.279
+Corn,former ,upland ,dry,211.4854
+Corn,former ,lowland,dry,455.3192
 Corn,former ,upland ,wet,106.1758
 Corn,former ,lowland,wet,276.135
 Chili,current ,upland ,dry,406.1651
 Chili,current ,lowland,dry,244.6381
-Chili,current ,upland ,dry,832.8907
-Chili,current ,lowland,dry,445.9938
-Chili,former ,upland ,wet,803.3321
-Chili,former ,lowland,wet,395.3955
+Chili,current ,upland ,wet,832.8907
+Chili,current ,lowland,wet,445.9938
+Chili,former ,upland ,dry,803.3321
+Chili,former ,lowland,dry,395.3955
 Chili,former ,upland ,wet,1505.513
 Chili,former ,lowland,wet,766.9737
 Shallot,current ,upland ,dry,
 Shallot,current ,lowland,dry,
-Shallot,current ,upland ,dry,209.0724
-Shallot,current ,lowland,dry,1692.006
-Shallot,former ,upland ,wet,
-Shallot,former ,lowland,wet,
+Shallot,current ,upland ,wet,209.0724
+Shallot,current ,lowland,wet,1692.006
+Shallot,former ,upland ,dry,
+Shallot,former ,lowland,dry,
 Shallot,former ,upland ,wet,
 Shallot,former ,lowland,wet,
 Banana,current ,upland ,dry,
 Banana,current ,lowland,dry,
-Banana,current ,upland ,dry,11.62176
-Banana,current ,lowland,dry,
-Banana,former ,upland ,wet,
-Banana,former ,lowland,wet,
+Banana,current ,upland ,wet,11.62176
+Banana,current ,lowland,wet,
+Banana,former ,upland ,dry,
+Banana,former ,lowland,dry,
 Banana,former ,upland ,wet,.
 Banana,former ,lowland,wet,
 Green Vegetables,current ,upland ,dry,123.2469
 Green Vegetables,current ,lowland,dry,61.725035
-Green Vegetables,current ,upland ,dry,163.988955
-Green Vegetables,current ,lowland,dry,577.48635
-Green Vegetables,former ,upland ,wet,596.89815
-Green Vegetables,former ,lowland,wet,324.13620000000003
+Green Vegetables,current ,upland ,wet,163.988955
+Green Vegetables,current ,lowland,wet,577.48635
+Green Vegetables,former ,upland ,dry,596.89815
+Green Vegetables,former ,lowland,dry,324.1362
 Green Vegetables,former ,upland ,wet,845.9687
 Green Vegetables,former ,lowland,wet,
 Paddy,current ,upland ,dry,
 Paddy,current ,lowland,dry,411.5531
-Paddy,current ,upland ,dry,523.0092
-Paddy,current ,lowland,dry,527.5726
-Paddy,former ,upland ,wet,268.0503
-Paddy,former ,lowland,wet,233.763
+Paddy,current ,upland ,wet,523.0092
+Paddy,current ,lowland,wet,527.5726
+Paddy,former ,upland ,dry,268.0503
+Paddy,former ,lowland,dry,233.763
 Paddy,former ,upland ,wet,600.2413
 Paddy,former ,lowland,wet,483.4538
 Other,current ,upland ,dry,24.593145
 Other,current ,lowland,dry,29.604931
-Other,current ,upland ,dry,122.6767355
-Other,current ,lowland,dry,241.6701
-Other,former ,upland ,wet,282.627945
-Other,former ,lowland,wet,908.2233
+Other,current ,upland ,wet,122.6767355
+Other,current ,lowland,wet,241.6701
+Other,former ,upland ,dry,282.627945
+Other,former ,lowland,dry,908.2233
 Other,former ,upland ,wet,2531.4818
-Other,former ,lowland,wet,638.2257666666666
+Other,former ,lowland,wet,638.225766666667
