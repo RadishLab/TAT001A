@@ -30,7 +30,11 @@ export default class WorldMap {
       .projection(this.projection);
     this.root = this.parent.append('g');
 
-    Promise.all([this.loadCountries(), this.loadJoinData()])
+    this.loadData();
+  }
+
+  loadData() {
+    return Promise.all([this.loadCountries(), this.loadJoinData()])
       .then(([countries, joinData]) => {
         this.countriesGeojson = this.join(countries, joinData);
         this.maxValue = max(this.countriesGeojson.features, d => d.properties.joined ? parseFloat(d.properties.joined[this.valueField]) : undefined);

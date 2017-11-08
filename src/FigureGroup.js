@@ -9,9 +9,13 @@ export default function FigureGroup({ title, chapter, figures }) {
       {figures.map(figure => {
         let renderedFigure;
         if (figure.type === 'map') {
+          let size = 'map';
+          if (figure.area === 'Europe') {
+            size = 'map-europe';
+          }
           renderedFigure = (
             <div key={figure.name}>
-              <Figure id={`${chapter}-${figure.name}`} figureClass={figure.figureClass} size='map'/>
+              <Figure id={`${chapter}-${figure.name}`} figureClass={figure.figureClass} size={size} />
             </div>
           );
         } else {
