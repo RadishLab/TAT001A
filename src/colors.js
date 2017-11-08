@@ -31,6 +31,15 @@ export const schemeCategorySolution = [
   '#87BEB8'
 ];
 
+export const schemeCategorySolutionMap = [
+  '#D3D8EC',
+  '#A7B6DD',
+  '#7F99CF',
+  '#5A81C3',
+  '#356CB9',
+  '#2F4FA9'
+];
+
 // General map-related colors
 export const mapNoData = '#D3D3D3';
 export const mapCircleOverlay = '#fff';
