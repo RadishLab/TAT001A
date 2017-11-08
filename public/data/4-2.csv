@@ -1,5 +1,13 @@
-country,Survey year1,Prevalence in survey1 (%),Survey year2,Prevalence in survey2 (%),Projected prevalence in 2015 (%)
-Niger,2007,8.7,2012,14,19
-Congo,2003,13,2011-12,19.8,43.1
-Lesotho,2004,15,2009,34,54.2
-Mauritania,2003,27.4,2006,34.1,47.3
+country,year,value,,,,
+Niger,2007,8.7,,,,
+Niger,2012,14,,,,
+Niger,2015,19,,,,
+Congo,2003,13,,,,
+Congo,2011,19.8,,,,
+Congo,2015,43.1,,,,
+Lesotho,2004,15,,,,
+Lesotho,2009,34,,,,
+Lesotho,2015,54.2,,,,
+Mauritania,2003,27.4,,,,
+Mauritania,2006,34.1,,,,
+Mauritania,2015,47.3,,,,
