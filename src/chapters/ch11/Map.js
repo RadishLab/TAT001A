@@ -10,6 +10,7 @@ export default class Map extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.colorScale = scaleOrdinal(schemeCategorySolutionMap.reverse());
+    this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
   }
 

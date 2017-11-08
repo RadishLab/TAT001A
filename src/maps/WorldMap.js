@@ -61,7 +61,11 @@ export default class WorldMap {
     country.append('path')
       .style('fill', d => {
         if (d.properties.joined) {
-          return this.colorScale(d.properties.joined[this.valueField] / this.maxValue);
+          const value = d.properties.joined[this.valueField];
+          if (this.colorScaleType && this.colorScaleType === 'ordinal') {
+            return this.colorScale(value);
+          }
+          return this.colorScale(value / this.maxValue);
         }
         return mapNoData;
       })

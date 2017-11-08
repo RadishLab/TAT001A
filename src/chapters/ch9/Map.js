@@ -1,3 +1,4 @@
+import { set } from 'd3-collection';
 import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
@@ -9,6 +10,7 @@ export default class Map9 extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
+    this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
     this.symbolField = 'Symbol (Total economic cost>10000 PPP$ million)';
   }
@@ -16,7 +18,10 @@ export default class Map9 extends WorldMap {
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(dataUrl('9-map.csv'), (csvData) => {
-        resolve(csvData);
+        const filteredData = csvData.filter(d => d[this.valueField] !== '');
+        const domain = set(filteredData.map(d => d[this.valueField])).values().sort().reverse();
+        this.colorScale.domain(domain);
+        resolve(filteredData);
       });
     });
   }

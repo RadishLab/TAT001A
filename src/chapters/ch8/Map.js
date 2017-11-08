@@ -1,3 +1,4 @@
+import { set } from 'd3-collection';
 import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
@@ -9,6 +10,7 @@ export default class Map extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
+    this.colorScaleType = 'ordinal';
     this.valueField = 'KeyCode';
     this.symbolField = 'Symbol (Female ≥15%)';
   }
@@ -16,7 +18,10 @@ export default class Map extends WorldMap {
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(dataUrl('8-map.csv'), (csvData) => {
-        resolve(csvData);
+        const filteredData = csvData.filter(d => d[this.valueField] !== '');
+        const domain = set(filteredData.map(d => d[this.valueField])).values().sort();
+        this.colorScale.domain(domain);
+        resolve(filteredData);
       });
     });
   }
