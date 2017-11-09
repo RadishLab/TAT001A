@@ -1,0 +1,61 @@
+Country ,ISO3,Industry/Individual suing Government,Gov/indiv. Suing tobacco industry 
+Argentina,ARG,1,0
+Australia,AUS,1,1
+Belgium,BEL,1,0
+Bhutan,BTN,1,0
+Brazil,BRA,1,1
+Canada,CAN,1,1
+Central African Republic,CAF,1,0
+China,CHN,1,0
+Colombia,COL,1,0
+Costa Rica,CRI,1,1
+Dominican Republic,DOM,1,0
+European Union ,#N/A,1,0
+Fiji,FJI,1,1
+Finland,FIN,0,1
+France,FRA,1,1
+Germany,DEU,1,0
+Guatemala,GTM,1,0
+Hong Kong,HKG,1,1
+Hungary,HUN,1,1
+India,IND,1,1
+Indonesia,IDN,1,1
+Ireland,IRL,1,1
+Israel,ISR,1,1
+Italy,ITA,1,1
+Japan,JPN,1,1
+Kenya,KEN,1,0
+Lesotho,LSO,0,0
+Lithuania,LTU,1,0
+Macedonia,MKD,1,0
+Mali,MLI,0,1
+Marshall Islands,MHL,0,1
+Mexico,MEX,1,0
+Moldova,MDA,0,0
+Nepal,NPL,0,1
+Netherlands,NLD,1,1
+New Zealand,NZL,1,1
+Northern Ireland,IRL,0,1
+Norway,NOR,1,0
+Pakistan,PAK,1,1
+Panama,PAN,1,0
+Paraguay,PRY,1,0
+Peru,PER,1,0
+Philippines,PHL,1,0
+Romania,ROU,0,0
+Russia,RUS,0,0
+Singapore,SGP,0,1
+Solvenia,SVN,0,0
+South Africa,ZAF,1,1
+Sri Lanka,LKA,1,1
+Switzerland,CHE,1,0
+Taiwan,TWN,0,1
+Thailand,THA,1,1
+Tonga,TON,0,1
+Turkey,TUR,1,1
+Uganda,UGA,1,1
+Ukraine,UKR,1,1
+United Kingdom,GBR,1,1
+United States,USA,1,1
+Uruguay,URY,1,0
+Venezuela,VEN,0,1

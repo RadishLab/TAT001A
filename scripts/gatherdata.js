@@ -24,6 +24,7 @@ const FILES = {
   '5 Secondhand/TA6 Secondhand Inset 3-SHS in Europe.xlsx': '5-3.csv',
   '5 Secondhand/TA6 Secondhand Inset 4-SHS by socioeconomic status.xlsx': '5-4.csv',
   '6 Health/DALYs from tobacco.xlsx': '6-map.csv',
+  '7 Comorbidities/Map - Comorbidities - TB deaths due to tobacco.xlsx': '7-map.csv',
   '8 Deaths/TA6 Deaths Inset 1-Death by WHO region.xlsx': '8-1.csv',
   '8 Deaths/TA6 Deaths Inset 2-Cancer deaths in USA.xlsx': '8-2.csv',
   '8 Deaths/TA6 Deaths Inset 3-Attributable Deaths by Region.xlsx': '8-3.csv',
@@ -47,6 +48,7 @@ const FILES = {
   '13 Smokefree/Smokefree inset 1.xlsx': '13-1.csv',
   '15 Partnerships/TA6 Map_Partnerships.xlsx': '15-map.csv',
   '16 ENDS/TA6 ENDS Map (Market Access).xlsx': '16-map.csv',
+  '18 Countering the Industry/Map - Countering the Industry - Country litigation.xlsx': '18-map.csv',
 };
 
 const execPromise = promisify(exec);
