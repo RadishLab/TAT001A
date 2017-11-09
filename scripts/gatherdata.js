@@ -25,6 +25,8 @@ const FILES = {
   '5 Secondhand/TA6 Secondhand Inset 4-SHS by socioeconomic status.xlsx': '5-4.csv',
   '6 Health/DALYs from tobacco.xlsx': '6-map.csv',
   '7 Comorbidities/Map - Comorbidities - TB deaths due to tobacco.xlsx': '7-map.csv',
+  '7 Comorbidities/inset1-data-ESTIMATES.xlsx': '7-1.csv',
+  '7 Comorbidities/inset3-data-ESTIMATES.xlsx': '7-3.csv',
   '8 Deaths/TA6 Deaths Inset 1-Death by WHO region.xlsx': '8-1.csv',
   '8 Deaths/TA6 Deaths Inset 2-Cancer deaths in USA.xlsx': '8-2.csv',
   '8 Deaths/TA6 Deaths Inset 3-Attributable Deaths by Region.xlsx': '8-3.csv',
