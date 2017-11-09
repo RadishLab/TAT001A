@@ -7,7 +7,7 @@ import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 import { schemeCategorySolution } from '../../colors';
 import BarChart from '../../charts/BarChart';
 
-export default class Chart3 extends BarChart {
+export default class Chart1 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.yLabel = 'Number of Countries';
