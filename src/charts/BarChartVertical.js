@@ -1,5 +1,3 @@
-import { line } from 'd3-shape';
-
 import Chart from './Chart';
 
 /*
@@ -30,18 +28,7 @@ export default class BarChartVertical extends Chart {
   }
 
   renderGuidelines() {
-    const xGuideLine = line()
-      .x(d => d[0])
-      .y(d => d[1]);
-    const xGuideLines = this.root.append('g');
-    const xGuideLineGroup = xGuideLines.selectAll('.x-guide-line')
-      .data(this.x.ticks(this.xTicks).map(tick => [
-        [this.x(tick), 0],
-        [this.x(tick), this.chartHeight]
-      ]))
-      .enter().append('g').classed('x-guide-line', true);
-    xGuideLineGroup.append('path')
-      .attr('d', d => xGuideLine(d));
+    this.renderXGuidelines();
   }
 
   renderLegend() {

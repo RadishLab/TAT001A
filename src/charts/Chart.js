@@ -125,6 +125,25 @@ export default class Chart {
       .attr('d', d => yGuideLine(d));
   }
 
+  renderXGuidelines() {
+    const xGuideLine = line()
+      .x(d => d[0])
+      .y(d => d[1]);
+    const xGuideLines = this.root.append('g');
+    const xGuideLineGroup = xGuideLines.selectAll('.x-guide-line')
+      .data(this.xTicks().map(tick => [
+        [this.x(tick), 0],
+        [this.x(tick), this.chartHeight]
+      ]))
+      .enter().append('g').classed('x-guide-line', true);
+    xGuideLineGroup.append('path')
+      .attr('d', d => xGuideLine(d));
+  }
+
+  xTicks() {
+    return this.x.ticks(this.xTicks);
+  }
+
   renderLegend() {
     const legendLine = line()
       .x(d => d[0])

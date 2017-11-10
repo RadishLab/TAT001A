@@ -1,4 +1,5 @@
 import Chart2 from './Chart2';
+import Chart3 from './Chart3';
 import Map from './Map';
 
 export const figures = [
@@ -11,5 +12,10 @@ export const figures = [
     name: 'inset2',
     figureClass: Chart2,
     type: 'chart-vertical'
+  },
+  {
+    name: 'inset3',
+    figureClass: Chart3,
+    type: 'chart'
   }
 ];
