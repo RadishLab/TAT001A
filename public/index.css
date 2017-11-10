@@ -33,6 +33,11 @@ body {
   stroke: #EDE7DF;
   stroke-width: 0.5; }
 
+.x-guide-line path {
+  fill: none;
+  stroke: #EDE7DF;
+  stroke-width: 0.5; }
+
 .axis-y .axis-title {
   fill: #a29d98;
   font-size: 7px;

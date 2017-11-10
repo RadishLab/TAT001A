@@ -54,6 +54,12 @@ body {
   stroke-width: 0.5;
 }
 
+.x-guide-line path {
+  fill: none;
+  stroke: $guide-line-color;
+  stroke-width: 0.5;
+}
+
 .axis-y .axis-title {
   fill: $axis-label-color;
   font-size: $axis-label-font-size;
