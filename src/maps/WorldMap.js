@@ -81,6 +81,8 @@ export default class WorldMap {
         return 'none';
       })
       .attr('d', this.path);
+
+    return country;
   }
 
   renderLabels() {

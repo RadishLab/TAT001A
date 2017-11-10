@@ -8,15 +8,24 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
+    this.colorPositive = schemeCategorySolutionMap.slice(0, 1);
+    this.colorNegative = schemeCategoryProblemMap.slice(-1);
     this.colorScale = scaleOrdinal()
-      .range([
-        schemeCategoryProblemMap.slice(-1),
-        schemeCategorySolutionMap.slice(0, 1),
-        schemeCategoryProblemMap.slice(-1)
-      ])
+      .range([this.colorNegative, this.colorPositive, this.colorNegative])
       .domain(['suing government', 'suing industry', 'both']);
     this.colorScaleType = 'ordinal';
     this.valueField = 'value';
+
+    this.parent.select('defs')
+      .append('pattern')
+        .attr('id', 'diagonalHatch')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', 4)
+        .attr('height', 4)
+      .append('path')
+        .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
+        .attr('stroke', this.colorPositive)
+        .attr('stroke-width', 1);
   }
 
   loadJoinData() {
@@ -50,5 +59,16 @@ export default class Map extends WorldMap {
       }
     });
     return countries;
+  }
+
+  renderPaths() {
+    super.renderPaths().append('path')
+      .style('fill', d => {
+        if (d.properties.joined && d.properties.joined[this.valueField] === 'both') {
+          return 'url(#diagonalHatch)';
+        }
+        return 'none';
+      })
+      .attr('d', this.path);
   }
 }
