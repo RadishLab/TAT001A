@@ -17,6 +17,7 @@ import { figures as ch13Figures } from './chapters/ch13/Figures';
 import { figures as ch15Figures } from './chapters/ch15/Figures';
 import { figures as ch16Figures } from './chapters/ch16/Figures';
 import { figures as ch18Figures } from './chapters/ch18/Figures';
+import { figures as ch19Figures } from './chapters/ch19/Figures';
 
 class App extends Component {
   render() {
@@ -38,6 +39,7 @@ class App extends Component {
         <FigureGroup title='Chapter 15' chapter={15} figures={ch15Figures}/>
         <FigureGroup title='Chapter 16' chapter={16} figures={ch16Figures}/>
         <FigureGroup title='Chapter 18' chapter={18} figures={ch18Figures}/>
+        <FigureGroup title='Chapter 19' chapter={19} figures={ch19Figures}/>
       </div>
     );
   }

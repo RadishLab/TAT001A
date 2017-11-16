@@ -14,6 +14,7 @@ import { figures as ch13figures } from './ch13/Figures.js';
 import { figures as ch15figures } from './ch15/Figures.js';
 import { figures as ch16figures } from './ch16/Figures.js';
 import { figures as ch18figures } from './ch18/Figures.js';
+import { figures as ch19figures } from './ch19/Figures.js';
 
 /*
  * Gather all figures for all chapters here in one exportable object that we can
@@ -37,6 +38,7 @@ const chapters = {
   'ch15': ch15figures,
   'ch16': ch16figures,
   'ch18': ch18figures,
+  'ch19': ch19figures,
 };
 
 const figures = {};
