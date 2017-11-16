@@ -18,8 +18,15 @@ const heights = {
 
 export default class Figure extends Component {
   componentDidMount() {
-    const { figureClass, size } = this.props;
-    new figureClass(this.svg, widths[size], heights[size]);
+    const { figureClass, size, dimensions } = this.props;
+    let width, height;
+    if (dimensions) {
+      [width, height] = dimensions;
+    } else {
+      width = widths[size];
+      height = heights[size];
+    }
+    new figureClass(this.svg, width, height);
   }
 
   render() {
