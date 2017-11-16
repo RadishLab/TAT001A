@@ -1,7 +1,6 @@
 import { max, min } from 'd3-array';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
-import { select } from 'd3-selection';
 import { line } from 'd3-shape';
 
 import { schemeCategorySolution } from '../../colors';
@@ -172,7 +171,5 @@ export default class Chart1 extends BarChart {
         let yOffset = this.chartHeight + 52;
         return `translate(${xOffset}, ${yOffset})`;
       });
-
-    console.log(this.root.select('.axis-x').node().getBBox());
   }
 }
