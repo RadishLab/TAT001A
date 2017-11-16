@@ -84,7 +84,7 @@ export default class Chart {
     }
 
     if (this.xLabel) {
-      let xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().width + 15;
+      let xAxisHeight = this.parent.select('.axis-x').node().getBBox().height + 10;
       xAxisGroup.append('text')
         .classed('axis-title', true)
         .text(this.xLabel)
