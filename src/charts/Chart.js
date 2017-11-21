@@ -165,7 +165,7 @@ export default class Chart {
         .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
         .text(label)
-        .attr('transform', `translate(${lineWidth + 5}, 0)`);
+        .attr('transform', `translate(${lineWidth + 2.5}, 0)`);
       legendItem.append('path')
         .datum([[0, 0], [lineWidth, 0]])
         .style('stroke', this.colors(value))
