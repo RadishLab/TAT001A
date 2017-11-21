@@ -83,15 +83,8 @@ export default class WorldMap {
       .style('fill', fill)
       .attr('d', d => this.path(d));
 
-    largeCountries.append('path')
-      .style('fill', d => {
-        if (d.properties.joined) {
-          if (d.properties.joined[this.symbolField]) {
-            return 'url(#dots)';
-          }
-        }
-        return 'none';
-      })
+    largeCountries.filter(d => d.properties.joined && d.properties.joined[this.symbolField]).append('path')
+      .style('fill', d => 'url(#dots)')
       .attr('d', d => this.path(d));
 
     const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold);
@@ -101,15 +94,8 @@ export default class WorldMap {
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
 
-    smallCountries.append('path')
-      .style('fill', d => {
-        if (d.properties.joined) {
-          if (d.properties.joined[this.symbolField]) {
-            return 'url(#dots)';
-          }
-        }
-        return 'none';
-      })
+    smallCountries.filter(d => d.properties.joined && d.properties.joined[this.symbolField]).append('path')
+      .style('fill', d => 'url(#dots)')
       .attr('r', 3)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
