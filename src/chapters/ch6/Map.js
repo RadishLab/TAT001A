@@ -27,7 +27,7 @@ export default class Map extends WorldMap {
 
   join(countries, joinData) {
     countries.features.forEach(feature => {
-      const countryData = joinData.filter(row => row.ISO3 === feature.properties.iso_a3);
+      const countryData = joinData.filter(row => row.ISO3 === this.getISO3(feature));
       if (countryData.length > 0) {
         feature.properties.joined = countryData[0];
       }

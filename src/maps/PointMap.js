@@ -27,7 +27,7 @@ export default class PointMap {
 
   loadCountries() {
     return new Promise((resolve, reject) => {
-      loadCachedData(d3json, 'countries-dots.topojson', (data) => {
+      loadCachedData(d3json, 'countries-simplified.topojson', (data) => {
         resolve(topojson.feature(data, data.objects['-']));
       });
     });

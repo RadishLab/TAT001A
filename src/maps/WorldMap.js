@@ -44,13 +44,19 @@ export default class WorldMap {
 
   loadCountries() {
     return new Promise((resolve, reject) => {
-      loadCachedData(d3json, 'countries-dots.topojson', (data) => {
+      loadCachedData(d3json, 'countries-simplified.topojson', (data) => {
         resolve(topojson.feature(data, data.objects['-']));
       });
     });
   }
 
+  getISO3(feature) {
+    return feature.properties.ISO_A3;
+  }
+
   renderPaths() {
+    const smallCountryThreshold = 35000;
+
     this.countries = this.root.append('g');
     const country = this.countries.selectAll('.country')
       .data(this.countriesGeojson.features)
@@ -58,20 +64,26 @@ export default class WorldMap {
         .append('g')
         .classed('country', true);
 
-    country.append('path')
-      .style('fill', d => {
-        if (d.properties.joined) {
-          const value = d.properties.joined[this.valueField];
-          if (this.colorScaleType && this.colorScaleType === 'ordinal') {
-            return this.colorScale(value);
-          }
-          return this.colorScale(value / this.maxValue);
+    const fill = (d => {
+      if (d.properties.joined) {
+        const value = d.properties.joined[this.valueField];
+        if (this.colorScaleType && this.colorScaleType === 'ordinal') {
+          return this.colorScale(value);
         }
-        return mapNoData;
-      })
-      .attr('d', this.path);
+        return this.colorScale(value / this.maxValue);
+      }
+      return mapNoData;
+    });
 
-    country.append('path')
+    let largeCountries = country.filter(d => d.properties.areakm >= smallCountryThreshold);
+    if (largeCountries.empty()) {
+      largeCountries = country;
+    }
+    largeCountries.append('path')
+      .style('fill', fill)
+      .attr('d', d => this.path(d));
+
+    largeCountries.append('path')
       .style('fill', d => {
         if (d.properties.joined) {
           if (d.properties.joined[this.symbolField]) {
@@ -80,7 +92,27 @@ export default class WorldMap {
         }
         return 'none';
       })
-      .attr('d', this.path);
+      .attr('d', d => this.path(d));
+
+    const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold);
+    smallCountries.append('circle')
+      .style('fill', fill)
+      .attr('r', 3)
+      .attr('cx', d => this.path.centroid(d)[0])
+      .attr('cy', d => this.path.centroid(d)[1]);
+
+    smallCountries.append('path')
+      .style('fill', d => {
+        if (d.properties.joined) {
+          if (d.properties.joined[this.symbolField]) {
+            return 'url(#dots)';
+          }
+        }
+        return 'none';
+      })
+      .attr('r', 3)
+      .attr('cx', d => this.path.centroid(d)[0])
+      .attr('cy', d => this.path.centroid(d)[1]);
 
     return country;
   }
