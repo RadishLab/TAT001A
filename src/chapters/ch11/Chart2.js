@@ -22,7 +22,7 @@ export default class Chart2 extends BarChartVertical {
     return new Promise((resolve, reject) => {
       csv('data/11-2.csv', (csvData) => {
         resolve(csvData.map(d => {
-          d.country = d['Country and Year'];
+          d.country = d['Country and Year'].toUpperCase();
           d.intendToQuit = +d['% of current smokers who intend to quit'];
           d.attemptedToQuit = d['% of current smokers who attempted to quit in past 12 months'];
           return d;
