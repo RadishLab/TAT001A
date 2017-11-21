@@ -70,7 +70,7 @@ export default class Chart {
         if (this.x.bandwidth) {
           x += (this.x.bandwidth() / 2);
         }
-        return `translate(${x}, 5)`;
+        return `translate(${x}, 2.5)`;
       })
       .classed('date', d => isDate(d))
       .classed('number', d => isNumber(d))
