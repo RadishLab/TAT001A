@@ -51,7 +51,6 @@ export default class WorldMap {
   }
 
   getISO3(feature) {
-    //if (feature.properties.ISO_A3 !== '-99') return feature.properties.ISO_A3;
     return feature.properties.ADM0_A3;
   }
 
