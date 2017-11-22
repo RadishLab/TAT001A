@@ -90,13 +90,13 @@ export default class WorldMap {
     const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold);
     smallCountries.append('circle')
       .style('fill', fill)
-      .attr('r', 3)
+      .attr('r', 1)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
 
     smallCountries.filter(d => d.properties.joined && d.properties.joined[this.symbolField]).append('path')
       .style('fill', d => 'url(#dots)')
-      .attr('r', 3)
+      .attr('r', 1)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
 
