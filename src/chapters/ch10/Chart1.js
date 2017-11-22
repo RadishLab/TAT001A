@@ -74,6 +74,8 @@ export default class Chart1 extends BarChart {
   }
 
   createZScale() {
-    return scaleOrdinal(schemeCategorySolution);
+    const colors = schemeCategorySolution.slice();
+    colors[1] = '#00a792';
+    return scaleOrdinal(colors);
   }
 }

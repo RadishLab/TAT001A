@@ -107,7 +107,9 @@ export default class Chart4 extends LineChart {
   }
 
   createZScale() {
-    return scaleOrdinal(schemeCategorySolution);
+    const colors = schemeCategorySolution.slice();
+    colors[1] = '#585857';
+    return scaleOrdinal(colors);
   }
 
   renderLines() {

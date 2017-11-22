@@ -22,8 +22,8 @@ export const schemeCategoryProblemMap = [
 // Chapters 10 and up
 export const schemeCategorySolution = [
   '#356CB9',
-  '#38AC90',
   '#F79311',
+  '#38AC90',
   '#505152',
   '#3B84BC',
   '#749ECD',
