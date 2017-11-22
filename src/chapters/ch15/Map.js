@@ -7,7 +7,7 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.colorScale = scaleOrdinal(['#fd9426', '#fc0d1b'])
+    this.colorScale = scaleOrdinal(['#00a792', '#1b70b2'])
       .domain(['Friend', 'Member']);
     this.colorScaleType = 'ordinal';
     this.valueField = 'value';

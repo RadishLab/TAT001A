@@ -55,7 +55,7 @@ export default class WorldMap {
   }
 
   renderPaths() {
-    const smallCountryThreshold = 35000;
+    const smallCountryThreshold = 20000;
 
     this.countries = this.root.append('g');
     const country = this.countries.selectAll('.country')

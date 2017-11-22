@@ -1,15 +1,14 @@
 import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
-import { schemeCategoryProblemMap, schemeCategorySolutionMap } from '../../colors';
 import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.colorPositive = schemeCategorySolutionMap.slice(0, 1);
-    this.colorNegative = schemeCategoryProblemMap.slice(-1);
+    this.colorPositive = '#1b70b2';
+    this.colorNegative = '#00a792';
     this.colorScale = scaleOrdinal()
       .range([this.colorNegative, this.colorPositive, this.colorNegative])
       .domain(['suing government', 'suing industry', 'both']);
@@ -25,7 +24,7 @@ export default class Map extends WorldMap {
       .append('path')
         .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
         .attr('stroke', this.colorPositive)
-        .attr('stroke-width', 1);
+        .attr('stroke-width', 0.5);
   }
 
   loadJoinData() {
