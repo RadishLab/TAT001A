@@ -49,6 +49,7 @@ const FILES = {
   '12 Taxes/TA6 Tax Inset 4 tax and illicit.xlsx': '12-4.csv',
   '13 Smokefree/High achieving smoke-free countries.xlsx': '13-map.csv',
   '13 Smokefree/Smokefree inset 1.xlsx': '13-1.csv',
+  '14 Media/TA6 Media Map.xlsx': '14-map.csv',
   '15 Partnerships/TA6 Map_Partnerships.xlsx': '15-map.csv',
   '16 ENDS/TA6 ENDS Map (Market Access).xlsx': '16-map.csv',
   '18 Countering the Industry/Map - Countering the Industry - Country litigation.xlsx': '18-map.csv',

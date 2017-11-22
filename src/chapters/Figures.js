@@ -35,6 +35,7 @@ const chapters = {
   'ch11': ch11figures,
   'ch12': ch12figures,
   'ch13': ch13figures,
+  'ch14': ch14figures,
   'ch15': ch15figures,
   'ch16': ch16figures,
   'ch18': ch18figures,
