@@ -13,9 +13,9 @@ export const schemeCategoryProblem = [
 export const schemeCategoryProblemMap = [
   '#FCD3C9',
   '#F7AB9C',
+  '#F48375',
   '#F15D56',
   '#F0393A',
-  '#F48375',
   '#DB2A31'
 ];
 

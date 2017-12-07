@@ -115,7 +115,6 @@ export default class WorldMap {
   }
 
   renderLegend() {
-    // TODO
   }
 
   render() {
@@ -125,7 +124,6 @@ export default class WorldMap {
     ], this.countriesGeojson);
 
     this.renderPaths();
-    //this.renderLabels();
     this.renderLegend();
   }
 }
