@@ -11,7 +11,6 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    // TODO add a line for world's population
     this.figurePrefix = '13-inset3';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
     this.yLabel = this.getTranslation('Population protected (billions)');
@@ -81,6 +80,7 @@ export default class Chart3 extends BarChart {
     super.render();
     this.renderRightAxis();
     this.renderLines();
+    this.renderPopulationLine();
   }
 
   renderBars() {
@@ -109,6 +109,27 @@ export default class Chart3 extends BarChart {
     lineSelection.append('path')
       .style('stroke', this.colors('countries'))
       .style('fill', 'none')
+      .attr('d', d => lineCreator(d));
+  }
+
+  renderPopulationLine() {
+    let lineCreator = line()
+      .x(d => { console.log(d); return d[0]; })
+      .y(d => { console.log(this.y(d[1])); return this.y(d[1]) });
+
+    let lineSelection = this.root.selectAll('.line.global-population')
+      .data([[
+        [0, 7.6],
+        [this.chartWidth, 7.6]
+      ]])
+      .enter().append('g')
+        .classed('line global-population', true);
+
+    lineSelection.append('path')
+      .style('stroke', '#585857')
+      .style('fill', 'none')
+      .style('stroke-dasharray', '5,5')
+      .style('stroke-width', 0.25)
       .attr('d', d => lineCreator(d));
   }
 
