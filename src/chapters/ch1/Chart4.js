@@ -14,14 +14,20 @@ import Chart from '../../charts/Chart';
 export default class Chart4 extends Chart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Region';
-    this.yLabel = 'Crop';
+    this.figurePrefix = '1-inset4';
+    this.xLabel = this.getTranslation('Region');
+    this.yLabel = this.getTranslation('Crop');
     this.parent
       .classed('circle-chart', true);
     this.legendItems = [
-      { label: 'Former', value: 'former' },
-      { label: 'Current', value: 'current' },
+      { label: this.getTranslation('Farmers who stopped growing tobacco'), value: 'former' },
+      { label: this.getTranslation('Farmers still growing tobacco'), value: 'current' },
     ];
+    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = (label) => {
+      if (label === 'Other') label = 'Mixed/Other';
+      return this.getTranslation(label);
+    }
   }
 
   createMargin() {
@@ -116,7 +122,8 @@ export default class Chart4 extends Chart {
   }
 
   renderYAxis() {
-    const yAxis = axisLeft(this.y);
+    const yAxis = axisLeft(this.y)
+      .tickFormat(this.yAxisTickFormat);
     const yAxisGroup = this.root.append('g')
       .classed('axis axis-y', true);
     yAxisGroup

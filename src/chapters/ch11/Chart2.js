@@ -9,13 +9,14 @@ import BarChartVertical from '../../charts/BarChartVertical';
 export default class Chart2 extends BarChartVertical {
   constructor(parent, width, height) {
     super(parent, width, height);
+    this.figurePrefix = '11-inset2';
     this.yLabel = null;
     this.legendItems = [
-      { label: '% of current smokers who intend to quit', value: 'intend' },
-      { label: '% of current smokers who attempted to quit in past 12 months', value: 'attempted' },
+      { label: this.getTranslation('% of current smokers who intend to quit'), value: 'intend' },
+      { label: this.getTranslation('% of current smokers who attempted to quit in past 12 months'), value: 'attempted' },
     ];
     this.xAxisTickFormat = (d => `${d}%`);
-    this.yAxisTickFormat = (d => d);
+    this.yAxisTickFormat = this.getTranslation.bind(this);
   }
 
   loadData() {
@@ -33,7 +34,7 @@ export default class Chart2 extends BarChartVertical {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.left = 70;
+    margin.left = 80;
     margin.bottom = 38;
     return margin;
   }

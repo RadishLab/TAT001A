@@ -10,13 +10,15 @@ import LineChart from '../../charts/LineChart';
 export default class Chart1 extends LineChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Year';
-    this.yLabel = 'Tonnes';
+    this.figurePrefix = '1-inset1';
+
+    this.xLabel = this.getTranslation('Year');
+    this.yLabel = this.getTranslation('Tonnes');
     this.legendItems = [
-      { label: 'Low Income Countries', value: 'LOW' },
-      { label: 'Middle Income Countries', value: 'MIDDLE' },
-      { label: 'High Income Countries', value: 'HIGH' },
-      { label: 'China', value: 'MED' },
+      { label: this.getTranslation('Low Income Countries'), value: 'LOW' },
+      { label: this.getTranslation('Middle Income Countries'), value: 'MIDDLE' },
+      { label: this.getTranslation('High Income Countries'), value: 'HIGH' },
+      { label: this.getTranslation('China'), value: 'MED' },
     ];
   }
 

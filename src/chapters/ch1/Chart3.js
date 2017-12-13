@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -8,14 +9,17 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.yLabel = 'Profit per Acre (USD)';
+    this.figurePrefix = '1-inset3';
+    this.yLabel = this.getTranslation('Profit per Acre (USD)');
     this.yTicks = 6;
     this.legendItems = [
-      { label: 'Contractor (Adjusted)', value: 'contractor-adjusted' },
-      { label: 'Contractor (Unadjusted)', value: 'contractor-unadjusted' },
-      { label: 'Independent (Adjusted)', value: 'independent-adjusted' },
-      { label: 'Independent (Unadjusted)', value: 'independent-unadjusted' },
+      { label: this.getTranslation('Contractor (Adjusted)'), value: 'contractor-adjusted' },
+      { label: this.getTranslation('Contractor (Unadjusted)'), value: 'contractor-unadjusted' },
+      { label: this.getTranslation('Independent (Adjusted)'), value: 'independent-adjusted' },
+      { label: this.getTranslation('Independent (Unadjusted)'), value: 'independent-unadjusted' },
     ];
+    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = format('d');
   }
 
   loadData() {

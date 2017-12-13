@@ -2,6 +2,7 @@ import { axisBottom, axisLeft } from 'd3-axis';
 import { format } from 'd3-format';
 import { select } from 'd3-selection';
 import { line } from 'd3-shape';
+import i18next from 'i18next';
 import isDate from 'lodash.isdate';
 import isNumber from 'lodash.isnumber';
 import isString from 'lodash.isstring';
@@ -26,6 +27,11 @@ export default class Chart {
     this.loadData()
       .then(data => this.data = data)
       .then(this.onDataLoaded.bind(this));
+  }
+
+  getTranslation(text) {
+    if (!text || text === '') return text;
+    return i18next.t(`${this.figurePrefix}.${text}`, text);
   }
 
   createMargin() {
@@ -55,7 +61,7 @@ export default class Chart {
   renderXAxis() {
     const xAxis = axisBottom(this.x);
     if (this.xAxisTickFormat) {
-      xAxis.tickFormat(this.xAxisTickFormat);
+      xAxis.tickFormat(this.xAxisTickFormat.bind(this));
     }
     const xAxisGroup = this.root.append('g')
       .classed('axis axis-x', true);

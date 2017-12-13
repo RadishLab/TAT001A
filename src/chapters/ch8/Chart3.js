@@ -8,13 +8,15 @@ import BarChart from '../../charts/BarChart';
 export class Chart3 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.yLabel = 'Countries';
+    this.figurePrefix = '8-inset3';
+    this.yLabel = this.getTranslation('Countries');
     this.yTicks = 6;
     this.legendItems = [
       { label: '0-9.9%', value: 'Deaths: 0-9.9%' },
       { label: '10-19.9%', value: 'Deaths: 10-19.9%' },
       { label: '20%+', value: 'Deaths: 20%+' }
     ];
+    this.xAxisTickFormat = this.getTranslation.bind(this);
   }
 
   loadData() {
@@ -28,6 +30,12 @@ export class Chart3 extends BarChart {
         }));
       });
     });
+  }
+
+  createMargin() {
+    const margin = super.createMargin();
+    margin.top = 10;
+    return margin;
   }
 
   createXScale() {

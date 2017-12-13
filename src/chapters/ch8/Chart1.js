@@ -8,12 +8,14 @@ import BarChart from '../../charts/BarChart';
 export class Chart1 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.yLabel = 'Deaths';
+    this.figurePrefix = '8-inset1';
+    this.yLabel = this.getTranslation('Deaths');
     this.yTicks = 6;
     this.legendItems = [
-      { label: 'Male deaths', value: 'Male deaths' },
-      { label: 'Female deaths', value: 'Female deaths' },
+      { label: this.getTranslation('Male deaths'), value: 'Male deaths' },
+      { label: this.getTranslation('Female deaths'), value: 'Female deaths' },
     ];
+    this.xAxisTickFormat = this.getTranslation.bind(this);
   }
 
   loadData() {

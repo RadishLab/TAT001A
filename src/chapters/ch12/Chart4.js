@@ -12,12 +12,13 @@ import LineChart from '../../charts/LineChart';
 export default class Chart4 extends LineChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Year';
-    this.yLabel = 'Price (£)';
+    this.figurePrefix = '12-inset4';
+    this.xLabel = this.getTranslation('Year');
+    this.yLabel = this.getTranslation('Price (£)');
     this.legendItems = [
-      { label: 'Price per pack, inflation-adjusted', value: 'price' },
-      { label: 'Tax-paid consumption', value: 'taxpaid' },
-      { label: 'Illicit consumption', value: 'illicit' },
+      { label: this.getTranslation('Price per pack, inflation-adjusted'), value: 'price' },
+      { label: this.getTranslation('Tax-paid consumption'), value: 'taxpaid' },
+      { label: this.getTranslation('Illicit consumption'), value: 'illicit' },
     ];
     this.yAxisTickFormat = format('.2');
   }
@@ -51,7 +52,7 @@ export default class Chart4 extends LineChart {
       .append('text')
         .classed('axis-title', true)
         .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text('Cigarettes (billions)');
+        .text(this.getTranslation('Cigarettes (billions)'));
   }
 
   loadData() {

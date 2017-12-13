@@ -8,12 +8,14 @@ import BarChart from '../../charts/BarChart';
 export class Chart4 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.yLabel = 'Cigarette Consumption';
+    this.figurePrefix = '4-inset4';
+    this.yLabel = this.getTranslation('Cigarette Consumption');
     this.yTicks = 6;
     this.legendItems = [
       { label: '1980', value: '1980' },
       { label: '2016', value: '2016' },
     ];
+    this.xAxisTickFormat = this.getTranslation.bind(this);
   }
 
   loadData() {

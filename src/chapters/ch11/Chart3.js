@@ -12,15 +12,17 @@ import Chart from '../../charts/Chart';
 export default class Chart3 extends Chart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Age of Smokers at Quitting';
+    this.figurePrefix = '11-inset3';
+    this.xLabel = this.getTranslation('Age of Smokers at Quitting');
     this.yLabel = [
-      'Relative Risk of Death Before Age 65',
-      'Compared to a Never Smoker'
+      this.getTranslation('Relative Risk of Death Before Age 65'),
+      this.getTranslation('Compared to a Never Smoker')
     ];
     this.yTicks = 6;
     this.parent
       .classed('circle-chart', true);
     this.legendItems = [];
+    this.xAxisTickFormat = (label) => label !== 'Never' ? label : this.getTranslation(label);
   }
 
   createMargin() {

@@ -10,13 +10,14 @@ import LineChart from '../../charts/LineChart';
 export class Chart1 extends LineChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Year';
-    this.yLabel = 'Smokers';
+    this.figurePrefix = '9-inset1';
+    this.xLabel = this.getTranslation('Year');
+    this.yLabel = this.getTranslation('Smokers');
     this.legendItems = [
-      { label: 'Low HDI', value: 'Low HDI' },
-      { label: 'Medium HDI', value: 'Medium HDI' },
-      { label: 'High HDI', value: 'High HDI' },
-      { label: 'Very High HDI', value: 'Very High HDI' },
+      { label: this.getTranslation('Low HDI'), value: 'Low HDI' },
+      { label: this.getTranslation('Medium HDI'), value: 'Medium HDI' },
+      { label: this.getTranslation('High HDI'), value: 'High HDI' },
+      { label: this.getTranslation('Very High HDI'), value: 'Very High HDI' },
     ];
   }
 

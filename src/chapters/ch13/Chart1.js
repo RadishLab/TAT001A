@@ -11,12 +11,14 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
+    // TODO add a line for world's population
+    this.figurePrefix = '13-inset3';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
-    this.yLabel = 'Population protected (billions)';
+    this.yLabel = this.getTranslation('Population protected (billions)');
     this.yTicks = 6;
     this.legendItems = [
-      { label: 'Countries', value: 'countries' },
-      { label: 'Population', value: 'population' },
+      { label: this.getTranslation('Countries'), value: 'countries' },
+      { label: this.getTranslation('Population'), value: 'population' },
     ];
   }
 
@@ -122,7 +124,7 @@ export default class Chart3 extends BarChart {
       .append('text')
         .classed('axis-title', true)
         .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text('Countries');
+        .text(this.getTranslation('Countries'));
   }
 
   createZScale() {

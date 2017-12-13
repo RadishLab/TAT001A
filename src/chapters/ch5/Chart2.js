@@ -8,13 +8,15 @@ import BarChart from '../../charts/BarChart';
 export default class Chart2 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.yLabel = 'Secondhand smoke exposure (%)';
+    this.figurePrefix = '5-inset2';
+    this.yLabel = this.getTranslation('Secondhand smoke exposure (%)');
     this.yTicks = 6;
     this.legendItems = [
-      { label: 'Home', value: 'home' },
-      { label: 'Work', value: 'work' },
-      { label: 'Restaurant', value: 'restaurant' }
+      { label: this.getTranslation('Home'), value: 'home' },
+      { label: this.getTranslation('Work'), value: 'work' },
+      { label: this.getTranslation('Restaurant'), value: 'restaurant' }
     ];
+    this.xAxisTickFormat = this.getTranslation.bind(this);
   }
 
   loadData() {

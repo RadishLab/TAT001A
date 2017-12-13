@@ -11,11 +11,12 @@ import LineChart from '../../charts/LineChart';
 export default class Chart1 extends LineChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Year';
-    this.yLabel = 'Tuberculosis mortality per 10k';
+    this.figurePrefix = '7-inset1';
+    this.xLabel = this.getTranslation('Year');
+    this.yLabel = this.getTranslation('Tuberculosis mortality per 10k');
     this.legendItems = [
-      { label: 'Baseline scenario', value: 'including smoking' },
-      { label: 'Without smoking', value: 'not including smoking' }
+      { label: this.getTranslation('Baseline scenario'), value: 'including smoking' },
+      { label: this.getTranslation('Without smoking'), value: 'not including smoking' }
     ];
   }
 

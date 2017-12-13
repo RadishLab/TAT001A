@@ -8,11 +8,12 @@ import BarChart from '../../charts/BarChart';
 export class Chart4 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.yLabel = 'Lung cancer mortality rate (per 100k)';
+    this.figurePrefix = '8-inset4';
+    this.yLabel = this.getTranslation('Lung cancer mortality rate (per 100k)');
     this.yTicks = 6;
     this.legendItems = [
-      { label: 'Poland (2011)', value: 'Poland (2011)' },
-      { label: 'United States, non-Hispanic whites (2010)', value: 'United States, non-Hispanic whites (2010)' },
+      { label: this.getTranslation('Poland (2011)'), value: 'Poland (2011)' },
+      { label: this.getTranslation('United States, non-Hispanic whites (2010)'), value: 'United States, non-Hispanic whites (2010)' },
     ];
   }
 
@@ -51,7 +52,7 @@ export class Chart4 extends BarChart {
   }
 
   xAxisTickFormat(d) {
-    return d.split(':')[1];
+    return this.getTranslation(d.split(':')[1]);
   }
 
   renderBars() {

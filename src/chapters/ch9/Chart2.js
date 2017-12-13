@@ -13,11 +13,12 @@ import LineChart from '../../charts/LineChart';
 export class Chart2 extends LineChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Year';
-    this.yLabel = 'Smoking Prevalence';
+    this.figurePrefix = '9-inset2';
+    this.xLabel = this.getTranslation('Year');
+    this.yLabel = this.getTranslation('Smoking Prevalence');
     this.legendItems = [
-      { label: 'Male', value: 'male' },
-      { label: 'Female', value: 'female' },
+      { label: this.getTranslation('Male'), value: 'male' },
+      { label: this.getTranslation('Female'), value: 'female' },
     ];
     this.yAxisTickFormat = format('.0%');
   }

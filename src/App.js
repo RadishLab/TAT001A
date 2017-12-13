@@ -1,4 +1,6 @@
+import CSV from 'comma-separated-values';
 import React, { Component } from 'react';
+import i18next from 'i18next';
 
 import FigureGroup from './FigureGroup';
 import { figures as ch1Figures } from './chapters/ch1/Figures';
@@ -21,9 +23,51 @@ import { figures as ch18Figures } from './chapters/ch18/Figures';
 import { figures as ch19Figures } from './chapters/ch19/Figures';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.missingKeys = {};
+    i18next.init({
+      lng: 'en',
+      fallbackLng: 'en',
+      debug: true,
+      saveMissing: true,
+      missingKeyHandler: (lng, ns, key, fallbackValue) => {
+        if (!key || key === '') return;
+        if (!this.missingKeys[lng]) {
+          this.missingKeys[lng] = new Set();
+        }
+        this.missingKeys[lng].add(key);
+      },
+      resources: {
+        en: {
+          translation: {}
+        }
+      }
+    });
+  }
+
   render() {
     return (
       <div>
+        <button style={{ float: 'right' }} onClick={() => {
+          const data = Array.from(this.missingKeys.en).map(key => {
+            return key.split('.', 2);
+          }).sort((a, b) => {
+            const aChapter = parseInt(a[0].split('-')[0], 10);
+            const bChapter = parseInt(b[0].split('-')[0], 10);
+            if (aChapter !== bChapter) return aChapter - bChapter;
+            return a[0].localeCompare(b[0]);
+          });
+          const link = document.createElement('a');
+          console.log(data);
+          link.setAttribute('href', encodeURI('data:text/csv;charset=utf-8,' + new CSV(data, {
+            header: ['figure', 'english', 'chinese', 'spanish', 'arabic', 'portuguese']
+          }).encode()));
+          link.setAttribute('download', 'missing-keys.csv');
+          link.click();
+        }}>
+          get missing
+        </button>
         <FigureGroup title='Chapter 1' chapter={1} figures={ch1Figures}/>
         <FigureGroup title='Chapter 2' chapter={2} figures={ch2Figures}/>
         <FigureGroup title='Chapter 3' chapter={3} figures={ch3Figures}/>

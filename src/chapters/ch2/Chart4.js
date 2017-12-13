@@ -12,11 +12,12 @@ import LineChart from '../../charts/LineChart';
 export default class Chart4 extends LineChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Year';
-    this.yLabel = 'Number of Factories';
+    this.figurePrefix = '2-inset4';
+    this.xLabel = this.getTranslation('Year');
+    this.yLabel = this.getTranslation('Number of Factories');
     this.legendItems = [
-      { label: 'Factories', value: 'factories' },
-      { label: 'Share Dividend', value: 'dividend' },
+      { label: this.getTranslation('Factories'), value: 'factories' },
+      { label: this.getTranslation('Share Dividend'), value: 'dividend' },
     ];
     this.yAxisTickFormat = format('.2s');
   }
@@ -48,7 +49,7 @@ export default class Chart4 extends LineChart {
       .append('text')
         .classed('axis-title', true)
         .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text('Dividend per Share (£)');
+        .text(this.getTranslation('Dividend per Share (£)'));
   }
 
   loadData() {

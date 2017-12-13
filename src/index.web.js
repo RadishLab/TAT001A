@@ -8,6 +8,7 @@ const prefix = 'ta-visualization';
  * Index for web version of visualizations. Bundles together all of the figures
  * and initializes them if it finds the appropriate element on the page.
  */
+// TODO load translations
 Object.keys(figures).forEach(key => {
   const visualizationRoot = select(`#${prefix}-${key}`);
   if (visualizationRoot.node()) {

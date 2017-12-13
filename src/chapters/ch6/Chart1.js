@@ -10,13 +10,15 @@ import wrap from '../../wrap';
 export default class Chart1 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.xLabel = 'Cause of Death';
-    this.yLabel = 'Deaths (millions)';
+    this.figurePrefix = '6-inset1';
+    this.xLabel = this.getTranslation('Cause of Death');
+    this.yLabel = this.getTranslation('Deaths (millions)');
     this.yTicks = 6;
+    this.xAxisTickFormat = this.getTranslation.bind(this);
     this.yAxisTickFormat = d => d / 1000000;
     this.legendItems = [
-      { label: 'Not tobacco-related', value: 'other' },
-      { label: 'Tobacco-related', value: 'tobacco' },
+      { label: this.getTranslation('Not tobacco-related'), value: 'other' },
+      { label: this.getTranslation('Tobacco-related'), value: 'tobacco' },
     ];
   }
 
@@ -79,9 +81,6 @@ export default class Chart1 extends BarChart {
   renderBars() {
     const barGroups = this.createBarGroups().filter(d => d.disease !== 'tobacco use');
     const barWidth = this.x.bandwidth();
-
-    // TODO stack tobacco use deaths
-    //  * aggregate tobacco use by disease, stack those
 
     barGroups.append('rect')
         .classed('bar', true)
@@ -153,7 +152,7 @@ export default class Chart1 extends BarChart {
       })
       .attr('font-size', 4)
       .attr('fill', '#585857')
-      .text(d => d.disease);
+      .text(d => this.getTranslation(d.disease));
 
     tobaccoUseDeathBars.selectAll('text')
       .call(wrap, barWidth * 2);

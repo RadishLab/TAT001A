@@ -10,12 +10,13 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
+    this.figurePrefix = '12-inset3';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
-    this.yLabel = 'Sales';
+    this.yLabel = this.getTranslation('Sales');
     this.yTicks = 6;
     this.legendItems = [
-      { label: 'cigarette sales', value: 'cigarette' },
-      { label: 'roll-your-own tobacco sales', value: 'rollyourown' },
+      { label: this.getTranslation('cigarette sales'), value: 'cigarette' },
+      { label: this.getTranslation('roll-your-own tobacco sales'), value: 'rollyourown' },
     ];
   }
 

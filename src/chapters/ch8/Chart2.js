@@ -8,11 +8,12 @@ import BarChart from '../../charts/BarChart';
 export class Chart2 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.yLabel = 'Deaths';
+    this.figurePrefix = '8-inset2';
+    this.yLabel = this.getTranslation('Deaths');
     this.yTicks = 6;
     this.legendItems = [
-      { label: 'Male deaths', value: 'Males' },
-      { label: 'Female deaths', value: 'Females' },
+      { label: this.getTranslation('Male deaths'), value: 'Males' },
+      { label: this.getTranslation('Female deaths'), value: 'Females' },
     ];
   }
 
@@ -52,7 +53,7 @@ export class Chart2 extends BarChart {
   }
 
   xAxisTickFormat(d) {
-    return d.split(':')[1];
+    return this.getTranslation(d.split(':')[1]);
   }
 
   renderBars() {
