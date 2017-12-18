@@ -10,7 +10,7 @@ export class Chart1 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.figurePrefix = '4-inset1';
-    this.yLabel = this.getTranslation('Daily Smokers');
+    this.yLabel = this.getTranslation('Daily Smokers (%)');
     this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('Low HDI'), value: 'Low' },
@@ -19,15 +19,15 @@ export class Chart1 extends BarChart {
       { label: this.getTranslation('Very High HDI'), value: 'Very High' },
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
-    this.yAxisTickFormat = format('.0%');
+    this.yAxisTickFormat = format('.2');
   }
 
   loadData() {
     return new Promise((resolve, reject) => {
       csv('data/4-1.csv', (csvData) => {
         resolve(csvData.map(d => {
-          d.male = parseFloat(d.Male);
-          d.female = parseFloat(d.Female);
+          d.male = parseFloat(d.Male) * 100;
+          d.female = parseFloat(d.Female) * 100;
           return d;
         }));
       });

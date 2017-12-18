@@ -98,10 +98,15 @@ export default class Chart {
     }
   }
 
+  defaultYAxisTickFormat(d) {
+    if (d === 0) return '0';
+    return format('.2s')(d);
+  }
+
   renderYAxis() {
     const yAxis = axisLeft(this.y)
       .ticks(this.yTicks)
-      .tickFormat(this.yAxisTickFormat ? this.yAxisTickFormat : format('.2s'));
+      .tickFormat(this.yAxisTickFormat ? this.yAxisTickFormat : this.defaultYAxisTickFormat);
     const yAxisGroup = this.root.append('g')
       .classed('axis axis-y', true);
     yAxisGroup

@@ -1,6 +1,5 @@
 import { extent } from 'd3-array';
 import { axisRight } from 'd3-axis';
-import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
 import { curveBasis, line } from 'd3-shape';
@@ -19,7 +18,7 @@ export default class Chart4 extends LineChart {
       { label: this.getTranslation('Factories'), value: 'factories' },
       { label: this.getTranslation('Share Dividend'), value: 'dividend' },
     ];
-    this.yAxisTickFormat = format('.2s');
+    this.yAxisTickFormat = this.defaultYAxisTickFormat;
   }
 
   createMargin() {

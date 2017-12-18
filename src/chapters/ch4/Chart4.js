@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -9,21 +10,22 @@ export class Chart4 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.figurePrefix = '4-inset4';
-    this.yLabel = this.getTranslation('Cigarette Consumption');
+    this.yLabel = this.getTranslation('Cigarette Consumption (trillions)');
     this.yTicks = 6;
     this.legendItems = [
       { label: '1980', value: '1980' },
       { label: '2016', value: '2016' },
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = format('.2');
   }
 
   loadData() {
     return new Promise((resolve, reject) => {
       csv('data/4-4.csv', (csvData) => {
         resolve(csvData.map(d => {
-          d['1980'] = +d['1980'];
-          d['2016'] = +d['2016'];
+          d['1980'] = +d['1980'] / 1000000000000;
+          d['2016'] = +d['2016'] / 1000000000000;
           return d;
         }));
       });

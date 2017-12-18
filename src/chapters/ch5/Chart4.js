@@ -12,10 +12,16 @@ export default class Chart4 extends BarChart {
     this.yLabel = this.getTranslation('Prevalence (%)');
     this.yTicks = 6;
     this.legendItems = [
-      { label: this.getTranslation('Below university'), value: 'Below university' },
+      { label: this.getTranslation('No university degree'), value: 'Below university' },
       { label: this.getTranslation('University'), value: 'University' }
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+  }
+
+  createMargin() {
+    const margin = super.createMargin();
+    margin.bottom = this.legendOrientation() === 'horizontal' ? 42 : 58;
+    return margin;
   }
 
   loadData() {

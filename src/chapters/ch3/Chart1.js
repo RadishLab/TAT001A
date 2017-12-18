@@ -15,8 +15,8 @@ export default class Chart1 extends LineChart {
     this.yLabel = this.getTranslation('% Global Population Covered');
     this.legendItems = [
       { label: this.getTranslation('FCTC Compliant GHW'), value: 'fctc' },
-      { label: this.getTranslation('POS AdBan'), value: 'pos' },
-      { label: this.getTranslation('Internet AdBan'), value: 'internet' },
+      { label: this.getTranslation('POS Ad Ban'), value: 'pos' },
+      { label: this.getTranslation('Internet Ad Ban'), value: 'internet' },
     ];
     this.yAxisTickFormat = format('.0%');
   }

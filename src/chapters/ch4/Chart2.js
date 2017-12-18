@@ -1,5 +1,6 @@
 import { extent } from 'd3-array';
 import { nest } from 'd3-collection';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
 import { timeParse } from 'd3-time-format';
@@ -19,6 +20,7 @@ export default class Chart2 extends LineChart {
       { label: this.getTranslation('Lesotho'), value: 'Lesotho' },
       { label: this.getTranslation('Mauritania'), value: 'Mauritania' },
     ];
+    this.yAxisTickFormat = format('.2d');
   }
 
   createMargin() {

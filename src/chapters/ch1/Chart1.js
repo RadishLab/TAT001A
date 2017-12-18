@@ -1,5 +1,6 @@
 import { extent, sum } from 'd3-array';
 import { nest } from 'd3-collection';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
 import { timeParse } from 'd3-time-format';
@@ -13,7 +14,7 @@ export default class Chart1 extends LineChart {
     this.figurePrefix = '1-inset1';
 
     this.xLabel = this.getTranslation('Year');
-    this.yLabel = this.getTranslation('Tonnes');
+    this.yLabel = this.getTranslation('Tonnes (millions)');
     this.legendItems = [
       { label: this.getTranslation('Low HDI'), value: 'Low-HDI' },
       { label: this.getTranslation('Medium HDI'), value: 'Medium-HDI' },
@@ -21,6 +22,7 @@ export default class Chart1 extends LineChart {
       { label: this.getTranslation('Very high HDI'), value: 'Very high-HDI' },
       { label: this.getTranslation('China'), value: 'China' },
     ];
+    this.yAxisTickFormat = format('.2');
   }
 
   createMargin() {
@@ -34,7 +36,7 @@ export default class Chart1 extends LineChart {
       csv('data/1-1.csv', (csvData) => {
         const filteredData = csvData
           .map(row => {
-            row.value = +row.tonnes;
+            row.value = +row.tonnes / 1000000.0;
             row.year = timeParse('%Y')(row.year);
             return row;
           });

@@ -10,7 +10,7 @@ export default class Chart3 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.figurePrefix = '1-inset3';
-    this.yLabel = this.getTranslation('Profit per Acre (USD)');
+    this.yLabel = this.getTranslation('Annual Profit per Acre (USD)');
     this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('Contractor (Adjusted)'), value: 'contractor-adjusted' },
