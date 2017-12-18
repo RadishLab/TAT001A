@@ -8,7 +8,7 @@ const OUTPUT_DATA_DIR = './public/data';
 
 const FILES = {
   '1 Growing/TA6 Growing Map - Print - 2014 Production by Tonne.xlsx': '1-map.csv',
-  '1 Growing/TA6 Growing - Inset 1 - Production by HDI group.xlsx': '1-1.csv',
+  '1 Growing/TA6 Growing - Inset 1 - Production by HDI group - data for the graph in the printed version.xlsx': '1-1.csv',
   '1 Growing/TA6 Growing - Inset 3 - Farmer profits - 5-country.xlsx': '1-3.csv',
   '1 Growing/TA6 Growing - Inset 4 - Sales of other crops.xlsx': '1-4.csv',
   '2 Manufacturing/TA6 Manufacturing Data-Main Map Largest Factories.xlsx': '2-map.csv',

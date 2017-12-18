@@ -15,10 +15,11 @@ export default class Chart1 extends LineChart {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Tonnes');
     this.legendItems = [
-      { label: this.getTranslation('Low Income Countries'), value: 'LOW' },
-      { label: this.getTranslation('Middle Income Countries'), value: 'MIDDLE' },
-      { label: this.getTranslation('High Income Countries'), value: 'HIGH' },
-      { label: this.getTranslation('China'), value: 'MED' },
+      { label: this.getTranslation('Low HDI'), value: 'Low-HDI' },
+      { label: this.getTranslation('Medium HDI'), value: 'Medium-HDI' },
+      { label: this.getTranslation('High HDI (excl. China)'), value: 'High-HDI (excl. China)' },
+      { label: this.getTranslation('Very high HDI'), value: 'Very high-HDI' },
+      { label: this.getTranslation('China'), value: 'China' },
     ];
   }
 
@@ -33,12 +34,12 @@ export default class Chart1 extends LineChart {
       csv('data/1-1.csv', (csvData) => {
         const filteredData = csvData
           .map(row => {
-            row.value = +row.Tonnes;
-            row.year = timeParse('%Y')(row.Year);
+            row.value = +row.tonnes;
+            row.year = timeParse('%Y')(row.year);
             return row;
           });
         const nestedData = nest()
-          .key(d => d.incomegroup)
+          .key(d => d['category description'])
           .key(d => d.year)
             .rollup(leaves => sum(leaves, d => d.value))
           .entries(filteredData);
