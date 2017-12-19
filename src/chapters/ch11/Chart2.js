@@ -25,7 +25,7 @@ export default class Chart2 extends BarChartVertical {
         resolve(csvData.map(d => {
           d.country = d['Country and Year'].toUpperCase();
           d.intendToQuit = +d['% of current smokers who intend to quit'];
-          d.attemptedToQuit = d['% of current smokers who attempted to quit in past 12 months'];
+          d.attemptedToQuit = +d['% of current smokers who attempted to quit in past 12 months'];
           return d;
         }));
       });
@@ -65,7 +65,7 @@ export default class Chart2 extends BarChartVertical {
     barGroups.append('rect')
       .classed('bar', true)
       .attr('x', 0)
-      .attr('width', d => this.chartWidth - this.x(d.intendToQuit))
+      .attr('width', d => this.x(d.intendToQuit))
       .attr('y', d => this.y(d.country))
       .attr('height', barHeight)
       .attr('fill', d => this.colors('intend'));
@@ -73,7 +73,7 @@ export default class Chart2 extends BarChartVertical {
     barGroups.append('rect')
       .classed('bar', true)
       .attr('x', 0)
-      .attr('width', d => this.chartWidth - this.x(d.attemptedToQuit))
+      .attr('width', d => this.x(d.attemptedToQuit))
       .attr('y', d => this.y(d.country) + barHeight)
       .attr('height', barHeight)
       .attr('fill', d => this.colors('attempted'));
@@ -82,6 +82,6 @@ export default class Chart2 extends BarChartVertical {
   createZScale() {
     const colors = schemeCategorySolution.slice();
     colors[1] = '#00a792';
-    return scaleOrdinal(colors);
+    return scaleOrdinal(colors).domain(['attempted', 'intend']);
   }
 }
