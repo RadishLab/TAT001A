@@ -76,7 +76,7 @@ export default class Chart3 extends BarChart {
     let legendItem = legendLeft.append('g')
       .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
-        .text('Adjusted for labor costs')
+        .text(this.getTranslation('Adjusted for labor costs'))
         .attr('transform', `translate(0, 0)`);
 
     yOffset += legendItem.node().getBBox().height + 1;
@@ -106,7 +106,7 @@ export default class Chart3 extends BarChart {
     legendItem = legendRight.append('g')
       .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
-        .text('Not adjusted for labor costs')
+        .text(this.getTranslation('Not adjusted for labor costs'))
         .attr('transform', `translate(0, 0)`);
 
     yOffset += legendItem.node().getBBox().height + 1;
