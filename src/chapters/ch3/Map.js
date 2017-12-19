@@ -19,6 +19,7 @@ export default class Map extends WorldMap {
     return new Promise((resolve, reject) => {
       csv(dataUrl('3-map.csv'), (csvData) => {
         const mappedData = csvData.map(d => {
+          d.outlined = d[this.symbolField] === '2';
           d[this.symbolField] = d[this.symbolField] === '1';
           return d;
         });
@@ -38,5 +39,17 @@ export default class Map extends WorldMap {
       }
     });
     return countries;
+  }
+
+  renderPaths() {
+    const country = super.renderPaths();
+    const outlinedCountries = country.filter(d => d.properties.joined && d.properties.joined.outlined);
+    outlinedCountries.selectAll('path')
+      .style('stroke', '#585857')
+      .style('stroke-width', 0.5);
+    outlinedCountries.each((d, i, nodes) => {
+      nodes[i].parentNode.appendChild(nodes[i]);
+    });
+    return country;
   }
 }
