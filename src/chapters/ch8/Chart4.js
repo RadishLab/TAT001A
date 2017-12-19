@@ -9,12 +9,14 @@ export class Chart4 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.figurePrefix = '8-inset4';
+    this.xLabel = this.getTranslation('Education Level Attained');
     this.yLabel = this.getTranslation('Lung cancer mortality rate (per 100k)');
     this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('Poland (2011)'), value: 'Poland (2011)' },
       { label: this.getTranslation('United States, non-Hispanic whites (2010)'), value: 'United States, non-Hispanic whites (2010)' },
     ];
+    this.legendYOffset = 50;
   }
 
   loadData() {
@@ -45,6 +47,12 @@ export class Chart4 extends BarChart {
     return scaleLinear()
       .range([this.chartHeight, 0])
       .domain(yExtent);
+  }
+
+  createMargin() {
+    const margin = super.createMargin();
+    margin.bottom = this.legendOrientation() === 'horizontal' ? 52 : 60;
+    return margin;
   }
 
   getXValue(d) {

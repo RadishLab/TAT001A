@@ -27,6 +27,7 @@ export default class Chart {
     this.loadData()
       .then(data => this.data = data)
       .then(this.onDataLoaded.bind(this));
+    this.legendYOffset = 40;
   }
 
   getTranslation(text) {
@@ -163,7 +164,7 @@ export default class Chart {
       .classed('legend', true)
       .attr('transform', () => {
         let xOffset = 15;
-        let yOffset = this.chartHeight + 40;
+        let yOffset = this.chartHeight + this.legendYOffset;
         return `translate(${xOffset}, ${yOffset})`;
       });
 
