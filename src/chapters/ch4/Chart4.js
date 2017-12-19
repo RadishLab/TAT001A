@@ -26,6 +26,7 @@ export class Chart4 extends BarChart {
         resolve(csvData.map(d => {
           d['1980'] = +d['1980'] / 1000000000000;
           d['2016'] = +d['2016'] / 1000000000000;
+          d.change = +d['% of change'];
           return d;
         }));
       });
@@ -38,6 +39,12 @@ export class Chart4 extends BarChart {
       .range([0, this.chartWidth])
       .padding(0.5)
       .domain(values);
+  }
+
+  createMargin() {
+    const margin = super.createMargin();
+    margin.top = 10;
+    return margin;
   }
 
   renderBars() {
@@ -59,6 +66,12 @@ export class Chart4 extends BarChart {
         .attr('y', d => this.y(d['2016']))
         .attr('height', d => this.chartHeight - this.y(d['2016']))
         .attr('fill', this.colors('2016'));
+
+    barGroups.append('text')
+      .text(d => `${format('+d')(d.change * 100)}%`)
+      .attr('transform', d => `translate(${this.x(d.region) + barWidth * 1.5}, ${this.y(d['2016']) - 2})`)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '4px');
   }
 
   createYScale() {
