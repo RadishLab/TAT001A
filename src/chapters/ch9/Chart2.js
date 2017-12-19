@@ -18,14 +18,19 @@ export class Chart2 extends LineChart {
     this.yLabel = this.getTranslation('Smoking Prevalence (%)');
     this.legendItems = [
       { label: this.getTranslation('Male'), value: 'male' },
+      { label: this.getTranslation('Male'), value: 'male' },
+      { label: this.getTranslation('Female'), value: 'female' },
       { label: this.getTranslation('Female'), value: 'female' },
     ];
     this.yAxisTickFormat = d => format('d')(d * 100);
+    this.legendYOffset = 35;
   }
 
   createMargin() {
     const margin = super.createMargin();
     margin.right = 30;
+    margin.bottom = this.legendOrientation() === 'horizontal' ? 50 : 50;
+    margin.top = 2;
     return margin;
   }
 
@@ -52,6 +57,82 @@ export class Chart2 extends LineChart {
         .classed('axis-title', true)
         .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
         .text('Deaths Caused by Smoking (%)');
+  }
+
+  renderLegend() {
+    const legendLine = line()
+      .x(d => d[0])
+      .y(d => d[1]);
+    const legend = this.parent.append('g')
+      .classed('legend', true)
+      .attr('transform', () => {
+        let xOffset = 15;
+        let yOffset = this.chartHeight + this.legendYOffset;
+        return `translate(${xOffset}, ${yOffset})`;
+      });
+
+    const lineWidth = 10;
+
+    let xOffset = 0,
+      yOffset = 0;
+    const legendLeft = legend.append('g')
+      .attr('transform', 'translate(0, 0)');
+    const legendLeftItems = [];
+    legendLeftItems.push(this.legendItems[0]);
+    legendLeftItems.push(this.legendItems[2]);
+
+    let legendItem = legendLeft.append('g')
+      .attr('transform', `translate(${xOffset}, ${yOffset})`);
+      legendItem.append('text')
+        .text('Deaths caused by smoking')
+        .attr('transform', `translate(0, 0)`);
+
+    yOffset += legendItem.node().getBBox().height + 1;
+
+    legendLeftItems.forEach(({ label, value }) => {
+      legendItem = legendLeft.append('g')
+        .attr('transform', `translate(${xOffset}, ${yOffset})`);
+      legendItem.append('text')
+        .text(label)
+        .attr('transform', `translate(${lineWidth + 2.5}, 0)`);
+      legendItem.append('path')
+        .datum([[0, 0], [lineWidth, 0]])
+        .style('stroke', this.colors(value))
+        .attr('transform', 'translate(0, -2)')
+        .attr('d', d => legendLine(d));
+      yOffset += legendItem.node().getBBox().height + 1;
+    });
+
+    xOffset = 0;
+    yOffset = 0;
+    const legendRight = legend.append('g')
+      .attr('transform', 'translate(75, 0)');
+    const legendRightItems = [];
+    legendRightItems.push(this.legendItems[1]);
+    legendRightItems.push(this.legendItems[3]);
+
+    legendItem = legendRight.append('g')
+      .attr('transform', `translate(${xOffset}, ${yOffset})`);
+      legendItem.append('text')
+        .text('Smoking prevalence')
+        .attr('transform', `translate(0, 0)`);
+
+    yOffset += legendItem.node().getBBox().height + 1;
+
+    legendRightItems.forEach(({ label, value }) => {
+      legendItem = legendRight.append('g')
+        .attr('transform', `translate(${xOffset}, ${yOffset})`);
+      legendItem.append('text')
+        .text(label)
+        .attr('transform', `translate(${lineWidth + 2.5}, 0)`);
+      legendItem.append('path')
+        .datum([[0, 0], [lineWidth, 0]])
+        .style('stroke', this.colors(value))
+        .style('stroke-dasharray', '2,2')
+        .attr('transform', 'translate(0, -2)')
+        .attr('d', d => legendLine(d));
+      yOffset += legendItem.node().getBBox().height + 1;
+    });
   }
 
   loadData() {
