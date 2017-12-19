@@ -56,7 +56,7 @@ export class Chart2 extends LineChart {
       .append('text')
         .classed('axis-title', true)
         .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text('Deaths Caused by Smoking (%)');
+        .text(this.getTranslation('Deaths Caused by Smoking (%)'));
   }
 
   renderLegend() {
@@ -84,7 +84,7 @@ export class Chart2 extends LineChart {
     let legendItem = legendLeft.append('g')
       .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
-        .text('Deaths caused by smoking')
+        .text(this.getTranslation('Smoking prevalence'))
         .attr('transform', `translate(0, 0)`);
 
     yOffset += legendItem.node().getBBox().height + 1;
@@ -114,7 +114,7 @@ export class Chart2 extends LineChart {
     legendItem = legendRight.append('g')
       .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
-        .text('Smoking prevalence')
+        .text(this.getTranslation('Deaths caused by smoking'))
         .attr('transform', `translate(0, 0)`);
 
     yOffset += legendItem.node().getBBox().height + 1;
