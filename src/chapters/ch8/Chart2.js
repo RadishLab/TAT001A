@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -9,19 +10,20 @@ export class Chart2 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.figurePrefix = '8-inset2';
-    this.yLabel = this.getTranslation('Deaths');
+    this.yLabel = this.getTranslation('Deaths (thousands)');
     this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('Male deaths'), value: 'Males' },
       { label: this.getTranslation('Female deaths'), value: 'Females' },
     ];
+    this.yAxisTickFormat = format('.2');
   }
 
   loadData() {
     return new Promise((resolve, reject) => {
       csv('data/8-2.csv', (csvData) => {
         resolve(csvData.map(d => {
-          d['Number of Deaths'] = +d['Number of Deaths'];
+          d['Number of Deaths'] = +d['Number of Deaths'] / 1000;
           d['Percent (%)'] = +d['Percent (%)'];
           return d;
         }));

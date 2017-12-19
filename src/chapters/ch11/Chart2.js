@@ -1,5 +1,6 @@
 import { max, min } from 'd3-array';
 import { set } from 'd3-collection';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -15,7 +16,7 @@ export default class Chart2 extends BarChartVertical {
       { label: this.getTranslation('% of current smokers who intend to quit'), value: 'intend' },
       { label: this.getTranslation('% of current smokers who attempted to quit in past 12 months'), value: 'attempted' },
     ];
-    this.xAxisTickFormat = (d => `${d}%`);
+    this.xAxisTickFormat = format('d');
     this.yAxisTickFormat = this.getTranslation.bind(this);
   }
 

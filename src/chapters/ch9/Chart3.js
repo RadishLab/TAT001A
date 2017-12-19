@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -9,14 +10,14 @@ export class Chart3 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.figurePrefix = '9-inset3';
-    this.yLabel = this.getTranslation('Smoking Prevalence');
+    this.yLabel = this.getTranslation('Smoking Prevalence (%)');
     this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('Lowest Wealth Group'), value: 'Lowest Wealth Group' },
       { label: this.getTranslation('Highest Wealth Group'), value: 'Highest Wealth Group' },
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
-    this.yAxisTickFormat = (d => `${d}%`);
+    this.yAxisTickFormat = format('d')
   }
 
   loadData() {

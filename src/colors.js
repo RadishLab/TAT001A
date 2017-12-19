@@ -32,12 +32,12 @@ export const schemeCategorySolution = [
 ];
 
 export const schemeCategorySolutionMap = [
-  '#D3D8EC',
+  '#D3D8EC', // Lightest
   '#A7B6DD',
   '#7F99CF',
   '#5A81C3',
   '#356CB9',
-  '#2F4FA9'
+  '#2F4FA9' // Darkest
 ];
 
 // General map-related colors

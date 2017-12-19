@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -9,10 +10,11 @@ export default class Chart3 extends BarChart {
   constructor(parent, width, height) {
     super(parent, width, height);
     this.figurePrefix = '10-inset3';
-    this.yLabel = this.getTranslation('Revenue growth (in Million 2014 PPP dollars)');
+    this.yLabel = this.getTranslation('Revenue growth (in Billion 2014 PPP dollars)');
     this.yTicks = 6;
     this.legendItems = [];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = d => format('d')(d / 1000);
   }
 
   loadData() {

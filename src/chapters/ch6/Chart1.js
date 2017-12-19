@@ -3,7 +3,6 @@ import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 import { line } from 'd3-shape';
 
-import { schemeCategorySolution } from '../../colors';
 import BarChart from '../../charts/BarChart';
 import wrap from '../../wrap';
 
@@ -79,7 +78,7 @@ export default class Chart1 extends BarChart {
   }
 
   renderBars() {
-    const barGroups = this.createBarGroups().filter(d => d.disease !== 'tobacco use');
+    const barGroups = this.createBarGroups().filter(d => d.disease !== 'Tobacco use');
     const barWidth = this.x.bandwidth();
 
     barGroups.append('rect')
@@ -99,10 +98,10 @@ export default class Chart1 extends BarChart {
         .attr('fill', this.colors('tobacco'));
 
     // Get tobacco use related deaths by disease
-    const tobaccoUseDeaths = this.data.filter(d => d.disease !== '' && d.disease !== 'tobacco use');
+    const tobaccoUseDeaths = this.data.filter(d => d.disease !== '' && d.disease !== 'Tobacco use');
     tobaccoUseDeaths.push({
       disease: 'other',
-      tobaccoRelated: this.data.filter(d => d.disease === 'tobacco use')[0].otherTobaccoRelated
+      tobaccoRelated: this.data.filter(d => d.disease === 'Tobacco use')[0].otherTobaccoRelated
     });
     tobaccoUseDeaths.forEach((d, i) => {
       // Since we are stacking these vertically, find number of deaths that will
@@ -121,7 +120,7 @@ export default class Chart1 extends BarChart {
 
     tobaccoUseDeathBars.append('rect')
       .classed('bar', true)
-      .attr('x', this.x('tobacco use'))
+      .attr('x', this.x('Tobacco use'))
       .attr('width', barWidth)
       .attr('y', d => this.y(d.tobaccoRelated + d.deathsUnder))
       .attr('height', d => this.chartHeight - this.y(d.tobaccoRelated))
@@ -135,15 +134,15 @@ export default class Chart1 extends BarChart {
       .attr('d', d => {
         const y = this.y(d.deathsUnder);
         return lineCreator([
-          [this.x('tobacco use') + 0.25, y],
-          [this.x('tobacco use') + barWidth - 0.25, y]
+          [this.x('Tobacco use') + 0.25, y],
+          [this.x('Tobacco use') + barWidth - 0.25, y]
         ]);
       });
 
     tobaccoUseDeathBars.append('text')
       .attr('dy', 0)
       .attr('transform', d => {
-        const x = this.x('tobacco use') + barWidth + 2;
+        const x = this.x('Tobacco use') + barWidth + 2;
         let y = this.y(d.deathsUnder) - (this.chartHeight - this.y(d.tobaccoRelated)) / 2;
         if (d.disease === 'tuberculosis') {
           y += 1;
@@ -159,7 +158,8 @@ export default class Chart1 extends BarChart {
   }
 
   createZScale() {
-    return scaleOrdinal(schemeCategorySolution);
+    return scaleOrdinal(['#bcdeda', '#f04f41'])
+      .domain(['other', 'tobacco']);
   }
 
   render() {

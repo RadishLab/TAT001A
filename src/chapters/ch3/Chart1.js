@@ -18,7 +18,7 @@ export default class Chart1 extends LineChart {
       { label: this.getTranslation('POS Ad Ban'), value: 'pos' },
       { label: this.getTranslation('Internet Ad Ban'), value: 'internet' },
     ];
-    this.yAxisTickFormat = format('.0%');
+    this.yAxisTickFormat = format('d');
   }
 
   createMargin() {
@@ -33,9 +33,9 @@ export default class Chart1 extends LineChart {
         const mappedData = csvData
           .map(row => {
             row.year = timeParse('%Y')(row.year);
-            row.fctc = +row['FCTC Compliant GHW'];
-            row.pos = +row['POS AdBan'];
-            row.internet = +row['Internet AdBan'];
+            row.fctc = +row['FCTC Compliant GHW'] * 100;
+            row.pos = +row['POS AdBan'] * 100;
+            row.internet = +row['Internet AdBan'] * 100;
             return row;
           });
         const nestedData = ['fctc', 'pos', 'internet'].map(type => {

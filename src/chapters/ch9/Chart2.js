@@ -15,12 +15,12 @@ export class Chart2 extends LineChart {
     super(parent, width, height);
     this.figurePrefix = '9-inset2';
     this.xLabel = this.getTranslation('Year');
-    this.yLabel = this.getTranslation('Smoking Prevalence');
+    this.yLabel = this.getTranslation('Smoking Prevalence (%)');
     this.legendItems = [
       { label: this.getTranslation('Male'), value: 'male' },
       { label: this.getTranslation('Female'), value: 'female' },
     ];
-    this.yAxisTickFormat = format('.0%');
+    this.yAxisTickFormat = d => format('d')(d * 100);
   }
 
   createMargin() {
@@ -42,7 +42,7 @@ export class Chart2 extends LineChart {
   renderRightAxis() {
     const yAxis = axisRight(this.deathRateScale)
       .ticks(5)
-      .tickFormat(d => `${d}%`);
+      .tickFormat(format('d'));
     const yAxisGroup = this.root.append('g')
       .classed('axis axis-y', true);
     yAxisGroup
@@ -51,7 +51,7 @@ export class Chart2 extends LineChart {
       .append('text')
         .classed('axis-title', true)
         .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text('Deaths Caused by Smoking');
+        .text('Deaths Caused by Smoking (%)');
   }
 
   loadData() {

@@ -1,5 +1,6 @@
 import { max, min } from 'd3-array';
 import { set } from 'd3-collection';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 import { timeFormat, timeParse } from 'd3-time-format';
@@ -12,12 +13,13 @@ export default class Chart3 extends BarChart {
     super(parent, width, height);
     this.figurePrefix = '12-inset3';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
-    this.yLabel = this.getTranslation('Sales');
+    this.yLabel = this.getTranslation('Sales (millions)');
     this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('cigarette sales'), value: 'cigarette' },
       { label: this.getTranslation('roll-your-own tobacco sales'), value: 'rollyourown' },
     ];
+    this.yAxisTickFormat = d => format('.2')(d / 1000000);
   }
 
   loadData() {

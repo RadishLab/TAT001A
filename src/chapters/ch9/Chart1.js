@@ -1,5 +1,6 @@
 import { extent } from 'd3-array';
 import { nest } from 'd3-collection';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
 import { timeParse } from 'd3-time-format';
@@ -12,13 +13,14 @@ export class Chart1 extends LineChart {
     super(parent, width, height);
     this.figurePrefix = '9-inset1';
     this.xLabel = this.getTranslation('Year');
-    this.yLabel = this.getTranslation('Smokers');
+    this.yLabel = this.getTranslation('Smokers (millions)');
     this.legendItems = [
       { label: this.getTranslation('Low HDI'), value: 'Low HDI' },
       { label: this.getTranslation('Medium HDI'), value: 'Medium HDI' },
       { label: this.getTranslation('High HDI'), value: 'High HDI' },
       { label: this.getTranslation('Very High HDI'), value: 'Very High HDI' },
     ];
+    this.yAxisTickFormat = format('d');
   }
 
   loadData() {
@@ -27,7 +29,7 @@ export class Chart1 extends LineChart {
         const mappedData = csvData
           .map(row => {
             row.year = timeParse('%Y')(row.Year);
-            row.value = +row.Smokers
+            row.value = +row.Smokers / 1000000;
             return row;
           });
         const nestedData = nest()

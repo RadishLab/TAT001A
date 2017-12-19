@@ -21,10 +21,11 @@ export default class Map extends WorldMap {
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(dataUrl('19-map.csv'), (csvData) => {
-        resolve(csvData.map(d => {
+        const mappedData = csvData.map(d => {
           d[this.valueField] = +d[this.valueField];
           return d;
-        }));
+        });
+        resolve(mappedData);
       });
     });
   }

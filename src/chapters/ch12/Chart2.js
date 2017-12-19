@@ -42,7 +42,7 @@ export default class Chart2 extends LineChart {
   renderRightAxis() {
     const yAxis = axisRight(this.prevalenceScale)
       .ticks(5)
-      .tickFormat(format('.0%'));
+      .tickFormat(d => format('d')(d * 100));
     const yAxisGroup = this.root.append('g')
       .classed('axis axis-y', true);
     yAxisGroup
@@ -51,7 +51,7 @@ export default class Chart2 extends LineChart {
       .append('text')
         .classed('axis-title', true)
         .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.getTranslation('Smoking Prevalence'));
+        .text(this.getTranslation('Smoking Prevalence (%)'));
   }
 
   loadData() {
