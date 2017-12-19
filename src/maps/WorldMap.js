@@ -30,6 +30,7 @@ export default class WorldMap {
       .projection(this.projection);
     this.root = this.parent.append('g');
 
+    this.noDataColor = mapNoData;
     this.loadData();
   }
 
@@ -72,7 +73,7 @@ export default class WorldMap {
         }
         return this.colorScale(value / this.maxValue);
       }
-      return mapNoData;
+      return this.noDataColor;
     });
 
     let largeCountries = country.filter(d => d.properties.areakm >= smallCountryThreshold);

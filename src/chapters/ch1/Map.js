@@ -12,6 +12,7 @@ export default class Map1 extends WorldMap {
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
+    this.noDataColor = schemeCategoryProblemMap[0];
   }
 
   loadJoinData() {
