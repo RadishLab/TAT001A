@@ -13,7 +13,7 @@ export default class Chart1 extends LineChart {
     super(parent, width, height);
     this.figurePrefix = '7-inset1';
     this.xLabel = this.getTranslation('Year');
-    this.yLabel = this.getTranslation('Tuberculosis mortality per 10k');
+    this.yLabel = this.getTranslation('Tuberculosis mortality per 10,000');
     this.legendItems = [
       { label: this.getTranslation('Baseline scenario'), value: 'including smoking' },
       { label: this.getTranslation('Without smoking'), value: 'not including smoking' }
