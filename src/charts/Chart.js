@@ -28,6 +28,7 @@ export default class Chart {
       .then(data => this.data = data)
       .then(this.onDataLoaded.bind(this));
     this.legendYOffset = 40;
+    this.yLabelOffset = 0;
   }
 
   getTranslation(text) {
@@ -114,7 +115,7 @@ export default class Chart {
       .call(yAxis)
       .append('text')
         .classed('axis-title', true)
-        .attr('transform', `translate(-${(this.margin.left - 6)}, ${this.chartHeight / 2}) rotate(-90)`)
+        .attr('transform', `translate(-${(this.margin.left - 6)}, ${(this.chartHeight / 2) + this.yLabelOffset}) rotate(-90)`)
         .text(this.yLabel);
     this.parent.select('.axis-y').selectAll('.tick')
       .classed('date', d => isDate(d))
