@@ -9,7 +9,7 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.colorScale = scaleOrdinal(schemeCategorySolutionMap);
+    this.colorScale = scaleOrdinal(schemeCategorySolutionMap.slice(1));
     this.colorScaleType = 'ordinal';
     this.valueField = 'W-MM_Group_16';
   }
@@ -17,9 +17,10 @@ export default class Map extends WorldMap {
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(dataUrl('14-map.csv'), (csvData) => {
-        const domain = set(csvData.map(d => d[this.valueField])).values().sort();
+        const filteredData = csvData.filter(d => d[this.valueField] !== '1');
+        const domain = set(filteredData.map(d => d[this.valueField])).values().sort();
         this.colorScale.domain(domain);
-        resolve(csvData);
+        resolve(filteredData);
       });
     });
   }
