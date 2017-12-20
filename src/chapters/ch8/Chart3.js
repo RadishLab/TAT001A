@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -17,6 +18,7 @@ export class Chart3 extends BarChart {
       { label: '20%+', value: 'Deaths: 20%+' }
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = format('d');
   }
 
   loadData() {
