@@ -19,9 +19,13 @@ export default class Map9 extends WorldMap {
     return new Promise((resolve, reject) => {
       csv(dataUrl('9-map.csv'), (csvData) => {
         const filteredData = csvData.filter(d => d[this.valueField] !== '');
-        const domain = set(filteredData.map(d => d[this.valueField])).values().sort().reverse();
+        const mappedData = filteredData.map(d => {
+          d[this.symbolField] = false;
+          return d;
+        });
+        const domain = set(mappedData.map(d => d[this.valueField])).values().sort().reverse();
         this.colorScale.domain(domain);
-        resolve(filteredData);
+        resolve(mappedData);
       });
     });
   }
