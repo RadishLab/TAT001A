@@ -14,7 +14,7 @@ export default class Chart1 extends LineChart {
     this.figurePrefix = '1-inset1';
 
     this.xLabel = this.getTranslation('Year');
-    this.yLabel = this.getTranslation('Tonnes (millions)');
+    this.yLabel = this.getTranslation('Metric tons (millions)');
     this.legendItems = [
       { label: this.getTranslation('Low HDI'), value: 'Low-HDI' },
       { label: this.getTranslation('Medium HDI'), value: 'Medium-HDI' },
