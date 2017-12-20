@@ -8,7 +8,7 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map extends WorldMap {
   constructor(parent, width, height) {
     super(parent, width, height);
-    this.colorScale = scaleOrdinal(schemeCategorySolutionMap)
+    this.colorScale = scaleOrdinal(schemeCategorySolutionMap.slice(2))
       .domain([
         'Sales Permitted, Regulated',
         'Market Authorization Required',
