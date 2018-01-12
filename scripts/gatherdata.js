@@ -55,6 +55,7 @@ const FILES = {
   '18 Countering the Industry/Map - Countering the Industry - Country litigation.xlsx': '18-map.csv',
   '19 Optimism/TA6 Optimism Map.xlsx': '19-map.csv',
   'Web Smokeless/TA6 Smokeless Data.xlsx': 'smokeless-map.csv',
+  'Web Waterpipe/TA6 Waterpipe Data Inset 1.xlsx': 'waterpipe-1.csv',
 };
 
 const execPromise = promisify(exec);
