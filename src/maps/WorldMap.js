@@ -52,6 +52,10 @@ export default class WorldMap {
   }
 
   getISO3(feature) {
+    // South Sudan
+    if (feature.properties.ADM0_A3 === 'SDS') {
+      return feature.properties.ISO_A3;
+    }
     return feature.properties.ADM0_A3;
   }
 
