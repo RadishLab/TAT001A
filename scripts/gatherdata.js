@@ -54,6 +54,7 @@ const FILES = {
   '16 ENDS/TA6 ENDS Map (Market Access).xlsx': '16-map.csv',
   '18 Countering the Industry/Map - Countering the Industry - Country litigation.xlsx': '18-map.csv',
   '19 Optimism/TA6 Optimism Map.xlsx': '19-map.csv',
+  'Web Smokeless/TA6 Smokeless Data.xlsx': 'web-smokeless-map.csv',
 };
 
 const execPromise = promisify(exec);
