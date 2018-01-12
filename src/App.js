@@ -21,7 +21,7 @@ import { figures as ch15Figures } from './chapters/ch15/Figures';
 import { figures as ch16Figures } from './chapters/ch16/Figures';
 import { figures as ch18Figures } from './chapters/ch18/Figures';
 import { figures as ch19Figures } from './chapters/ch19/Figures';
-import { figures as webSmokelessFigures } from './chapters/web-smokeless/Figures';
+import { figures as smokelessFigures } from './chapters/smokeless/Figures';
 
 class App extends Component {
   constructor() {
@@ -87,7 +87,7 @@ class App extends Component {
         <FigureGroup title='Chapter 16' chapter={16} figures={ch16Figures}/>
         <FigureGroup title='Chapter 18' chapter={18} figures={ch18Figures}/>
         <FigureGroup title='Chapter 19' chapter={19} figures={ch19Figures}/>
-        <FigureGroup title='Web: Smokeless' chapter={'web-smokeless'} figures={webSmokelessFigures}/>
+        <FigureGroup title='Smokeless' chapter={'smokeless'} figures={smokelessFigures}/>
       </div>
     );
   }

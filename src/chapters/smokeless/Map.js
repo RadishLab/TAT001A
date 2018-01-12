@@ -17,7 +17,7 @@ export default class Map extends WorldMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(dataUrl('web-smokeless-map.csv'), (csvData) => {
+      csv(dataUrl('smokeless-map.csv'), (csvData) => {
         const domain = set(csvData.map(d => d[this.valueField])).values().sort();
         this.colorScale.domain(domain);
         resolve(csvData);
