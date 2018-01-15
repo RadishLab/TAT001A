@@ -62,6 +62,9 @@ export default class Chart {
 
   renderXAxis() {
     const xAxis = axisBottom(this.x);
+    if (this.xAxisTickArguments) {
+      xAxis.ticks(this.xAxisTickArguments);
+    }
     if (this.xAxisTickFormat) {
       xAxis.tickFormat(this.xAxisTickFormat.bind(this));
     }
