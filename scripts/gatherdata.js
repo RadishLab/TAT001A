@@ -19,6 +19,7 @@ const FILES = {
   '4 Prevalence/TA6 Prevalence Inset 2_Trend.xlsx': '4-2.csv',
   '4 Prevalence/TA6 Prevalence Inset 3-Monitoring.xlsx': '4-3.csv',
   '4 Prevalence/TA6 Prevalence Inset 4-Consumption.xlsx': '4-4.csv',
+  '4 Prevalence/TA6 Prevalence Online Inset-Countries with highest no of smokers.xlsx': '4-5.csv',
   '4 Prevalence/TA6 Prevalence Map & Symbol.xlsx': '4-map.csv',
   '5 Secondhand/TA6 Secondhand Inset 2-SHS in select countries.xlsx': '5-2.csv',
   '5 Secondhand/TA6 Secondhand Inset 3-SHS in Europe.xlsx': '5-3.csv',
