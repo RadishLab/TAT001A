@@ -1,6 +1,7 @@
 import Map1 from './Map1';
 import Map2 from './Map2';
 import Map3 from './Map3';
+import Map4 from './Map4';
 
 export const figures = [
   {
@@ -16,6 +17,11 @@ export const figures = [
   {
     name: 'map3',
     figureClass: Map3,
+    type: 'map'
+  },
+  {
+    name: 'map4',
+    figureClass: Map4,
     type: 'map'
   }
 ];
