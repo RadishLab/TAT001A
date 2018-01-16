@@ -123,9 +123,10 @@ export default class WorldMap {
   }
 
   render() {
+    const parentRect = this.parent.node().getBoundingClientRect();
     this.projection.fitExtent([
       [0, 0],
-      [this.parent.node().clientWidth, this.parent.node().clientHeight]
+      [parentRect.width, parentRect.height]
     ], this.countriesGeojson);
 
     this.renderPaths();
