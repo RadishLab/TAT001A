@@ -15,6 +15,7 @@ import { figures as ch15figures } from './ch15/Figures.js';
 import { figures as ch16figures } from './ch16/Figures.js';
 import { figures as ch18figures } from './ch18/Figures.js';
 import { figures as ch19figures } from './ch19/Figures.js';
+import { figures as consumptionFigures } from './consumption/Figures.js';
 import { figures as smokelessFigures } from './smokeless/Figures.js';
 import { figures as waterpipeFigures } from './waterpipe/Figures.js';
 import { figures as youthFigures } from './youth/Figures.js';
@@ -43,6 +44,7 @@ const chapters = {
   'ch16': ch16figures,
   'ch18': ch18figures,
   'ch19': ch19figures,
+  'consumption': consumptionFigures,
   'smokeless': smokelessFigures,
   'waterpipe': waterpipeFigures,
   'youth': youthFigures,

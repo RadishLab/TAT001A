@@ -55,6 +55,7 @@ const FILES = {
   '16 ENDS/TA6 ENDS Map (Market Access).xlsx': '16-map.csv',
   '18 Countering the Industry/Map - Countering the Industry - Country litigation.xlsx': '18-map.csv',
   '19 Optimism/TA6 Optimism Map.xlsx': '19-map.csv',
+  'Web Consumption/TA6 Consumption Map.xlsx': 'consumption-map.csv',
   'Web Smokeless/TA6 Smokeless Data.xlsx': 'smokeless-map.csv',
   'Web Waterpipe/TA6 Waterpipe Data Inset 1.xlsx': 'waterpipe-1.csv',
   'Web Waterpipe/TA6 Waterpipe Data Inset 2.xlsx': 'waterpipe-2.csv',
