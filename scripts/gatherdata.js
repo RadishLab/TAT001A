@@ -63,6 +63,7 @@ const FILES = {
   'Web Youth/TA6 Youth Map 2 (Girls).xlsx': 'youth-map2.csv',
   'Web Youth/TA6 Youth Map 3 (Boys-cigarettes).xlsx': 'youth-map3.csv',
   'Web Youth/TA6 Youth Map 4 (Girls-cigarettes).xlsx': 'youth-map4.csv',
+  'Web Youth/TA6 Youth Inset 1-Current tobacco use in adults and youth-just data.xlsx': 'youth-1.csv',
 };
 
 const execPromise = promisify(exec);
