@@ -12,13 +12,12 @@ export default class Map extends WorldMap {
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
-    this.noDataColor = schemeCategoryProblemMap[0];
   }
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(dataUrl('smokeless-map.csv'), (csvData) => {
-        const domain = set(csvData.map(d => d[this.valueField])).values().sort();
+        const domain = set(csvData.map(d => d[this.valueField])).values().filter(d => d && d !== '').sort();
         this.colorScale.domain(domain);
         resolve(csvData);
       });

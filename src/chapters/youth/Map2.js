@@ -16,8 +16,8 @@ export default class Map extends WorldMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(dataUrl('youth-map1.csv'), (csvData) => {
-        const domain = set(csvData.map(d => d[this.valueField])).values().sort();
+      csv(dataUrl('youth-map2.csv'), (csvData) => {
+        const domain = set(csvData.map(d => d[this.valueField])).values().filter(d => d && d !== '').sort();
         this.colorScale.domain(domain);
         resolve(csvData);
       });
