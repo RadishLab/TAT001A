@@ -75,6 +75,10 @@ body {
 .legend path {
   stroke-width: 2; }
 
+.arc-label {
+  font-size: 6px;
+  text-anchor: middle; }
+
 .line-chart .line {
   fill: none;
   stroke-width: 1.5; }

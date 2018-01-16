@@ -110,4 +110,5 @@ body {
 }
 
 // Import specific charts here so we can override above styles
+@import '_pieChart';
 @import '_lineChart';

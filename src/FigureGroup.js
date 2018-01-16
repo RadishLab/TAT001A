@@ -30,6 +30,12 @@ export default function FigureGroup({ title, chapter, figures }) {
               <Figure id={`${chapter}-${figure.name}`} figureClass={figure.figureClass} size='chart-vertical' />
             </div>
           );
+        } else if (figure.type === 'chart-pie') {
+          renderedFigure = (
+            <div key={figure.name}>
+              <Figure id={`${chapter}-${figure.name}`} figureClass={figure.figureClass} size='chart-pie' />
+            </div>
+          );
         } else {
           renderedFigure = (
             <div key={figure.name}>
