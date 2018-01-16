@@ -58,6 +58,7 @@ const FILES = {
   'Web Consumption/TA6 Consumption Map.xlsx': 'consumption-map.csv',
   'Web Consumption/TA6 Consumption Inset 1.xlsx': 'consumption-1.csv',
   'Web Consumption/TA6 Consumption Inset 2 - reformatted.xlsx': 'consumption-2.csv',
+  'Web Consumption/TA6 Consumption Inset 3.xlsx': 'consumption-3.csv',
   'Web Smokeless/TA6 Smokeless Data.xlsx': 'smokeless-map.csv',
   'Web Waterpipe/TA6 Waterpipe Data Inset 1.xlsx': 'waterpipe-1.csv',
   'Web Waterpipe/TA6 Waterpipe Data Inset 2.xlsx': 'waterpipe-2.csv',
