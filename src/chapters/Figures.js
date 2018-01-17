@@ -11,6 +11,7 @@ import { figures as ch10figures } from './ch10/Figures.js';
 import { figures as ch11figures } from './ch11/Figures.js';
 import { figures as ch12figures } from './ch12/Figures.js';
 import { figures as ch13figures } from './ch13/Figures.js';
+import { figures as ch14figures } from './ch14/Figures.js';
 import { figures as ch15figures } from './ch15/Figures.js';
 import { figures as ch16figures } from './ch16/Figures.js';
 import { figures as ch18figures } from './ch18/Figures.js';
