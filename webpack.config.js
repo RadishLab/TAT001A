@@ -4,17 +4,12 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 /*
- * Webpack config file to create separate bundles for each map or chart.
- * 
- * CommonsChunkPlugin creates a bundle of the commonly invoked modules, and we 
- * create a separate bundle for each map or chart.
+ * Webpack config file to create bundle for embedded online visualizations.
  */
 module.exports = {
-  entry: {
-    ch1map: './src/index.web.js'
-  },
+  entry: './src/index.web.js',
   output: {
-    filename: 'web.bundle.js',
+    filename: 'ta-visualizations.bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -34,7 +29,8 @@ module.exports = {
   plugins: [
     new UglifyJSPlugin(),
     new CopyWebpackPlugin([
-      'public'
+      { from: 'public/data', to: 'data/' },
+      'public/index.css'
     ])
   ]
 }
