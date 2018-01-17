@@ -17,8 +17,8 @@ export default class PieChart extends Chart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.left = this.radius;
-    margin.top = this.radius;
+    margin.left = this.radius || 0;
+    margin.top = this.radius || 0;
     return margin;
   }
 
