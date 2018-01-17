@@ -27,6 +27,7 @@ const FILES = {
   '5 Secondhand/TA6 Secondhand Inset 6-SHS in youth by WHO region.xlsx': '5-6.csv',
   '6 Health/DALYs from tobacco.xlsx': '6-map.csv',
   '6 Health/Inset 1 Formatted.xlsx': '6-1.csv',
+  '6 Health/Inset 2 (web only) Percent of DALYs from tobacco, by age group, 2016 - formatted.xlsx': '6-2.csv',
   '7 Comorbidities/Map - Comorbidities - TB deaths due to tobacco.xlsx': '7-map.csv',
   '7 Comorbidities/inset1-data-ESTIMATES.xlsx': '7-1.csv',
   '7 Comorbidities/inset3-data-ESTIMATES.xlsx': '7-3.csv',
