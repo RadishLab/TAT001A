@@ -1,4 +1,6 @@
-.arc-label {
-  font-size: $export-font-size;
-  text-anchor: middle;
+.ta-visualization .pie-chart {
+  .arc-label {
+    font-size: $font-size;
+    text-anchor: middle;
+  }
 }

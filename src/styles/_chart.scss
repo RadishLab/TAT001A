@@ -1,96 +1,98 @@
-.tick {
-  color: $text-color;
+.ta-visualization {
+  .tick {
+    color: $text-color;
 
-  &.date {
-    color: $tick-text-color;
+    &.date {
+      color: $tick-text-color;
 
-    text {
-      fill: $tick-text-color;
+      text {
+        fill: $tick-text-color;
+      }
+    }
+
+    &.number {
+      color: $tick-number-color;
+
+      text {
+        fill: $tick-number-color;
+      }
+    }
+
+    &.text {
+      color: $tick-text-color;
+
+      text {
+        fill: $tick-text-color;
+      }
+    }
+
+    tspan {
+      text-anchor: middle;
     }
   }
 
-  &.number {
-    color: $tick-number-color;
-
-    text {
-      fill: $tick-number-color;
-    }
+  .axis-x .tick {
+    text-align: center;
   }
 
-  &.text {
-    color: $tick-text-color;
-
-    text {
-      fill: $tick-text-color;
-    }
+  .y-guide-line path {
+    fill: none;
+    stroke: $guide-line-color;
+    stroke-width: 0.5;
   }
 
-  tspan {
+  .x-guide-line path {
+    fill: none;
+    stroke: $guide-line-color;
+    stroke-width: 0.5;
+  }
+
+  .axis-y .axis-title {
+    fill: $axis-label-color;
+    font-size: $axis-label-font-size;
     text-anchor: middle;
   }
-}
 
-.axis-x .tick {
-  text-align: center;
-}
-
-.y-guide-line path {
-  fill: none;
-  stroke: $guide-line-color;
-  stroke-width: 0.5;
-}
-
-.x-guide-line path {
-  fill: none;
-  stroke: $guide-line-color;
-  stroke-width: 0.5;
-}
-
-.axis-y .axis-title {
-  fill: $axis-label-color;
-  font-size: $axis-label-font-size;
-  text-anchor: middle;
-}
-
-.axis-y .domain {
-  stroke: none;
-}
-
-.axis-y .tick {
-  font-size: $font-size;
-}
-
-.axis-y .tick line {
-  display: none;
-}
-
-.axis-x .axis-title {
-  fill: $axis-label-color;
-  font-size: $axis-label-font-size;
-  text-anchor: middle;
-}
-
-.axis-x .domain {
-  stroke: none;
-}
-
-.axis-x .tick {
-  font-size: $font-size;
-  text-anchor: middle;
-}
-
-.axis-x .tick line {
-  display: none;
-}
-
-.legend {
-  font-size: $font-size;
-
-  text {
-    fill: $text-color;
+  .axis-y .domain {
+    stroke: none;
   }
-}
 
-.legend path {
-  stroke-width: 2;
+  .axis-y .tick {
+    font-size: $font-size;
+  }
+
+  .axis-y .tick line {
+    display: none;
+  }
+
+  .axis-x .axis-title {
+    fill: $axis-label-color;
+    font-size: $axis-label-font-size;
+    text-anchor: middle;
+  }
+
+  .axis-x .domain {
+    stroke: none;
+  }
+
+  .axis-x .tick {
+    font-size: $font-size;
+    text-anchor: middle;
+  }
+
+  .axis-x .tick line {
+    display: none;
+  }
+
+  .legend {
+    font-size: $font-size;
+
+    text {
+      fill: $text-color;
+    }
+  }
+
+  .legend path {
+    stroke-width: 2;
+  }
 }

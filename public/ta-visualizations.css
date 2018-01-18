@@ -2,77 +2,77 @@
 .ta-visualization-standalone text {
   font-family: 'Source Sans Pro', sans-serif; }
 
-.tick {
+.ta-visualization .tick {
   color: #585857; }
-  .tick.date {
+  .ta-visualization .tick.date {
     color: #585857; }
-    .tick.date text {
+    .ta-visualization .tick.date text {
       fill: #585857; }
-  .tick.number {
+  .ta-visualization .tick.number {
     color: #585857; }
-    .tick.number text {
+    .ta-visualization .tick.number text {
       fill: #585857; }
-  .tick.text {
+  .ta-visualization .tick.text {
     color: #585857; }
-    .tick.text text {
+    .ta-visualization .tick.text text {
       fill: #585857; }
-  .tick tspan {
+  .ta-visualization .tick tspan {
     text-anchor: middle; }
 
-.axis-x .tick {
+.ta-visualization .axis-x .tick {
   text-align: center; }
 
-.y-guide-line path {
+.ta-visualization .y-guide-line path {
   fill: none;
   stroke: #EDE7DF;
   stroke-width: 0.5; }
 
-.x-guide-line path {
+.ta-visualization .x-guide-line path {
   fill: none;
   stroke: #EDE7DF;
   stroke-width: 0.5; }
 
-.axis-y .axis-title {
+.ta-visualization .axis-y .axis-title {
   fill: #a29d98;
   font-size: 12px;
   text-anchor: middle; }
 
-.axis-y .domain {
+.ta-visualization .axis-y .domain {
   stroke: none; }
 
-.axis-y .tick {
+.ta-visualization .axis-y .tick {
   font-size: 12px; }
 
-.axis-y .tick line {
+.ta-visualization .axis-y .tick line {
   display: none; }
 
-.axis-x .axis-title {
+.ta-visualization .axis-x .axis-title {
   fill: #a29d98;
   font-size: 12px;
   text-anchor: middle; }
 
-.axis-x .domain {
+.ta-visualization .axis-x .domain {
   stroke: none; }
 
-.axis-x .tick {
+.ta-visualization .axis-x .tick {
   font-size: 12px;
   text-anchor: middle; }
 
-.axis-x .tick line {
+.ta-visualization .axis-x .tick line {
   display: none; }
 
-.legend {
+.ta-visualization .legend {
   font-size: 12px; }
-  .legend text {
+  .ta-visualization .legend text {
     fill: #585857; }
 
-.legend path {
+.ta-visualization .legend path {
   stroke-width: 2; }
 
-.arc-label {
-  font-size: 6px;
+.ta-visualization .pie-chart .arc-label {
+  font-size: 12px;
   text-anchor: middle; }
 
-.line-chart .line {
+.ta-visualization .line-chart .line {
   fill: none;
   stroke-width: 1.5; }

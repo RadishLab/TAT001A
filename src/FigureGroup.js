@@ -10,7 +10,7 @@ export default function FigureGroup({ title, chapter, figures }) {
         let renderedFigure;
         if (figure.dimensions) {
           renderedFigure = (
-            <div key={figure.name}>
+            <div className='ta-visualization' key={figure.name}>
               <Figure id={`${chapter}-${figure.name}`} figureClass={figure.figureClass} dimensions={figure.dimensions} />
             </div>
           );
@@ -20,25 +20,25 @@ export default function FigureGroup({ title, chapter, figures }) {
             size = 'map-europe';
           }
           renderedFigure = (
-            <div key={figure.name}>
+            <div className='ta-visualization' key={figure.name}>
               <Figure id={`${chapter}-${figure.name}`} figureClass={figure.figureClass} size={size} />
             </div>
           );
         } else if (figure.type === 'chart-vertical') {
           renderedFigure = (
-            <div key={figure.name}>
+            <div className='ta-visualization' key={figure.name}>
               <Figure id={`${chapter}-${figure.name}`} figureClass={figure.figureClass} size='chart-vertical' />
             </div>
           );
         } else if (figure.type === 'chart-pie') {
           renderedFigure = (
-            <div key={figure.name}>
+            <div className='ta-visualization' key={figure.name}>
               <Figure id={`${chapter}-${figure.name}`} figureClass={figure.figureClass} size='chart-pie' />
             </div>
           );
         } else {
           renderedFigure = (
-            <div key={figure.name}>
+            <div className='ta-visualization' key={figure.name}>
               <Figure id={`${chapter}-${figure.name}-wide`} figureClass={figure.figureClass} size='wide'/>
               <Figure id={`${chapter}-${figure.name}-narrow`} figureClass={figure.figureClass} size='narrow'/>
             </div>
