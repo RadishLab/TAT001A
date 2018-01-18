@@ -8,8 +8,8 @@ import { schemeCategoryProblem } from '../../colors';
 import BarChart from '../../charts/BarChart';
 
 export default class Chart3 extends BarChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = 'waterpipe-inset2';
     this.yLabel = this.getTranslation('Tobacco Users That Used Waterpipe (%)');
     this.yTicks = 6;

@@ -11,8 +11,8 @@ import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
 
 export class Chart2 extends LineChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '9-inset2';
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Smoking Prevalence (%)');
@@ -137,6 +137,7 @@ export class Chart2 extends LineChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
+      // TODO if url given in constructor get that instead
       csv('data/9-2.csv', (csvData) => {
         const mappedData = csvData
           .map(row => {

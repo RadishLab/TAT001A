@@ -12,8 +12,8 @@ import { schemeCategoryProblem } from '../../colors';
 import Chart from '../../charts/Chart';
 
 export default class Chart4 extends Chart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '1-inset4';
     this.xLabel = this.getTranslation('Region');
     this.yLabel = this.getTranslation('Crop');

@@ -1,8 +1,8 @@
 import Chart from './Chart';
 
 export default class BarChart extends Chart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.parent
       .classed('bar-chart', true);
   }

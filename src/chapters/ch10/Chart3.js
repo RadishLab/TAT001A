@@ -7,8 +7,8 @@ import { schemeCategorySolution } from '../../colors';
 import BarChart from '../../charts/BarChart';
 
 export default class Chart3 extends BarChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '10-inset3';
     this.yLabel = this.getTranslation('Revenue growth (in Billion 2014 PPP dollars)');
     this.yTicks = 6;

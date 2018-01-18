@@ -6,8 +6,8 @@ import { loadCachedData } from '../dataService';
 import WorldMap from './WorldMap';
 
 export default class EuropeMap extends WorldMap {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.padding = 20;
 
     // We crop to the extent of the SVG because we don't want countries outside

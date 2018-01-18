@@ -4,8 +4,8 @@ import Chart from './Chart';
  * A vertically-oriented bar chart (where the bars run horizontally).
  */
 export default class BarChartVertical extends Chart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.parent
       .classed('bar-chart', true);
   }

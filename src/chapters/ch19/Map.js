@@ -6,8 +6,8 @@ import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map extends WorldMap {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.valueField = 'Average score for POWER';
     this.symbolField = 'Symbol - prevalence decline in the highest-performing countries';
     this.colorScale = scaleLinear()

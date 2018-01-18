@@ -7,8 +7,8 @@ import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map9 extends WorldMap {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';

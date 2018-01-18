@@ -7,8 +7,8 @@ import { schemeCategoryProblem } from '../../colors';
 import BarChart from '../../charts/BarChart';
 
 export default class Chart3 extends BarChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = 'consumption-inset3';
     this.yLabel = this.getTranslation('Average Number of Cigarettes per Person');
     this.yTicks = 6;

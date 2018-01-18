@@ -9,8 +9,8 @@ import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
 
 export default class Chart4 extends LineChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '2-inset4';
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Number of Factories');

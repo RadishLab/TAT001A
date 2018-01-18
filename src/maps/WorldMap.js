@@ -9,10 +9,10 @@ import { mapNoData, mapCircleOverlay } from '../colors';
 import { loadCachedData } from '../dataService';
 
 export default class WorldMap {
-  constructor(parent, width, height) {
+  constructor(parent, options) {
     this.parent = select(parent)
-      .attr('height', height)
-      .attr('width', width);
+      .attr('height', options.height)
+      .attr('width', options.width);
     this.parent
       .append('defs')
       .append('pattern')

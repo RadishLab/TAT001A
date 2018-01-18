@@ -6,8 +6,8 @@ import { dataUrl } from '../../dataService';
 import EuropeMap from '../../maps/EuropeMap';
 
 export default class Map3a extends EuropeMap {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.colorScale = scaleLinear()
       .domain([0, 1])
       .range([

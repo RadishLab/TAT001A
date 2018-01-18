@@ -5,8 +5,8 @@ import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map extends WorldMap {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.colorScale = scaleOrdinal(['#00a792', '#1b70b2'])
       .domain(['Friend', 'Member']);
     this.colorScaleType = 'ordinal';

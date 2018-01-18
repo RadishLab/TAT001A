@@ -10,9 +10,9 @@ import isString from 'lodash.isstring';
 import wrap from '../wrap';
 
 export default class Chart {
-  constructor(parent, width, height) {
-    this.width = width;
-    this.height = height;
+  constructor(parent, options) {
+    this.width = options.width;
+    this.height = options.height;
     this.parent = select(parent)
       .attr('height', this.height)
       .attr('width', this.width)

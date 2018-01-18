@@ -5,8 +5,8 @@ import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map extends WorldMap {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.colorPositive = '#1b70b2';
     this.colorBoth = '#00a792';
     this.colorWorst = '#f89d1d';

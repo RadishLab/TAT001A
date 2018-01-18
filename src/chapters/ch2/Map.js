@@ -6,8 +6,8 @@ import { dataUrl } from '../../dataService';
 import PointMap from '../../maps/PointMap';
 
 export default class Map extends PointMap {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblem);
     this.categoryField = 'Products';
   }

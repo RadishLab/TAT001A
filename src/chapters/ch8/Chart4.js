@@ -6,8 +6,8 @@ import { schemeCategoryProblem } from '../../colors';
 import BarChart from '../../charts/BarChart';
 
 export class Chart4 extends BarChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '8-inset4';
     this.xLabel = this.getTranslation('Education Level Attained');
     this.yLabel = this.getTranslation('Lung cancer mortality rate (per 100,000)');

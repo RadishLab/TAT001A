@@ -8,8 +8,8 @@ import { schemeCategorySolution } from '../../colors';
 import BarChartVertical from '../../charts/BarChartVertical';
 
 export default class Chart2 extends BarChartVertical {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '11-inset2';
     this.yLabel = null;
     this.legendItems = [

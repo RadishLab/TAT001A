@@ -6,8 +6,8 @@ import { schemeCategoryProblem } from '../../colors';
 import BarChart from '../../charts/BarChart';
 
 export default class Chart2 extends BarChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '5-inset2';
     this.yLabel = this.getTranslation('Secondhand smoke exposure (%)');
     this.yTicks = 6;

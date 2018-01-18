@@ -10,8 +10,8 @@ import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
 
 export default class Chart3 extends LineChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = 'waterpipe-inset3';
     this.xAxisTickArguments = timeYear.every(1);
     this.yLabel = this.getTranslation('Ever Use of Waterpipe (%)');

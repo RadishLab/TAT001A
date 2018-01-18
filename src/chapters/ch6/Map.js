@@ -6,8 +6,8 @@ import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map extends WorldMap {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.valueField = 'Percent of DALYs due to tobacco';
     this.colorScale = scaleLinear()
       .domain([0, 1])

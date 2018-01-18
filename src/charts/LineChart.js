@@ -3,8 +3,8 @@ import { line } from 'd3-shape';
 import Chart from './Chart';
 
 export default class LineChart extends Chart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.parent
       .classed('line-chart', true);
   }

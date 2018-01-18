@@ -7,8 +7,8 @@ import BarChart from '../../charts/BarChart';
 import wrap from '../../wrap';
 
 export default class Chart1 extends BarChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '6-inset1';
     this.xLabel = this.getTranslation('Cause of Death');
     this.yLabel = this.getTranslation('Deaths (millions)');

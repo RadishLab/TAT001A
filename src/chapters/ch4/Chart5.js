@@ -8,8 +8,8 @@ import { schemeCategoryProblem } from '../../colors';
 import BarChartVertical from '../../charts/BarChartVertical';
 
 export default class Chart5 extends BarChartVertical {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '4-inset5';
     this.xLabel = this.getTranslation('Daily Smokers (millions)');
     this.yLabel = null;

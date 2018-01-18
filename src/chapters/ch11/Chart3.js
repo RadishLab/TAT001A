@@ -10,8 +10,8 @@ import { schemeCategorySolution } from '../../colors';
 import Chart from '../../charts/Chart';
 
 export default class Chart3 extends Chart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = '11-inset3';
     this.xLabel = this.getTranslation('Age of Smokers at Quitting');
     this.yLabel = [

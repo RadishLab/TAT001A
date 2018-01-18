@@ -5,8 +5,8 @@ import { schemeCategoryProblem } from '../../colors';
 import PieChart from '../../charts/PieChart';
 
 export default class Chart1 extends PieChart {
-  constructor(parent, width, height) {
-    super(parent, width, height);
+  constructor(parent, options) {
+    super(parent, options);
     this.figurePrefix = 'consumption-inset1';
     this.legendItems = [
       { label: this.getTranslation('Low HDI'), value: 'Low' },
