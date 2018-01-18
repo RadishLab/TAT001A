@@ -1,17 +1,15 @@
 import { geoPath } from 'd3-geo';
 import { geoGinzburg5 } from 'd3-geo-projection';
 import { json as d3json } from 'd3-request';
-import { select } from 'd3-selection';
 import * as topojson from 'topojson-client';
 
 import { mapNoData } from '../colors';
 import { loadCachedData } from '../dataService';
+import Visualization from '../Visualization';
 
-export default class PointMap {
+export default class PointMap extends Visualization {
   constructor(parent, options) {
-    this.parent = select(parent)
-      .attr('height', options.height)
-      .attr('width', options.width);
+    super(parent, options);
     this.projection = geoGinzburg5();
     this.path = geoPath()
       .projection(this.projection);
@@ -27,7 +25,7 @@ export default class PointMap {
 
   loadCountries() {
     return new Promise((resolve, reject) => {
-      loadCachedData(d3json, 'countries-simplified.topojson', (data) => {
+      loadCachedData(d3json, this.baseDataUrl + 'countries-simplified.topojson', (data) => {
         resolve(topojson.feature(data, data.objects['-']));
       });
     });

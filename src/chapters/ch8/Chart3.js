@@ -23,7 +23,7 @@ export class Chart3 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/8-3.csv', (csvData) => {
+      csv(this.dataFileUrl('8-3.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d['Deaths: 0-9.9%'] = +d['Deaths: 0-9.9%'];
           d['Deaths: 10-19.9%'] = +d['Deaths: 10-19.9%'];

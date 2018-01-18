@@ -23,7 +23,7 @@ export default class Chart1 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/6-1.csv', (csvData) => {
+      csv(this.dataFileUrl('6-1.csv'), (csvData) => {
         const mappedData = csvData.map(d => {
           d.tobaccoRelated = +d['tobacco-related'];
           d.notTobaccoRelated = +d['other'];

@@ -25,7 +25,7 @@ export default class Chart3 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/consumption-3.csv', (csvData) => {
+      csv(this.dataFileUrl('consumption-3.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.lowest = +d['Lowest'];
           d.low = +d['Low'];

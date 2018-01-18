@@ -35,7 +35,7 @@ export default class Chart3 extends Chart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/11-3.csv', (csvData) => {
+      csv(this.dataFileUrl('11-3.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.value = +d['Relative Risk of Death Before Age 65 Compared to a Never Smoker'];
           d.age = d['Age of Smokers at Quitting'];

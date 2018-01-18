@@ -3,7 +3,6 @@ import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
 import { schemeCategoryProblemMap } from '../../colors';
-import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map1 extends WorldMap {
@@ -17,7 +16,7 @@ export default class Map1 extends WorldMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(dataUrl('1-map.csv'), (csvData) => {
+      csv(this.dataFileUrl('1-map.csv'), (csvData) => {
         const domain = set(csvData.map(d => d[this.valueField])).values().sort();
         this.colorScale.domain(domain);
         resolve(csvData);

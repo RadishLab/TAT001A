@@ -2,7 +2,6 @@ import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
 import { schemeCategorySolutionMap } from '../../colors';
-import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map extends WorldMap {
@@ -15,7 +14,7 @@ export default class Map extends WorldMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(dataUrl('13-map.csv'), (csvData) => {
+      csv(this.dataFileUrl('13-map.csv'), (csvData) => {
         const mappedData = csvData.map(d => {
           d[this.valueField] = d['Highest level of smoke-free legisation: Y/N'] === 'Y';
           return d;

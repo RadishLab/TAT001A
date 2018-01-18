@@ -25,7 +25,7 @@ export class Chart1 extends LineChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/9-1.csv', (csvData) => {
+      csv(this.dataFileUrl('9-1.csv'), (csvData) => {
         const mappedData = csvData
           .map(row => {
             row.year = timeParse('%Y')(row.Year);

@@ -39,7 +39,7 @@ export default class EuropeMap extends WorldMap {
 
   loadCountries() {
     return new Promise((resolve, reject) => {
-      loadCachedData(d3json, 'countries-50m.topojson', (data) => {
+      loadCachedData(d3json, this.baseDataUrl + 'countries-50m.topojson', (data) => {
         resolve(topojson.feature(data, data.objects['-']));
       });
     });
@@ -47,7 +47,7 @@ export default class EuropeMap extends WorldMap {
 
   loadEurope() {
     return new Promise((resolve, reject) => {
-      loadCachedData(d3json, 'europe.topojson', (data) => {
+      loadCachedData(d3json, this.baseDataUrl + 'europe.topojson', (data) => {
         resolve(topojson.feature(data, data.objects['-']));
       });
     });

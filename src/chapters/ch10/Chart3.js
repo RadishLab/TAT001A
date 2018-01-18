@@ -19,7 +19,7 @@ export default class Chart3 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/10-3.csv', (csvData) => {
+      csv(this.dataFileUrl('10-3.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.value = +d['Revenue growth (in Million 2014 PPP dollars)'];
           d.region = d['Annual Excise Revenue (Million International Dollars PPP)'];

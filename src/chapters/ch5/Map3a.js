@@ -2,7 +2,6 @@ import { csv } from 'd3-request';
 import { scaleLinear } from 'd3-scale';
 
 import { schemeCategoryProblemMap } from '../../colors';
-import { dataUrl } from '../../dataService';
 import EuropeMap from '../../maps/EuropeMap';
 
 export default class Map3a extends EuropeMap {
@@ -19,7 +18,7 @@ export default class Map3a extends EuropeMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(dataUrl('5-3.csv'), (csvData) => {
+      csv(this.dataFileUrl('5-3.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.iso3code = d['ISO Code'];
           d.value = +d['Bar (%)'];

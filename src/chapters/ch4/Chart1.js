@@ -24,7 +24,7 @@ export class Chart1 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/4-1.csv', (csvData) => {
+      csv(this.dataFileUrl('4-1.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.male = parseFloat(d.Male) * 100;
           d.female = parseFloat(d.Female) * 100;

@@ -23,7 +23,7 @@ export default class Chart1 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/10-1.csv', (csvData) => {
+      csv(this.dataFileUrl('10-1.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.value = +d['Number of countries'];
           d.policy = d['Policies'];

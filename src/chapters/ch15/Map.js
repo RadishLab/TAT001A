@@ -1,7 +1,6 @@
 import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
-import { dataUrl } from '../../dataService';
 import WorldMap from '../../maps/WorldMap';
 
 export default class Map extends WorldMap {
@@ -15,7 +14,7 @@ export default class Map extends WorldMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(dataUrl('15-map.csv'), (csvData) => {
+      csv(this.dataFileUrl('15-map.csv'), (csvData) => {
         const mappedData = csvData.map(d => {
           d[this.valueField] = d['Prevent20 Status (Members = #fc0d1b; Friends = #fd9426)'];
           return d;

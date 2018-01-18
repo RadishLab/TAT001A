@@ -1,22 +1,17 @@
 import { axisBottom, axisLeft } from 'd3-axis';
 import { format } from 'd3-format';
-import { select } from 'd3-selection';
 import { line } from 'd3-shape';
 import i18next from 'i18next';
 import isDate from 'lodash.isdate';
 import isNumber from 'lodash.isnumber';
 import isString from 'lodash.isstring';
 
+import Visualization from '../Visualization';
 import wrap from '../wrap';
 
-export default class Chart {
+export default class Chart extends Visualization {
   constructor(parent, options) {
-    this.width = options.width;
-    this.height = options.height;
-    this.parent = select(parent)
-      .attr('height', this.height)
-      .attr('width', this.width)
-      .attr('viewBox', `0 0 ${this.width} ${this.height}`);
+    super(parent, options);
 
     this.margin = this.createMargin();
     this.chartWidth = this.width - this.margin.left - this.margin.right;

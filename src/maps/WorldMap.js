@@ -2,17 +2,15 @@ import { max } from 'd3-array';
 import { geoPath } from 'd3-geo';
 import { geoGinzburg5 } from 'd3-geo-projection';
 import { json as d3json } from 'd3-request';
-import { select } from 'd3-selection';
 import * as topojson from 'topojson-client';
 
 import { mapNoData, mapCircleOverlay } from '../colors';
 import { loadCachedData } from '../dataService';
+import Visualization from '../Visualization';
 
-export default class WorldMap {
+export default class WorldMap extends Visualization {
   constructor(parent, options) {
-    this.parent = select(parent)
-      .attr('height', options.height)
-      .attr('width', options.width);
+    super(parent, options);
     this.parent
       .append('defs')
       .append('pattern')
@@ -45,7 +43,7 @@ export default class WorldMap {
 
   loadCountries() {
     return new Promise((resolve, reject) => {
-      loadCachedData(d3json, 'countries-simplified.topojson', (data) => {
+      loadCachedData(d3json, this.baseDataUrl + 'countries-simplified.topojson', (data) => {
         resolve(topojson.feature(data, data.objects['-']));
       });
     });

@@ -22,7 +22,7 @@ export class Chart4 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/4-4.csv', (csvData) => {
+      csv(this.dataFileUrl('4-4.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d['1980'] = +d['1980'] / 1000000000000;
           d['2016'] = +d['2016'] / 1000000000000;

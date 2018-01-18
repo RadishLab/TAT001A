@@ -23,7 +23,7 @@ export default class Chart5 extends BarChartVertical {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/4-5.csv', (csvData) => {
+      csv(this.dataFileUrl('4-5.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.country = d.Country;
           d.male = +d.Male;

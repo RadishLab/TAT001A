@@ -21,7 +21,7 @@ export class Chart2 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/8-2.csv', (csvData) => {
+      csv(this.dataFileUrl('8-2.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d['Number of Deaths'] = +d['Number of Deaths'] / 1000;
           d['Percent (%)'] = +d['Percent (%)'];

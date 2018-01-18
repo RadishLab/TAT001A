@@ -17,7 +17,7 @@ export default class Chart6 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/5-6.csv', (csvData) => {
+      csv(this.dataFileUrl('5-6.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.region = d['WHO Region'];
           d.value = +d['Estimated prevalence (%) for both sexes'];

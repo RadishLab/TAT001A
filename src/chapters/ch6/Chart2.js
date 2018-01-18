@@ -19,7 +19,7 @@ export default class Chart2 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/6-2.csv', (csvData) => {
+      csv(this.dataFileUrl('6-2.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.age = d.Age;
           d.value = +d['Percent of DALYs From Tobacco'];

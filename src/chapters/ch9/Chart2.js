@@ -137,8 +137,7 @@ export class Chart2 extends LineChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      // TODO if url given in constructor get that instead
-      csv('data/9-2.csv', (csvData) => {
+      csv(this.dataFileUrl('9-2.csv'), (csvData) => {
         const mappedData = csvData
           .map(row => {
             row.year = timeParse('%Y')(row.year);

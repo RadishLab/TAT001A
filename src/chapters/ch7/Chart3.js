@@ -24,7 +24,7 @@ export default class Chart3 extends LineChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/7-3.csv', (csvData) => {
+      csv(this.dataFileUrl('7-3.csv'), (csvData) => {
         const mappedData = csvData
           .map(row => {
             row.age = +row.age

@@ -2,7 +2,6 @@ import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
 import { schemeCategoryProblem } from '../../colors';
-import { dataUrl } from '../../dataService';
 import PointMap from '../../maps/PointMap';
 
 export default class Map extends PointMap {
@@ -14,7 +13,7 @@ export default class Map extends PointMap {
 
   loadPointData() {
     return new Promise((resolve, reject) => {
-      csv(dataUrl('2-map.csv'), (csvData) => {
+      csv(this.dataFileUrl('2-map.csv'), (csvData) => {
         resolve(csvData);
       });
     });

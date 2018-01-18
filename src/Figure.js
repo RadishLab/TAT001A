@@ -28,7 +28,7 @@ export default class Figure extends Component {
       width = widths[size];
       height = heights[size];
     }
-    new figureClass(this.svg, { width, height });
+    new figureClass(this.svg, { baseDataUrl: 'data/', width, height });
   }
 
   render() {

@@ -33,7 +33,7 @@ export default class Chart1 extends LineChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/1-1.csv', (csvData) => {
+      csv(this.dataFileUrl('1-1.csv'), (csvData) => {
         const filteredData = csvData
           .map(row => {
             row.value = +row.tonnes / 1000000.0;

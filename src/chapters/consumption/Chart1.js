@@ -18,7 +18,7 @@ export default class Chart1 extends PieChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/consumption-1.csv', (csvData) => {
+      csv(this.dataFileUrl('consumption-1.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.color = d['HDI'];
           d.label = d['location'];

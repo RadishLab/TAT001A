@@ -22,7 +22,7 @@ export default class Chart3 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/waterpipe-2.csv', (csvData) => {
+      csv(this.dataFileUrl('waterpipe-2.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.men = +d.Men * 100;
           d.women = +d.Women * 100;

@@ -40,7 +40,7 @@ export default class Chart4 extends Chart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/1-4.csv', (csvData) => {
+      csv(this.dataFileUrl('1-4.csv'), (csvData) => {
         const filteredData = csvData.filter(d => d.Sales !== '');
         resolve(filteredData.map(d => {
           d.crop = d.Crop;

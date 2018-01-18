@@ -31,7 +31,7 @@ export default class Chart3 extends BarChart {
 
   loadData() {
     return new Promise((resolve, reject) => {
-      csv('data/1-3.csv', (csvData) => {
+      csv(this.dataFileUrl('1-3.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.profitType = d['Profit Type (per Acre)'].indexOf('Adjusted') >= 0 ? 'adjusted' : 'unadjusted';
           d.employmentType = d['Contract versus Independent'].trim().toLowerCase();
