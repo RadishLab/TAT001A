@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+.ta-visualization-standalone text {
+  font-family: 'Source Sans Pro', sans-serif; }
+
+.ta-visualization .tick {
+  color: #585857; }
+  .ta-visualization .tick.date {
+    color: #585857; }
+    .ta-visualization .tick.date text {
+      fill: #585857; }
+  .ta-visualization .tick.number {
+    color: #585857; }
+    .ta-visualization .tick.number text {
+      fill: #585857; }
+  .ta-visualization .tick.text {
+    color: #585857; }
+    .ta-visualization .tick.text text {
+      fill: #585857; }
+  .ta-visualization .tick tspan {
+    text-anchor: middle; }
+
+.ta-visualization .axis-x .tick {
+  text-align: center; }
+
+.ta-visualization .y-guide-line path {
+  fill: none;
+  stroke: #EDE7DF;
+  stroke-width: 0.5; }
+
+.ta-visualization .x-guide-line path {
+  fill: none;
+  stroke: #EDE7DF;
+  stroke-width: 0.5; }
+
+.ta-visualization .axis-y .axis-title {
+  fill: #a29d98;
+  font-size: 12px;
+  text-anchor: middle; }
+
+.ta-visualization .axis-y .domain {
+  stroke: none; }
+
+.ta-visualization .axis-y .tick {
+  font-size: 12px; }
+
+.ta-visualization .axis-y .tick line {
+  display: none; }
+
+.ta-visualization .axis-x .axis-title {
+  fill: #a29d98;
+  font-size: 12px;
+  text-anchor: middle; }
+
+.ta-visualization .axis-x .domain {
+  stroke: none; }
+
+.ta-visualization .axis-x .tick {
+  font-size: 12px;
+  text-anchor: middle; }
+
+.ta-visualization .axis-x .tick line {
+  display: none; }
+
+.ta-visualization .legend {
+  font-size: 12px; }
+  .ta-visualization .legend text {
+    fill: #585857; }
+
+.ta-visualization .legend path {
+  stroke-width: 2; }
+
+.ta-visualization .pie-chart .arc-label {
+  font-size: 12px;
+  text-anchor: middle; }
+
+.ta-visualization .line-chart .line {
+  fill: none;
+  stroke-width: 1.5; }
