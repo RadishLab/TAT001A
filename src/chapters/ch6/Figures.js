@@ -10,12 +10,12 @@ export const figures = [
   },
   {
     dimensions: [500, 190],
-    name: 'inset1',
+    name: '1',
     figureClass: Chart1,
     type: 'chart'
   },
   {
-    name: 'inset2',
+    name: '2',
     figureClass: Chart2,
     type: 'chart'
   }

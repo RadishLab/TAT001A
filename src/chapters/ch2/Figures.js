@@ -8,7 +8,7 @@ export const figures = [
     type: 'map'
   },
   {
-    name: 'inset4',
+    name: '4',
     figureClass: Chart4,
     type: 'chart'
   }

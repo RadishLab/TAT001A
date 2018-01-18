@@ -10,17 +10,17 @@ export const figures = [
     type: 'map'
   },
   {
-    name: 'inset1',
+    name: '1',
     figureClass: Chart1,
     type: 'chart'
   },
   {
-    name: 'inset2',
+    name: '2',
     figureClass: Chart2,
     type: 'chart'
   },
   {
-    name: 'inset3',
+    name: '3',
     figureClass: Chart3,
     type: 'chart'
   }

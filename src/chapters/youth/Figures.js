@@ -26,7 +26,7 @@ export const figures = [
     type: 'map'
   },
   {
-    name: 'inset1',
+    name: '1',
     figureClass: Chart1,
     type: 'chart'
   }

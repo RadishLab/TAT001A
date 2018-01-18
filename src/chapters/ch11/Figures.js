@@ -9,12 +9,12 @@ export const figures = [
     type: 'map'
   },
   {
-    name: 'inset2',
+    name: '2',
     figureClass: Chart2,
     type: 'chart-vertical'
   },
   {
-    name: 'inset3',
+    name: '3',
     figureClass: Chart3,
     type: 'chart'
   }

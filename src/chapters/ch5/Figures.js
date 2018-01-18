@@ -6,29 +6,29 @@ import Chart6 from './Chart6';
 
 export const figures = [
   {
-    name: 'inset2',
+    name: '2',
     figureClass: Chart2,
     type: 'chart'
   },
   {
-    name: 'inset3a',
+    name: '3a',
     figureClass: Map3a,
     type: 'map',
     area: 'Europe'
   },
   {
-    name: 'inset3b',
+    name: '3b',
     figureClass: Map3b,
     type: 'map',
     area: 'Europe'
   },
   {
-    name: 'inset4',
+    name: '4',
     figureClass: Chart4,
     type: 'chart'
   },
   {
-    name: 'inset6',
+    name: '6',
     figureClass: Chart6,
     type: 'chart'
   }
