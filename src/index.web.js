@@ -42,6 +42,7 @@ function initializeVisualizations() {
     const container = select(`#${prefix}-${key}`);
     if (container.empty()) return;
 
+    container.classed('ta-visualization-standalone', true);
     const figureClass = figures[key].figureClass;
     new figureClass(container.append('svg').node(), createOptions(container.node()));
   });

@@ -34,7 +34,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "make-svgs": "babel-node scripts/tosvg.js",
-    "gather-data": "babel-node scripts/gatherdata.js"
+    "gather-data": "babel-node scripts/gatherdata.js",
+    "build-css-standalone": "node-sass-chokidar --include-path ./node_modules ./src/styles/index.standalone.scss ./public/ta-visualizations.css",
+    "build-standalone": "npm run build-css-standalone && webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.32",

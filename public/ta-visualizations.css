@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+.ta-visualization-standalone text {
+  font-family: 'Source Sans Pro', sans-serif; }
+
+.tick {
+  color: #585857; }
+  .tick.date {
+    color: #585857; }
+    .tick.date text {
+      fill: #585857; }
+  .tick.number {
+    color: #585857; }
+    .tick.number text {
+      fill: #585857; }
+  .tick.text {
+    color: #585857; }
+    .tick.text text {
+      fill: #585857; }
+  .tick tspan {
+    text-anchor: middle; }
+
+.axis-x .tick {
+  text-align: center; }
+
+.y-guide-line path {
+  fill: none;
+  stroke: #EDE7DF;
+  stroke-width: 0.5; }
+
+.x-guide-line path {
+  fill: none;
+  stroke: #EDE7DF;
+  stroke-width: 0.5; }
+
+.axis-y .axis-title {
+  fill: #a29d98;
+  font-size: 12px;
+  text-anchor: middle; }
+
+.axis-y .domain {
+  stroke: none; }
+
+.axis-y .tick {
+  font-size: 12px; }
+
+.axis-y .tick line {
+  display: none; }
+
+.axis-x .axis-title {
+  fill: #a29d98;
+  font-size: 12px;
+  text-anchor: middle; }
+
+.axis-x .domain {
+  stroke: none; }
+
+.axis-x .tick {
+  font-size: 12px;
+  text-anchor: middle; }
+
+.axis-x .tick line {
+  display: none; }
+
+.legend {
+  font-size: 12px; }
+  .legend text {
+    fill: #585857; }
+
+.legend path {
+  stroke-width: 2; }
+
+.arc-label {
+  font-size: 6px;
+  text-anchor: middle; }
+
+.line-chart .line {
+  fill: none;
+  stroke-width: 1.5; }

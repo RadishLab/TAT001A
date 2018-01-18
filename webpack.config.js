@@ -9,7 +9,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
   entry: './src/index.web.js',
   output: {
-    filename: 'ta-visualizations.bundle.js',
+    filename: 'ta-visualizations.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -30,7 +30,7 @@ module.exports = {
     new UglifyJSPlugin(),
     new CopyWebpackPlugin([
       { from: 'public/data', to: 'data/' },
-      'public/index.css'
+      'public/ta-visualizations.css'
     ])
   ]
 }

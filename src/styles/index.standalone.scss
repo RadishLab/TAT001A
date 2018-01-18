@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import '_variables';
+
+.ta-visualization-standalone {
+  text {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+}
+
+$axis-label-font-size: $standalone-font-size;
+$font-size: $standalone-font-size;
+
+@import '_chart';
+@import '_pieChart';
+@import '_lineChart';
