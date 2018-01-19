@@ -52,6 +52,7 @@ const FILES = {
   '12 Taxes/TA6 Tax Inset 4 tax and illicit.xlsx': '12-4.csv',
   '12 Taxes/TA6 Tax Inset 5 Web only.xlsx': '12-5.csv',
   '12 Taxes/TA6 Tax Inset 6 Web only.xlsx': '12-6.csv',
+  '12 Taxes/TA6 Tax Inset 7 Web only.xlsx': '12-7.csv',
   '13 Smokefree/High achieving smoke-free countries.xlsx': '13-map.csv',
   '13 Smokefree/Smokefree inset 1.xlsx': '13-1.csv',
   '14 Media/TA6 Media Map.xlsx': '14-map.csv',
