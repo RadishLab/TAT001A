@@ -23,17 +23,24 @@ function initializeTranslations() {
 }
 
 function createOptions(containerNode) {
-  // Start with dimensions
-  const options = {
-    width: containerNode.offsetWidth,
-    height: containerNode.offsetHeight
-  };
+  const options = {};
 
   // Collect data- attributes
   const containerDataset = containerNode.dataset;
   for (const key in containerDataset) {
     options[key] = containerDataset[key];
   }
+
+  // Add dimensions
+  const width = containerNode.offsetWidth;
+  let height = containerNode.offsetHeight;
+  if (options.aspect) {
+    const aspect = JSON.parse(options.aspect);
+    height = width * (aspect[1] / aspect[0]);
+  }
+  options.width = width;
+  options.height = height;
+
   return options;
 }
 
