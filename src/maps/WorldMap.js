@@ -11,6 +11,8 @@ import Visualization from '../Visualization';
 export default class WorldMap extends Visualization {
   constructor(parent, options) {
     super(parent, options);
+    this.legend = options.legend;
+    this.parent.classed('world-map', true);
     this.parent
       .append('defs')
       .append('pattern')
@@ -117,7 +119,47 @@ export default class WorldMap extends Visualization {
         .attr('transform', d => `translate(${this.path.centroid(d)})`);
   }
 
+  getLegendItems() {
+    const legendItemList = Object.entries(this.legend);
+    legendItemList.unshift([ null, this.getTranslation('No data') ]);
+    return legendItemList;
+  }
+
   renderLegend() {
+    if (!this.legend) return;
+
+    const legendWidth = this.width / 7;
+    const legendHeight = 15;
+    const legendPadding = 3;
+    const legendItemList = this.getLegendItems();
+    const legendItemCount = legendItemList.length;
+
+    this.legendGroup = this.root.append('g')
+      .classed('legend', true)
+      .attr('transform', `translate(${this.width - legendWidth}, 0)`);
+
+    const legendItems = this.legendGroup.selectAll('rect')
+      .data(legendItemList)
+      .enter().append('g')
+      .attr('transform', d => {
+        const keyCode = d[0];
+        const position = keyCode ? parseInt(keyCode, 10) : 0;
+        const y = (legendHeight + legendPadding) * (legendItemCount - position);
+        return `translate(0, ${y})`;
+      });
+
+    legendItems.append('rect')
+      .attr('width', legendWidth)
+      .attr('height', legendHeight)
+      .attr('fill', d => {
+        const keyCode = d[0];
+        return keyCode !== null ? this.colorScale(keyCode) : this.noDataColor;
+      });
+
+    legendItems.append('text')
+      .attr('x', 4)
+      .attr('y', 11)
+      .text(d => d[1]);
   }
 
   render() {

@@ -1,4 +1,5 @@
 import { select } from 'd3-selection';
+import i18next from 'i18next';
 
 export default class Visualization {
   constructor(parent, options) {
@@ -15,6 +16,11 @@ export default class Visualization {
     }
 
     this.dataOverrideUrl = options.dataOverrideUrl;
+  }
+
+  getTranslation(text) {
+    if (!text || text === '') return text;
+    return i18next.t(`${this.figurePrefix}.${text}`, text);
   }
 
   dataFileUrl(filename) {

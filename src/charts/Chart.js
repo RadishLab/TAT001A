@@ -1,7 +1,6 @@
 import { axisBottom, axisLeft } from 'd3-axis';
 import { format } from 'd3-format';
 import { line } from 'd3-shape';
-import i18next from 'i18next';
 import isDate from 'lodash.isdate';
 import isNumber from 'lodash.isnumber';
 import isString from 'lodash.isstring';
@@ -24,11 +23,6 @@ export default class Chart extends Visualization {
       .then(this.onDataLoaded.bind(this));
     this.legendYOffset = 40;
     this.yLabelOffset = 0;
-  }
-
-  getTranslation(text) {
-    if (!text || text === '') return text;
-    return i18next.t(`${this.figurePrefix}.${text}`, text);
   }
 
   createMargin() {

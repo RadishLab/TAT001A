@@ -41,6 +41,10 @@ function createOptions(containerNode) {
   options.width = width;
   options.height = height;
 
+  if (options.legend) {
+    options.legend = JSON.parse(options.legend);
+  }
+
   return options;
 }
 

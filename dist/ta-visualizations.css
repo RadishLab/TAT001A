@@ -76,3 +76,6 @@
 .ta-visualization .line-chart .line {
   fill: none;
   stroke-width: 1.5; }
+
+.world-map .legend text {
+  fill: #2d2d2d; }
