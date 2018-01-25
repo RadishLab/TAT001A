@@ -2,8 +2,22 @@
 @import '_variables';
 
 .ta-visualization-standalone {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 50%; /* aspect ratio TOdo dynamic */
+  vertical-align: top;
+  overflow: hidden;
+
   text {
     font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  svg {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
   }
 }
 

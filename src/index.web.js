@@ -35,8 +35,8 @@ function createOptions(containerNode) {
   const width = containerNode.offsetWidth;
   let height = containerNode.offsetHeight;
   if (options.aspect) {
-    const aspect = JSON.parse(options.aspect);
-    height = width * (aspect[1] / aspect[0]);
+    options.aspect = JSON.parse(options.aspect);
+    height = width * (options.aspect[1] / options.aspect[0]);
   }
   options.width = width;
   options.height = height;

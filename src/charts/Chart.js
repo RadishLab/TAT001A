@@ -12,9 +12,14 @@ export default class Chart extends Visualization {
   constructor(parent, options) {
     super(parent, options);
 
+    // TODO make legend height dynamic (and over-rideable) based on the number
+    // of items and orientation, subtract this from chartHeight
+
+    this.legendHeight = 15;
+
     this.margin = this.createMargin();
     this.chartWidth = this.width - this.margin.left - this.margin.right;
-    this.chartHeight = this.height - this.margin.top - this.margin.bottom;
+    this.chartHeight = this.height - this.margin.top - this.margin.bottom - this.legendHeight;
     this.root = this.parent.append('g')
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
@@ -26,13 +31,11 @@ export default class Chart extends Visualization {
   }
 
   createMargin() {
-    // TODO if legend is vertical, make bottom margin larger based on the number
-    // of legend items
     return {
       top: 0,
       right: 0,
       bottom: this.legendOrientation() === 'horizontal' ? 40 : 60,
-      left: 30
+      left: 40
     };
   }
 
@@ -98,6 +101,8 @@ export default class Chart extends Visualization {
   }
 
   renderYAxis() {
+    // TODO x translate based on size of y-axis and y label rather than 25
+    // (magic number)
     const yAxis = axisLeft(this.y)
       .ticks(this.yTicks)
       .tickFormat(this.yAxisTickFormat ? this.yAxisTickFormat : this.defaultYAxisTickFormat);
@@ -107,7 +112,7 @@ export default class Chart extends Visualization {
       .call(yAxis)
       .append('text')
         .classed('axis-title', true)
-        .attr('transform', `translate(-${(this.margin.left - 6)}, ${(this.chartHeight / 2) + this.yLabelOffset}) rotate(-90)`)
+        .attr('transform', `translate(-25, ${(this.chartHeight / 2) + this.yLabelOffset}) rotate(-90)`)
         .text(this.yLabel);
     this.parent.select('.axis-y').selectAll('.tick')
       .classed('date', d => isDate(d))
