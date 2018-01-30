@@ -12,6 +12,8 @@ export default class Visualization {
         .attr('preserveAspectRatio', 'xMinYMin meet')
         .attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
+      // Cribbed from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js#25978286
+
       const parentContainer = select(this.parent.node().parentNode);
       parentContainer
         .style('padding-bottom', (d) => {

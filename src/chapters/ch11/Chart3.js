@@ -1,10 +1,6 @@
 import { max, min } from 'd3-array';
-import { axisLeft } from 'd3-axis';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scalePoint } from 'd3-scale';
-import isDate from 'lodash.isdate';
-import isNumber from 'lodash.isnumber';
-import isString from 'lodash.isstring';
 
 import { schemeCategorySolution } from '../../colors';
 import Chart from '../../charts/Chart';
@@ -93,26 +89,6 @@ export default class Chart3 extends Chart {
 
   renderGuidelines() {
     this.renderXGuidelines();
-  }
-
-  renderYAxis() {
-    const yAxis = axisLeft(this.y);
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true).call(yAxis);
-    yAxisGroup
-      .append('text')
-        .classed('axis-title', true)
-        .text(this.yLabel[0])
-        .attr('transform', `translate(-${(this.margin.left - 6)}, ${this.chartHeight / 2}) rotate(-90)`);
-    yAxisGroup
-      .append('text')
-        .classed('axis-title', true)
-        .text(this.yLabel[1])
-        .attr('transform', `translate(-${(this.margin.left - 13)}, ${this.chartHeight / 2}) rotate(-90)`);
-    this.parent.select('.axis-y').selectAll('.tick')
-      .classed('date', d => isDate(d))
-      .classed('number', d => isNumber(d))
-      .classed('text', d => isString(d));
   }
 
   render() {

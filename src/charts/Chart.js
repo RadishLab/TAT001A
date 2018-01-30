@@ -100,6 +100,27 @@ export default class Chart extends Visualization {
     return format('.2s')(d);
   }
 
+  renderYLabel(axisGroup) {
+    if (typeof this.yLabel === 'string') {
+      axisGroup.append('text')
+        .classed('axis-title', true)
+        .attr('transform', `translate(-25, ${(this.chartHeight / 2) + this.yLabelOffset}) rotate(-90)`)
+        .text(this.yLabel);
+    }
+    else if (Array.isArray(this.yLabel) && this.yLabel.length === 2) {
+      axisGroup
+        .append('text')
+          .classed('axis-title', true)
+          .text(this.yLabel[0])
+          .attr('transform', `translate(-${(this.margin.left - 6)}, ${this.chartHeight / 2}) rotate(-90)`);
+      axisGroup
+        .append('text')
+          .classed('axis-title', true)
+          .text(this.yLabel[1])
+          .attr('transform', `translate(-${(this.margin.left - 13)}, ${this.chartHeight / 2}) rotate(-90)`);
+    }
+  }
+
   renderYAxis() {
     // TODO x translate based on size of y-axis and y label rather than 25
     // (magic number)
@@ -108,12 +129,8 @@ export default class Chart extends Visualization {
       .tickFormat(this.yAxisTickFormat ? this.yAxisTickFormat : this.defaultYAxisTickFormat);
     const yAxisGroup = this.root.append('g')
       .classed('axis axis-y', true);
-    yAxisGroup
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(-25, ${(this.chartHeight / 2) + this.yLabelOffset}) rotate(-90)`)
-        .text(this.yLabel);
+    yAxisGroup.call(yAxis);
+    this.renderYLabel(yAxisGroup);
     this.parent.select('.axis-y').selectAll('.tick')
       .classed('date', d => isDate(d))
       .classed('number', d => isNumber(d))
