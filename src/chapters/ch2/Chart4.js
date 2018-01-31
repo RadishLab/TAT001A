@@ -1,5 +1,5 @@
 import { extent } from 'd3-array';
-import { axisRight } from 'd3-axis';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
 import { curveBasis, line } from 'd3-shape';
@@ -14,6 +14,8 @@ export default class Chart4 extends LineChart {
     this.figurePrefix = '2-inset4';
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Number of Factories');
+    this.yLabelRight = this.getTranslation('Dividend per Share (£)');
+    this.yAxisRightTickFormat = format('.2');
     this.legendItems = [
       { label: this.getTranslation('Factories'), value: 'factories' },
       { label: this.getTranslation('Share Dividend'), value: 'dividend' },
@@ -28,27 +30,8 @@ export default class Chart4 extends LineChart {
   }
 
   onDataLoaded(data) {
-    this.dividendScale = this.createDividendScale();
+    this.yRight = this.createDividendScale();
     super.onDataLoaded(data);
-  }
-
-  render() {
-    super.render();
-    this.renderRightAxis();
-  }
-
-  renderRightAxis() {
-    const yAxis = axisRight(this.dividendScale)
-      .ticks(5);
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true);
-    yAxisGroup
-      .attr('transform', `translate(${this.chartWidth}, 0)`)
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.getTranslation('Dividend per Share (£)'));
   }
 
   loadData() {
@@ -75,7 +58,7 @@ export default class Chart4 extends LineChart {
   }
 
   lineY2Accessor(d) {
-    return this.dividendScale(d.dividend);
+    return this.yRight(d.dividend);
   }
 
   createXScale() {

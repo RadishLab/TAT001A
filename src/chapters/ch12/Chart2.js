@@ -1,5 +1,4 @@
 import { extent } from 'd3-array';
-import { axisRight } from 'd3-axis';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
@@ -15,6 +14,8 @@ export default class Chart2 extends LineChart {
     this.figurePrefix = '12-inset2';
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Price / Tax Index');
+    this.yLabelRight = this.getTranslation('Smoking Prevalence (%)');
+    this.yAxisRightTickFormat = d => format('d')(d * 100);
     this.legendItems = [
       { label: this.getTranslation('Price'), value: 'price' },
       { label: this.getTranslation('Tax'), value: 'tax' },
@@ -30,28 +31,8 @@ export default class Chart2 extends LineChart {
   }
 
   onDataLoaded(data) {
-    this.prevalenceScale = this.createPrevalenceScale();
+    this.yRight = this.createPrevalenceScale();
     super.onDataLoaded(data);
-  }
-
-  render() {
-    super.render();
-    this.renderRightAxis();
-  }
-
-  renderRightAxis() {
-    const yAxis = axisRight(this.prevalenceScale)
-      .ticks(5)
-      .tickFormat(d => format('d')(d * 100));
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true);
-    yAxisGroup
-      .attr('transform', `translate(${this.chartWidth}, 0)`)
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.getTranslation('Smoking Prevalence (%)'));
   }
 
   loadData() {
@@ -79,7 +60,7 @@ export default class Chart2 extends LineChart {
   }
 
   lineY2Accessor(d) {
-    return this.prevalenceScale(d.value);
+    return this.yRight(d.value);
   }
 
   createXScale() {

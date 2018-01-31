@@ -1,5 +1,4 @@
 import { extent } from 'd3-array';
-import { axisRight } from 'd3-axis';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
@@ -15,6 +14,8 @@ export default class Chart4 extends LineChart {
     this.figurePrefix = '12-inset4';
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Price (£)');
+    this.yLabelRight = this.getTranslation('Cigarettes (billions)');
+    this.yAxisRightTickFormat = format('d');
     this.legendItems = [
       { label: this.getTranslation('Price per pack, inflation-adjusted'), value: 'price' },
       { label: this.getTranslation('Tax-paid consumption'), value: 'taxpaid' },
@@ -31,28 +32,8 @@ export default class Chart4 extends LineChart {
   }
 
   onDataLoaded(data) {
-    this.cigaretteScale = this.createCigaretteScale();
+    this.yRight = this.createCigaretteScale();
     super.onDataLoaded(data);
-  }
-
-  render() {
-    super.render();
-    this.renderRightAxis();
-  }
-
-  renderRightAxis() {
-    const yAxis = axisRight(this.cigaretteScale)
-      .ticks(5)
-      .tickFormat(format('d'));
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true);
-    yAxisGroup
-      .attr('transform', `translate(${this.chartWidth}, 0)`)
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.getTranslation('Cigarettes (billions)'));
   }
 
   loadData() {
@@ -80,7 +61,7 @@ export default class Chart4 extends LineChart {
   }
 
   lineY2Accessor(d) {
-    return this.cigaretteScale(d.value);
+    return this.yRight(d.value);
   }
 
   createXScale() {

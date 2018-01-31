@@ -1,5 +1,4 @@
 import { extent } from 'd3-array';
-import { axisRight } from 'd3-axis';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
@@ -14,7 +13,9 @@ export default class Chart1 extends LineChart {
     super(parent, options);
     this.figurePrefix = 'illicit-1';
     this.yLabel = this.getTranslation('Price (£)');
+    this.yLabelRight = this.getTranslation('Deaths Caused by Smoking (%)');
     this.yAxisTickFormat = format('d');
+    this.yAxisRightTickFormat = format('d');
     this.legendItems = [
       { label: this.getTranslation('Price per pack, inflation-adjusted'), value: 'price' },
       { label: this.getTranslation('Illicit consumption'), value: 'consumption' }
@@ -30,28 +31,8 @@ export default class Chart1 extends LineChart {
   }
 
   onDataLoaded(data) {
-    this.consumptionScale = this.createConsumptionYScale();
+    this.yRight = this.createConsumptionYScale();
     super.onDataLoaded(data);
-  }
-
-  render() {
-    super.render();
-    this.renderRightAxis();
-  }
-
-  renderRightAxis() {
-    const yAxis = axisRight(this.consumptionScale)
-      .ticks(5)
-      .tickFormat(format('d'));
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true);
-    yAxisGroup
-      .attr('transform', `translate(${this.chartWidth}, 0)`)
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.getTranslation('Deaths Caused by Smoking (%)'));
   }
 
   loadData() {
@@ -78,7 +59,7 @@ export default class Chart1 extends LineChart {
   }
 
   lineY2Accessor(d) {
-    return this.consumptionScale(d.consumption);
+    return this.yRight(d.consumption);
   }
 
   createXScale() {
@@ -138,9 +119,6 @@ export default class Chart1 extends LineChart {
 
     lineSelection.append('path')
       .style('stroke', d => this.colors('consumption'))
-      .attr('d', d => {
-        console.log(d, lineCreator(d));
-        return lineCreator(d);
-      });
+      .attr('d', d => lineCreator(d));
   }
 }

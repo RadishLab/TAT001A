@@ -1,4 +1,4 @@
-import { axisBottom, axisLeft } from 'd3-axis';
+import { axisBottom, axisLeft, axisRight } from 'd3-axis';
 import { format } from 'd3-format';
 import { line } from 'd3-shape';
 import isDate from 'lodash.isdate';
@@ -50,6 +50,9 @@ export default class Chart extends Visualization {
   renderAxes() {
     this.renderXAxis();
     this.renderYAxis();
+    if (this.yRight) {
+      this.renderYAxisRight();
+    }
   }
 
   renderXAxis() {
@@ -135,6 +138,21 @@ export default class Chart extends Visualization {
       .classed('date', d => isDate(d))
       .classed('number', d => isNumber(d))
       .classed('text', d => isString(d));
+  }
+
+  renderYAxisRight() {
+    const yAxis = axisRight(this.yRight)
+      .ticks(5)
+      .tickFormat(this.yAxisRightTickFormat ? this.yAxisRightTickFormat : this.defaultYAxisTickFormat);
+    const yAxisGroup = this.root.append('g')
+      .classed('axis axis-y', true);
+    yAxisGroup
+      .attr('transform', `translate(${this.chartWidth}, 0)`)
+      .call(yAxis)
+      .append('text')
+        .classed('axis-title', true)
+        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
+        .text(this.yLabelRight);
   }
 
   renderGuidelines() {

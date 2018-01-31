@@ -1,5 +1,4 @@
 import { extent } from 'd3-array';
-import { axisRight } from 'd3-axis';
 import { nest } from 'd3-collection';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
@@ -16,6 +15,8 @@ export class Chart2 extends LineChart {
     this.figurePrefix = '9-inset2';
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Smoking Prevalence (%)');
+    this.yLabelRight = this.getTranslation('Deaths Caused by Smoking (%)');
+    this.yAxisRightTickFormat = format('d');
     this.legendItems = [
       { label: this.getTranslation('Male'), value: 'male' },
       { label: this.getTranslation('Male'), value: 'male' },
@@ -35,28 +36,8 @@ export class Chart2 extends LineChart {
   }
 
   onDataLoaded(data) {
-    this.deathRateScale = this.createDeathRateYScale();
+    this.yRight = this.createDeathRateYScale();
     super.onDataLoaded(data);
-  }
-
-  render() {
-    super.render();
-    this.renderRightAxis();
-  }
-
-  renderRightAxis() {
-    const yAxis = axisRight(this.deathRateScale)
-      .ticks(5)
-      .tickFormat(format('d'));
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true);
-    yAxisGroup
-      .attr('transform', `translate(${this.chartWidth}, 0)`)
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.getTranslation('Deaths Caused by Smoking (%)'));
   }
 
   renderLegend() {
@@ -158,7 +139,7 @@ export class Chart2 extends LineChart {
   }
 
   lineY2Accessor(d) {
-    return this.deathRateScale(d.value);
+    return this.yRight(d.value);
   }
 
   createXScale() {

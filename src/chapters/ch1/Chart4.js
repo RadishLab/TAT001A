@@ -1,12 +1,8 @@
 import { max, min } from 'd3-array';
-import { axisLeft } from 'd3-axis';
 import { set } from 'd3-collection';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scalePoint } from 'd3-scale';
 import { line } from 'd3-shape';
-import isDate from 'lodash.isdate';
-import isNumber from 'lodash.isnumber';
-import isString from 'lodash.isstring';
 
 import { schemeCategoryProblem } from '../../colors';
 import Chart from '../../charts/Chart';
@@ -121,21 +117,11 @@ export default class Chart4 extends Chart {
       .attr('d', d => yGuideLine(d));
   }
 
-  renderYAxis() {
-    const yAxis = axisLeft(this.y)
-      .tickFormat(this.yAxisTickFormat);
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true);
-    yAxisGroup
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(-${(this.margin.left - 6)}, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.yLabel);
-    this.parent.select('.axis-y').selectAll('.tick')
-      .classed('date', d => isDate(d))
-      .classed('number', d => isNumber(d))
-      .classed('text', d => isString(d));
+  renderYLabel(axisGroup) {
+    axisGroup.append('text')
+      .classed('axis-title', true)
+      .attr('transform', `translate(-${(this.margin.left - 6)}, ${this.chartHeight / 2}) rotate(-90)`)
+      .text(this.yLabel);
   }
 
   render() {

@@ -1,4 +1,3 @@
-import { axisRight } from 'd3-axis';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
@@ -14,6 +13,8 @@ export default class Chart3 extends BarChart {
     this.figurePrefix = '13-inset3';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
     this.yLabel = this.getTranslation('Population protected (billions)');
+    this.yLabelRight = this.getTranslation('Countries');
+    this.yAxisRightTickFormat = format('d');
     this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('Countries'), value: 'countries' },
@@ -36,7 +37,7 @@ export default class Chart3 extends BarChart {
   }
 
   onDataLoaded(data) {
-    this.countryScale = this.createCountryScale();
+    this.yRight = this.createCountryScale();
     super.onDataLoaded(data);
   }
 
@@ -73,12 +74,11 @@ export default class Chart3 extends BarChart {
   }
 
   lineAccessor(d) {
-    return this.countryScale(d.value);
+    return this.yRight(d.value);
   }
 
   render() {
     super.render();
-    this.renderRightAxis();
     this.renderLines();
     this.renderPopulationLine();
   }
@@ -99,7 +99,7 @@ export default class Chart3 extends BarChart {
   renderLines() {
     let lineCreator = line()
       .x(d => this.x(d.year) + this.x.bandwidth() / 2)
-      .y(d => this.countryScale(d.value));
+      .y(d => this.yRight(d.value));
 
     let lineSelection = this.root.selectAll('.line.country')
       .data([this.data.map(d => ({ year: d.year, value: d.countries }))])
@@ -131,21 +131,6 @@ export default class Chart3 extends BarChart {
       .style('stroke-dasharray', '5,5')
       .style('stroke-width', 0.25)
       .attr('d', d => lineCreator(d));
-  }
-
-  renderRightAxis() {
-    const yAxis = axisRight(this.countryScale)
-      .ticks(5)
-      .tickFormat(format('d'));
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true);
-    yAxisGroup
-      .attr('transform', `translate(${this.chartWidth}, 0)`)
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.getTranslation('Countries'));
   }
 
   createZScale() {

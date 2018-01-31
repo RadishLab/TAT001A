@@ -1,5 +1,4 @@
 import { extent } from 'd3-array';
-import { axisRight } from 'd3-axis';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
@@ -15,6 +14,8 @@ export default class Chart6 extends LineChart {
     this.figurePrefix = '12-inset6';
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Price per Pack (Colombian peso)');
+    this.yLabelRight = this.getTranslation('Relative income price (%)');
+    this.yAxisRightTickFormat = d => format('.2')(d * 100);
     this.legendItems = [
       { label: this.getTranslation('Cigarette price per pack'), value: 'price' },
       { label: this.getTranslation('Inflation-adjusted cigarette price per pack'), value: 'price-inflation' },
@@ -33,28 +34,8 @@ export default class Chart6 extends LineChart {
   }
 
   onDataLoaded(data) {
-    this.affordabilityScale = this.createAffordabilityScale();
+    this.yRight = this.createAffordabilityScale();
     super.onDataLoaded(data);
-  }
-
-  render() {
-    super.render();
-    this.renderRightAxis();
-  }
-
-  renderRightAxis() {
-    const yAxis = axisRight(this.affordabilityScale)
-      .ticks(this.yTicks)
-      .tickFormat(d => format('.2')(d * 100));
-    const yAxisGroup = this.root.append('g')
-      .classed('axis axis-y', true);
-    yAxisGroup
-      .attr('transform', `translate(${this.chartWidth}, 0)`)
-      .call(yAxis)
-      .append('text')
-        .classed('axis-title', true)
-        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
-        .text(this.getTranslation('Relative income price (%)'));
   }
 
   loadData() {
@@ -82,7 +63,7 @@ export default class Chart6 extends LineChart {
   }
 
   lineY2Accessor(d) {
-    return this.affordabilityScale(d.value);
+    return this.yRight(d.value);
   }
 
   createXScale() {
