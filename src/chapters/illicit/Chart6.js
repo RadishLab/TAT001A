@@ -35,7 +35,6 @@ export default class Chart6 extends BarChart {
           d.year = timeParse('%Y')(d.year);
           return d;
         });
-        console.log(mappedData);
         resolve(mappedData);
       });
     });
