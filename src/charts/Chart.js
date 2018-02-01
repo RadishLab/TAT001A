@@ -63,6 +63,9 @@ export default class Chart extends Visualization {
     if (this.xAxisTickFormat) {
       xAxis.tickFormat(this.xAxisTickFormat.bind(this));
     }
+    if (this.xAxisTickValues) {
+      xAxis.tickValues(this.xAxisTickValues());
+    }
     const xAxisGroup = this.root.append('g')
       .classed('axis axis-x', true);
     xAxisGroup

@@ -41,6 +41,11 @@ export default class Chart3 extends BarChart {
     super.onDataLoaded(data);
   }
 
+  xAxisTickValues() {
+    const values = this.data.filter(d => d.population > 0).map(d => d.year);
+    return values;
+  }
+
   createMargin() {
     const margin = super.createMargin();
     margin.bottom = this.legendOrientation() === 'horizontal' ? 32 : 40;
@@ -53,7 +58,7 @@ export default class Chart3 extends BarChart {
     const values = this.data.map(this.getXValue);
     return scaleBand()
       .range([0, this.chartWidth])
-      .padding(0.5)
+      .padding(0.1)
       .domain(values);
   }
 
@@ -102,7 +107,7 @@ export default class Chart3 extends BarChart {
       .y(d => this.yRight(d.value));
 
     let lineSelection = this.root.selectAll('.line.country')
-      .data([this.data.map(d => ({ year: d.year, value: d.countries }))])
+      .data([this.data.filter(d => d.countries > 0).map(d => ({ year: d.year, value: d.countries }))])
       .enter().append('g')
         .classed('line country', true);
 
@@ -114,8 +119,8 @@ export default class Chart3 extends BarChart {
 
   renderPopulationLine() {
     let lineCreator = line()
-      .x(d => { console.log(d); return d[0]; })
-      .y(d => { console.log(this.y(d[1])); return this.y(d[1]) });
+      .x(d => d[0])
+      .y(d => this.y(d[1]));
 
     let lineSelection = this.root.selectAll('.line.global-population')
       .data([[
