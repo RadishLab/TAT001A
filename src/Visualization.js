@@ -53,7 +53,7 @@ export default class Visualization {
     this.filtersContainer = parentContainer.append('div')
       .classed('visualization-filters', true);
 
-    this.filtersContainer.append('span').text(this.getTranslation('Switch between:'));
+    this.filtersContainer.append('span').text(this.getTranslation('Filters:'));
 
     const filterButtons = this.filtersContainer
       .append('div').classed('filter-button-group', true)
