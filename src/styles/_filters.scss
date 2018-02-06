@@ -1,0 +1,38 @@
+.ta-visualization .visualization-filters {
+  color: $text-color;
+  font-size: 10px;
+
+  .filter-button-group {
+    display: inline-block;
+    margin: 0 5px;
+  }
+
+  button {
+    background: white;
+    border: 1px solid #a7a7a7;
+    border-right: none;
+    color: #b7b7b7;
+    cursor: pointer;
+    font-size: 10px;
+
+    &:first-of-type {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    &:last-of-type {
+      border-right: 1px solid #a7a7a7;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &.selected {
+      background: #a7a7a7;
+      color: black;
+    }
+  }
+}

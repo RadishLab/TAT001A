@@ -45,4 +45,27 @@ export default class Visualization {
     if (this.dataOverrideUrl) return this.dataOverrideUrl;
     return this.baseDataUrl + filename;
   }
+
+  renderFilters() {
+    if (!this.filters) return;
+
+    const parentContainer = select(this.parent.node().parentNode);
+    this.filtersContainer = parentContainer.append('div')
+      .classed('visualization-filters', true);
+
+    this.filtersContainer.append('span').text(this.getTranslation('Switch between:'));
+
+    const filterButtons = this.filtersContainer
+      .append('div').classed('filter-button-group', true)
+      .selectAll('button')
+      .data(this.filters)
+      .enter().append('button');
+
+    filterButtons
+      .text(d => d.label)
+      .on('click', (d) => this.updateFilters(d));
+
+    // On init select initial key
+    this.updateFilters(this.filters[this.initialFilterIndex]);
+  }
 }

@@ -85,22 +85,26 @@ export default class WorldMap extends Visualization {
       largeCountries = country;
     }
     largeCountries.append('path')
+      .classed('country-fill', true)
       .style('fill', fill)
       .attr('d', d => this.path(d));
 
-    largeCountries.filter(d => d.properties.joined && d.properties.joined[this.symbolField]).append('path')
-      .style('fill', d => 'url(#dots)')
+    largeCountries.append('path')
+      .classed('country-symbol', true)
+      .style('fill', d => (d.properties.joined && d.properties.joined[this.symbolField]) ? 'url(#dots)' : 'none')
       .attr('d', d => this.path(d));
 
     const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold);
     smallCountries.append('circle')
+      .classed('country-fill', true)
       .style('fill', fill)
       .attr('r', 1)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
 
-    smallCountries.filter(d => d.properties.joined && d.properties.joined[this.symbolField]).append('path')
-      .style('fill', d => 'url(#dots)')
+    smallCountries.append('circle')
+      .classed('country-symbol', true)
+      .style('fill', d => (d => d.properties.joined && d.properties.joined[this.symbolField]) ? 'url(#dots)' : 'none')
       .attr('r', 1)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
@@ -171,5 +175,24 @@ export default class WorldMap extends Visualization {
 
     this.renderPaths();
     this.renderLegend();
+  }
+
+  updateFilters(selectedFilter) {
+    this.filtersContainer.selectAll('button').classed('selected', d => d.keyCodeHeader === selectedFilter.keyCodeHeader);
+    this.countries.selectAll('.country .country-fill')
+      .transition().duration(300)
+      .style('fill', d => {
+        if (!d.properties.joined) return this.noDataColor;
+        return this.colorScale(d.properties.joined[selectedFilter.keyCodeHeader]);
+      });
+
+    this.countries.selectAll('.country .country-symbol')
+      .transition().duration(300)
+      .style('fill', d => {
+        if (d.properties.joined && d.properties.joined[this.symbolField] === 'Yes') {
+          return 'url(#dots)';
+        }
+        return 'none';
+      });
   }
 }
