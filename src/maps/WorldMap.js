@@ -2,6 +2,7 @@ import { max } from 'd3-array';
 import { geoPath } from 'd3-geo';
 import { geoGinzburg5 } from 'd3-geo-projection';
 import { json as d3json } from 'd3-request';
+import { event as currentEvent, select } from 'd3-selection';
 import * as topojson from 'topojson-client';
 
 import { mapNoData, mapCircleOverlay } from '../colors';
@@ -32,6 +33,11 @@ export default class WorldMap extends Visualization {
 
     this.noDataColor = mapNoData;
     this.loadData();
+
+    this.mouseoverStroke = '#555';
+    this.defaultStroke = 'none';
+    this.tooltip = this.parentContainer.append('div')
+      .classed('ta-visualization-tooltip tooltip-country', true);
   }
 
   loadData() {
@@ -68,6 +74,28 @@ export default class WorldMap extends Visualization {
       .enter()
         .append('g')
         .classed('country', true);
+
+    country
+      .on('mouseover', (d, i, nodes) => {
+        const overCountry = select(nodes[i]);
+        overCountry.style('stroke', this.mouseoverStroke);
+        overCountry.node().parentNode.appendChild(overCountry.node());
+
+        if (this.tooltipContent) {
+          this.tooltip
+            .html(this.tooltipContent(d))
+            .classed('visible', true)
+            .style('top', `${currentEvent.layerY + 10}px`)
+            .style('left', `${currentEvent.layerX + 10}px`);
+        }
+      })
+      .on('mouseout', (d, i, nodes) => {
+        select(nodes[i]).style('stroke', this.defaultStroke);
+
+        if (this.tooltipContent) {
+          this.tooltip.classed('visible', false);
+        }
+      });
 
     const fill = (d => {
       if (d.properties.joined) {

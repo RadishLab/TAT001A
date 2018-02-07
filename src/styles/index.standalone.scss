@@ -12,13 +12,6 @@
   text {
     font-family: 'Source Sans Pro', sans-serif;
   }
-
-  svg {
-    display: inline-block;
-    position: absolute;
-    top: 10px;
-    left: 0;
-  }
 }
 
 $axis-label-font-size: $standalone-font-size;
@@ -29,3 +22,4 @@ $font-size: $standalone-font-size;
 @import '_lineChart';
 @import '_map';
 @import '_filters';
+@import '_tooltip';

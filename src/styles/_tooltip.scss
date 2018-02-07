@@ -1,0 +1,18 @@
+.ta-visualization-tooltip {
+  background: white;
+  border: 1px solid lightgray;
+  display: none;
+  font-size: 10px;
+  padding: 3px;
+  position: absolute;
+
+  &.visible {
+    display: block;
+  }
+
+  &.tooltip-country {
+    .country-name {
+      font-weight: bold;
+    }
+  }
+}

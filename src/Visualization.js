@@ -6,6 +6,7 @@ export default class Visualization {
     this.width = options.width;
     this.height = options.height;
     this.parent = select(parent);
+    this.parentContainer = select(this.parent.node().parentNode);
 
     if (options.aspect) {
       this.parent
@@ -14,11 +15,10 @@ export default class Visualization {
 
       // Cribbed from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js#25978286
 
-      const parentContainer = select(this.parent.node().parentNode);
-      parentContainer
+      this.parentContainer
         .style('padding-bottom', (d) => {
           // TODO handle when width not set as %
-          const paddingBottom = parseFloat(parentContainer.style('width'), 10) * (options.aspect[1] / options.aspect[0]) + '%';
+          const paddingBottom = parseFloat(this.parentContainer.style('width'), 10) * (options.aspect[1] / options.aspect[0]) + '%';
           return paddingBottom;
         });
     }
@@ -49,9 +49,8 @@ export default class Visualization {
   renderFilters() {
     if (!this.filters) return;
 
-    const parentContainer = select(this.parent.node().parentNode);
-    this.filtersContainer = parentContainer.append('div')
-      .classed('visualization-filters', true);
+    this.filtersContainer = this.parentContainer.append('div')
+      .classed('ta-visualization-filters', true);
 
     this.filtersContainer.append('span').text(this.getTranslation('Filters:'));
 

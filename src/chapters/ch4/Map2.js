@@ -46,6 +46,18 @@ export default class Map2 extends WorldMap {
     return countries;
   }
 
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    if (d.properties.joined) {
+      content += `<div class="data">${this.getTranslation('Male prevalence')}: ${d.properties.joined['Male-Prevalence']}%</div>`;
+      content += `<div class="data">${this.getTranslation('Female prevalence')}: ${d.properties.joined['Female-Prevalence']}%</div>`;
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+    }
+    return content;
+  }
+
   render() {
     super.render();
     this.renderFilters();
