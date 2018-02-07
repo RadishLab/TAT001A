@@ -48,4 +48,23 @@ export default class Map extends WorldMap {
     });
     return countries;
   }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    if (d.properties.joined) {
+      if (d.properties.joined[this.valueField] === 'both') {
+        content += `<div class="data">${this.getTranslation('Industry suing government and government suing industry')}</div>`;
+      }
+      if (d.properties.joined[this.valueField] === 'suing government') {
+        content += `<div class="data">${this.getTranslation('Industry suing government')}</div>`;
+      }
+      if (d.properties.joined[this.valueField] === 'suing industry') {
+        content += `<div class="data">${this.getTranslation('Government suing industry')}</div>`;
+      }
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+    }
+    return content;
+  }
 }
