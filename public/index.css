@@ -86,29 +86,41 @@ body {
 .world-map .legend text {
   fill: #2d2d2d; }
 
-.ta-visualization .visualization-filters {
+.ta-visualization-filters {
   color: #585857;
   font-size: 10px;
   margin-left: 5%; }
-  .ta-visualization .visualization-filters .filter-button-group {
+  .ta-visualization-filters .filter-button-group {
     display: inline-block;
     margin: 0 5px; }
-  .ta-visualization .visualization-filters button {
+  .ta-visualization-filters button {
     background: white;
     border: 1px solid #a7a7a7;
     border-right: none;
     color: #b7b7b7;
     cursor: pointer;
     font-size: 10px; }
-    .ta-visualization .visualization-filters button:first-of-type {
+    .ta-visualization-filters button:first-of-type {
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px; }
-    .ta-visualization .visualization-filters button:last-of-type {
+    .ta-visualization-filters button:last-of-type {
       border-right: 1px solid #a7a7a7;
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px; }
-    .ta-visualization .visualization-filters button:focus {
+    .ta-visualization-filters button:focus {
       outline: 0; }
-    .ta-visualization .visualization-filters button.selected {
+    .ta-visualization-filters button.selected {
       background: #a7a7a7;
       color: black; }
+
+.ta-visualization-tooltip {
+  background: white;
+  border: 1px solid lightgray;
+  display: none;
+  font-size: 10px;
+  padding: 3px;
+  position: absolute; }
+  .ta-visualization-tooltip.visible {
+    display: block; }
+  .ta-visualization-tooltip.tooltip-country .country-name {
+    font-weight: bold; }
