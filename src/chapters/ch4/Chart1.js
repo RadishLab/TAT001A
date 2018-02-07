@@ -57,7 +57,7 @@ export class Chart1 extends BarChart {
     const barWidth = this.x.bandwidth() / 4;
 
     barGroups.append('rect')
-        .classed('bar', true)
+        .classed('bar male', true)
         .attr('x', d => {
           let x = this.x('male');
           if (d['HDI Category'] === 'Low') {
@@ -79,7 +79,7 @@ export class Chart1 extends BarChart {
         .attr('fill', d => this.colors(d['HDI Category']));
 
     barGroups.append('rect')
-        .classed('bar', true)
+        .classed('bar female', true)
         .attr('x', d => {
           let x = this.x('female');
           if (d['HDI Category'] === 'Low') {
@@ -103,5 +103,16 @@ export class Chart1 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div>${d['HDI Category']} HDI</div>`;
+    if (bar.classed('male')) {
+      content += `<div>${this.yAxisTickFormat(d.male)}%</div>`;
+    }
+    if (bar.classed('female')) {
+      content += `<div>${this.yAxisTickFormat(d.female)}%</div>`;
+    }
+    return content;
   }
 }

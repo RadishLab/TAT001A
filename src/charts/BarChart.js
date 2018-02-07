@@ -1,3 +1,5 @@
+import { event as currentEvent, select } from 'd3-selection';
+
 import Chart from './Chart';
 
 export default class BarChart extends Chart {
@@ -5,6 +7,8 @@ export default class BarChart extends Chart {
     super(parent, options);
     this.parent
       .classed('bar-chart', true);
+    this.mouseoverStroke = '#555';
+    this.defaultStroke = 'none';
   }
 
   onDataLoaded(data) {
@@ -27,5 +31,26 @@ export default class BarChart extends Chart {
   render() {
     super.render();
     this.renderBars();
+    this.root.selectAll('.bar')
+      .on('mouseover', (d, i, nodes) => {
+        const overBar = select(nodes[i]);
+        overBar.style('stroke', this.mouseoverStroke);
+
+        if (this.tooltipContent) {
+          this.tooltip
+            .html(this.tooltipContent(d, overBar))
+            .classed('visible', true)
+            .style('top', `${currentEvent.layerY - 10}px`)
+            .style('left', `${currentEvent.layerX + 10}px`);
+        }
+      })
+      .on('mouseout', (d, i, nodes) => {
+        const outBar = select(nodes[i]);
+        outBar.style('stroke', this.defaultStroke);
+
+        if (this.tooltipContent) {
+          this.tooltip.classed('visible', false);
+        }
+      });
   }
 }

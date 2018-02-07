@@ -34,6 +34,9 @@ export default class Visualization {
     }
 
     this.dataOverrideUrl = options.dataOverrideUrl;
+
+    this.tooltip = this.parentContainer.append('div')
+      .classed('ta-visualization-tooltip', true);
   }
 
   getTranslation(text) {

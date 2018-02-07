@@ -36,8 +36,8 @@ export default class WorldMap extends Visualization {
 
     this.mouseoverStroke = '#555';
     this.defaultStroke = 'none';
-    this.tooltip = this.parentContainer.append('div')
-      .classed('ta-visualization-tooltip tooltip-country', true);
+    this.tooltip
+      .classed('tooltip-country', true);
   }
 
   loadData() {
