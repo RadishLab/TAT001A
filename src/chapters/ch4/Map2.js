@@ -1,4 +1,3 @@
-import { set } from 'd3-collection';
 import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 import 'd3-transition';
@@ -11,26 +10,40 @@ export default class Map2 extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
+
     this.filters = [
-      { label: 'male', keyCodeHeader: 'Male-Key Code', symbolHeader: 'Male-Symbol' },
-      { label: 'female', keyCodeHeader: 'Female-Key Code', symbolHeader: 'Female-Symbol' }
+      {
+        group: 'gender',
+        values: [
+          { label: this.getTranslation('male'), value: 'male' },
+          { label: this.getTranslation('female'), value: 'female' }
+        ]
+      }
     ];
-    this.initialFilterIndex = 0;
-    this.symbolField = 'Male-Symbol';
+
+    this.filterColumns = [
+      {
+        gender: 'male',
+        keyCode: 'Male-Key Code',
+        symbol: 'Male-Symbol'
+      },
+      {
+        gender: 'female',
+        keyCode: 'Female-Key Code',
+        symbol: 'Female-Symbol'
+      }
+    ];
+    this.filterState = { gender: 'male' };
   }
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('4-map2.csv'), (csvData) => {
         const filteredData = csvData.filter(d => {
-          return this.filters.some(filter => d[filter.keyCodeHeader] !== '');
+          return this.filterColumns.some(filter => d[filter.keyCode] !== '');
         });
-        let values = [];
-        this.filters.forEach(filter => {
-          values = values.concat(filteredData.map(d => d[filter.keyCodeHeader]));
-        });
-        const domain = set(values).values().filter(d => d !== '').sort();
-        this.colorScale.domain(domain);
+
+        this.colorScale.domain(this.getFilteredKeyCodeDomain(filteredData));
         resolve(filteredData);
       });
     });

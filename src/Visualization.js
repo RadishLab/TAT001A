@@ -57,17 +57,22 @@ export default class Visualization {
 
     this.filtersContainer.append('span').text(this.getTranslation('Filters:'));
 
-    const filterButtons = this.filtersContainer
-      .append('div').classed('filter-button-group', true)
-      .selectAll('button')
-      .data(this.filters)
-      .enter().append('button');
+    this.filters.forEach(filter => {
+      const filterValues = filter.values.map(f => ({ ...f, ...{ group: filter.group } }));
+      const filterButtons = this.filtersContainer
+        .append('div').classed('filter-button-group', true)
+        .selectAll('button')
+        .data(filterValues)
+        .enter().append('button');
 
-    filterButtons
-      .text(d => d.label)
-      .on('click', (d) => this.updateFilters(d));
+      filterButtons
+        .text(d => d.label)
+        .on('click', (d) => this.updateFilters({
+          [filter.group]: d.value
+        }));
+    });
 
     // On init select initial key
-    this.updateFilters(this.filters[this.initialFilterIndex]);
+    this.updateFilters(this.filterState);
   }
 }

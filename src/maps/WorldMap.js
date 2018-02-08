@@ -1,4 +1,5 @@
 import { max } from 'd3-array';
+import { set } from 'd3-collection';
 import { geoPath } from 'd3-geo';
 import { geoGinzburg5 } from 'd3-geo-projection';
 import { json as d3json } from 'd3-request';
@@ -207,22 +208,45 @@ export default class WorldMap extends Visualization {
     this.renderLegend();
   }
 
-  updateFilters(selectedFilter) {
-    this.filtersContainer.selectAll('button').classed('selected', d => d.keyCodeHeader === selectedFilter.keyCodeHeader);
-    this.countries.selectAll('.country .country-fill')
-      .transition().duration(300)
-      .style('fill', d => {
-        if (!d.properties.joined) return this.noDataColor;
-        return this.colorScale(d.properties.joined[selectedFilter.keyCodeHeader]);
-      });
+  getFilteredKeyCodeDomain(data) {
+    let values = [];
+    this.filterColumns.forEach(filter => {
+      values = values.concat(data.map(d => d[filter.keyCode]));
+    });
+    return set(values).values().filter(d => d !== '').sort();
+  }
 
-    this.countries.selectAll('.country .country-symbol')
-      .transition().duration(300)
-      .style('fill', d => {
-        if (d.properties.joined && d.properties.joined[this.symbolField] === 'Yes') {
-          return 'url(#dots)';
-        }
-        return 'none';
-      });
+  updateFilters(selectedFilter) {
+    // Update filter state and buttons
+    this.filterState = { ...this.filterState, ...selectedFilter };
+    this.filtersContainer.selectAll('button')
+      .classed('selected', d => this.filterState[d.group] === d.value);
+
+    // Look for columns that should be associated with the given filter state
+    const matchingColumn = this.filterColumns.filter(column => {
+      return Object.keys(this.filterState).every(key => this.filterState[key] === column[key]);
+    })[0];
+
+    // Update fill with the matching filters
+    if (matchingColumn && matchingColumn.keyCode) {
+      this.countries.selectAll('.country .country-fill')
+        .transition().duration(300)
+        .style('fill', d => {
+          if (!d.properties.joined) return this.noDataColor;
+          return this.colorScale(d.properties.joined[matchingColumn.keyCode]);
+        });
+    }
+
+    // Update symbol (overlay) with the matching filters
+    if (matchingColumn && matchingColumn.symbol) {
+      this.countries.selectAll('.country .country-symbol')
+        .transition().duration(300)
+        .style('fill', d => {
+          if (d.properties.joined && d.properties.joined[matchingColumn.symbol] === 'Yes') {
+            return 'url(#dots)';
+          }
+          return 'none';
+        });
+    }
   }
 }
