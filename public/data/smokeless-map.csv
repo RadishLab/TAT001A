@@ -1,201 +1,197 @@
-Country,ISO3,TA6 Data,Key Code,TA6 Year
-Bulgaria,BGR,0,1,2010
-DPR Korea,PRK,0,1,2007
-Portugal,PRT,0,1,2010
-Syrian Arab Rep. ,SYR,0,1,1999
-Tajikistan,TJK,0,1,2012
-Rep. Moldova,MDA,0,1,2013
-Latvia,LVA,0,1,2014
-Uruguay,URY,0,1,2009
-Costa Rica,CRI,0.001,1,2015
-Hungary,HUN,0.001,1,2014
-Argentina,ARG,0.001510662269592285,1,2012
-Netherlands,NLD,0.0019910562133789063,1,2011
-Azerbaijan,AZE,0.002,1,2011
-Greece,GRC,0.002,1,2013
-Ukraine,UKR,0.002,1,2010
-Mexico,MEX,0.002,1,2015
-Kuwait,KWT,0.002,1,2014
-Romania,ROU,0.0029743804168701183,1,2011
-Seychelles,SYC,0.003,1,2013
-St. Kitts and Nevis,KNA,0.003,1,2007
-Niue,NIU,0.003,1,2011
-Brazil,BRA,0.003,1,2013
-Barbados,BRB,0.003006810836791992,1,2007
-Malawi,MWI,0.0035009235382080076,1,2010
-Trinidad and Tobago,TTO,0.003989193496704102,1,2012
-Australia,AUS,0.004,1,2013
-Canada,CAN,0.004,1,2015
-Honduras,HND,0.004501698760986327,1,2012
-Mongolia,MNG,0.005,1,2013
-Bahamas,BHS,0.005,1,2012
-Zambia,ZMB,0.005004353637695311,1,2008
-China,CHN,0.005145111694335937,1,2009
-Samoa,WSM,0.005640201339721678,1,2009
-Russian Federation,RUS,0.005692288513183592,1,2009
-Georgia,GEO,0.005770830383300785,1,2010
-Croatia,HRV,0.006,1,2014-15
-Armenia,ARM,0.0061229296875000006,1,2010
-Italy,ITA,0.00645662769317627,1,2010
-Egypt,EGY,0.006999999999999999,1,2011-12
-Senegal,SEN,0.006999999999999999,1,2015
-Ghana,GHA,0.0074475021743774395,1,2008
-Dominican Rep.,DOM,0.007504280929565429,1,2007
-Panama,PAN,0.00752520122528076,1,2013
-Ethiopia,ETH,0.008,1,2015
-Saudi Arabia,SAU,0.009000000000000001,1,2014
-Albania,ALB,0.009030138931274417,1,2009
-Iraq,IRQ,0.009573317413330083,1,2006
-Zimbabwe,ZWE,0.009917812194824224,1,2011
-Qatar,QAT,0.009939907741546627,1,2013
-Poland,POL,0.01,2,2014-15
-Belgium,BEL,0,1,2012
-Lithuania,LTU,0.01,2,2012
-Slovenia,SVN,0.01,2,2012
-United Kingdom,GBR,0.010507531700134276,2,2010
-Gambia,GMB,0.011031733093261718,2,2010
-Libyan Arab Jamahiriya,LBY,0.011573705558776865,2,2009
-Côte d'Ivoire,CIV,0.011979791793823242,2,2012
-Gabon,GAB,0.012023619079589843,2,2012
-Ireland,IRL,0.01247304424285889,2,2010
-Grenada,GRD,0.012508375701904306,2,2011
-Kazakhstan,KAZ,0.013000000000000001,2,2014
-Slovakia,SVK,0.013000000000000001,2,2014
-Viet Nam,VNM,0.01311829681396484,2,2010
-Angola,AGO,0.013896267089843746,2,2015-16
-Turkmenistan,TKM,0.013999999999999999,2,2013-14
-Guinea,GIN,0.014499255828857423,2,2009
-France,FRA,0.014516065139770506,2,2010
-Austria,AUT,0.016,2,2015
-Denmark,DNK,0.016,2,2015
-Equatorial Guinea,GNQ,0.016782168159484863,2,2011
-Philippines,PHL,0.017,2,2015
-Czech Rep.,CZE,0.017,2,2015
-Brunei Dar.,BRN,0.018000000000000002,2,2014-15
-Nigeria,NGA,0.01917548828125,2,2012
-Rwanda,RWA,0.02,2,2012
-Germany,DEU,0.02,2,2012
-Lux. ,LUX,0.02,2,2012
-Namibia,NAM,0.02072261867141724,2,2007
-Liberia,LBR,0.021,2,2011
-Swaziland,SWZ,0.022000000000000002,2,2014
-Eritrea,ERI,0.022000000000000002,2,2010
-United States of America,USA,0.022000000000000002,2,2015
-Paraguay,PRY,0.023059209365844716,2,2011
-United Republic of Tanzania,TZA,0.025,2,2012
-Spain,ESP,0.025047931518554688,2,2010
-Guyana,GUY,0.02508140258789062,2,2009
-Finland,FIN,0.026000000000000002,2,2014
-Switz.,CHE,0.027000000000000003,2,2013
-Estonia,EST,0.027999999999999997,2,2014
-Sao Tome and Principe,STP,0.028379897537231438,2,2009
-Cameroon,CMR,0.03,2,2013
-Mali,MLI,0.03065737228393555,2,2013
-Thailand,THA,0.033,2,2014
-Haiti,HTI,0.03496458030700684,2,2012
-Chad,TCD,0.035024813995361344,2,2008
-Niger,NER,0.035088624877929686,2,2012
-Venezuela ,VEN,0.03558227672576904,2,2011
-Kenya,KEN,0.036000000000000004,2,2015
-Togo,TGO,0.036000000000000004,2,2010-11
-Uganda,UGA,0.037000000000000005,2,2014
-Botswana,BWA,0.039,2,2014
-Malta,MLT,0.04,2,2012
-LAO PDR,LAO,0.043,2,2015
-Indonesia,IDN,0.0434717953491211,2,2013
-Cape Verde,CPV,0.04655938373565673,2,2007
-Cambodia,KHM,0.049,2,2014
-Benin,BEN,0.05,3,2015
-Iceland,ISL,0.051,3,2015
-Kyrgyzstan,KGZ,0.052000000000000005,3,2013
-Congo,COG,0.052489148139953624,3,2012
-Comoros,COM,0.05357178745269778,3,2012
-Tunisia,TUN,0.0537466259765625,3,2006
-Algeria,DZA,0.057,3,2010
-Maldives,MDV,0.06335822578430174,3,2009
-S. Africa,ZAF,0.06776569728851317,3,2003
-Mozambique,MOZ,0.06939663753509522,3,2011
-Sierra Leone,SLE,0.07534080261230466,3,2009
-Pakistan,PAK,0.077,3,2014
-Burundi,BDI,0.0799788665771484,3,2010
-Burkina Faso,BFA,0.08900000000000001,3,2013
-Yemen,YEM,0.092,3,2013
-Dem. Rep. of Congo,COD,0.09729399501800538,3,2005
-Lesotho,LSO,0.105,4,2012
-Malaysia,MYS,0.109,4,2015
-Uzbekistan,UZB,0.12,4,2014
-Fed. States of Micronesia,FSM,0.1291980854797363,4,2002
-Sudan,SDN,0.13492353290557874,4,2005
-Norway,NOR,0.14,4,2015
-Sri Lanka,LKA,0.158,4,2014
-Sweden,SWE,0.16,4,2015
-Mauritania,MRT,0.1692043566131591,4,2006
-Afghanistan,AFG,0.17509949851989756,4,
-Nepal,NPL,0.17800000000000002,4,2012-13
-Bhutan,BTN,0.19699999999999998,4,2014
-Timor-Leste,TLS,0.198,4,2014
-Madagascar,MDG,0.22106314527130128,5,2009
-Marshall Islands,MHL,0.25,5,2010
-India,IND,0.2589882879257202,5,2009
-Bangladesh,BGD,0.31472870567321776,5,2010
-Myanmar,MMR,0.43200000000000005,5,2014
-Palau,PLW,0.63,5,2011-13
-Andorra,AND,,,
+Country,ISO3,TA6 Data,TA6 Year,TA6 Source
+Syrian Arab Rep. ,SYR,0,1999,"Syrian Arab Republic WHO FCTC First Implementation Report, February 25, 2007. http://www.who.int/tobacco/framework/cop/party_reports/syria_report.pdf?ua=1."
+Fed. States of Micronesia,FSM,0.129198085479736,2002,"WHO. Micronesia NCD Risk Factors STEPS Report 2002. Suva, Fiji, December 2008. http://www.who.int/chp/steps/STEPS_Report_Micronesia.pdf?ua=1."
+S. Africa,ZAF,0.0677656972885132,2003,"South Africa Department of Health, and South African Medical Research Council. South Africa Demographic and Health Survey, 2003: Full Report. [Pretoria, South Africa]: Department of Health, South Africa : MRC South Africa, 2007. http://dhsprogram.com/pubs/pdf/FR206/FR206.pdf."
+Dem. Rep. of Congo,COD,0.0972939950180054,2005,"LONGO-MBENZA, BEYA EFINI, EKWANZALA, VANGU NGOMA, NAHIMANA Damien, MBUNGU FUELE, M’BUYAMBA KABANGU, BIELELI I, and MUPEPE MAYUKU. Democratic Republic of the Congo NCD Risk Factors Report 2005. Kinshasa, November 2006."
+Sudan,SDN,0.134923532905579,2005,"WHO Sudan Office, Sudan Federal Ministry of Health, and Khartoum State Ministry of Health. Sudan Results of Non Communicable Diseases Risk Factors Survey, January 2006. http://www.who.int/fctc/reporting/Sudan_annex1_STEPS_survey2006.pdf?ua=1."
+Tunisia,TUN,0.0537466259765625,2006,"Organization, World Health. WHO Report on the Global Tobacco Epidemic, 2009: Implementing Smoke-Free Environments. World Health Organization, 2009."
+Mauritania,MRT,0.169204356613159,2006,"WHO. “Mauritanie (Nouakchott) Enquête STEPS 2006.” WHO, 2006. http://www.afro.who.int/en/clusters-a-programmes/hpr/health-risk-factors/diseases-surveillance/surveillance-country-profiles/step-survey-on-noncommunicable-disease-risk-factors.html."
+Dominican Rep.,DOM,0.00750428092956543,2007,"Centro de Estudios Sociales y Demográficos (CESDEM), and Macro International Inc. Encuesta Demográfica Y  de Salud 2007. Santo Domingo, República Dominicana, 2008. http://dhsprogram.com/pubs/pdf/FR205/FR205.pdf."
+St. Kitts and Nevis,KNA,0.003,2007,"Edwards, Petronella, Hazel Williams-Roberts, Bichara Sahely, William Turner, and Juletta Fyfield. 2008 STEPwise Approach to Chronic  Disease Risk Factor Survey Report: A Baseline for Non-Communicable Disease Surveillance  in St Kitts, 2008. http://www.who.int/chp/steps/2007_Report_StKitts.pdf?ua=1."
+Namibia,NAM,0.0207226186714172,2007,"Ministry of Health and Social Services (MoHSS) [Namibia], and Macro International Inc. Namibia Demographic and Health Survey 2006-07. Windhoek, Namibia and Calverton, Maryland, USA. Accessed June 27, 2014. http://dhsprogram.com/pubs/pdf/FR204/FR204c.pdf."
+Barbados,BRB,0.00300681083679199,2007,"WHO. “Barbados STEPS Survey 2007.” WHO. Accessed June 27, 2014. http://www.who.int/chp/steps/Barbados_2007_STEPS_FactSheet.pdf."
+Cape Verde,CPV,0.0465593837356567,2007,"WHO. “Cap Vert Enquete STEPS 2007.” WHO, 2007. http://www.afro.who.int/en/clusters-a-programmes/hpr/health-risk-factors/diseases-surveillance/surveillance-country-profiles/step-survey-on-noncommunicable-disease-risk-factors.html."
+DPR Korea,PRK,0,2007,"WHO. DPRK Final Report of Survey of Risk Factor Based on STEPwise Approach 2007, 2007. http://www.who.int/chp/steps/DPRK_STEPS_Report_2007.pdf?ua=1."
+Ghana,GHA,0.00744750217437744,2008,"Ghana Statistical Service (GSS), Ghana Health Service (GHS), and ICF Macro. Ghana Demographic and Health Survey 2008. Accra, Ghana, 2009. http://dhsprogram.com/pubs/pdf/FR221/FR221%5B13Aug2012%5D.pdf."
+Zambia,ZMB,0.00500435363769531,2008,"WHO. Prevalence Rates of the Common Noncommunicable Diseases and Their Risk Factors in Lusaka District, Zambia 2008, November 2008. http://www.who.int/chp/steps/2008_STEPS_Report_Zambia.pdf."
+Madagascar,MDG,0.221063145271301,2009,"Blecher, Evan, Alex C. Liber, Martine Chaussard, and Stacey Fedewa. “Market Structures, Socioeconomics, and Tobacco Usage Patterns in Madagascar.” Nicotine & Tobacco Research 16, no. Suppl 1 (January 1, 2014): S56–S64. doi:10.1093/ntr/ntt020."
+Uruguay,URY,0,2009,"CDC's Office on Smoking and Health, “Global Tobacco Control: Surveys: GATS,” http://www.cdc.gov/tobacco/global/gats/countries/index.htm."
+Guinea,GIN,0.0144992558288574,2009,"Institut National de la Statistique, Ministère du Plan, MEASURE DHS, and ICF International. Enquête Demographique et de Santé et À Indicateurs Multiples(Eds-Mics 2012). Conakry, Guinée; Calverton, Maryland, U.S.A., November 2013. http://dhsprogram.com/pubs/pdf/FR280/FR280.pdf."
+Albania,ALB,0.00903013893127442,2009,"Institute of Statistics, Institute of Public Health [Albania], and ICF Macro. Albania Demographic and Health  Survey 2008-09. Tirana, Albania, 2010. http://dhsprogram.com/pubs/pdf/FR230/FR230.pdf."
+Guyana,GUY,0.0250814025878906,2009,"Ministry of Health (MOH), Bureau of Statistics (BOS), and ICF Macro. Guyana Demographic and Health Survey 2009, 2010. http://dhsprogram.com/pubs/pdf/FR232/FR232.pdf."
+Samoa,WSM,0.00564020133972168,2009,"Ministry of Health [Samoa], Bureau of Statistics [Samoa], and ICF Macro. Samoa Demographic  and Health Survey 2009. Apia, Samoa, 2010. http://dhsprogram.com/pubs/pdf/FR240/FR240.pdf."
+Maldives,MDV,0.0633582257843017,2009,"Ministry of Health and Family (MOHF) [Maldives], and ICF Macro. Maldives Demographic and Health  Survey 2009. Calverton, Maryland. Accessed June 27, 2014. http://dhsprogram.com/pubs/pdf/FR237/FR237.pdf."
+China,CHN,0.00514511169433594,2009,"Wang, Yu, and Douglas Bettcher. Global Adult Tobacco Survey (GATS) China 2010 Country Report, 2010. http://dhsprogram.com/pubs/pdf/FR240/FR240.pdf."
+Sao Tome and Principe,STP,0.0283798975372314,2009,"WHO Report on the Global Tobacco Epidemic, 2011: Warning about the Dangers of Tobacco. World Health Organization, 2011. http://www.who.int/tobacco/global_report/2011/en_tfi_global_report_2011_appendix_VIII_table_2.pdf?ua=1."
+Russian Federation,RUS,0.00569228851318359,2009,"WHO. “Global Adult Tobacco Survey (GATS) Fact Sheet: Russian Federation 2009.” WHO, 2009. http://www.who.int/tobacco/surveillance/en_tfi_gats_russia_factsheet.pdf."
+Sierra Leone,SLE,0.0753408026123047,2009,"WHO. “Sierra Leone STEPS Survey 2009.” WHO, 2009. http://www.who.int/chp/steps/2009_Sierra_Leone_FactSheet_EN.pdf."
+Libyan Arab Jamahiriya,LBY,0.0115737055587769,2009,"WHO. Libya STEPS Survey Report 2009. Country. Accessed June 30, 2014. http://www.who.int/chp/steps/2009_STEPS_Libya.pdf?ua=1."
+Ukraine,UKR,0.002,2010,"Andreeva, Tatiana, Natalia Kharchenko, Konstantin Krasovsky, Nataliya Korol, Veronica Lea, Juliette Lee, Charles W Warren, and Victoria Zakhozha. Global Adult Tobacco Survey (GATS) Ukraine 2010. Country. GATS. WHO, 2010. http://www.who.int/tobacco/surveillance/en_tfi_gats_ukraine_report_2010.pdf."
+Bulgaria,BGR,0,2010,"Gallus, Silvano, Alessandra LUGO, Carlo LA VECCHIA, Paolo BOFFETTA, Frank J CHALOUPKA, Paolo COLOMBO, Laura CURRIE, et al. PPACTE, WP2: European Survey on  Smoking: Final Report 2010. Dublin: Pricing Policies and Control of Tobacco in Europe, January 31, 2012. http://www.ppacte.eu/index.php?option=com_docman&task=cat_view&gid=65&Itemid=29."
+France,FRA,0.0145160651397705,2010,"Gallus, Silvano, Alessandra LUGO, Carlo LA VECCHIA, Paolo BOFFETTA, Frank J CHALOUPKA, Paolo COLOMBO, Laura CURRIE, et al. PPACTE, WP2: European Survey on  Smoking: Final Report 2010. Dublin: Pricing Policies and Control of Tobacco in Europe, January 31, 2012. http://www.ppacte.eu/index.php?option=com_docman&task=cat_view&gid=65&Itemid=29."
+Ireland,IRL,0.0124730442428589,2010,"Gallus, Silvano, Alessandra LUGO, Carlo LA VECCHIA, Paolo BOFFETTA, Frank J CHALOUPKA, Paolo COLOMBO, Laura CURRIE, et al. PPACTE, WP2: European Survey on  Smoking: Final Report 2010. Dublin: Pricing Policies and Control of Tobacco in Europe, January 31, 2012. http://www.ppacte.eu/index.php?option=com_docman&task=cat_view&gid=65&Itemid=29."
+Italy,ITA,0.00645662769317627,2010,"Gallus, Silvano, Alessandra LUGO, Carlo LA VECCHIA, Paolo BOFFETTA, Frank J CHALOUPKA, Paolo COLOMBO, Laura CURRIE, et al. PPACTE, WP2: European Survey on  Smoking: Final Report 2010. Dublin: Pricing Policies and Control of Tobacco in Europe, January 31, 2012. http://www.ppacte.eu/index.php?option=com_docman&task=cat_view&gid=65&Itemid=29."
+Portugal,PRT,0,2010,"Gallus, Silvano, Alessandra LUGO, Carlo LA VECCHIA, Paolo BOFFETTA, Frank J CHALOUPKA, Paolo COLOMBO, Laura CURRIE, et al. PPACTE, WP2: European Survey on  Smoking: Final Report 2010. Dublin: Pricing Policies and Control of Tobacco in Europe, January 31, 2012. http://www.ppacte.eu/index.php?option=com_docman&task=cat_view&gid=65&Itemid=29."
+United Kingdom,GBR,0.0105075317001343,2010,"Gallus, Silvano, Alessandra LUGO, Carlo LA VECCHIA, Paolo BOFFETTA, Frank J CHALOUPKA, Paolo COLOMBO, Laura CURRIE, et al. PPACTE, WP2: European Survey on  Smoking: Final Report 2010. Dublin: Pricing Policies and Control of Tobacco in Europe, January 31, 2012. http://www.ppacte.eu/index.php?option=com_docman&task=cat_view&gid=65&Itemid=29."
+Spain,ESP,0.0250479315185547,2010,"Gallus, Silvano, Alessandra LUGO, Carlo LA VECCHIA, Paolo BOFFETTA, Frank J CHALOUPKA, Paolo COLOMBO, Laura CURRIE, et al. PPACTE, WP2: European Survey on  Smoking: Final Report. Dublin: Pricing Policies and Control of Tobacco in Europe, January 31, 2012. http://www.ppacte.eu/index.php?option=com_docman&task=cat_view&gid=65&Itemid=29."
+Viet Nam,VNM,0.0131182968139648,2010,"Hanoi Medical University, Ministry of Health of Viet Nam, General Statistics Office, US CDC, and WHO. “Global Adult Tobacco Survey (GATS) Viet Nam 2010.” WHO, 2010. http://www.who.int/tobacco/surveillance/en_tfi_gats_vietnam_report.pdf."
+Burundi,BDI,0.0799788665771484,2010,"Institut de Statistiques et d’Études Économiques du Burundi (ISTEEBU), Ministère de la Santé Publique et de la Lutte, contre le Sida [Burundi] (MSPLS), and ICF International. Enquête Démographique et de Santé Burundi 2010. Bujumbura, Burundi, 2012. http://dhsprogram.com/pubs/pdf/FR253/FR253.pdf."
+Eritrea,ERI,0.022,2010,"Ministry of Health Eritrea. Eritrea National Non Communicable Disease (NCD) Risk Factor Baseline Survey (Using WHO STEPSwise Approach) 2004, 2004. http://www.who.int/chp/steps/STEPS_Eritrea_Data.pdf?ua=1."
+Bangladesh,BGD,0.314728705673218,2010,"Rahman, Mujibur. Non-communicable Disease Risk Factor Survey, Bangladesh 2010. Bangladesh Society of Medicine, 2010. http://www.who.int/chp/steps/2010_STEPS_Report_Bangladesh.pdf."
+Marshall Islands,MHL,0.25,2010,"WHO. “Marshall Islands WHO FCTC Third Implementation Report.” WHO, 2012. http://www.who.int/fctc/reporting/party_reports/marshall_islands_2012_report.pdf?ua=1."
+Gambia,GMB,0.0110317330932617,2010,"WHO. “The Gambia STEPS Survey 2010.” WHo. Accessed June 27, 2014. http://www.who.int/chp/steps/Gambia_2010_STEPS_FactSheet.pdf?ua=1."
+Algeria,DZA,0.057,2010,"WHO. Algeria WHO FCTC First Implementation Report, February 22, 2011. http://www.who.int/fctc/reporting/Algeriareport.pdf?ua=1."
+Georgia,GEO,0.00577083038330079,2010,"WHO. Georgia STEPS Survey 2010 Report, 2010. http://www.who.int/chp/steps/2012_GeorgiaSTEPS_Report.pdf?ua=1."
+Romania,ROU,0.00297438041687012,2011,"Irimie, Sorina. Global Adult Tobacco Survey Romania 2011. Cluj-Napoca: Ministry of Health Romania, 2012. http://www.who.int/tobacco/surveillance/survey/gats/gats_romania_report_2011.pdf."
+Liberia,LBR,0.021,2011,"Liberia Institute of Statistics and Geo-Information Services (LISGIS) [Liberia], Ministry of Health and Social Welfare [Liberia], National AIDS Control Program [Liberia], and Macro International Inc. Liberia  Demographic and Health Survey 2007. Monrovia, Liberia, 2008. http://dhsprogram.com/pubs/pdf/FR201/FR201.pdf."
+Mozambique,MOZ,0.0693966375350952,2011,"Ministerio da Saude (MISAU), Instituto Nacional de Estatística (INE), and ICF International (ICFI). Moçambique Inquérito Demográfico E de Saúde 2011. Calverton, Maryland, USA. Accessed June 27, 2014. http://dhsprogram.com/pubs/pdf/FR266/FR266.pdf."
+Equatorial Guinea,GNQ,0.0167821681594849,2011,"Ministerio de Sanidad y Bienestar Social, Ministerio de Economía, Planificación e Inversiones Públicas, and ICF International. Encuesta Demográfica Y de Salud (EDSGE-I) 2011. Calverton, Maryland, USA, 2012. http://dhsprogram.com/pubs/pdf/FR271/FR271.pdf."
+Azerbaijan,AZE,0.002,2011,"State Statistical Committee (SSC) [Azerbaijan], and Macro International Inc. Azerbaijan  Demographic and Health Survey 2006. Calverton, Maryland, USA, 2008. http://dhsprogram.com/pubs/pdf/FR195/FR195.pdf."
+Venezuela ,VEN,0.035582276725769,2011,"WHO. “WHO Report on the Global Tobacco Epidemic, 2013: Venezuela (Bolivarian Republic Of).” WHO. Accessed June 27, 2014. http://www.who.int/tobacco/surveillance/policy/country_profile/ven.pdf."
+Niue,NIU,0.003,2011,"WHO. Niue NCD Risk Factors STEPS Report, May 2013. http://www.who.int/chp/steps/Niue_STEPS_Report_2011.pdf."
+Netherlands,NLD,0.00199105621337891,2011,"WHO. WHO Report on the Global Tobacco Epidemic, 2013: Netherlands, 2013. http://www.who.int/tobacco/surveillance/policy/country_profile/nld.pdf?ua=1."
+Paraguay,PRY,0.0230592093658447,2011,"WHO. WHO Report on the Global Tobacco Epidemic, 2013: Paraguay, 2013. http://www.who.int/tobacco/surveillance/policy/country_profile/pry.pdf?ua=1."
+Grenada,GRD,0.0125083757019043,2011,"WHO. WHO STEPS Chronic Disease Risk Factor Surveillance: Grenada, 2011. http://www.who.int/chp/steps/Grenada_2010-11_STEPS_Report.pdf?ua=1."
+Zimbabwe,ZWE,0.00991781219482422,2011,"Zimbabwe National Statistics Agency (ZIMSTAT), and ICF International. Zimbabwe Demographic and Health Survey 2010-11. Calverton, Maryland, 2012. http://dhsprogram.com/pubs/pdf/FR254/FR254.pdf."
+Haiti,HTI,0.0349645803070068,2012,"Cayemittes, Michel, Michelle Fatuma Busangu, Jean de Dieu Bizimana, Bernard Barrère, Blaise Sévère, and Viviane Cayemittes et Emmanuel Charles. Enquête Mortalité, Morbidité et Utilisation Des Services, Haïti, 2012. Calverton, Maryland, USA, 2013. http://dhsprogram.com/pubs/pdf/FR273/FR273.pdf."
+Congo,COG,0.0524891481399536,2012,"Centre Nationale de la Statistique et des Études Économiques (CNSEE) [Congo], and ICF International. Enquête Démographique et de Santé Du Congo (EDSC-II) 2011-2012. Calverton, Maryland, USA, 2013. http://dhsprogram.com/pubs/pdf/FR267/FR267.pdf."
+Gabon,GAB,0.0120236190795898,2012,"Direction Générale de la Statistique (DGS), and ICF International. Enquête Démographique et de Santé Du Gabon 2012. Calverton, Maryland, et Libreville, Gabon, 2013. http://dhsprogram.com/pubs/pdf/FR276/FR276.pdf."
+Comoros,COM,0.0535717874526978,2012,"Direction Générale de la Statistique et de la Prospective (DGSP), and ICF International. Enquête  Démographique et de Santé et À Indicateurs Multiples Aux Comores 2012. Rockville, MD 20850, USA, 2014. http://dhsprogram.com/pubs/pdf/FR278/FR278.pdf."
+Belgium,BEL,0,2012,Eurobarometer 385- Attitudes of Europeans Towards Tobacco
+Germany,DEU,0.02,2012,Eurobarometer 385- Attitudes of Europeans Towards Tobacco
+Lithuania,LTU,0.01,2012,Eurobarometer 385- Attitudes of Europeans Towards Tobacco
+Lux. ,LUX,0.02,2012,Eurobarometer 385- Attitudes of Europeans Towards Tobacco
+Malta,MLT,0.04,2012,Eurobarometer 385- Attitudes of Europeans Towards Tobacco
+Slovenia,SVN,0.01,2012,Eurobarometer 385- Attitudes of Europeans Towards Tobacco
+Côte d'Ivoire,CIV,0.0119797917938232,2012,"Institut National de la Statistique (INS), and ICF International. Enquête Démographique et de Santé et À Indicateurs Multiples de Côte d’Ivoire 2011-2012. Calverton, Maryland, USA, 2012. http://dhsprogram.com/pubs/pdf/FR272/FR272.pdf."
+Niger,NER,0.0350886248779297,2012,"Institut National de la Statistique (INS), and ICF International. Enquête Démographique et de Santé et À Indicateurs Multiples Du Niger 2012. Calverton, Maryland, 2013. http://dhsprogram.com/pubs/pdf/FR277/FR277.pdf."
+Lesotho,LSO,0.105,2012,"Ministry of Health and Social Welfare (MOHSW) [Lesotho], and ICF Macro. Lesotho Demographic and Health Survey 2009. Maseru, Lesotho, 2010. http://dhsprogram.com/pubs/pdf/FR241/FR241%5BNEW_completeHHQst_3March2012%5D.pdf."
+United Republic of Tanzania,TZA,0.025,2012,"National Bureau of Statistics (NBS) [Tanzania], and ICF Macro. Tanzania Demographic and Health Survey 2010, 2011. http://dhsprogram.com/pubs/pdf/FR243/FR243[24June2011].pdf."
+Rwanda,RWA,0.02,2012,"National Institute of Statistics of Rwanda (NISR) [Rwanda], Ministry of Health (MOH) [Rwanda], and ICF International. Rwanda Demographic and Health Survey 2010. Calverton, Maryland, USA, 2012. http://dhsprogram.com/pubs/pdf/FR259/FR259.pdf."
+Honduras,HND,0.00450169876098633,2012,"Secretaría de Salud [Honduras], Instituto Nacional de Estadística (INE), and ICF International. Encuesta Nacional de Salud Y Demografía 2011-2012. Tegucigalpa, Honduras, 2013. http://dhsprogram.com/pubs/pdf/FR274/FR274.pdf."
+Tajikistan,TJK,0,2012,"Statistical Agency under the President of the Republic of Tajikistan (SA), Ministry of Health [Tajikistan], and ICF International. Tajikistan Demographic and Health Survey 2012. Dushanbe, Tajikistan, and Calverton, Maryland, USA, 2013. http://dhsprogram.com/pubs/pdf/FR279/FR279.pdf."
+Bahamas,BHS,0.005,2012,STEPS Survey
+Trinidad and Tobago,TTO,0.0039891934967041,2012,"WHO, and Ministry of Health Government of Trinidad and Tobago. Panamerican Steps Chronic Non-Communicable Disease Risk Factor Survey Final Report 2011, March 2012. http://www.who.int/chp/steps/TrinidadAndTobago_2011_STEPS_Report.pdf?ua=1."
+Argentina,ARG,0.00151066226959228,2012,"WHO. “Global Adult Tobacco Survey Fact Sheet Argentina 2012.” WHO, 2012. http://www.who.int/tobacco/surveillance/survey/gats/argentina_fact_sheet_2012.pdf."
+Nigeria,NGA,0.01917548828125,2012,"WHO. “Global Adult Tobacco Survey Fact Sheet: Nigeria 2012.” WHO, 2012. http://www.who.int/tobacco/surveillance/survey/gats/nigeria_factsheet.pdf."
+Mali,MLI,0.0306573722839355,2013,"Cellule de Planification et de Statistiques, Institut National de la Statistique (I, and INFO-STAT et ICF International. “Mali Demographic and Health Survey 2012-13.” ICF International, May 2014. https://dhsprogram.com/pubs/pdf/FR286/FR286.pdf."
+Cameroon,CMR,0.03,2013,"Institut National de la Statistique (INS), and ICF International. Enquête Démographique et de Santé et À Indicateurs Multiples Du Cameroun 2011. Calverton, Maryland, USA, 2012. http://dhsprogram.com/pubs/pdf/FR260/FR260.pdf."
+Burkina Faso,BFA,0.089,2013,"Institut National de la Statistique et de la Démographie (INSD), and ICF International. Enquête Démographique et de Santé et À Indicateurs Multiples Du Burkina Faso 2010. Calverton, Maryland, USA, 2012. http://dhsprogram.com/pubs/pdf/FR256/FR256.pdf."
+Seychelles,SYC,0.003,2013,"Ministry of Health and Social Development. The Seychelles Heart Study 2004:  Methods and Main Findings. Victoria, Seychelles, July 7, 2007. http://www.who.int/chp/steps/2004_STEPS_Report_Seychelles.pdf?ua=1."
+Yemen,YEM,0.092,2013,"Ministry of Public Health and Population (Yemen). Yemen Family Health Survey 2003. Accessed June 27, 2014. http://www.mophp-ye.org/arabic/docs/Familyhealth_english.pdf."
+Rep. Moldova,MDA,0,2013,"National Scientific and Applied Center for Preventive Medicine (NCPM) [Moldova], and ORC Macro. Moldova Demographic and Health Survey 2005. Calverton, Maryland, 2006. http://dhsprogram.com/pubs/pdf/FR178/FR178.pdf."
+Kyrgyzstan,KGZ,0.052,2013,"National Statistical Committee of the Kyrgyz Republic (NSC), Ministry of Health [Kyrgyz Republic], and ICF International. Kyrgyz Republic Demographic and Health Survey 2012. Bishkek, Kyrgyz Republic, and Calverton, Maryland, USA, 2013. http://dhsprogram.com/pubs/pdf/FR283/FR283.pdf."
+Panama,PAN,0.00752520122528076,2013,"WHO. “Global Adult Tobacco Survey (GATS) Fact Sheet: Panama 2013.” WHO. Accessed June 30, 2014. http://www.who.int/tobacco/surveillance/survey/gats/pan_factsheet2013.pdf."
+Greece,GRC,0.002,2013,"WHO. “Global Adult Tobacco Survey Fact Sheet: Greece 2013.” WHO. Accessed June 30, 2014. http://www.who.int/tobacco/surveillance/survey/gats/grc.pdf."
+Indonesia,IDN,0.0434717953491211,2013,"WHO. “Global Adult Tobacco Survey Fact Sheet: Indonesia 2011.” WHO, 2011. http://www.who.int/tobacco/surveillance/survey/gats/indonesia_factsheet_8_february_2012.pdf."
+Qatar,QAT,0.00993990774154663,2013,"WHO. “Global Adult Tobacco Survey Fact Sheet: Qatar 2013,” 2013. http://dhsprogram.com/pubs/pdf/FR221/FR221%5B13Aug2012%5D.pdf."
+Australia,AUS,0.004,2013,"WHO. Australia WHO FCTC First Implementation Report, February 28, 2007. http://www.who.int/fctc/reporting/party_reports/aus/en/."
+Brazil,BRA,0.003,2013,"WHO. Global Adult Tobacco Survey  Brazil Report 2010. Rio de Janeiro, RJ, 2010. http://www.who.int/tobacco/surveillance/en_tfi_gats_2010_brazil.pdf."
+Mongolia,MNG,0.005,2013,"WHO. Mongolian STEPS Survey on the Prevalence of Non-Communicable Disease and Injury Risk Factors 2009, 2010. http://www.who.int/chp/steps/2009_STEPS_Report_Mongolia.pdf?ua=1."
+Switz.,CHE,0.027,2013,"WHO. WHO Report on the Global Tobacco Epidemic, 2013: Switzerland, 2013. http://www.who.int/tobacco/surveillance/policy/country_profile/che.pdf?ua=1."
+Chad,TCD,0.0350248139953613,2014,Chad DHS 2014
+Hungary,HUN,0.001,2014,European Health Interview Survey
+Kazakhstan,KAZ,0.013,2014,Global Adult Tobacco Survey
+Pakistan,PAK,0.077,2014,Global Adult Tobacco Survey
+Estonia,EST,0.028,2014,Health Behaviour among Estonian Adult Population
+Latvia,LVA,0,2014,Health Behaviour among Latvian Adult Population
+Finland,FIN,0.026,2014,Health Behaviour and Health among the Finnish Adult Population
+Cambodia,KHM,0.049,2014,National Adult Tobacco Survey of Cambodia
+Timor-Leste,TLS,0.198,2014,National survey for noncommunicable disease risk factors and injuries
+Saudi Arabia,SAU,0.009,2014,Saudi Health Information Survey
+Bhutan,BTN,0.197,2014,STEPS Survey
+Botswana,BWA,0.039,2014,STEPS Survey
+Kuwait,KWT,0.002,2014,STEPS Survey
+Myanmar,MMR,0.432,2014,STEPS Survey
+Swaziland,SWZ,0.022,2014,STEPS Survey
+Uzbekistan,UZB,0.12,2014,STEPS Survey
+Thailand,THA,0.033,2014,The Smoking and Drinking Behaviour Survey 
+Slovakia,SVK,0.013,2014,Tobacco and Health Education Survey
+Uganda,UGA,0.037,2014,Uganda NCD Risk Factors Survey
+Canada,CAN,0.004,2015,"Canadian Tobacco, Alcohol and Drugs Survey (CTADS)"
+Afghanistan,AFG,0.175099498519898,2015,Demographic and Health Survey
+Colombia,COL,0,2015,Demographic and Health Survey
+Costa Rica,CRI,0.001,2015,Global Adult Tobacco Survey
+Mexico,MEX,0.002,2015,Global Adult Tobacco Survey
+Philippines,PHL,0.017,2015,Global Adult Tobacco Survey
+Senegal,SEN,0.007,2015,Global Adult Tobacco Survey
+Guatemala,GTM,0.000975090408325196,2015,Guatemala DHS 2014-15
+Malawi,MWI,0.00350092353820801,2015,Malawi DHS 2015
+Iceland,ISL,0.051,2015,May - December Household Surveys done by Gallup
+Denmark,DNK,0.016,2015,Monitoring Smoking Habits in the Danish Population
+LAO PDR,LAO,0.043,2015,National Adult Tobacco Survey
+Malaysia,MYS,0.109,2015,National Health And Morbidity Survey
+United States of America,USA,0.022,2015,National Health Interview Survey (NHIS)
+Sweden,SWE,0.16,2015,National Survey of Public Health
+Austria,AUT,0.016,2015,Representative Survey on Substance Abuse
+Sri Lanka,LKA,0.158,2015,Sri Lanka 2015 STEPS Survey
+Norway,NOR,0.14,2015,Statistics Norway Smoking Habits Survey
+Benin,BEN,0.05,2015,STEPS Survey
+Ethiopia,ETH,0.008,2015,STEPS Survey
+Kenya,KEN,0.036,2015,STEPS Survey
+Czech Rep.,CZE,0.017,2015,The use of tobacco in the Czech Republic
+Iraq,IRQ,0.00151691940307617,2015,"WHO. Chronic Non-Communicable Diseases  Risk Factors Survey  In Iraq, 2006. http://www.who.int/chp/steps/IraqSTEPSReport2006.pdf?ua=1."
+Armenia,ARM,0.001030732421875,2016,Armenia DHS 2015-16
+Angola,AGO,0.0138962670898437,2016,Demographic and Health Survey
+India,IND,0.177532742500305,2016,India DHS 2015-16
+Nepal,NPL,0.215,2016,Nepal DHS 2016
+Togo,TGO,0.036,2011,"Ministère de la santé Togo, and Agoudavi k. Rapport Final de L’enquête STEPS Togo 2010, 2012. http://www.who.int/chp/steps/2010STEPS_Report_Togo_FR.pdf."
+Egypt,EGY,0.007,2012,"WHO. “Global Aldult Tobacco Survey (GATS) Fact Sheet: Egypt 2009,” 2009. http://www.who.int/tobacco/surveillance/gats_egypt_fact_sheet.pdf."
+Palau,PLW,0.63,2013,STEPS Survey
+Turkmenistan,TKM,0.014,2014,STEPS Survey
+Croatia,HRV,0.006,2015,European Health Interview Survey with TQS
+Brunei Dar.,BRN,0.018,2015,"Knowledge, Attitudes and Practices Survey on Noncommunicable Diseases"
+Poland,POL,0.01,2015,Nationwide Survey on Attitudes towards Tobacco Smoking
+Guinea-Bissau,GNB,,,
+Hong Kong,HKG,,,
+Isl. Rep. of Iran,IRN,,,
+Israel,ISR,,,
+Jamaica,JAM,,,
+Japan,JPN,,,
+Jordan,JOR,,,
+Kiribati,KIR,,,
+Lebanon,LBN,,,
+Mauritius,MUS,,,
+Monaco,MCO,,,
+Montenegro,MNE,,,
+Morocco,MAR,,,
+Nauru,NRU,,,
+New Zealand,NZL,,,
+Nicaragua,NIC,,,
+Oman,OMN,,,
+Papua New Guinea,PNG,,,
+Peru,PER,,,
+Rep. Korea,KOR,,,
+San Marino,SMR,,,
+Serbia ,SRB,,,
+Singapore,SGP,,,
+Solomon Islands,SLB,,,
+Somalia,SOM,,,
+St. Lucia,LCA,,,
+St. Vincent and the Grenadines,VCT,,,
+Suriname,SUR,,,
+Tonga,TON,,,
+Turkey,TUR,,,
+Tuvalu,TUV,,,
 UAE,ARE,,,
+Vanuatu,VUT,,,
+West Bank/Gaza Strip,PSE,,,
+Andorra,AND,,,
 Antigua and Barbuda,ATG,,,
 Bahrain,BHR,,,
-Bosnia and Herzegovina,BIH,,,
 Belarus,BLR,,,
 Belize,BLZ,,,
 Bolivia ,BOL,,,
+Bosnia and Herzegovina,BIH,,,
 Central African Rep.,CAF,,,
 Chile,CHL,,,
 Cook Islands,COK,,,
-Colombia,COL,,,
 Cuba,CUB,,,
 Cyprus,CYP,,,
 Djibouti,DJI,,,
 Dominica,DMA,,,
 Ecuador,ECU,,,
-Fiji,FJI,,,
-Guinea-Bissau,GNB,,,
-Guatemala,GTM,,,
-Hong Kong,HKG,,,
-Isl. Rep. of Iran,IRN,,,
-Israel,ISR,,,
-Jamaica,JAM,,,
-Jordan,JOR,,,
-Japan,JPN,,,
-Kiribati,KIR,,,
-Rep. Korea,KOR,,,
-Lebanon,LBN,,,
-St. Lucia,LCA,,,
-Morocco,MAR,,,
-Monaco,MCO,,,
-FYR Macedonia,MKD,,,
-Montenegro,MNE,,,
-Mauritius,MUS,,,
-Nicaragua,NIC,,,
-Nauru,NRU,,,
-New Zealand,NZL,,,
-Oman,OMN,,,
-Peru,PER,,,
-Papua New Guinea,PNG,,,
-West Bank/Gaza Strip,PSE,,,
-Singapore,SGP,,,
-Solomon Islands,SLB,,,
 El Salvador,SLV,,,
-San Marino,SMR,,,
-Somalia,SOM,,,
-Serbia ,SRB,,,
+Fiji,FJI,,,
+FYR Macedonia,MKD,,,
 S. Sudan,SSD,,,
-Suriname,SUR,,,
-Tonga,TON,,,
-Turkey,TUR,,,
-Tuvalu,TUV,,,
-St. Vincent and the Grenadines,VCT,,,
-Vanuatu,VUT,,,
-,,,,
-,,,,
-,,,,
-,,,,

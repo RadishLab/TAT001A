@@ -103,6 +103,8 @@ export default class WorldMap extends Visualization {
         if (this.colorScaleType && this.colorScaleType === 'ordinal') {
           return this.colorScale(value);
         }
+
+        if (value == null) return this.noDataColor;
         return this.colorScale(value / this.maxValue);
       }
       return this.noDataColor;

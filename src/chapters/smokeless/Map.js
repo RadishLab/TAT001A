@@ -1,6 +1,5 @@
-import { set } from 'd3-collection';
 import { csv } from 'd3-request';
-import { scaleOrdinal } from 'd3-scale';
+import { scaleLinear } from 'd3-scale';
 
 import { schemeCategoryProblemMap } from '../../colors';
 import WorldMap from '../../maps/WorldMap';
@@ -8,17 +7,24 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
-    this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
-    this.colorScaleType = 'ordinal';
-    this.valueField = 'Key Code';
+    this.colorScale = scaleLinear()
+      .domain([0, 1])
+      .range([
+        schemeCategoryProblemMap[0],
+        schemeCategoryProblemMap.slice(-1)[0],
+      ]);
+    this.valueField = 'TA6 Data';
   }
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('smokeless-map.csv'), (csvData) => {
-        const domain = set(csvData.map(d => d[this.valueField])).values().filter(d => d && d !== '').sort();
-        this.colorScale.domain(domain);
-        resolve(csvData);
+        const mappedData = csvData.map(d => {
+          const value = d[this.valueField] !== '' ? +d[this.valueField] : null;
+          d[this.valueField] = value;
+          return d;
+        });
+        resolve(mappedData);
       });
     });
   }
