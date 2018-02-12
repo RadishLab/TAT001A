@@ -1,4 +1,5 @@
 import { set } from 'd3-collection';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
@@ -37,5 +38,17 @@ export default class Map9 extends WorldMap {
       }
     });
     return countries;
+  }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    const valueFormat = format(',d');
+    if (d.properties.joined) {
+      content += `<div class="data">${valueFormat(d.properties.joined['Total economic cost (2016 PPP$ million)'])} ${this.getTranslation('million USD')}</div>`;
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+    }
+    return content;
   }
 }
