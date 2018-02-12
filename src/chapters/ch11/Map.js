@@ -11,6 +11,14 @@ export default class Map extends WorldMap {
     this.colorScale = scaleOrdinal(schemeCategorySolutionMap.reverse());
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
+
+    this.keyCodeMapping = {
+      '1': this.getTranslation('Data not reported'),
+      '2': this.getTranslation('None'),
+      '3': this.getTranslation('Nicotine replacement therapy and/or some cessation services (neither cost-covered)'),
+      '4': this.getTranslation('Nicotine replacement therapy and/or some cessation services (at least one cost-covered)'),
+      '5': this.getTranslation('National quit line, and both nicotine replacement therapy and some cessation services cost-covered')
+    };
   }
 
   loadJoinData() {
@@ -36,5 +44,16 @@ export default class Map extends WorldMap {
       }
     });
     return countries;
+  }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    if (d.properties.joined) {
+      content += `<div class="data">${this.keyCodeMapping[d.properties.joined[this.valueField]]}</div>`;
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+    }
+    return content;
   }
 }
