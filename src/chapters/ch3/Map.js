@@ -51,4 +51,20 @@ export default class Map extends WorldMap {
     });
     return country;
   }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    if (d.properties.joined) {
+      let label = this.getTranslation('bans on direct and indirect advertising');
+      const count = parseInt(d.properties.joined['TA6 Data'], 10);
+      if (count === 1) {
+        label = this.getTranslation('ban on direct and indirect advertising');
+      }
+      content += `<div class="data">${count} ${label}</div>`;
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+    }
+    return content;
+  }
 }
