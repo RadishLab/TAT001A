@@ -37,6 +37,7 @@ const FILES = {
   '8 Deaths/TA6 Deaths Inset 3-Attributable Deaths by Region.xlsx': '8-3.csv',
   '8 Deaths/TA6 Deaths Inset 4-Lung cancer & SES.xlsx': '8-4.csv',
   '8 Deaths/TA6 Deaths Map & Symbol.xlsx': '8-map.csv',
+  '8 Deaths/TA6 Deaths Online Only Map.xlsx': '8-map2.csv',
   '9 Societal Harms/TA6 Societal Inset1.xlsx': '9-1.csv',
   '9 Societal Harms/TA6 Societal Inset2 Jamaica.xlsx': '9-2.csv',
   '9 Societal Harms/TA6 Societal Inset3.xlsx': '9-3.csv',
