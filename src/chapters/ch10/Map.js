@@ -1,4 +1,5 @@
 import { set } from 'd3-collection';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
@@ -37,5 +38,17 @@ export default class Map extends WorldMap {
       }
     });
     return countries;
+  }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    const percentFormat = format('.1f');
+    if (d.properties.joined) {
+      content += `<div class="data">${percentFormat(d.properties.joined['Share of deaths due to NCDs (%)'])}% ${this.getTranslation('of deaths to do NCDs')}</div>`;
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+    }
+    return content;
   }
 }
