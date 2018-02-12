@@ -34,4 +34,14 @@ export default class Map extends WorldMap {
     });
     return countries;
   }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let status = this.getTranslation('none');
+    if (d.properties.joined) {
+      status = d.properties.joined['Prevent20 Status (Members = #fc0d1b; Friends = #fd9426)'].toLowerCase();
+    }
+    content += `<div class="data">${this.getTranslation('Prevent20 status')}: ${status}</div>`;
+    return content;
+  }
 }
