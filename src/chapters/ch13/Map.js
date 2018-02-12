@@ -35,4 +35,15 @@ export default class Map extends WorldMap {
     });
     return countries;
   }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    if (d.properties.joined && d.properties.joined[this.valueField]) {
+      content += `<div class="data">${this.getTranslation('Has highest level of smoke-free legisation')}</div>`;
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('Does not have highest level of smoke-free legisation')}</div>`;
+    }
+    return content;
+  }
 }
