@@ -37,4 +37,15 @@ export default class Map3a extends EuropeMap {
     });
     return countries;
   }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    if (d.properties.joined) {
+      content += `<div class="data">${d.properties.joined[this.valueField]}% ${this.getTranslation('prevalance of secondhand exposure in bars')}</div>`;
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+    }
+    return content;
+  }
 }
