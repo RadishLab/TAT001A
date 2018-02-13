@@ -12,15 +12,6 @@ export default class Visualization {
       this.parent
         .attr('preserveAspectRatio', 'xMinYMin meet')
         .attr('viewBox', `0 0 ${this.width} ${this.height}`);
-
-      // Cribbed from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js#25978286
-
-      this.parentContainer
-        .style('padding-bottom', (d) => {
-          // TODO handle when width not set as %
-          const paddingBottom = parseFloat(this.parentContainer.style('width'), 10) * (options.aspect[1] / options.aspect[0]) + '%';
-          return paddingBottom;
-        });
     }
     else {
       this.parent
