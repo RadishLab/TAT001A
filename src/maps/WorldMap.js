@@ -66,6 +66,19 @@ export default class WorldMap extends Visualization {
     return feature.properties.ADM0_A3;
   }
 
+  countryFill(d) {
+    if (d.properties.joined) {
+      const value = d.properties.joined[this.valueField];
+      if (this.colorScaleType && this.colorScaleType === 'ordinal') {
+        return this.colorScale(value);
+      }
+
+      if (value == null) return this.noDataColor;
+      return this.colorScale(value / this.maxValue);
+    }
+    return this.noDataColor;
+  }
+
   renderPaths() {
     const smallCountryThreshold = 20000;
 
@@ -98,26 +111,13 @@ export default class WorldMap extends Visualization {
         }
       });
 
-    const fill = (d => {
-      if (d.properties.joined) {
-        const value = d.properties.joined[this.valueField];
-        if (this.colorScaleType && this.colorScaleType === 'ordinal') {
-          return this.colorScale(value);
-        }
-
-        if (value == null) return this.noDataColor;
-        return this.colorScale(value / this.maxValue);
-      }
-      return this.noDataColor;
-    });
-
     let largeCountries = country.filter(d => d.properties.areakm >= smallCountryThreshold);
     if (largeCountries.empty()) {
       largeCountries = country;
     }
     largeCountries.append('path')
       .classed('country-fill', true)
-      .style('fill', fill)
+      .style('fill', this.countryFill.bind(this))
       .attr('d', d => this.path(d));
 
     largeCountries.append('path')
@@ -128,7 +128,7 @@ export default class WorldMap extends Visualization {
     const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold);
     smallCountries.append('circle')
       .classed('country-fill', true)
-      .style('fill', fill)
+      .style('fill', this.countryFill.bind(this))
       .attr('r', 1)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
@@ -164,7 +164,7 @@ export default class WorldMap extends Visualization {
     if (!this.legend) return;
 
     const legendWidth = this.width / 7;
-    const legendHeight = 15;
+    const legendHeight = 18;
     const legendPadding = 3;
     const legendItemList = this.getLegendItems();
     const legendItemCount = legendItemList.length;
@@ -193,7 +193,7 @@ export default class WorldMap extends Visualization {
 
     legendItems.append('text')
       .attr('x', 4)
-      .attr('y', 11)
+      .attr('y', 15)
       .text(d => d[1]);
   }
 

@@ -21,6 +21,7 @@
     "lodash.isdate": "^4.0.1",
     "lodash.isnumber": "^3.0.3",
     "lodash.isstring": "^4.0.1",
+    "nouislider": "^11.0.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "^1.0.14",

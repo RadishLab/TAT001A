@@ -1,6 +1,7 @@
 .ta-visualization-filters {
   color: $text-color;
-  font-size: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: $font-size;
   margin-left: 5%;
 
   .filter-button-group {
@@ -35,5 +36,9 @@
       background: #a7a7a7;
       color: black;
     }
+  }
+
+  .filter-year {
+    max-width: 400px;
   }
 }
