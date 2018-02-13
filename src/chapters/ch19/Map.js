@@ -1,3 +1,4 @@
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear } from 'd3-scale';
 
@@ -12,8 +13,8 @@ export default class Map extends WorldMap {
     this.colorScale = scaleLinear()
       .domain([0, 1])
       .range([
-        schemeCategorySolutionMap.slice(-1)[0],
         schemeCategorySolutionMap[0],
+        schemeCategorySolutionMap.slice(-1)[0],
       ]);
   }
 
@@ -37,5 +38,25 @@ export default class Map extends WorldMap {
       }
     });
     return countries;
+  }
+
+  percentChangeText(d) {
+    if (!d || d === 'n/a') return this.getTranslation('unknown');
+    const percent = parseFloat(d, 10);
+    return `${format('+.1f')(percent)}%`;
+  }
+
+  tooltipContent(d) {
+    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    const powerScoreFormat = d => format('.1f')(parseFloat(d, 10));
+    if (d.properties.joined) {
+      content += `<div class="data">${this.getTranslation('Average POWER score')}: ${powerScoreFormat(d.properties.joined['Average score for POWER'])}</div>`;
+      content += `<div class="data">${this.getTranslation('Smoking prevalence change (2005 - 2015)')}: ${this.percentChangeText(d.properties.joined['Smoking Prevalence Change (2005 - 2015, Age 15+) '])}</div>`;
+      content += `<div class="data">${this.getTranslation('Number of policies at highest level')}: ${d.properties.joined['Number of Policies at Highest Level']}</div>`;
+    }
+    else {
+      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+    }
+    return content;
   }
 }
