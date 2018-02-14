@@ -26,7 +26,7 @@ export default class Chart extends Visualization {
     this.loadData()
       .then(data => this.data = data)
       .then(this.onDataLoaded.bind(this));
-    this.legendYOffset = 40;
+    this.legendYOffset = this.options.web ? 50 : 40;
     this.yLabelOffset = 0;
   }
 
@@ -202,7 +202,9 @@ export default class Chart extends Visualization {
         return `translate(${xOffset}, ${yOffset})`;
       });
 
-    const lineWidth = 10;
+    const legendHeight = this.options.web ? 20 : 8;
+    const lineWidth = this.options.web ? 20 : 10;
+    const linePadding = this.options.web ? 5 : 2.5;
     let xOffset = 0,
       yOffset = 0;
 
@@ -211,11 +213,11 @@ export default class Chart extends Visualization {
         .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
         .text(label)
-        .attr('transform', `translate(${lineWidth + 2.5}, 0)`);
+        .attr('transform', `translate(${lineWidth + linePadding}, 0)`);
       legendItem.append('path')
         .datum([[0, 0], [lineWidth, 0]])
         .style('stroke', this.colors(value))
-        .attr('transform', 'translate(0, -2)')
+        .attr('transform', `translate(0, -${legendHeight / 4})`)
         .attr('d', d => legendLine(d));
 
       if (this.legendOrientation() === 'horizontal') {
