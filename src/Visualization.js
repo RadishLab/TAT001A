@@ -3,6 +3,7 @@ import i18next from 'i18next';
 
 export default class Visualization {
   constructor(parent, options) {
+    this.options = options;
     this.width = options.width;
     this.height = options.height;
     this.parent = select(parent);

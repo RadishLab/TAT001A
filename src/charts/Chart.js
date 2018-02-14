@@ -35,7 +35,7 @@ export default class Chart extends Visualization {
       top: 0,
       right: 0,
       bottom: this.legendOrientation() === 'horizontal' ? 40 : 60,
-      left: 40
+      left: this.options.web ? 60 : 40
     };
   }
 
@@ -110,7 +110,7 @@ export default class Chart extends Visualization {
     if (typeof this.yLabel === 'string') {
       axisGroup.append('text')
         .classed('axis-title', true)
-        .attr('transform', `translate(-25, ${(this.chartHeight / 2) + this.yLabelOffset}) rotate(-90)`)
+        .attr('transform', `translate(${-(this.margin.left - 15)}, ${(this.chartHeight / 2) + this.yLabelOffset}) rotate(-90)`)
         .text(this.yLabel);
     }
     else if (Array.isArray(this.yLabel) && this.yLabel.length === 2) {

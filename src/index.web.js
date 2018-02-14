@@ -23,7 +23,7 @@ function initializeTranslations() {
 }
 
 function createOptions(containerNode) {
-  const options = {};
+  const options = { web: true };
 
   // Collect data- attributes
   const containerDataset = containerNode.dataset;
