@@ -1,6 +1,6 @@
 .ta-visualization {
   .line-chart .line {
     fill: none;
-    stroke-width: 1.5;
+    stroke-width: $line-chart-line-stroke-width;
   }
 }

@@ -294,6 +294,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .ta-visualization .tick {
   color: #585857; }
+  .ta-visualization .tick text {
+    font-weight: normal; }
   .ta-visualization .tick.date {
     color: #585857; }
     .ta-visualization .tick.date text {
@@ -372,6 +374,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .ta-visualization-filters {
   color: #585857;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 6px;
   margin-left: 5%; }
   .ta-visualization-filters .filter-button-group {
@@ -403,7 +406,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   background: white;
   border: 1px solid lightgray;
   display: none;
-  font-size: 10px;
+  font-size: 6px;
   padding: 3px;
   position: absolute;
   max-width: 250px; }

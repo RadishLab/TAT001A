@@ -294,6 +294,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .ta-visualization .tick {
   color: #585857; }
+  .ta-visualization .tick text {
+    font-weight: bold; }
   .ta-visualization .tick.date {
     color: #585857; }
     .ta-visualization .tick.date text {
@@ -365,7 +367,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .ta-visualization .line-chart .line {
   fill: none;
-  stroke-width: 1.5; }
+  stroke-width: 2.5px; }
 
 .world-map .legend text {
   fill: #2d2d2d; }

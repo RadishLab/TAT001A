@@ -2,6 +2,10 @@
   .tick {
     color: $text-color;
 
+    text {
+      font-weight: $tick-font-weight;
+    }
+
     &.date {
       color: $tick-text-color;
 
