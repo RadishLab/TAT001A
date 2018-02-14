@@ -27,7 +27,7 @@ export default class Chart1 extends LineChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 40 : 65;
+    margin.bottom = this.legendOrientation() !== 'horizontal' ? 65 : margin.bottom;
     return margin;
   }
 

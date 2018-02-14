@@ -26,16 +26,29 @@ export default class Chart extends Visualization {
     this.loadData()
       .then(data => this.data = data)
       .then(this.onDataLoaded.bind(this));
-    this.legendYOffset = this.options.web ? 50 : 40;
+    this.legendYOffset = this.options.web ? 85 : 40;
     this.yLabelOffset = 0;
   }
 
   createMargin() {
+    let bottom = 40;
+    if (this.options.web) {
+      if (this.legendOrientation() === 'horizontal') {
+        bottom = 80;
+      }
+      else {
+        bottom = 120;
+      }
+    }
+    else if (this.legendOrientation() === 'horizontal') {
+      bottom = 60;
+    }
+
     return {
       top: 0,
       right: 0,
-      bottom: this.legendOrientation() === 'horizontal' ? 40 : 60,
-      left: this.options.web ? 60 : 40
+      left: this.options.web ? 60 : 40,
+      bottom
     };
   }
 
@@ -72,6 +85,7 @@ export default class Chart extends Visualization {
       .attr('transform', `translate(0, ${this.chartHeight})`)
       .call(xAxis);
 
+    const tickMarginTop = this.options.web ? 20 : 2.5;
     this.parent.select('.axis-x .domain');
     this.parent.select('.axis-x').selectAll('.tick')
       .attr('transform', (d, e) => {
@@ -79,7 +93,7 @@ export default class Chart extends Visualization {
         if (this.x.bandwidth) {
           x += (this.x.bandwidth() / 2);
         }
-        return `translate(${x}, 2.5)`;
+        return `translate(${x}, ${tickMarginTop})`;
       })
       .classed('date', d => isDate(d))
       .classed('number', d => isNumber(d))
@@ -93,7 +107,7 @@ export default class Chart extends Visualization {
     }
 
     if (this.xLabel) {
-      let xAxisHeight = this.parent.select('.axis-x').node().getBBox().height + 10;
+      let xAxisHeight = this.parent.select('.axis-x').node().getBBox().height + (this.options.web ? 25 : 10);
       xAxisGroup.append('text')
         .classed('axis-title', true)
         .text(this.xLabel)
