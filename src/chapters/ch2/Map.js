@@ -18,4 +18,11 @@ export default class Map extends PointMap {
       });
     });
   }
+
+  tooltipContent(d) {
+    let content = `<div class="header">${d.Company}</div>`;
+    content += `<div class="data">${this.getTranslation('Products')}: ${d.Products}</div>`;
+    content += `<div class="data">${this.getTranslation('City')}: ${d.City}</div>`;
+    return content;
+  }
 }

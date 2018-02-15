@@ -1,6 +1,7 @@
 import { geoPath } from 'd3-geo';
 import { geoGinzburg5 } from 'd3-geo-projection';
 import { json as d3json } from 'd3-request';
+import { event as currentEvent } from 'd3-selection';
 import * as topojson from 'topojson-client';
 
 import { mapNoData } from '../colors';
@@ -21,6 +22,9 @@ export default class PointMap extends Visualization {
         this.pointData = pointData;
         this.render();
       });
+
+    this.tooltip
+      .classed('tooltip-point', true);
   }
 
   loadCountries() {
@@ -52,7 +56,16 @@ export default class PointMap extends Visualization {
     point.append('circle')
       .style('fill', d => this.colorScale(d[this.categoryField]))
       .attr('r', this.options.web ? 7 : 3)
-      .attr("transform", d => `translate(${this.projection([d.Longitude, d.Latitude])})`);
+      .attr("transform", d => `translate(${this.projection([d.Longitude, d.Latitude])})`)
+      .on('mouseover', (d) => {
+        if (this.tooltipContent) {
+          this.tooltip
+            .html(this.tooltipContent(d))
+            .classed('visible', true)
+            .style('top', `${currentEvent.layerY + 10}px`)
+            .style('left', `${currentEvent.layerX + 10}px`);
+        }
+      });
   }
 
   render() {
