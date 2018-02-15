@@ -28,9 +28,10 @@ export default class Chart4 extends Chart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.left = 80;
+    margin.left = this.options.web ? 180 : 80;
     margin.top = 10;
     margin.bottom = this.legendOrientation() === 'horizontal' ? 30 : 40;
+    if (this.options.web) margin.bottom = 75;
     return margin;
   }
 
@@ -78,7 +79,7 @@ export default class Chart4 extends Chart {
         min(values.concat(0)),
         max(values)
       ])
-      .range([1, 15]);
+      .range(this.options.web ? [5, 25] : [1, 15]);
   }
 
   createColorScale() {
@@ -93,6 +94,7 @@ export default class Chart4 extends Chart {
     circleGroups.append('circle')
       .attr('fill', 'none')
       .attr('stroke', d => this.colors(d.when))
+      .attr('stroke-width', 2)
       .attr('cx', d => this.x(`${d.where}-${d.season}`))
       .attr('cy', d => this.y(d.crop))
       .attr('r', d => {
@@ -120,16 +122,12 @@ export default class Chart4 extends Chart {
   renderYLabel(axisGroup) {
     axisGroup.append('text')
       .classed('axis-title', true)
-      .attr('transform', `translate(-${(this.margin.left - 6)}, ${this.chartHeight / 2}) rotate(-90)`)
+      .attr('transform', `translate(-${(this.margin.left - (this.options.web ? 16 : 6))}, ${this.chartHeight / 2}) rotate(-90)`)
       .text(this.yLabel);
   }
 
   render() {
     super.render();
     this.renderCircles();
-
-    let xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().height + 20;
-    this.parent.select('.axis-x .axis-title')
-      .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
   }
 }
