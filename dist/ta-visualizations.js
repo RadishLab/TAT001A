@@ -2628,8 +2628,11 @@ var Chart = function (_Visualization) {
       }
 
       if (this.xLabel) {
-        var xAxisHeight = this.parent.select('.axis-x').node().getBBox().height + (this.options.web ? 25 : 10);
-        xAxisGroup.append('text').classed('axis-title', true).text(this.xLabel).attr('transform', 'translate(' + this.chartWidth / 2 + ', ' + xAxisHeight + ')');
+        var yOffset = this.parent.select('.axis-x').node().getBBox().height;
+        yOffset += this.options.web ? 25 : 10;
+        xAxisGroup.append('text').classed('axis-title', true).text(this.xLabel).attr('transform', function () {
+          return 'translate(' + _this2.chartWidth / 2 + ', ' + yOffset + ')';
+        });
       }
     }
   }, {
@@ -19924,9 +19927,10 @@ var Chart4 = function (_Chart) {
     key: 'createMargin',
     value: function createMargin() {
       var margin = _get(Chart4.prototype.__proto__ || Object.getPrototypeOf(Chart4.prototype), 'createMargin', this).call(this);
-      margin.left = 80;
+      margin.left = this.options.web ? 180 : 80;
       margin.top = 10;
       margin.bottom = this.legendOrientation() === 'horizontal' ? 30 : 40;
+      if (this.options.web) margin.bottom = 75;
       return margin;
     }
   }, {
@@ -19977,7 +19981,7 @@ var Chart4 = function (_Chart) {
       var values = this.data.map(function (d) {
         return d.sales;
       });
-      return (0, _d3Scale.scaleLinear)().domain([(0, _d3Array.min)(values.concat(0)), (0, _d3Array.max)(values)]).range([1, 15]);
+      return (0, _d3Scale.scaleLinear)().domain([(0, _d3Array.min)(values.concat(0)), (0, _d3Array.max)(values)]).range(this.options.web ? [5, 25] : [1, 15]);
     }
   }, {
     key: 'createColorScale',
@@ -19993,7 +19997,7 @@ var Chart4 = function (_Chart) {
 
       circleGroups.append('circle').attr('fill', 'none').attr('stroke', function (d) {
         return _this3.colors(d.when);
-      }).attr('cx', function (d) {
+      }).attr('stroke-width', 2).attr('cx', function (d) {
         return _this3.x(d.where + '-' + d.season);
       }).attr('cy', function (d) {
         return _this3.y(d.crop);
@@ -20026,16 +20030,13 @@ var Chart4 = function (_Chart) {
   }, {
     key: 'renderYLabel',
     value: function renderYLabel(axisGroup) {
-      axisGroup.append('text').classed('axis-title', true).attr('transform', 'translate(-' + (this.margin.left - 6) + ', ' + this.chartHeight / 2 + ') rotate(-90)').text(this.yLabel);
+      axisGroup.append('text').classed('axis-title', true).attr('transform', 'translate(-' + (this.margin.left - (this.options.web ? 16 : 6)) + ', ' + this.chartHeight / 2 + ') rotate(-90)').text(this.yLabel);
     }
   }, {
     key: 'render',
     value: function render() {
       _get(Chart4.prototype.__proto__ || Object.getPrototypeOf(Chart4.prototype), 'render', this).call(this);
       this.renderCircles();
-
-      var xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().height + 20;
-      this.parent.select('.axis-x .axis-title').attr('transform', 'translate(' + this.chartWidth / 2 + ', ' + xAxisHeight + ')');
     }
   }]);
 

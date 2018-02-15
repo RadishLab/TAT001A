@@ -39,7 +39,7 @@
     "gather-data": "babel-node scripts/gatherdata.js",
     "build-css-standalone": "node-sass-chokidar --include-path ./node_modules ./src/styles/index.standalone.scss ./public/ta-visualizations.css",
     "build-standalone": "npm run build-css-standalone && webpack",
-    "build-js-standalone-watch": "webpack --watch --progress",
+    "build-js-standalone-watch": "webpack --config=webpack.dev.config.js --watch --progress",
     "build-css-standalone-watch": "node-sass-chokidar --include-path ./node_modules ./src/styles/index.standalone.scss ./public/ta-visualizations.css --watch --recursive",
     "build-standalone-watch": "npm-run-all -p build-css-standalone-watch build-js-standalone-watch"
   },

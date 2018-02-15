@@ -107,11 +107,12 @@ export default class Chart extends Visualization {
     }
 
     if (this.xLabel) {
-      let xAxisHeight = this.parent.select('.axis-x').node().getBBox().height + (this.options.web ? 25 : 10);
+      let yOffset = this.parent.select('.axis-x').node().getBBox().height;
+      yOffset += (this.options.web ? 25 : 10);
       xAxisGroup.append('text')
         .classed('axis-title', true)
         .text(this.xLabel)
-        .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
+        .attr('transform', () => `translate(${this.chartWidth / 2}, ${yOffset})`);
     }
   }
 
