@@ -367,7 +367,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .ta-visualization .line-chart .line {
   fill: none;
-  stroke-width: 1.5; }
+  stroke-width: 1.5px; }
 
 .world-map .legend text {
   fill: #2d2d2d; }

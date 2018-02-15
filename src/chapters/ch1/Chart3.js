@@ -25,7 +25,8 @@ export default class Chart3 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 50;
+    margin.bottom = this.options.web ? 85 : 45;
+    if (this.options.web) margin.left = 80;
     return margin;
   }
 
@@ -59,11 +60,11 @@ export default class Chart3 extends BarChart {
       .classed('legend', true)
       .attr('transform', () => {
         let xOffset = 15;
-        let yOffset = this.chartHeight + 25;
+        let yOffset = this.chartHeight + 60;
         return `translate(${xOffset}, ${yOffset})`;
       });
 
-    const lineWidth = 10;
+    const lineWidth = this.options.web ? 20 : 10;
 
     let xOffset = 0,
       yOffset = 0;
@@ -81,24 +82,28 @@ export default class Chart3 extends BarChart {
 
     yOffset += legendItem.node().getBBox().height + 1;
 
-    legendLeftItems.forEach(({ label, value }) => {
-      legendItem = legendLeft.append('g')
+    const appendLegendItem = (container, label, value) => {
+      const legendItem = container.append('g')
         .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
         .text(label)
         .attr('transform', `translate(${lineWidth + 2.5}, 0)`);
+
+      const legendItemHeight = legendItem.node().getBBox().height;
       legendItem.append('path')
         .datum([[0, 0], [lineWidth, 0]])
         .style('stroke', this.colors(value))
-        .attr('transform', 'translate(0, -2)')
+        .attr('transform', `translate(0, -${legendItemHeight / 3})`)
         .attr('d', d => legendLine(d));
       yOffset += legendItem.node().getBBox().height + 1;
-    });
+    };
+
+    legendLeftItems.forEach(({ label, value }) => appendLegendItem(legendLeft, label, value));
 
     xOffset = 0;
     yOffset = 0;
     const legendRight = legend.append('g')
-      .attr('transform', 'translate(70, 0)');
+      .attr('transform', `translate(${legendLeft.node().getBBox().width + 10}, 0)`);
     const legendRightItems = [];
     legendRightItems.push(this.legendItems[1]);
     legendRightItems.push(this.legendItems[3]);
@@ -111,20 +116,7 @@ export default class Chart3 extends BarChart {
 
     yOffset += legendItem.node().getBBox().height + 1;
 
-    legendRightItems.forEach(({ label, value }) => {
-      legendItem = legendRight.append('g')
-        .attr('transform', `translate(${xOffset}, ${yOffset})`);
-      legendItem.append('text')
-        .text(label)
-        .attr('transform', `translate(${lineWidth + 2.5}, 0)`);
-      legendItem.append('path')
-        .datum([[0, 0], [lineWidth, 0]])
-        .style('stroke', this.colors(value))
-        .attr('transform', 'translate(0, -2)')
-        .attr('d', d => legendLine(d));
-      yOffset += legendItem.node().getBBox().height + 1;
-    });
-
+    legendRightItems.forEach(({ label, value }) => appendLegendItem(legendRight, label, value));
   }
 
   renderBars() {
