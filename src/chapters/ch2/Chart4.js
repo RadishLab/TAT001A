@@ -25,7 +25,7 @@ export default class Chart4 extends LineChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.right = 30;
+    margin.right = this.options.web ? 60 : 40;
     return margin;
   }
 

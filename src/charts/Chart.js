@@ -169,7 +169,10 @@ export default class Chart extends Visualization {
       .call(yAxis)
       .append('text')
         .classed('axis-title', true)
-        .attr('transform', `translate(27, ${this.chartHeight / 2}) rotate(-90)`)
+        .attr('transform', () => {
+          const yAxisWidth = yAxisGroup.node().getBBox().width;
+          return `translate(${yAxisWidth + 10}, ${this.chartHeight / 2}) rotate(-90)`;
+        })
         .text(this.yLabelRight);
   }
 
