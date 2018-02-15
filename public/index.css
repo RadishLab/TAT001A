@@ -406,6 +406,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   background: white;
   border: 1px solid lightgray;
   display: none;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 6px;
   padding: 3px;
   position: absolute;
@@ -413,4 +414,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   .ta-visualization-tooltip.visible {
     display: block; }
   .ta-visualization-tooltip.tooltip-country .country-name {
+    font-weight: bold; }
+  .ta-visualization-tooltip.tooltip-point .header {
     font-weight: bold; }
