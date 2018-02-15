@@ -23,7 +23,7 @@ export default class Chart1 extends LineChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.right = 10;
+    margin.right = this.options.web ? 20 : 10;
     return margin;
   }
 
