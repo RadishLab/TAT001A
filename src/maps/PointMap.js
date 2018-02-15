@@ -51,14 +51,15 @@ export default class PointMap extends Visualization {
         .classed('point', true);
     point.append('circle')
       .style('fill', d => this.colorScale(d[this.categoryField]))
-      .attr('r', 3)
+      .attr('r', this.options.web ? 7 : 3)
       .attr("transform", d => `translate(${this.projection([d.Longitude, d.Latitude])})`);
   }
 
   render() {
+    const parentRect = this.parent.node().getBoundingClientRect();
     this.projection.fitExtent([
       [0, 0],
-      [this.parent.node().clientWidth, this.parent.node().clientHeight]
+      [parentRect.width, parentRect.height]
     ], this.countriesGeojson);
 
     this.renderPaths();
