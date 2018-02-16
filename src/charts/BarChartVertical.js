@@ -31,16 +31,6 @@ export default class BarChartVertical extends Chart {
     this.renderXGuidelines();
   }
 
-  renderLegend() {
-    super.renderLegend();
-    this.parent.select('.legend')
-      .attr('transform', () => {
-        const xOffset = 5;
-        const yOffset = this.chartHeight + 25;
-        return `translate(${xOffset}, ${yOffset})`;
-      });
-  }
-
   render() {
     super.render();
     this.renderBars();
