@@ -26,8 +26,11 @@ export default class Chart4 extends LineChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.right = 30;
+    margin.right = this.options.web ? 60 : 30;
     margin.bottom = this.legendOrientation() === 'horizontal' ? 42 : 60;
+    if (this.options.web) {
+      margin.bottom = 80;
+    }
     return margin;
   }
 
