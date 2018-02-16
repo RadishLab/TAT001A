@@ -49,7 +49,8 @@ export default class Chart3 extends BarChart {
   createMargin() {
     const margin = super.createMargin();
     margin.bottom = this.legendOrientation() === 'horizontal' ? 32 : 40;
-    margin.right = 30;
+    if (this.options.web) margin.bottom = 65;
+    margin.right = this.options.web ? 60 : 30;
     margin.top = 10;
     return margin;
   }
@@ -113,6 +114,7 @@ export default class Chart3 extends BarChart {
 
     lineSelection.append('path')
       .style('stroke', this.colors('countries'))
+      .style('stroke-width', 2)
       .style('fill', 'none')
       .attr('d', d => lineCreator(d));
   }
