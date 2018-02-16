@@ -13,6 +13,7 @@ export default class Map9 extends WorldMap {
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
     this.symbolField = 'Symbol (Total economic cost>10000 PPP$ million)';
+    this.keyCodeReversed = true;
   }
 
   loadJoinData() {

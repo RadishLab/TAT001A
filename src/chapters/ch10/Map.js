@@ -9,10 +9,11 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
-    this.colorScale = scaleOrdinal(schemeCategorySolutionMap.reverse());
+    this.colorScale = scaleOrdinal(schemeCategorySolutionMap);
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
     this.symbolField = 'Symbol';
+    this.keyCodeReversed = true;
   }
 
   loadJoinData() {
@@ -23,7 +24,7 @@ export default class Map extends WorldMap {
           return d;
         });
         const filteredData = mappedData.filter(d => d[this.valueField] !== '');
-        const domain = set(filteredData.map(d => d[this.valueField])).values().sort();
+        const domain = set(filteredData.map(d => d[this.valueField])).values().sort().reverse();
         this.colorScale.domain(domain);
         resolve(filteredData);
       });
@@ -44,7 +45,7 @@ export default class Map extends WorldMap {
     let content = `<div class="country-name">${d.properties.NAME}</div>`;
     const percentFormat = format('.1f');
     if (d.properties.joined) {
-      content += `<div class="data">${percentFormat(d.properties.joined['Share of deaths due to NCDs (%)'])}% ${this.getTranslation('of deaths to do NCDs')}</div>`;
+      content += `<div class="data">${percentFormat(d.properties.joined['Share of deaths due to NCDs (%)'])}% ${this.getTranslation('of deaths due to NCDs')}</div>`;
     }
     else {
       content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;

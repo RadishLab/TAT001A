@@ -14,6 +14,7 @@ export default class WorldMap extends Visualization {
   constructor(parent, options) {
     super(parent, options);
     this.legend = options.legend;
+    console.log('this.legend', this.legend);
     this.parent.classed('world-map', true);
     this.parent
       .append('defs')
@@ -155,7 +156,9 @@ export default class WorldMap extends Visualization {
   }
 
   getLegendItems() {
-    const legendItemList = Object.entries(this.legend);
+    const legendItemList = this.keyCodeReversed ?
+      Object.entries(this.legend).reverse() :
+      Object.entries(this.legend);
     legendItemList.unshift([ null, this.getTranslation('No data') ]);
     return legendItemList;
   }
@@ -176,10 +179,8 @@ export default class WorldMap extends Visualization {
     const legendItems = this.legendGroup.selectAll('rect')
       .data(legendItemList)
       .enter().append('g')
-      .attr('transform', d => {
-        const keyCode = d[0];
-        const position = keyCode ? parseInt(keyCode, 10) : 0;
-        const y = (legendHeight + legendPadding) * (legendItemCount - position);
+      .attr('transform', (d, i) => {
+        const y = (legendHeight + legendPadding) * (legendItemCount - i);
         return `translate(0, ${y})`;
       });
 
