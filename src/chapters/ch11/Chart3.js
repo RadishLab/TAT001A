@@ -26,6 +26,11 @@ export default class Chart3 extends Chart {
     margin.top = 15;
     margin.left = 35;
     margin.bottom = this.legendOrientation() === 'horizontal' ? 30 : 40;
+    if (this.options.web) {
+      margin.top = 25;
+      margin.left = 65;
+      margin.bottom = 50;
+    }
     return margin;
   }
 
@@ -82,9 +87,10 @@ export default class Chart3 extends Chart {
     circleGroups.append('circle')
       .attr('fill', 'none')
       .attr('stroke', d => this.colors(1))
+      .attr('stroke-width', 2)
       .attr('cx', d => this.x(d.age))
       .attr('cy', d => this.y(d.value))
-      .attr('r', 10);
+      .attr('r', 20);
   }
 
   renderGuidelines() {
@@ -94,9 +100,5 @@ export default class Chart3 extends Chart {
   render() {
     super.render();
     this.renderCircles();
-
-    let xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().height + 20;
-    this.parent.select('.axis-x .axis-title')
-      .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
   }
 }

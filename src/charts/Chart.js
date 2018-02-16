@@ -133,12 +133,12 @@ export default class Chart extends Visualization {
         .append('text')
           .classed('axis-title', true)
           .text(this.yLabel[0])
-          .attr('transform', `translate(-${(this.margin.left - 6)}, ${this.chartHeight / 2}) rotate(-90)`);
+          .attr('transform', `translate(-${(this.margin.left - (this.options.web ? 15 : 6))}, ${this.chartHeight / 2}) rotate(-90)`);
       axisGroup
         .append('text')
           .classed('axis-title', true)
           .text(this.yLabel[1])
-          .attr('transform', `translate(-${(this.margin.left - 13)}, ${this.chartHeight / 2}) rotate(-90)`);
+          .attr('transform', `translate(-${(this.margin.left - (this.options.web ? 30 : 13))}, ${this.chartHeight / 2}) rotate(-90)`);
     }
   }
 
