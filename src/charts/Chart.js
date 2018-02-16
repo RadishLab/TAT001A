@@ -171,7 +171,7 @@ export default class Chart extends Visualization {
         .classed('axis-title', true)
         .attr('transform', () => {
           const yAxisWidth = yAxisGroup.node().getBBox().width;
-          return `translate(${yAxisWidth + 10}, ${this.chartHeight / 2}) rotate(-90)`;
+          return `translate(${yAxisWidth + (this.options.web ? 16 : 10)}, ${this.chartHeight / 2}) rotate(-90)`;
         })
         .text(this.yLabelRight);
   }

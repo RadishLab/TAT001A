@@ -24,13 +24,13 @@ export class Chart2 extends LineChart {
       { label: this.getTranslation('Female'), value: 'female' },
     ];
     this.yAxisTickFormat = d => format('d')(d * 100);
-    this.legendYOffset = 35;
+    this.legendYOffset = 90;
   }
 
   createMargin() {
     const margin = super.createMargin();
-    margin.right = 30;
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 50 : 50;
+    margin.right = this.options.web ? 60 : 40;
+    margin.bottom = this.options.web ? 115 : 50;
     margin.top = 2;
     return margin;
   }
@@ -52,7 +52,7 @@ export class Chart2 extends LineChart {
         return `translate(${xOffset}, ${yOffset})`;
       });
 
-    const lineWidth = 10;
+    const lineWidth = this.options.web ? 20 : 10;
 
     let xOffset = 0,
       yOffset = 0;
@@ -76,10 +76,12 @@ export class Chart2 extends LineChart {
       legendItem.append('text')
         .text(label)
         .attr('transform', `translate(${lineWidth + 2.5}, 0)`);
+      const legendItemHeight = legendItem.node().getBBox().height;
       legendItem.append('path')
         .datum([[0, 0], [lineWidth, 0]])
         .style('stroke', this.colors(value))
         .attr('transform', 'translate(0, -2)')
+        .attr('transform', `translate(0, -${legendItemHeight / 3})`)
         .attr('d', d => legendLine(d));
       yOffset += legendItem.node().getBBox().height + 1;
     });
@@ -87,7 +89,7 @@ export class Chart2 extends LineChart {
     xOffset = 0;
     yOffset = 0;
     const legendRight = legend.append('g')
-      .attr('transform', 'translate(75, 0)');
+      .attr('transform', `translate(${legendLeft.node().getBBox().width + 10}, 0)`);
     const legendRightItems = [];
     legendRightItems.push(this.legendItems[1]);
     legendRightItems.push(this.legendItems[3]);
@@ -106,11 +108,13 @@ export class Chart2 extends LineChart {
       legendItem.append('text')
         .text(label)
         .attr('transform', `translate(${lineWidth + 2.5}, 0)`);
+      const legendItemHeight = legendItem.node().getBBox().height;
       legendItem.append('path')
         .datum([[0, 0], [lineWidth, 0]])
         .style('stroke', this.colors(value))
         .style('stroke-dasharray', '2,2')
         .attr('transform', 'translate(0, -2)')
+        .attr('transform', `translate(0, -${legendItemHeight / 3})`)
         .attr('d', d => legendLine(d));
       yOffset += legendItem.node().getBBox().height + 1;
     });
