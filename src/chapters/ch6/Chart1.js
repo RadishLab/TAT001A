@@ -1,4 +1,5 @@
-import { max, min } from 'd3-array';
+import { max, min, sum } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 import { line } from 'd3-shape';
@@ -28,8 +29,13 @@ export default class Chart1 extends BarChart {
           d.tobaccoRelated = +d['tobacco-related'];
           d.notTobaccoRelated = +d['other'];
           d.otherTobaccoRelated = +d['other tobacco-related'];
+          d.deaths = d.tobaccoRelated + d.notTobaccoRelated;
+          d.percentTobaccoRelated = d.tobaccoRelated / d.deaths;
+          d.percentNotTobaccoRelated = 1 - d.percentTobaccoRelated;
           return d;
         });
+
+        this.totalTobaccoRelated = sum(mappedData, d => d.tobaccoRelated + d.otherTobaccoRelated);
 
         // Pop tobacco use off, add an empty bar before it
         const tobaccoUse = mappedData.pop();
@@ -87,7 +93,7 @@ export default class Chart1 extends BarChart {
     const barWidth = this.x.bandwidth();
 
     barGroups.append('rect')
-        .classed('bar', true)
+        .classed('bar not-tobacco-related', true)
         .attr('x', d => this.x(this.getXValue(d)))
         .attr('width', barWidth)
         .attr('y', d => this.y(d.notTobaccoRelated))
@@ -95,7 +101,7 @@ export default class Chart1 extends BarChart {
         .attr('fill', this.colors('other'));
 
     barGroups.append('rect')
-        .classed('bar', true)
+        .classed('bar tobacco-related', true)
         .attr('x', d => this.x(this.getXValue(d)))
         .attr('width', barWidth)
         .attr('y', d => this.y(d.tobaccoRelated + d.notTobaccoRelated))
@@ -124,7 +130,7 @@ export default class Chart1 extends BarChart {
         .classed('bar-tobacco-use', true);
 
     tobaccoUseDeathBars.append('rect')
-      .classed('bar', true)
+      .classed('bar tobacco-use', true)
       .attr('x', this.x('Tobacco use'))
       .attr('width', barWidth)
       .attr('y', d => this.y(d.tobaccoRelated + d.deathsUnder))
@@ -144,22 +150,24 @@ export default class Chart1 extends BarChart {
         ]);
       });
 
-    tobaccoUseDeathBars.append('text')
-      .attr('dy', 0)
-      .attr('transform', d => {
-        const x = this.x('Tobacco use') + barWidth + 2;
-        let y = this.y(d.deathsUnder) - (this.chartHeight - this.y(d.tobaccoRelated)) / 2;
-        if (d.disease === 'tuberculosis') {
-          y += 1;
-        }
-        return `translate(${x}, ${y})`;
-      })
-      .attr('font-size', 4)
-      .attr('fill', '#585857')
-      .text(d => this.getTranslation(d.disease));
+    if (!this.options.web) {
+      tobaccoUseDeathBars.append('text')
+        .attr('dy', 0)
+        .attr('transform', d => {
+          const x = this.x('Tobacco use') + barWidth + 2;
+          let y = this.y(d.deathsUnder) - (this.chartHeight - this.y(d.tobaccoRelated)) / 2;
+          if (d.disease === 'tuberculosis') {
+            y += 1;
+          }
+          return `translate(${x}, ${y})`;
+        })
+        .attr('font-size', this.options.web ? 12 : 4)
+        .attr('fill', '#585857')
+        .text(d => this.getTranslation(d.disease));
 
-    tobaccoUseDeathBars.selectAll('text')
-      .call(wrap, barWidth * 2);
+      tobaccoUseDeathBars.selectAll('text')
+        .call(wrap, barWidth * 2);
+    }
   }
 
   createZScale() {
@@ -176,5 +184,26 @@ export default class Chart1 extends BarChart {
         let xOffset = 15;
         return `translate(${xOffset}, ${yOffset})`;
       });
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.disease}</div>`;
+    const deathsFormat = format(',d');
+    const percentFormat = format('.1%');
+
+    if (!bar.classed('tobacco-use')) {
+      content += `<div class="data">${this.getTranslation('Deaths')}: ${deathsFormat(d.deaths)}</div>`;
+    }
+    if (bar.classed('tobacco-related')) {
+      content += `<div class="data">${this.getTranslation('Tobacco-related')}: ${deathsFormat(d.tobaccoRelated)} (${percentFormat(d.percentTobaccoRelated)})</div>`;
+    }
+    if (bar.classed('not-tobacco-related')) {
+      content += `<div class="data">${this.getTranslation('Not tobacco-related')}: ${deathsFormat(d.notTobaccoRelated)} (${percentFormat(d.percentNotTobaccoRelated)})</div>`;
+    }
+    if (bar.classed('tobacco-use')) {
+      content += `<div class="data">${this.getTranslation('Deaths')}: ${deathsFormat(d.tobaccoRelated)}</div>`;
+      content += `<div class="data">${this.getTranslation('As a proportion of tobacco-related deaths')}: ${percentFormat(d.tobaccoRelated / this.totalTobaccoRelated)}</div>`;
+    }
+    return content;
   }
 }
