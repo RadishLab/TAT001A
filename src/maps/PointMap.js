@@ -1,3 +1,4 @@
+import { forceCollide, forceSimulation, forceX, forceY } from 'd3-force';
 import { geoPath } from 'd3-geo';
 import { geoGinzburg5 } from 'd3-geo-projection';
 import { json as d3json } from 'd3-request';
@@ -35,6 +36,36 @@ export default class PointMap extends Visualization {
     });
   }
 
+  spreadPoints(features) {
+    // Settings for forces
+    const decayRate = 0.3;
+    const forceStrength = 0.002;
+    const radius = 5;
+
+    // Set x and y to initial layer coordinates from lat lng
+    features = features.map(d => {
+      [d.x, d.y] = this.projection([d.Longitude, d.Latitude]);
+      return d;
+    });
+
+    var simulation = forceSimulation(features)
+      .velocityDecay(decayRate)
+      .force('x', forceX()
+        .x(d => d.x)
+        .strength(forceStrength))
+      .force('y', forceY()
+        .y(d => d.y)
+        .strength(forceStrength))
+      .force('collide', forceCollide().radius(radius).iterations(2));
+
+    // Make simulation run now rather than running dynamically
+    for (var i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
+      simulation.tick();
+    }
+
+    return features;
+  }
+
   renderPaths() {
     this.countries = this.root.append('g');
     const country = this.countries.selectAll('.country')
@@ -49,14 +80,14 @@ export default class PointMap extends Visualization {
 
     this.points = this.root.append('g');
     const point = this.points.selectAll('.point')
-      .data(this.pointData)
+      .data(this.spreadPoints(this.pointData))
       .enter()
         .append('g')
         .classed('point', true);
     point.append('circle')
       .style('fill', d => this.colorScale(d[this.categoryField]))
       .attr('r', this.options.web ? 7 : 3)
-      .attr("transform", d => `translate(${this.projection([d.Longitude, d.Latitude])})`)
+      .attr('transform', d => `translate(${d.x}, ${d.y})`)
       .on('mouseover', (d) => {
         if (this.tooltipContent) {
           this.tooltip
