@@ -14,7 +14,6 @@ export default class WorldMap extends Visualization {
   constructor(parent, options) {
     super(parent, options);
     this.legend = options.legend;
-    console.log('this.legend', this.legend);
     this.parent.classed('world-map', true);
     this.parent
       .append('defs')
