@@ -1,3 +1,4 @@
+import { event as currentEvent, select } from 'd3-selection';
 import { arc, pie } from 'd3-shape';
 
 import Chart from './Chart';
@@ -18,6 +19,8 @@ export default class PieChart extends Chart {
     this.parent
       .attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('viewBox', `0 0 ${this.width} ${this.height}`);
+
+    this.mouseoverStroke = '#555';
   }
 
   createMargin() {
@@ -56,18 +59,45 @@ export default class PieChart extends Chart {
       .data(this.pie)
       .enter();
 
-    arcEnter
+    const arcGroup = arcEnter.append('g').classed('arc-group', true);
+
+    arcGroup
       .append('path')
         .classed('arc', true)
         .attr('d',  arcGenerator)
+        .style('stroke-width', 2)
+        .style('stroke', d => this.colors(this.colorAccessor(d)))
         .style('fill', d => this.colors(this.colorAccessor(d)));
 
-    arcEnter
+    arcGroup
       .append('text')
         .classed('arc-label', true)
         .text(this.labelAccessor)
         .attr('x', d => arcGenerator.centroid(d)[0])
         .attr('y', d => arcGenerator.centroid(d)[1]);
+
+    arcGroup
+      .on('mouseover', (d, i, nodes) => {
+        const over = select(nodes[i]);
+        over.select('path').style('stroke', this.mouseoverStroke);
+        over.node().parentNode.appendChild(over.node());
+
+        if (this.tooltipContent) {
+          this.tooltip
+            .html(this.tooltipContent(d, over))
+            .classed('visible', true)
+            .style('top', `${currentEvent.layerY - 10}px`)
+            .style('left', `${currentEvent.layerX + 10}px`);
+        }
+      })
+      .on('mouseout', (d, i, nodes) => {
+        select(nodes[i]).select('path')
+          .style('stroke', d => this.colors(this.colorAccessor(d)));
+
+        if (this.tooltipContent) {
+          this.tooltip.classed('visible', false);
+        }
+      });
   }
 
   render() {
