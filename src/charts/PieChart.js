@@ -7,18 +7,25 @@ export default class PieChart extends Chart {
     super(parent, options);
     this.parent
       .classed('pie-chart', true);
-    this.radius = 100;
+    this.radius = this.options.web ? 200 : 100;
     this.margin = this.createMargin();
     this.root
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
     this.chartWidth = 2 * this.radius;
     this.chartHeight = 2 * this.radius;
+
+    this.height = this.radius * 2 + 100;
+    this.parent
+      .attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', `0 0 ${this.width} ${this.height}`);
   }
 
   createMargin() {
     const margin = super.createMargin();
-    margin.left = this.radius || 0;
-    margin.top = this.radius || 0;
+    margin.left = this.parent.node().getBoundingClientRect().width / 2;
+    if (this.radius) {
+      margin.top = this.radius + 5;
+    }
     return margin;
   }
 
@@ -66,5 +73,12 @@ export default class PieChart extends Chart {
   render() {
     this.renderArcs();
     this.renderLegend();
+    const legend = this.parent.select('.legend');
+    legend
+      .attr('transform', () => {
+        let xOffset = (this.width / 2) - (legend.node().getBoundingClientRect().width / 2);
+        let yOffset = this.chartHeight + this.legendYOffset;
+        return `translate(${xOffset}, ${yOffset})`;
+      });
   }
 }
