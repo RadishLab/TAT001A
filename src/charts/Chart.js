@@ -21,6 +21,7 @@ export default class Chart extends Visualization {
     this.chartWidth = this.width - this.margin.left - this.margin.right;
     this.chartHeight = this.height - this.margin.top - this.margin.bottom - this.legendHeight;
     this.root = this.parent.append('g')
+      .classed('chart', true)
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
     this.loadData()

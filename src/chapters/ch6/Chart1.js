@@ -50,6 +50,11 @@ export default class Chart1 extends BarChart {
     margin.bottom = 50;
     margin.right = 30;
     margin.top = 5;
+
+    if (this.options.web) {
+      margin.bottom = 150;
+      margin.top = 10;
+    }
     return margin;
   }
 
@@ -164,10 +169,11 @@ export default class Chart1 extends BarChart {
 
   render() {
     super.render();
+
+    const yOffset = this.root.node().getBoundingClientRect().height + this.margin.top + 10;
     this.parent.select('.legend')
       .attr('transform', () => {
         let xOffset = 15;
-        let yOffset = this.chartHeight + 52;
         return `translate(${xOffset}, ${yOffset})`;
       });
   }
