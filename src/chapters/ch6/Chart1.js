@@ -175,8 +175,51 @@ export default class Chart1 extends BarChart {
       .domain(['other', 'tobacco']);
   }
 
+  renderLinesBetweenBars() {
+    const tobaccoRelatedBars = this.root.selectAll('.bar.tobacco-related');
+    const tobaccoUseBars = this.root.selectAll('.bar.tobacco-use');
+    const lineCreator = line()
+      .x(d => d.x)
+      .y(d => d.y);
+    const lineGroup = this.root.append('g').classed('tobacco-death-lines', true);
+
+    const tobaccoLines = [];
+    tobaccoRelatedBars.each((d, i, nodes) => {
+      if (d.disease) {
+        const diseaseRect = nodes[i].getBoundingClientRect();
+        const tobaccoUseRect = tobaccoUseBars
+          .filter(tobaccoUseD => tobaccoUseD.disease === d.disease)
+          .node().getBoundingClientRect();
+
+        tobaccoLines.push([
+          {
+            disease: d.disease,
+            x: this.x(d.disease) + this.x.bandwidth(),
+            y: diseaseRect.top - 10 + diseaseRect.height / 2
+          },
+          {
+            disease: d.disease,
+            x: this.x('Tobacco use'),
+            y: tobaccoUseRect.top - 10 + (tobaccoUseRect.height / 2)
+          }
+        ]);
+      }
+    });
+
+    lineGroup.selectAll('.line')
+      .data(tobaccoLines).enter().append('path')
+      .classed('.line', true)
+      .style('stroke', this.colors('tobacco'))
+      .style('stroke-width', 1)
+      .attr('d', lineCreator);
+  }
+
   render() {
     super.render();
+
+    if (this.options.web) {
+      this.renderLinesBetweenBars();
+    }
 
     const yOffset = this.root.node().getBoundingClientRect().height + this.margin.top + 10;
     this.parent.select('.legend')
@@ -202,7 +245,7 @@ export default class Chart1 extends BarChart {
     }
     if (bar.classed('tobacco-use')) {
       content += `<div class="data">${this.getTranslation('Deaths')}: ${deathsFormat(d.tobaccoRelated)}</div>`;
-      content += `<div class="data">${this.getTranslation('As a proportion of tobacco-related deaths')}: ${percentFormat(d.tobaccoRelated / this.totalTobaccoRelated)}</div>`;
+      content += `<div class="data">${percentFormat(d.tobaccoRelated / this.totalTobaccoRelated)} ${this.getTranslation('of tobacco-related deaths')}</div>`;
     }
     return content;
   }
