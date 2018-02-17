@@ -1,3 +1,5 @@
+import { sum } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 
@@ -19,10 +21,16 @@ export default class Chart1 extends PieChart {
   loadData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('consumption-1.csv'), (csvData) => {
-        resolve(csvData.map(d => {
+        const mappedData = csvData.map(d => {
           d.color = d['HDI'];
-          d.label = d['location'];
           d.value = +d['Consumption'];
+          return d;
+        });
+
+        this.total = sum(mappedData, d => d.value);
+
+        resolve(mappedData.map(d => {
+          d.percent = d.value / this.total;
           return d;
         }));
       });
@@ -31,5 +39,15 @@ export default class Chart1 extends PieChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d) {
+    const percentFormat = format('.1%');
+    const cigaretteFormat = format(',d');
+    let content = `<div class="header">${d.data.location}</div>`;
+    content += `<div>${d.data.HDI} HDI</div>`;
+    content += `<div>${percentFormat(d.data.percent)} ${this.getTranslation('of cigarettes')}</div>`;
+    content += `<div>${cigaretteFormat(d.data.value)} ${this.getTranslation('cigarettes')}</div>`;
+    return content;
   }
 }
