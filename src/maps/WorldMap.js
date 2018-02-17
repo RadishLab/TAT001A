@@ -129,14 +129,14 @@ export default class WorldMap extends Visualization {
     smallCountries.append('circle')
       .classed('country-fill', true)
       .style('fill', this.countryFill.bind(this))
-      .attr('r', 1)
+      .attr('r', this.options.web ? 4 : 1)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
 
     smallCountries.append('circle')
       .classed('country-symbol', true)
       .style('fill', d => (d => d.properties.joined && d.properties.joined[this.symbolField]) ? 'url(#dots)' : 'none')
-      .attr('r', 1)
+      .attr('r', this.options.web ? 4 : 1)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
 
