@@ -24,6 +24,25 @@ export default class BarChart extends Chart {
       .enter().append('g');
   }
 
+  onMouseOverBar(d, bar) {
+    bar.style('stroke', this.mouseoverStroke);
+    if (this.tooltipContent) {
+      this.tooltip
+        .html(this.tooltipContent(d, bar))
+        .classed('visible', true)
+        .style('top', `${currentEvent.layerY - 10}px`)
+        .style('left', `${currentEvent.layerX + 10}px`);
+    }
+  }
+
+  onMouseOutBar(d, bar) {
+    bar.style('stroke', this.defaultStroke);
+
+    if (this.tooltipContent) {
+      this.tooltip.classed('visible', false);
+    }
+  }
+
   renderBars() {
     this.createBarGroups();
   }
@@ -33,24 +52,10 @@ export default class BarChart extends Chart {
     this.renderBars();
     this.root.selectAll('.bar')
       .on('mouseover', (d, i, nodes) => {
-        const overBar = select(nodes[i]);
-        overBar.style('stroke', this.mouseoverStroke);
-
-        if (this.tooltipContent) {
-          this.tooltip
-            .html(this.tooltipContent(d, overBar))
-            .classed('visible', true)
-            .style('top', `${currentEvent.layerY - 10}px`)
-            .style('left', `${currentEvent.layerX + 10}px`);
-        }
+        this.onMouseOverBar(d, select(nodes[i]));
       })
       .on('mouseout', (d, i, nodes) => {
-        const outBar = select(nodes[i]);
-        outBar.style('stroke', this.defaultStroke);
-
-        if (this.tooltipContent) {
-          this.tooltip.classed('visible', false);
-        }
+        this.onMouseOutBar(d, select(nodes[i]));
       });
   }
 }

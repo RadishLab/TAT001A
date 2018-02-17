@@ -181,7 +181,6 @@ export default class Chart1 extends BarChart {
     const lineCreator = line()
       .x(d => d.x)
       .y(d => d.y);
-    const lineGroup = this.root.append('g').classed('tobacco-death-lines', true);
 
     const tobaccoLines = [];
     tobaccoRelatedBars.each((d, i, nodes) => {
@@ -206,12 +205,28 @@ export default class Chart1 extends BarChart {
       }
     });
 
+    const lineGroup = this.root.append('g').classed('tobacco-death-lines', true);
     lineGroup.selectAll('.line')
       .data(tobaccoLines).enter().append('path')
-      .classed('.line', true)
+      .classed('line', true)
       .style('stroke', this.colors('tobacco'))
       .style('stroke-width', 1)
       .attr('d', lineCreator);
+  }
+
+  onMouseOverBar(d, bar) {
+    super.onMouseOverBar(d, bar);
+
+    if (bar.classed('tobacco-related') || bar.classed('tobacco-use')) {
+      this.root.selectAll('.tobacco-death-lines .line')
+        .style('opacity', d => d[0].disease === bar.data()[0].disease ? 1 : 0.2);
+    }
+  }
+
+  onMouseOutBar(d, bar) {
+    super.onMouseOutBar(d, bar);
+    this.root.selectAll('.tobacco-death-lines .line')
+      .style('opacity', 1);
   }
 
   render() {
