@@ -18,7 +18,10 @@ export class Chart1 extends BarChart {
       { label: this.getTranslation('High HDI'), value: 'High' },
       { label: this.getTranslation('Very High HDI'), value: 'Very High' },
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = d => {
+      let capitalized = d.charAt(0).toUpperCase() + d.slice(1);
+      return this.getTranslation(capitalized);
+    };
     this.yAxisTickFormat = format('.2');
   }
 
