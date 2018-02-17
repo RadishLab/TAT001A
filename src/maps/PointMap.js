@@ -65,6 +65,9 @@ export default class PointMap extends Visualization {
             .style('top', `${currentEvent.layerY + 10}px`)
             .style('left', `${currentEvent.layerX + 10}px`);
         }
+      })
+      .on('mouseout', (d) => {
+        this.tooltip.classed('visible', false);
       });
   }
 
