@@ -25,7 +25,7 @@ export default class Chart3 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.options.web ? 85 : 45;
+    margin.bottom = this.options.web ? 90 : 45;
     if (this.options.web) margin.left = 80;
     return margin;
   }
@@ -60,7 +60,7 @@ export default class Chart3 extends BarChart {
       .classed('legend', true)
       .attr('transform', () => {
         let xOffset = 15;
-        let yOffset = this.chartHeight + 60;
+        const yOffset = this.root.node().getBoundingClientRect().height + this.margin.top + 20;
         return `translate(${xOffset}, ${yOffset})`;
       });
 
