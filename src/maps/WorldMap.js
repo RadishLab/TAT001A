@@ -96,11 +96,21 @@ export default class WorldMap extends Visualization {
         overCountry.node().parentNode.appendChild(overCountry.node());
 
         if (this.tooltipContent) {
+          let x = currentEvent.layerX,
+            y = currentEvent.layerY
+
+          // If layerX or layerY not set, assume they're not supported, find
+          // another way
+          if (!x && !y) {
+            const rect = this.root.node().getBoundingClientRect();
+            x = currentEvent.clientX - rect.left;
+            y = currentEvent.clientY - rect.top;
+          }
           this.tooltip
             .html(this.tooltipContent(d))
             .classed('visible', true)
-            .style('top', `${currentEvent.layerY + 10}px`)
-            .style('left', `${currentEvent.layerX + 10}px`);
+            .style('top', `${y + 10}px`)
+            .style('left', `${x + 10}px`);
         }
       })
       .on('mouseout', (d, i, nodes) => {
