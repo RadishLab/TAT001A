@@ -8,6 +8,9 @@ import noUiSlider from 'nouislider';
 import { schemeCategoryProblemMap } from '../../colors';
 import WorldMap from '../../maps/WorldMap';
 
+/*
+ * Hectares planted with tobacco by country with year filters
+ */
 export default class Map2 extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
@@ -41,9 +44,11 @@ export default class Map2 extends WorldMap {
       const countryData = joinData.filter(row => row.iso3code === this.getISO3(feature));
       if (countryData.length > 0) {
         feature.properties.joined = countryData.map(d => {
+          let value = parseInt(d['Area harvested'], 10);
+          if (isNaN(value)) value = null;
           return {
             keycode: d[this.valueField],
-            value: +d['Area harvested'],
+            value,
             year: +d['Year']
           }
         });
@@ -128,7 +133,17 @@ export default class Map2 extends WorldMap {
         value = matchingYears[0].value;
       }
     }
-    content += `<div class="data">${this.getTranslation('Hectares of tobacco planted')}: ${value ? valueFormat(value) : this.getTranslation('no reported planting')}</div>`;
+
+    // Treat 0 different from null/undefined
+    if (value === 0) {
+      content += `<div class="data">${this.getTranslation('No reported production')}</div>`;
+    }
+    else if (!value) {
+      content += `<div class="data">${this.getTranslation('Data missing')}</div>`;
+    }
+    else {
+      content += `<div class="data">${this.getTranslation('Hectares of tobacco planted')}: ${valueFormat(value)}</div>`;
+    }
     return content;
   }
 }
