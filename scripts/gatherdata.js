@@ -78,6 +78,7 @@ const FILES = {
   'Web Waterpipe/TA6 Waterpipe Data Inset 1.xlsx': 'waterpipe-1.csv',
   'Web Waterpipe/TA6 Waterpipe Data Inset 2.xlsx': 'waterpipe-2.csv',
   'Web Waterpipe/TA6 Waterpipe Data Inset 3.xlsx': 'waterpipe-3.csv',
+  'Web Waterpipe/TA6 Waterpipe Map - edit.xlsx': 'waterpipe-map.csv',
   'Web Youth/TA6 Youth Map.xlsx': 'youth-map.csv',
   'Web Youth/TA6 Youth Inset 1-Current tobacco use in adults and youth-just data.xlsx': 'youth-1.csv',
 };

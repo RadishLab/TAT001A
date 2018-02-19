@@ -172,7 +172,48 @@ export default class WorldMap extends Visualization {
     return legendItemList;
   }
 
+  renderLinearLegend() {
+    // Add a linear gradient to the svg
+    let defs = this.parent.select('defs');
+    if (defs.empty()) {
+      defs = this.parent.append('defs');
+    }
+    const gradientId = 'fill-linear-legend';
+    const gradient = defs.append('linearGradient')
+      .attr('id', gradientId);
+    gradient.append('stop')
+      .attr('offset', '0%')
+      .attr('stop-color', this.colorScale.range()[0]);
+    gradient.append('stop')
+      .attr('offset', '100%')
+      .attr('stop-color', this.colorScale.range()[1]);
+
+    // Add a rect with our gradient
+    const legendWidth = this.width / 7;
+    this.legendGroup = this.root.append('g')
+      .classed('legend', true)
+      .attr('transform', `translate(${this.width - legendWidth}, 10)`);
+    this.legendGroup.append('rect')
+      .attr('width', legendWidth)
+      .attr('height', 25)
+      .attr('fill', `url(#${gradientId})`);
+
+    // Add labels
+    const extent = this.formatExtent();
+    this.legendGroup.append('text')
+      .text(extent[0])
+      .attr('transform', 'translate(2, 18)');
+    this.legendGroup.append('text')
+      .text(extent[1])
+      .style('text-anchor', 'end')
+      .attr('transform', `translate(${legendWidth - 2}, 18)`);
+  }
+
   renderLegend() {
+    if (this.colorScaleType === 'linear') {
+      this.renderLinearLegend();
+      return;
+    }
     if (!this.legend) return;
 
     const legendWidth = this.width / 7;
