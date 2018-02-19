@@ -26,6 +26,7 @@ const FILES = {
   '5 Secondhand/TA6 Secondhand Inset 2-SHS in select countries.xlsx': '5-2.csv',
   '5 Secondhand/TA6 Secondhand Inset 3-SHS in Europe.xlsx': '5-3.csv',
   '5 Secondhand/TA6 Secondhand Inset 4-SHS by socioeconomic status.xlsx': '5-4.csv',
+  '5 Secondhand/TA6 Secondhand Inset 5-SHS in select countries.xlsx': '5-5.csv',
   '5 Secondhand/TA6 Secondhand Inset 6-SHS in youth by WHO region.xlsx': '5-6.csv',
   '6 Health/DALYs from tobacco.xlsx': '6-map.csv',
   '6 Health/Inset 1 Formatted.xlsx': '6-1.csv',
