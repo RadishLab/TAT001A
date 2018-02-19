@@ -37564,11 +37564,19 @@ var _Map = __webpack_require__(593);
 
 var _Map2 = _interopRequireDefault(_Map);
 
+var _Map3 = __webpack_require__(633);
+
+var _Map4 = _interopRequireDefault(_Map3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var figures = exports.figures = [{
   name: 'map',
   figureClass: _Map2.default,
+  type: 'map'
+}, {
+  name: 'map2',
+  figureClass: _Map4.default,
   type: 'map'
 }, {
   name: '2',
@@ -41243,6 +41251,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.figures = undefined;
 
+var _Chart = __webpack_require__(634);
+
+var _Chart2 = _interopRequireDefault(_Chart);
+
 var _Map = __webpack_require__(621);
 
 var _Map2 = _interopRequireDefault(_Map);
@@ -41253,6 +41265,10 @@ var figures = exports.figures = [{
   name: 'map',
   figureClass: _Map2.default,
   type: 'map'
+}, {
+  name: '1',
+  figureClass: _Chart2.default,
+  type: 'chart'
 }];
 
 /***/ }),
@@ -42651,6 +42667,353 @@ var Chart4 = function (_BarChartVertical) {
 }(_BarChartVertical3.default);
 
 exports.default = Chart4;
+
+/***/ }),
+/* 633 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _d3Format = __webpack_require__(6);
+
+var _d3Request = __webpack_require__(0);
+
+var _d3Scale = __webpack_require__(3);
+
+__webpack_require__(196);
+
+var _colors = __webpack_require__(4);
+
+var _WorldMap2 = __webpack_require__(10);
+
+var _WorldMap3 = _interopRequireDefault(_WorldMap2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Map2 = function (_WorldMap) {
+  _inherits(Map2, _WorldMap);
+
+  // TODO finish based on client response
+  function Map2(parent, options) {
+    _classCallCheck(this, Map2);
+
+    var _this = _possibleConstructorReturn(this, (Map2.__proto__ || Object.getPrototypeOf(Map2)).call(this, parent, options));
+
+    _this.colorScale = (0, _d3Scale.scaleOrdinal)(_colors.schemeCategorySolutionMap);
+    _this.colorScaleType = 'ordinal';
+
+    _this.filters = [{
+      group: 'gender',
+      values: [{ label: _this.getTranslation('male'), value: 'male' }, { label: _this.getTranslation('female'), value: 'female' }]
+    }];
+
+    _this.filterColumns = [{
+      gender: 'male',
+      keyCode: 'Male-KeyCode'
+    }, {
+      gender: 'female',
+      keyCode: 'Female-KeyCode'
+    }];
+    _this.filterState = { gender: 'male' };
+    return _this;
+  }
+
+  _createClass(Map2, [{
+    key: 'loadJoinData',
+    value: function loadJoinData() {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        (0, _d3Request.csv)(_this2.dataFileUrl('12-map2.csv'), function (csvData) {
+          var filteredData = csvData.filter(function (d) {
+            return _this2.filterColumns.some(function (filter) {
+              return d[filter.keyCode] !== '';
+            });
+          });
+
+          _this2.colorScale.domain(_this2.getFilteredKeyCodeDomain(filteredData));
+          resolve(filteredData);
+        });
+      });
+    }
+  }, {
+    key: 'join',
+    value: function join(countries, joinData) {
+      var _this3 = this;
+
+      countries.features.forEach(function (feature) {
+        var countryData = joinData.filter(function (row) {
+          return row.ISO3 === _this3.getISO3(feature);
+        });
+        if (countryData.length > 0) {
+          feature.properties.joined = countryData[0];
+        }
+      });
+      return countries;
+    }
+  }, {
+    key: 'tooltipContent',
+    value: function tooltipContent(d) {
+      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var deathFormat = (0, _d3Format.format)(',d');
+      var percentFormat = (0, _d3Format.format)('.1f');
+      if (d.properties.joined) {
+        content += '<div class="data">' + this.getTranslation('Male') + ': ' + deathFormat(d.properties.joined['Male-No. Tobacco-related Deaths']) + ' ' + this.getTranslation('deaths') + ' (' + percentFormat(d.properties.joined['Male-% Tobacco-related Deaths']) + '%)</div>';
+        content += '<div class="data">' + this.getTranslation('Female') + ': ' + deathFormat(d.properties.joined['Female-No. Tobacco-related Deaths']) + ' ' + this.getTranslation('deaths') + ' (' + percentFormat(d.properties.joined['Female-% Tobacco-related Deaths']) + '%)</div>';
+      } else {
+        content += '<div class="data no-data">' + this.getTranslation('No data') + '</div>';
+      }
+      return content;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      _get(Map2.prototype.__proto__ || Object.getPrototypeOf(Map2.prototype), 'render', this).call(this);
+      this.renderFilters();
+    }
+  }]);
+
+  return Map2;
+}(_WorldMap3.default);
+
+exports.default = Map2;
+
+/***/ }),
+/* 634 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _d3Array = __webpack_require__(5);
+
+var _d3Collection = __webpack_require__(8);
+
+var _d3Format = __webpack_require__(6);
+
+var _d3Request = __webpack_require__(0);
+
+var _d3Scale = __webpack_require__(3);
+
+var _d3Shape = __webpack_require__(12);
+
+var _d3Selection = __webpack_require__(13);
+
+var _colors = __webpack_require__(4);
+
+var _Chart2 = __webpack_require__(31);
+
+var _Chart3 = _interopRequireDefault(_Chart2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Chart1 = function (_Chart) {
+  _inherits(Chart1, _Chart);
+
+  function Chart1(parent, options) {
+    _classCallCheck(this, Chart1);
+
+    var _this = _possibleConstructorReturn(this, (Chart1.__proto__ || Object.getPrototypeOf(Chart1)).call(this, parent, options));
+
+    _this.figurePrefix = 'smokeless-inset1';
+    _this.yLabel = _this.getTranslation('Prevalence of smokeless tobacco use among youth (%)');
+    _this.legendItems = [];
+    _this.yAxisTickFormat = (0, _d3Format.format)('d');
+    return _this;
+  }
+
+  _createClass(Chart1, [{
+    key: 'loadData',
+    value: function loadData() {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        (0, _d3Request.csv)(_this2.dataFileUrl('smokeless-1.csv'), function (csvData) {
+          var mappedData = csvData.map(function (d) {
+            d.country = d['Country'];
+            d.region = d['WHO Region'];
+            d.boys = parseFloat(d['TA6 Boys']);
+            d.girls = parseFloat(d['TA6 Girls']);
+            d.children = parseFloat(d['TA6 Children']);
+            return d;
+          });
+
+          var nested = (0, _d3Collection.nest)().key(function (d) {
+            return d.region;
+          }).rollup(function (values) {
+            return {
+              boys: {
+                max: (0, _d3Array.max)(values, function (d) {
+                  return d.boys;
+                }),
+                median: (0, _d3Array.median)(values, function (d) {
+                  return d.boys;
+                }),
+                min: (0, _d3Array.min)(values, function (d) {
+                  return d.boys;
+                })
+              },
+              girls: {
+                max: (0, _d3Array.max)(values, function (d) {
+                  return d.girls;
+                }),
+                median: (0, _d3Array.median)(values, function (d) {
+                  return d.girls;
+                }),
+                min: (0, _d3Array.min)(values, function (d) {
+                  return d.girls;
+                })
+              },
+              children: {
+                max: (0, _d3Array.max)(values, function (d) {
+                  return d.children;
+                }),
+                median: (0, _d3Array.median)(values, function (d) {
+                  return d.children;
+                }),
+                min: (0, _d3Array.min)(values, function (d) {
+                  return d.children;
+                })
+              }
+            };
+          }).entries(mappedData);
+
+          resolve(nested);
+        });
+      });
+    }
+  }, {
+    key: 'onDataLoaded',
+    value: function onDataLoaded(data) {
+      this.x = this.createXScale();
+      this.y = this.createYScale();
+      this.colors = this.createZScale();
+      this.render();
+    }
+  }, {
+    key: 'createMargin',
+    value: function createMargin() {
+      var margin = _get(Chart1.prototype.__proto__ || Object.getPrototypeOf(Chart1.prototype), 'createMargin', this).call(this);
+      margin.left = this.options.web ? 60 : 80;
+      margin.bottom = this.options.web ? 40 : 38;
+      return margin;
+    }
+  }, {
+    key: 'createXScale',
+    value: function createXScale() {
+      var values = (0, _d3Collection.set)(this.data.map(function (d) {
+        return d.key;
+      })).values().sort();
+      return (0, _d3Scale.scalePoint)().range([0, this.chartWidth]).padding(0.5).domain(values);
+    }
+  }, {
+    key: 'createYScale',
+    value: function createYScale() {
+      var values = this.data.map(function (d) {
+        return d.value.boys.max;
+      }).concat(this.data.map(function (d) {
+        return d.value.girls.max;
+      })).concat(this.data.map(function (d) {
+        return d.value.children.max;
+      }));
+      var yExtent = [(0, _d3Array.min)(values.concat(0)), (0, _d3Array.max)(values)];
+      return (0, _d3Scale.scaleLinear)().range([this.chartHeight, 0]).domain(yExtent);
+    }
+  }, {
+    key: 'renderWhiskers',
+    value: function renderWhiskers() {
+      var _this3 = this;
+
+      var whisker = this.root.selectAll('.whisker').data(this.data).enter().append('g').classed('whisker', true);
+
+      var lineCreator = (0, _d3Shape.line)();
+      whisker.append('path').style('stroke-opacity', 0.5).style('stroke-width', 5).style('stroke', 'black').attr('d', function (d) {
+        return lineCreator([[_this3.x(d.key), _this3.y(d.value.children.min)], [_this3.x(d.key), _this3.y(d.value.children.max)]]);
+      });
+
+      whisker.append('circle').attr('r', 10).attr('cx', function (d) {
+        return _this3.x(d.key);
+      }).attr('cy', function (d) {
+        return _this3.y(d.value.children.median);
+      }).style('fill', this.colors('smokeless'));
+
+      whisker.on('mouseover', function (d, i, nodes) {
+        _this3.onMouseOverWhisker(d, (0, _d3Selection.select)(nodes[i]));
+      }).on('mouseout', function (d, i, nodes) {
+        _this3.onMouseOutWhisker(d, (0, _d3Selection.select)(nodes[i]));
+      });
+    }
+  }, {
+    key: 'onMouseOverWhisker',
+    value: function onMouseOverWhisker(d, whisker) {
+      whisker.select('path').style('stroke-opacity', 1);
+      if (this.tooltipContent) {
+        this.tooltip.html(this.tooltipContent(d, whisker)).classed('visible', true).style('top', _d3Selection.event.layerY - 10 + 'px').style('left', _d3Selection.event.layerX + 10 + 'px');
+      }
+    }
+  }, {
+    key: 'onMouseOutWhisker',
+    value: function onMouseOutWhisker(d, whisker) {
+      whisker.select('path').style('stroke-opacity', 0.5);
+      if (this.tooltipContent) {
+        this.tooltip.classed('visible', false);
+      }
+    }
+  }, {
+    key: 'tooltipContent',
+    value: function tooltipContent(d, whisker) {
+      console.log(d);
+      var content = '<div class="header">' + d.key + '</div>';
+      content += '<div class="data">' + this.getTranslation('Median') + ': ' + d.value.children.median + '%</div>';
+      content += '<div class="data">' + this.getTranslation('Range') + ': ' + d.value.children.min + '% - ' + d.value.children.max + '%</div>';
+      return content;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      _get(Chart1.prototype.__proto__ || Object.getPrototypeOf(Chart1.prototype), 'render', this).call(this);
+      this.renderWhiskers();
+    }
+  }, {
+    key: 'createZScale',
+    value: function createZScale() {
+      return (0, _d3Scale.scaleOrdinal)(_colors.schemeCategoryProblem);
+    }
+  }]);
+
+  return Chart1;
+}(_Chart3.default);
+
+exports.default = Chart1;
 
 /***/ })
 /******/ ]);
