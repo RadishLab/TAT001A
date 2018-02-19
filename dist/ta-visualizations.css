@@ -419,3 +419,9 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     font-weight: bold; }
   .ta-visualization-tooltip .header {
     font-weight: bold; }
+  .ta-visualization-tooltip .tooltip-list {
+    padding-left: 20px; }
+    .ta-visualization-tooltip .tooltip-list li {
+      margin-bottom: 3px; }
+    .ta-visualization-tooltip .tooltip-list-11-map2 {
+      font-size: 12px; }

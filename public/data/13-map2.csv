@@ -1,0 +1,101 @@
+City,IATA,_y,_x,Population,Country,ISO3,Statistical concept,Smokefree,Source
+Ahmedabad,AMD,23.0429,72.3754,6210000,India,IND,Urban agglomeration,0,WHO GTCR 2017
+Alexandria,ALY,31.1102,29.5656,4400000,Egypt,EGY,City proper,0,WHO GTCR 2017
+Berlin,TXL,52.3334,13.1715,3450000,Germany,DEU,City proper,0,WHO GTCR 2017
+Bogota,BOG,4.4205,-74.0849,8502000,Colombia,COL,Urban agglomeration,N,WHO GTCR 2017
+Busan,PUS,35.1046,128.5617,3398000,South Korea,KOR,City proper (metropolitan city),0,WHO GTCR 2017
+Cairo,CAI,30.0719,31.242,11431000,Egypt,EGY,Official metropolitan area,0,WHO GTCR 2017
+Chennai,MAA,12.5939,80.1049,8523000,India,IND,Urban agglomeration,0,WHO GTCR 2017
+Delhi,DEL,28.3359,77.0611,21935000,India,IND,Urban agglomeration,0,WHO GTCR 2017
+Dhaka,DAC,23.5036,90.2352,15391000,Bangladesh,BGD,Metropolitan area,0,WHO GTCR 2017
+Jeddah,JED,21.4046,39.0923,3452000,Saudi Arabia,SAU,City proper,0,WHO GTCR 2017
+Kolkata,CCU,22.3917,88.2648,14283000,India,IND,Urban agglomeration,0,WHO GTCR 2017
+Mumbai,BOM,19.0519,72.5204,19422000,India,IND,Urban agglomeration,0,WHO GTCR 2017
+Osaka,ITM,34.4707,135.2617,11430000,Japan,JPN,Urban agglomeration,0,WHO GTCR 2017
+Pune,PNQ,18.3455,73.551,4951000,India,IND,Urban agglomeration,0,WHO GTCR 2017
+Riyadh,RUH,24.5727,46.4155,5227000,Saudi Arabia,SAU,City proper,0,WHO GTCR 2017
+Seoul,GMP,37.3329,126.4726,9751000,South Korea,KOR,City proper (metropolitan city),0,WHO GTCR 2017
+Shanghai,SHA,31.1152,121.201,19554000,China,CHN,Urban agglomeration,C,WHO GTCR 2017
+Shenzhen,SZX,22.3822,113.4844,10222000,China,CHN,Urban agglomeration,C,WHO GTCR 2017
+Singapore,SIN,1.212,103.5914,5086000,Singapore,SGP,Urban agglomeration,0,WHO GTCR 2017
+Surat,STV,21.0654,72.4434,4438000,India,IND,Urban agglomeration,0,WHO GTCR 2017
+Tokyo,HND,35.3308,139.4646,36933000,Japan,JPN,Metropolitan area,0,WHO GTCR 2017
+Yangon,RGN,16.5426,96.0759,4356000,Myanmar,MMR,City proper,0,WHO GTCR 2017
+Beijing,PEK,40.0448,116.3504,15000000,China,CHN,Urban agglomeration,C,WHO GTCR 2017
+Mexico City,MEX,19.261,-99.0419,20142000,Mexico,MEX,Metropolitan area,C,WHO GTCR 2017
+Paris,CDG,49.0046,2.33,10516000,France,FRA,Urban agglomeration,0,WHO GTCR 2017
+Ankara,ANK,39.5659,32.4119,4074000,Turkey,TUR,Urban agglomeration,N,WHO GTCR 2017
+Bangkok,BKK,13.5445,100.3624,8213000,Thailand,THA,Official metropolitan area,N,WHO GTCR 2017
+Belo Horizonte,CNF,-19.3801,-43.5807,5407000,Brazil,BRA,Metropolitan area,N,WHO GTCR 2017
+Buenos Aires,EZE,-34.492,-58.3209,13370000,Argentina,ARG,Urban agglomeration,N,WHO GTCR 2017
+Fortaleza,FOR,-3.4634,-38.3157,3520000,Brazil,BRA,Metropolitan area,N,WHO GTCR 2017
+Istanbul,IST,40.5836,28.4916,10953000,Turkey,TUR,Urban agglomeration,N,WHO GTCR 2017
+Karachi,KHI,24.5423,67.0938,13500000,Pakistan,PAK,Urban agglomeration,N,WHO GTCR 2017
+Lahore,LHE,31.3117,74.2412,7352000,Pakistan,PAK,Urban agglomeration,N,WHO GTCR 2017
+Lima,LIM,-12.0118,-77.0651,8950000,Peru,PER,Metropolitan area,N,WHO GTCR 2017
+London,LHR,51.2839,-0.2741,8923000,United Kingdom,GBR,Urban agglomeration,N,WHO GTCR 2017
+Madrid,MAD,40.282,-3.3339,6405000,Spain,ESP,Metropolitan area,N,WHO GTCR 2017
+Moscow,SVO,55.5818,37.2454,11472000,Russia,RUS,City Proper,N,WHO GTCR 2017
+Rio de Janeiro,GIG,-22.4832,-43.1437,11867000,Brazil,BRA,Metropolitan area,N,WHO GTCR 2017
+Salvador,SSA,-12.5439,-38.1951,3947000,Brazil,BRA,Metropolitan area,N,WHO GTCR 2017
+Santiago,SCL,-33.2334,-70.4708,5959000,Chile,CHL,Urban agglomeration,N,WHO GTCR 2017
+Sao Paulo,GRU,-23.2556,-46.2809,19649000,Brazil,BRA,Metropolitan area,N,WHO GTCR 2017
+Tehran,THR,35.4121,51.1848,7243000,Iran,IRN,City proper,N,WHO GTCR 2017
+Hyderabad,HYD,17.2708,78.274,7578000,India,IND,Urban agglomeration,S,WHO GTCR 2017
+Melbourne,MEL,-37.4024,144.5036,3896000,Australia,AUS,Urban agglomeration,S,WHO GTCR 2017
+Sydney,SYD,-33.5646,151.1038,4479000,Australia,AUS,Urban agglomeration,S,WHO GTCR 2017
+Baghdad,BGW,33.1543,44.1402,5891000,Iraq,IRQ,Metropolitan area,0,WHO GTCR 2017
+Barcelona,BCN,41.1749,2.0442,5488000,Spain,ESP,Metropolitan area,N,WHO GTCR 2017
+Brasilia,BSB,-15.5145,-47.5445,3701000,Brazil,BRA,Metropolitan area,N,WHO GTCR 2017
+Chittagong,CGP,22.1458,91.4847,5069000,Bangladesh,BGD,Statistical metropolitan area,0,WHO GTCR 2017
+Guangzhou,CAN,23.1103,113.1557,10486000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Harbin,HRB,45.3724,126.1501,5496000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Hong Kong,HKG,22.1832,113.5452,7053000,Hong Kong,HKG,Urban agglomeration,C,WHO GTCR 2017
+Jakarta,CGK,-6.0732,106.3921,9630000,Indonesia,IDN,City proper,0,WHO GTCR 2017
+Lagos,LOS,6.3438,3.1916,10788000,Nigeria,NGA,Urban agglomeration,0,WHO GTCR 2017
+Medellin,EOH,6.1312,-75.3526,3595000,Colombia,COL,Metropolitan area,N,WHO GTCR 2017
+Porto Alegre,POA,-29.5939,-51.1017,3892000,Brazil,BRA,Metropolitan area,N,WHO GTCR 2017
+Recife,REC,-8.0735,-34.5524,3684000,Brazil,BRA,Metropolitan area,N,WHO GTCR 2017
+St. Petersburg,LED,59.48,30.1554,4842000,Russia,RUS,City proper,N,WHO GTCR 2017
+Tianjin,TSN,39.0726,117.2046,8535000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Bengaluru,BLR,12.5659,77.4005,8275000,India,IND,Urban agglomeration,0,WHO GTCR 2017
+Guadalajara,GDL,20.3118,-103.184,4442000,Mexico,MEX,Metropolitan area,0,WHO GTCR 2017
+Monterrey,MTY,25.4642,-100.0624,4100000,Mexico,MEX,Metropolitan area,S,WHO GTCR 2017
+Khartoum,KRT,15.3522,32.3311,4516000,Sudan,SDN,Urban agglomeration,0,WHO GTCR 2017
+Kinshasa,FIH,-4.2308,15.264,8415000,Democratic Republic of the Congo,COD,City proper,0,WHO GTCR 2017
+Luanda,LAD,-8.513,13.1352,4790000,Angola,AGO,Urban agglomeration,0,WHO GTCR 2017
+Abidjan,ABJ,5.1535,-3.5535,4151000,Ivory Coast,CIV,Urban agglomeration,0,WHO GTCR 2017
+Dar es Salaam,DAR,-6.5241,39.1209,3415000,Tanzania,TZA,City proper,0,WHO GTCR 2017
+Changchun,CGQ,0,0,3598000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Chengdu,CTU,30.3442,103.5649,6397000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Chongqing,CKG,29.4308,106.3829,9732000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Dongguan,N/A,23.015704,113.738708,7160000,China,CHN,City proper,0,WHO GTCR 2017
+Foshan,FUO,23.0475,113.0415,6208000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Hangzhou,HGH,30.1342,120.2554,5189000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Jinan,TNA,0,0,3581000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Nanjing,NKG,31.4424,118.5136,5665000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Qingdao,TAO,36.1545,120.2231,3680000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Shantou,SWA,23.24,116.41,4062000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Shenyang,SHE,41.3824,123.2901,5469000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Wuhan,WUH,30.4701,114.1229,8904000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Xi'an,XIY,34.2645,108.4509,4846000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Zhengzhou,CGO,34.311,113.5027,3796000,China,CHN,Urban agglomeration,0,WHO GTCR 2017
+Cape Town,CPT,-33.5753,18.3606,3492000,South Africa,ZAF,Urban agglomeration,0,WHO GTCR 2017
+Johannesburg,JNB,-26.0821,28.1445,3763000,South Africa,ZAF,Official metropolitan area,0,WHO GTCR 2017
+Manila,MNL,14.3031,121.011,11654000,Philippines,PHL,Urban agglomeration,N,Manila Times
+Montreal,YUL,45.2805,-73.4429,3808000,Canada,CAN,Metropolitan area,S,Americans For Non-Smoker's Rights
+Toronto,YYZ,43.4038,-79.375,5485000,Canada,CAN,Metropolitan area,S,Americans For Non-Smoker's Rights
+Ho Chi Minh City,SGN,10.4912,106.3942,6189000,Vietnam,VNM,Urban agglomeration,0,Americans For Non-Smoker's Rights
+Atlanta,ATL,33.3825,-84.2537,4875000,United States,USA,Urban agglomeration,0,Americans For Non-Smoker's Rights
+Boston,BOS,42.2151,-71.0018,4772000,United States,USA,Urban agglomeration,S,Americans For Non-Smoker's Rights
+Chicago,ORD,41.5846,-87.5416,9545000,United States,USA,Urban agglomeration,C,Americans For Non-Smoker's Rights
+Dallas,DFW,32.5347,-97.0215,5143000,United States,USA,Urban agglomeration,C,Americans For Non-Smoker's Rights
+Detroit,DTW,42.1244,-83.2112,4364000,United States,USA,Urban agglomeration ,S,Americans For Non-Smoker's Rights
+Houston,IAH,29.5849,-95.2023,4785000,United States,USA,Urban agglomeration,C,Americans For Non-Smoker's Rights
+Los Angeles,LAX,33.5633,-118.2429,13223000,United States,USA,Metropolitan area,S,Americans For Non-Smoker's Rights
+Miami,MIA,25.4735,-80.1726,5971000,United States,USA,Urban agglomeration,0,Americans For Non-Smoker's Rights
+New York,JFK,40.3823,-73.4644,20104000,United States,USA,Urban agglomeration,S,Americans For Non-Smoker's Rights
+Philadelphia,PHL,39.5219,-75.1428,5841000,United States,USA,Urban agglomeration,0,Americans For Non-Smoker's Rights
+Phoenix,PHX,33.2603,-112.0029,3830000,United States,USA,Urban agglomeration,S,Americans For Non-Smoker's Rights
+San Francisco,SFO,37.3708,-122.2229,3681000,United States,USA,Urban agglomeration,S,Americans For Non-Smoker's Rights
+Washington D.C.,DCA,38.5107,-77.0215,4634000,United States,USA,Urban agglomeration,C,Americans For Non-Smoker's Rights

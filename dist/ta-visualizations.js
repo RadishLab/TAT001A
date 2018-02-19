@@ -37101,11 +37101,19 @@ var _Map = __webpack_require__(585);
 
 var _Map2 = _interopRequireDefault(_Map);
 
+var _Map3 = __webpack_require__(630);
+
+var _Map4 = _interopRequireDefault(_Map3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var figures = exports.figures = [{
   name: 'map',
   figureClass: _Map2.default,
+  type: 'map'
+}, {
+  name: 'map2',
+  figureClass: _Map4.default,
   type: 'map'
 }, {
   name: '2',
@@ -38691,11 +38699,19 @@ var _Map = __webpack_require__(597);
 
 var _Map2 = _interopRequireDefault(_Map);
 
+var _Map3 = __webpack_require__(631);
+
+var _Map4 = _interopRequireDefault(_Map3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var figures = exports.figures = [{
   name: 'map',
   figureClass: _Map2.default,
+  type: 'map'
+}, {
+  name: 'map2',
+  figureClass: _Map4.default,
   type: 'map'
 }, {
   name: '1',
@@ -42228,6 +42244,281 @@ var Chart1 = function (_BarChart) {
 }(_BarChart3.default);
 
 exports.default = Chart1;
+
+/***/ }),
+/* 630 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _d3Collection = __webpack_require__(8);
+
+var _d3Request = __webpack_require__(0);
+
+var _d3Scale = __webpack_require__(3);
+
+var _colors = __webpack_require__(4);
+
+var _WorldMap2 = __webpack_require__(10);
+
+var _WorldMap3 = _interopRequireDefault(_WorldMap2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Map2 = function (_WorldMap) {
+  _inherits(Map2, _WorldMap);
+
+  function Map2(parent, options) {
+    _classCallCheck(this, Map2);
+
+    var _this = _possibleConstructorReturn(this, (Map2.__proto__ || Object.getPrototypeOf(Map2)).call(this, parent, options));
+
+    _this.colorScale = (0, _d3Scale.scaleOrdinal)(_colors.schemeCategorySolutionMap.reverse());
+    _this.colorScaleType = 'ordinal';
+    _this.valueField = 'Key Code';
+    _this.keyCodeReversed = true;
+
+    _this.criteria = [{
+      header: 'Officially identified person in government or contracted by government  who is responsible for tobacco dependence treatment',
+      label: _this.getTranslation('Officially identified person in government or contracted by government who is responsible for tobacco dependence treatment')
+    }, {
+      header: 'Clearly identified budget for tobacco dependence treatment',
+      label: _this.getTranslation('Clearly identified budget for tobacco dependence treatment')
+    }, {
+      header: 'Official national tobacco treatment guidelines',
+      label: _this.getTranslation('Official national tobacco treatment guidelines')
+    }, {
+      header: 'Mass media campaigns promoting cessation',
+      label: _this.getTranslation('Mass media campaigns promoting cessation')
+    }, {
+      header: 'Offers help to healthcare workers and other relevant groups to stop using tobacco',
+      label: _this.getTranslation('Offers help to healthcare workers and other relevant groups to stop using tobacco')
+    }, {
+      header: 'Mandatory record of patients’ tobacco use in medical notes',
+      label: _this.getTranslation('Mandatory record of patients’ tobacco use in medical notes')
+    }, {
+      header: 'Free, national telephone tobacco quitline',
+      label: _this.getTranslation('Free, national telephone tobacco quitline')
+    }, {
+      header: 'Specialised tobacco dependence treatment services (experts or units/clinics) offering individual or group support delivered by trained professionals',
+      label: _this.getTranslation('Specialised tobacco dependence treatment services (experts or units/clinics) offering individual or group support delivered by trained professionals')
+    }];
+    return _this;
+  }
+
+  _createClass(Map2, [{
+    key: 'loadJoinData',
+    value: function loadJoinData() {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        (0, _d3Request.csv)(_this2.dataFileUrl('11-map2.csv'), function (csvData) {
+          var mappedData = csvData.map(function (d) {
+            d[_this2.valueField] = d['CESSATION INDEX'];
+            return d;
+          });
+          mappedData = mappedData.filter(function (d) {
+            return d[_this2.valueField] !== '';
+          });
+          var domain = (0, _d3Collection.set)(mappedData.map(function (d) {
+            return d[_this2.valueField];
+          })).values().sort();
+          _this2.colorScale.domain(domain);
+          resolve(mappedData);
+        });
+      });
+    }
+  }, {
+    key: 'join',
+    value: function join(countries, joinData) {
+      var _this3 = this;
+
+      countries.features.forEach(function (feature) {
+        var countryData = joinData.filter(function (row) {
+          return row.ISO3CODE === _this3.getISO3(feature);
+        });
+        if (countryData.length > 0) {
+          feature.properties.joined = countryData[0];
+        }
+      });
+      return countries;
+    }
+  }, {
+    key: 'tooltipContent',
+    value: function tooltipContent(d) {
+      var _this4 = this;
+
+      var country = d.properties.NAME;
+      if (country === 'United Kingdom') country = 'UK (England and Scotland only)';
+      var content = '<div class="country-name">' + country + '</div>';
+      if (d.properties.joined) {
+        console.log(d.properties.NAME, d.properties.joined);
+        content += '<ul class="tooltip-list tooltip-list-11-map2">';
+        this.criteria.forEach(function (criterion) {
+          if (d.properties.joined[criterion.header] === '1') {
+            content += '<li>' + criterion.label + '</li>';
+          }
+          if (d.properties.joined[criterion.header] === '0.5') {
+            content += '<li>' + criterion.label + ' (' + _this4.getTranslation('partial') + ')</li>';
+          }
+        });
+        content += '</ul>';
+      } else {
+        content += '<div class="data no-data">' + this.getTranslation('No data') + '</div>';
+      }
+      return content;
+    }
+  }]);
+
+  return Map2;
+}(_WorldMap3.default);
+
+exports.default = Map2;
+
+/***/ }),
+/* 631 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _d3Request = __webpack_require__(0);
+
+var _d3Scale = __webpack_require__(3);
+
+var _PointMap2 = __webpack_require__(192);
+
+var _PointMap3 = _interopRequireDefault(_PointMap2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Map2 = function (_PointMap) {
+  _inherits(Map2, _PointMap);
+
+  function Map2(parent, options) {
+    _classCallCheck(this, Map2);
+
+    var _this = _possibleConstructorReturn(this, (Map2.__proto__ || Object.getPrototypeOf(Map2)).call(this, parent, options));
+
+    _this.colorScale = (0, _d3Scale.scaleOrdinal)(['#356CB9', '#F79311', '#38AC90', '#505152']).domain(['N', 'S', 'C', '0']);
+    _this.categoryField = 'Smokefree';
+
+    _this.categories = {
+      '0': {
+        tooltip: _this.getTranslation('No comprehensive policy'),
+        legend: _this.getTranslation('No policy')
+      },
+      'N': {
+        tooltip: _this.getTranslation('Covered by national policy'),
+        legend: _this.getTranslation('National policy')
+      },
+      'S': {
+        tooltip: _this.getTranslation('Covered by state/province policy'),
+        legend: _this.getTranslation('State/province policy')
+      },
+      'C': {
+        tooltip: _this.getTranslation('Covered by municipal policy'),
+        legend: _this.getTranslation('Municipal policy')
+      }
+    };
+    return _this;
+  }
+
+  _createClass(Map2, [{
+    key: 'loadPointData',
+    value: function loadPointData() {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        (0, _d3Request.csv)(_this2.dataFileUrl('13-map2.csv'), function (csvData) {
+          var mappedData = csvData.map(function (d) {
+            d.Latitude = +d._y;
+            d.Longitude = +d._x;
+            return d;
+          }).filter(function (d) {
+            return d.Latitude && d.Longitude;
+          });
+          resolve(mappedData);
+        });
+      });
+    }
+  }, {
+    key: 'renderLegend',
+    value: function renderLegend() {
+      var _this3 = this;
+
+      var legendWidth = this.width / 7;
+      var legendHeight = 18;
+      var legendPadding = 3;
+      var legendItemList = Object.entries(this.categories);
+      var legendItemCount = legendItemList.length;
+
+      this.legendGroup = this.root.append('g').classed('legend', true).attr('transform', 'translate(' + (this.width - legendWidth) + ', 0)');
+
+      var legendItems = this.legendGroup.selectAll('rect').data(legendItemList).enter().append('g').attr('transform', function (d, i) {
+        var y = (legendHeight + legendPadding) * (legendItemCount - i);
+        return 'translate(0, ' + y + ')';
+      });
+
+      legendItems.append('rect').attr('width', legendWidth).attr('height', legendHeight).attr('fill', function (d) {
+        var keyCode = d[0];
+        return keyCode !== null ? _this3.colorScale(keyCode) : _this3.noDataColor;
+      });
+
+      legendItems.append('text').attr('x', 4).attr('y', 15).style('fill', function (d) {
+        if (d[0] === '0' || d[0] === 'N') return '#e8e8e8';
+        return '#585857';
+      }).text(function (d) {
+        return d[1].legend;
+      });
+    }
+  }, {
+    key: 'tooltipContent',
+    value: function tooltipContent(d) {
+      console.log(d);
+      var content = '<div class="header">' + d.City + '</div>';
+      content += '<div class="data">' + this.categories[d[this.categoryField]].tooltip + '</div>';
+      return content;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      _get(Map2.prototype.__proto__ || Object.getPrototypeOf(Map2.prototype), 'render', this).call(this);
+      this.renderLegend();
+    }
+  }]);
+
+  return Map2;
+}(_PointMap3.default);
+
+exports.default = Map2;
 
 /***/ })
 /******/ ]);
