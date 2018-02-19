@@ -39160,12 +39160,20 @@ var _Map = __webpack_require__(599);
 
 var _Map2 = _interopRequireDefault(_Map);
 
+var _Chart = __webpack_require__(632);
+
+var _Chart2 = _interopRequireDefault(_Chart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var figures = exports.figures = [{
   name: 'map',
   figureClass: _Map2.default,
   type: 'map'
+}, {
+  name: '4',
+  figureClass: _Chart2.default,
+  type: 'chart-vertical'
 }];
 
 /***/ }),
@@ -42519,6 +42527,130 @@ var Map2 = function (_PointMap) {
 }(_PointMap3.default);
 
 exports.default = Map2;
+
+/***/ }),
+/* 632 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _d3Array = __webpack_require__(5);
+
+var _d3Collection = __webpack_require__(8);
+
+var _d3Format = __webpack_require__(6);
+
+var _d3Request = __webpack_require__(0);
+
+var _d3Scale = __webpack_require__(3);
+
+var _colors = __webpack_require__(4);
+
+var _BarChartVertical2 = __webpack_require__(195);
+
+var _BarChartVertical3 = _interopRequireDefault(_BarChartVertical2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Chart4 = function (_BarChartVertical) {
+  _inherits(Chart4, _BarChartVertical);
+
+  function Chart4(parent, options) {
+    _classCallCheck(this, Chart4);
+
+    var _this = _possibleConstructorReturn(this, (Chart4.__proto__ || Object.getPrototypeOf(Chart4)).call(this, parent, options));
+
+    _this.figurePrefix = '14-4';
+    _this.yLabel = null;
+    _this.xLabel = _this.getTranslation('Number of Facebook users (millions)');
+    _this.xAxisTickFormat = (0, _d3Format.format)('d');
+    _this.yAxisTickFormat = _this.getTranslation.bind(_this);
+    _this.legendItems = [];
+    return _this;
+  }
+
+  _createClass(Chart4, [{
+    key: 'loadData',
+    value: function loadData() {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        (0, _d3Request.csv)(_this2.dataFileUrl('14-4.csv'), function (csvData) {
+          resolve(csvData.map(function (d) {
+            d.country = d['Countries with the most Facebook users, January 2018'];
+            d.value = +d['Number of Facebook users in millions'];
+            return d;
+          }));
+        });
+      });
+    }
+  }, {
+    key: 'createMargin',
+    value: function createMargin() {
+      var margin = _get(Chart4.prototype.__proto__ || Object.getPrototypeOf(Chart4.prototype), 'createMargin', this).call(this);
+      margin.left = this.options.web ? 150 : 80;
+      margin.bottom = this.options.web ? 50 : 38;
+      return margin;
+    }
+  }, {
+    key: 'createXScale',
+    value: function createXScale() {
+      var values = this.data.map(function (d) {
+        return d.value;
+      });
+      var xExtent = [(0, _d3Array.min)(values.concat(0)), (0, _d3Array.max)(values)];
+      return (0, _d3Scale.scaleLinear)().range([0, this.chartWidth]).domain(xExtent);
+    }
+  }, {
+    key: 'createYScale',
+    value: function createYScale() {
+      var values = (0, _d3Collection.set)(this.data.map(function (d) {
+        return d.country;
+      })).values().reverse();
+      return (0, _d3Scale.scaleBand)().range([this.chartHeight, 0]).padding(0.5).domain(values);
+    }
+  }, {
+    key: 'renderBars',
+    value: function renderBars() {
+      var _this3 = this;
+
+      var barGroups = this.createBarGroups();
+      var barHeight = this.y.bandwidth();
+
+      barGroups.append('rect').classed('bar', true).attr('x', 0).attr('width', function (d) {
+        return _this3.x(d.value);
+      }).attr('y', function (d) {
+        return _this3.y(d.country);
+      }).attr('height', barHeight).attr('fill', function (d) {
+        return _this3.colors('facebook users');
+      });
+    }
+  }, {
+    key: 'createZScale',
+    value: function createZScale() {
+      return (0, _d3Scale.scaleOrdinal)(_colors.schemeCategorySolution).domain(['facebook users']);
+    }
+  }]);
+
+  return Chart4;
+}(_BarChartVertical3.default);
+
+exports.default = Chart4;
 
 /***/ })
 /******/ ]);
