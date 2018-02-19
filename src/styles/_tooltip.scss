@@ -27,4 +27,16 @@
   .header {
     font-weight: bold;
   }
+
+  .tooltip-list {
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 3px;
+    }
+
+    &-11-map2 {
+      font-size: 12px;
+    }
+  }
 }
