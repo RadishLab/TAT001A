@@ -142,7 +142,6 @@ export default class Chart1 extends Chart {
   }
 
   tooltipContent(d, whisker) {
-    console.log(d);
     let content = `<div class="header">${d.key}</div>`;
     content += `<div class="data">${this.getTranslation('Median')}: ${d.value.children.median}%</div>`;
     content += `<div class="data">${this.getTranslation('Range')}: ${d.value.children.min}% - ${d.value.children.max}%</div>`;
