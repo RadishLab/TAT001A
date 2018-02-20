@@ -891,25 +891,18 @@ var WorldMap = function (_Visualization) {
       this.legendGroup.append('text').text(extent[1]).style('text-anchor', 'end').attr('transform', 'translate(' + (legendWidth - 2) + ', 18)');
     }
   }, {
-    key: 'renderLegend',
-    value: function renderLegend() {
+    key: 'renderLegendWithItems',
+    value: function renderLegendWithItems(items) {
       var _this6 = this;
-
-      if (this.colorScaleType === 'linear') {
-        this.renderLinearLegend();
-        return;
-      }
-      if (!this.legend) return;
 
       var legendWidth = this.width / 7;
       var legendHeight = 18;
       var legendPadding = 3;
-      var legendItemList = this.getLegendItems();
-      var legendItemCount = legendItemList.length;
+      var legendItemCount = items.length;
 
       this.legendGroup = this.root.append('g').classed('legend', true).attr('transform', 'translate(' + (this.width - legendWidth) + ', 0)');
 
-      var legendItems = this.legendGroup.selectAll('rect').data(legendItemList).enter().append('g').attr('transform', function (d, i) {
+      var legendItems = this.legendGroup.selectAll('rect').data(items).enter().append('g').attr('transform', function (d, i) {
         var y = (legendHeight + legendPadding) * (legendItemCount - i);
         return 'translate(0, ' + y + ')';
       });
@@ -922,6 +915,16 @@ var WorldMap = function (_Visualization) {
       legendItems.append('text').attr('x', 4).attr('y', 15).text(function (d) {
         return d[1];
       });
+    }
+  }, {
+    key: 'renderLegend',
+    value: function renderLegend() {
+      if (this.colorScaleType === 'linear') {
+        this.renderLinearLegend();
+        return;
+      }
+      if (!this.legend) return;
+      this.renderLegendWithItems(this.getLegendItems());
     }
   }, {
     key: 'render',
@@ -38872,6 +38875,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -38901,7 +38906,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Map2 = function (_WorldMap) {
   _inherits(Map2, _WorldMap);
 
-  // TODO finish based on client response
   function Map2(parent, options) {
     _classCallCheck(this, Map2);
 
@@ -38911,18 +38915,117 @@ var Map2 = function (_WorldMap) {
     _this.colorScaleType = 'ordinal';
 
     _this.filters = [{
-      group: 'gender',
-      values: [{ label: _this.getTranslation('male'), value: 'male' }, { label: _this.getTranslation('female'), value: 'female' }]
+      group: 'measure',
+      values: [{ label: _this.getTranslation('price'), value: 'price' }, { label: _this.getTranslation('tax'), value: 'tax' }, { label: _this.getTranslation('affordability'), value: 'afford' }]
+    }, {
+      group: 'year',
+      values: [{ label: '2008', value: '2008' }, { label: '2010', value: '2010' }, { label: '2012', value: '2012' }, { label: '2014', value: '2014' }, { label: '2016', value: '2016' }]
     }];
 
     _this.filterColumns = [{
-      gender: 'male',
-      keyCode: 'Male-KeyCode'
+      measure: 'price',
+      year: '2008',
+      keyCode: '2008 price key',
+      tooltipColumn: '2008 price of 20-cigarette pack of the most-sold brand in US dollars; adjusted for purchasing power of national currencies'
     }, {
-      gender: 'female',
-      keyCode: 'Female-KeyCode'
+      measure: 'price',
+      year: '2010',
+      keyCode: '2010 price key',
+      tooltipColumn: '2010 price of 20-cigarette pack of the most-sold brand in US dollars; adjusted for purchasing power of national currencies'
+    }, {
+      measure: 'price',
+      year: '2012',
+      keyCode: '2012 price key',
+      tooltipColumn: '2012 price of 20-cigarette pack of the most-sold brand in US dollars; adjusted for purchasing power of national currencies'
+    }, {
+      measure: 'price',
+      year: '2014',
+      keyCode: '2014 price key',
+      tooltipColumn: '2014 price of 20-cigarette pack of the most-sold brand in US dollars; adjusted for purchasing power of national currencies'
+    }, {
+      measure: 'price',
+      year: '2016',
+      keyCode: '2016 price key',
+      tooltipColumn: '2016 price of 20-cigarette pack of the most-sold brand in US dollars; adjusted for purchasing power of national currencies'
+    }, {
+      measure: 'tax',
+      year: '2008',
+      keyCode: '2008 tax key',
+      tooltipColumn: '2008 total excise tax as a % of price of the most sold brand'
+    }, {
+      measure: 'tax',
+      year: '2010',
+      keyCode: '2010 tax key',
+      tooltipColumn: '2010 total excise tax as a % of price of the most sold brand'
+    }, {
+      measure: 'tax',
+      year: '2012',
+      keyCode: '2012 tax key',
+      tooltipColumn: '2012 total excise tax as a % of price of the most sold brand'
+    }, {
+      measure: 'tax',
+      year: '2014',
+      keyCode: '2014 tax key',
+      tooltipColumn: '2014 total excise tax as a % of price of the most sold brand'
+    }, {
+      measure: 'tax',
+      year: '2016',
+      keyCode: '2016 tax key',
+      tooltipColumn: '2016 total excise tax as a % of price of the most sold brand'
+    }, {
+      measure: 'afford',
+      year: '2008',
+      keyCode: '2008 afford key',
+      tooltipColumn: '2008 affordability of cigarettes;  % of GDP per capita required to purchase 2000 cigarettes of the most popular brand'
+    }, {
+      measure: 'afford',
+      year: '2010',
+      keyCode: '2010 afford key',
+      tooltipColumn: '2010 affordability of cigarettes;  % of GDP per capita required to purchase 2000 cigarettes of the most popular brand'
+    }, {
+      measure: 'afford',
+      year: '2012',
+      keyCode: '2012 afford key',
+      tooltipColumn: '2012 affordability of cigarettes;  % of GDP per capita required to purchase 2000 cigarettes of the most popular brand'
+    }, {
+      measure: 'afford',
+      year: '2014',
+      keyCode: '2014 afford key',
+      tooltipColumn: '2014 affordability of cigarettes;  % of GDP per capita required to purchase 2000 cigarettes of the most popular brand'
+    }, {
+      measure: 'afford',
+      year: '2016',
+      keyCode: '2016 afford key',
+      tooltipColumn: '2016 affordability of cigarettes;  % of GDP per capita required to purchase 2000 cigarettes of the most popular brand'
     }];
-    _this.filterState = { gender: 'male' };
+    _this.filterState = { measure: 'price', year: '2016' };
+
+    _this.legends = {
+      price: {
+        '1': '< $2',
+        '2': '$2 - $3.99',
+        '3': '$4 - $5.99',
+        '4': '$6 - $7.99',
+        '5': '$8 - $9.99',
+        '6': '$10+'
+      },
+      tax: {
+        '1': '0%',
+        '2': '1% - 15%',
+        '3': '16% - 30%',
+        '4': '31% - 45%',
+        '5': '46% - 60%',
+        '6': '61%+'
+      },
+      afford: {
+        '1': '0% - 0.015%',
+        '2': '0.016% - 0.035%',
+        '3': '0.036% - 0.055%',
+        '4': '0.056% - 0.075%',
+        '5': '0.076% - 0.095%',
+        '6': '0.096%+'
+      }
+    };
     return _this;
   }
 
@@ -38951,7 +39054,7 @@ var Map2 = function (_WorldMap) {
 
       countries.features.forEach(function (feature) {
         var countryData = joinData.filter(function (row) {
-          return row.ISO3 === _this3.getISO3(feature);
+          return row['ISO3 CODE'] === _this3.getISO3(feature);
         });
         if (countryData.length > 0) {
           feature.properties.joined = countryData[0];
@@ -38960,14 +39063,69 @@ var Map2 = function (_WorldMap) {
       return countries;
     }
   }, {
+    key: 'updateFilters',
+    value: function updateFilters(selectedFilter) {
+      var _this4 = this;
+
+      // Update filter state and buttons
+      this.filterState = _extends({}, this.filterState, selectedFilter);
+      this.filtersContainer.selectAll('button').classed('selected', function (d) {
+        return _this4.filterState[d.group] === d.value;
+      });
+
+      // Look for columns that should be associated with the given filter state
+      var matchingColumn = this.filterColumns.filter(function (column) {
+        return Object.keys(_this4.filterState).every(function (key) {
+          return _this4.filterState[key] === column[key];
+        });
+      })[0];
+
+      // Different legend by selected measure
+      var legendItems = Object.entries(this.legends[matchingColumn.measure]);
+      legendItems.unshift([null, this.getTranslation('No data')]);
+      this.renderLegendWithItems(legendItems);
+
+      // Update fill with the matching filters
+      if (matchingColumn && matchingColumn.keyCode) {
+        this.countries.selectAll('.country .country-fill').transition().duration(300).style('fill', function (d) {
+          if (!d.properties.joined) return _this4.noDataColor;
+          return _this4.colorScale(d.properties.joined[matchingColumn.keyCode]);
+        });
+      }
+    }
+  }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
+      var _this5 = this;
+
       var content = '<div class="country-name">' + d.properties.NAME + '</div>';
-      var deathFormat = (0, _d3Format.format)(',d');
-      var percentFormat = (0, _d3Format.format)('.1f');
-      if (d.properties.joined) {
-        content += '<div class="data">' + this.getTranslation('Male') + ': ' + deathFormat(d.properties.joined['Male-No. Tobacco-related Deaths']) + ' ' + this.getTranslation('deaths') + ' (' + percentFormat(d.properties.joined['Male-% Tobacco-related Deaths']) + '%)</div>';
-        content += '<div class="data">' + this.getTranslation('Female') + ': ' + deathFormat(d.properties.joined['Female-No. Tobacco-related Deaths']) + ' ' + this.getTranslation('deaths') + ' (' + percentFormat(d.properties.joined['Female-% Tobacco-related Deaths']) + '%)</div>';
+
+      var matchingColumn = this.filterColumns.filter(function (column) {
+        return Object.keys(_this5.filterState).every(function (key) {
+          return _this5.filterState[key] === column[key];
+        });
+      })[0];
+
+      var formatters = {
+        price: function price(d) {
+          return '$' + (0, _d3Format.format)('.2f')(d);
+        },
+        tax: function tax(d) {
+          return (0, _d3Format.format)('.1f')(d * 100) + '%';
+        },
+        afford: function afford(d) {
+          return (0, _d3Format.format)('.2f')(d) + '%';
+        }
+      };
+
+      var labels = {
+        price: this.getTranslation('Price of a pack of cigarettes'),
+        tax: this.getTranslation('Tax as percent of price'),
+        afford: this.getTranslation('Percent of GDP per capita to buy 2000 cigarettes')
+      };
+
+      if (d.properties.joined && matchingColumn) {
+        content += '<div class="data">' + labels[matchingColumn.measure] + ': ' + formatters[matchingColumn.measure](d.properties.joined[matchingColumn.tooltipColumn]) + '</div>';
       } else {
         content += '<div class="data no-data">' + this.getTranslation('No data') + '</div>';
       }
@@ -38977,6 +39135,9 @@ var Map2 = function (_WorldMap) {
     key: 'render',
     value: function render() {
       _get(Map2.prototype.__proto__ || Object.getPrototypeOf(Map2.prototype), 'render', this).call(this);
+      var legendItems = Object.entries(this.legends.price);
+      legendItems.unshift([null, this.getTranslation('No data')]);
+      this.renderLegendWithItems(legendItems);
       this.renderFilters();
     }
   }]);

@@ -209,25 +209,18 @@ export default class WorldMap extends Visualization {
       .attr('transform', `translate(${legendWidth - 2}, 18)`);
   }
 
-  renderLegend() {
-    if (this.colorScaleType === 'linear') {
-      this.renderLinearLegend();
-      return;
-    }
-    if (!this.legend) return;
-
+  renderLegendWithItems(items) {
     const legendWidth = this.width / 7;
     const legendHeight = 18;
     const legendPadding = 3;
-    const legendItemList = this.getLegendItems();
-    const legendItemCount = legendItemList.length;
+    const legendItemCount = items.length;
 
     this.legendGroup = this.root.append('g')
       .classed('legend', true)
       .attr('transform', `translate(${this.width - legendWidth}, 0)`);
 
     const legendItems = this.legendGroup.selectAll('rect')
-      .data(legendItemList)
+      .data(items)
       .enter().append('g')
       .attr('transform', (d, i) => {
         const y = (legendHeight + legendPadding) * (legendItemCount - i);
@@ -246,6 +239,15 @@ export default class WorldMap extends Visualization {
       .attr('x', 4)
       .attr('y', 15)
       .text(d => d[1]);
+  }
+
+  renderLegend() {
+    if (this.colorScaleType === 'linear') {
+      this.renderLinearLegend();
+      return;
+    }
+    if (!this.legend) return;
+    this.renderLegendWithItems(this.getLegendItems());
   }
 
   render() {
