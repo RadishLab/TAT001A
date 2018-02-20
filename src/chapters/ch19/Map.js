@@ -1,3 +1,4 @@
+import { extent } from 'd3-array';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear } from 'd3-scale';
@@ -10,12 +11,19 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.valueField = 'Average score for POWER';
     this.symbolField = 'Symbol - prevalence decline in the highest-performing countries';
+    this.colorScaleType = 'linear';
     this.colorScale = scaleLinear()
       .domain([0, 1])
       .range([
         schemeCategorySolutionMap[0],
         schemeCategorySolutionMap.slice(-1)[0],
       ]);
+  }
+
+  formatExtent() {
+    const valueExtent = extent(this.countriesGeojson.features.filter(d => d.properties.joined), d => d.properties.joined[this.valueField]);
+    return valueExtent
+      .map(d => format('.1f')(d));
   }
 
   loadJoinData() {
