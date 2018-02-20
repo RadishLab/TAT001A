@@ -1,3 +1,4 @@
+import { extent } from 'd3-array';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear } from 'd3-scale';
@@ -8,6 +9,7 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
+    this.colorScaleType = 'linear';
     this.colorScale = scaleLinear()
       .domain([0, 1])
       .range([
@@ -38,6 +40,13 @@ export default class Map extends WorldMap {
       }
     });
     return countries;
+  }
+
+  formatExtent() {
+    const valueExtent = extent(this.countriesGeojson.features.filter(d => d.properties.joined), d => d.properties.joined[this.valueField]);
+    return valueExtent
+      .map(d => format('.1%')(d))
+      .map(d => d === '0.0%' ? '0%' : d);
   }
 
   tooltipContent(d) {
