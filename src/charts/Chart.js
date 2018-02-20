@@ -217,7 +217,13 @@ export default class Chart extends Visualization {
       .classed('legend', true)
       .attr('transform', () => {
         let xOffset = 15;
-        let yOffset = this.chartHeight + this.legendYOffset;
+        let yOffset;
+        if (this.legendYOffset) {
+          yOffset = this.chartHeight + this.legendYOffset;
+        }
+        else {
+          yOffset = this.chartHeight + 25 + this.root.select('.axis-x').node().getBBox().height;
+        }
         return `translate(${xOffset}, ${yOffset})`;
       });
 
