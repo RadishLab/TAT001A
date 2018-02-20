@@ -1,6 +1,7 @@
 import { geoNaturalEarth1, geoPath } from 'd3-geo';
 import { csv, json as d3json  } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
+import { event as currentEvent } from 'd3-selection';
 import * as topojson from 'topojson-client';
 
 import { mapNoData, schemeCategoryProblem } from '../../colors';
@@ -78,7 +79,22 @@ export default class Map extends PointMap {
         .classed('point', true);
     point.append('circle')
       .style('fill', d => this.colorScale(d[this.categoryField]))
-      .attr('r', 3)
-      .attr("transform", d => `translate(${this.projection([d.Longitude, d.Latitude])})`);
+      .attr('r', 8)
+      .attr('transform', d => `translate(${this.projection([d.Longitude, d.Latitude])})`)
+      .on('mouseover', d => {
+        this.tooltip
+          .html(this.tooltipContent(d))
+          .classed('visible', true)
+          .style('top', `${currentEvent.layerY + 10}px`)
+          .style('left', `${currentEvent.layerX + 10}px`);
+      })
+      .on('mouseout', d => {
+        this.tooltip.classed('visible', false);
+      });
+  }
+
+  tooltipContent(d) {
+    let content = `<div class="header">${d.city}</div>`;
+    return content;
   }
 }
