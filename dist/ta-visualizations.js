@@ -41302,6 +41302,8 @@ var _d3Request = __webpack_require__(0);
 
 var _d3Scale = __webpack_require__(1);
 
+var _d3Selection = __webpack_require__(13);
+
 var _topojsonClient = __webpack_require__(64);
 
 var topojson = _interopRequireWildcard(_topojsonClient);
@@ -41397,9 +41399,19 @@ var Map = function (_PointMap) {
       var point = this.points.selectAll('.point').data(this.pointData).enter().append('g').classed('point', true);
       point.append('circle').style('fill', function (d) {
         return _this4.colorScale(d[_this4.categoryField]);
-      }).attr('r', 3).attr("transform", function (d) {
+      }).attr('r', 8).attr('transform', function (d) {
         return 'translate(' + _this4.projection([d.Longitude, d.Latitude]) + ')';
+      }).on('mouseover', function (d) {
+        _this4.tooltip.html(_this4.tooltipContent(d)).classed('visible', true).style('top', _d3Selection.event.layerY + 10 + 'px').style('left', _d3Selection.event.layerX + 10 + 'px');
+      }).on('mouseout', function (d) {
+        _this4.tooltip.classed('visible', false);
       });
+    }
+  }, {
+    key: 'tooltipContent',
+    value: function tooltipContent(d) {
+      var content = '<div class="header">' + d.city + '</div>';
+      return content;
     }
   }]);
 
@@ -42082,6 +42094,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _d3Array = __webpack_require__(5);
+
 var _d3Format = __webpack_require__(6);
 
 var _d3Request = __webpack_require__(0);
@@ -42110,6 +42124,7 @@ var Map = function (_WorldMap) {
 
     var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, parent, options));
 
+    _this.colorScaleType = 'linear';
     _this.colorScale = (0, _d3Scale.scaleLinear)().domain([0, 1]).range([_colors.schemeCategoryProblemMap[0], _colors.schemeCategoryProblemMap.slice(-1)[0]]);
     _this.valueField = 'TA6 Data';
     return _this;
@@ -42145,6 +42160,22 @@ var Map = function (_WorldMap) {
         }
       });
       return countries;
+    }
+  }, {
+    key: 'formatExtent',
+    value: function formatExtent() {
+      var _this4 = this;
+
+      var valueExtent = (0, _d3Array.extent)(this.countriesGeojson.features.filter(function (d) {
+        return d.properties.joined;
+      }), function (d) {
+        return d.properties.joined[_this4.valueField];
+      });
+      return valueExtent.map(function (d) {
+        return (0, _d3Format.format)('.1%')(d);
+      }).map(function (d) {
+        return d === '0.0%' ? '0%' : d;
+      });
     }
   }, {
     key: 'tooltipContent',
@@ -42421,6 +42452,7 @@ var Chart3 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart3.prototype.__proto__ || Object.getPrototypeOf(Chart3.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 43 : 50;
+      if (this.options.web) margin.bottom = 80;
       return margin;
     }
   }, {
@@ -42575,7 +42607,7 @@ var Chart3 = function (_LineChart) {
     key: 'createMargin',
     value: function createMargin() {
       var margin = _get(Chart3.prototype.__proto__ || Object.getPrototypeOf(Chart3.prototype), 'createMargin', this).call(this);
-      margin.right = 10;
+      margin.right = this.options.web ? 25 : 10;
       margin.top = 5;
       return margin;
     }
@@ -42982,6 +43014,7 @@ var Chart1 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart1.prototype.__proto__ || Object.getPrototypeOf(Chart1.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 43 : 50;
+      if (this.options.web) margin.bottom = 80;
       return margin;
     }
   }, {
