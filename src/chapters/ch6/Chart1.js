@@ -176,34 +176,27 @@ export default class Chart1 extends BarChart {
   }
 
   renderLinesBetweenBars() {
-    const tobaccoRelatedBars = this.root.selectAll('.bar.tobacco-related');
-    const tobaccoUseBars = this.root.selectAll('.bar.tobacco-use');
-    const lineCreator = line()
-      .x(d => d.x)
-      .y(d => d.y);
-
     const tobaccoLines = [];
-    tobaccoRelatedBars.each((d, i, nodes) => {
+    this.root.selectAll('.bar.tobacco-related').each(d => {
       if (d.disease) {
-        const diseaseRect = nodes[i].getBoundingClientRect();
-        const tobaccoUseRect = tobaccoUseBars
-          .filter(tobaccoUseD => tobaccoUseD.disease === d.disease)
-          .node().getBoundingClientRect();
-
         tobaccoLines.push([
           {
             disease: d.disease,
             x: this.x(d.disease) + this.x.bandwidth(),
-            y: diseaseRect.top - 10 + diseaseRect.height / 2
+            y: this.y(d.notTobaccoRelated + d.tobaccoRelated / 2)
           },
           {
             disease: d.disease,
             x: this.x('Tobacco use'),
-            y: tobaccoUseRect.top - 10 + (tobaccoUseRect.height / 2)
+            y: this.y(d.tobaccoRelated + d.deathsUnder - (d.tobaccoRelated / 2))
           }
         ]);
       }
     });
+
+    const lineCreator = line()
+      .x(d => d.x)
+      .y(d => d.y);
 
     const lineGroup = this.root.append('g').classed('tobacco-death-lines', true);
     lineGroup.selectAll('.line')
