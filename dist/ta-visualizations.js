@@ -2529,7 +2529,12 @@ var Chart = function (_Visualization) {
       });
       var legend = this.parent.append('g').classed('legend', true).attr('transform', function () {
         var xOffset = 15;
-        var yOffset = _this6.chartHeight + _this6.legendYOffset;
+        var yOffset = void 0;
+        if (_this6.legendYOffset) {
+          yOffset = _this6.chartHeight + _this6.legendYOffset;
+        } else {
+          yOffset = _this6.chartHeight + 25 + _this6.root.select('.axis-x').node().getBBox().height;
+        }
         return 'translate(' + xOffset + ', ' + yOffset + ')';
       });
 
@@ -34538,32 +34543,25 @@ var Chart1 = function (_BarChart) {
     value: function renderLinesBetweenBars() {
       var _this4 = this;
 
-      var tobaccoRelatedBars = this.root.selectAll('.bar.tobacco-related');
-      var tobaccoUseBars = this.root.selectAll('.bar.tobacco-use');
+      var tobaccoLines = [];
+      this.root.selectAll('.bar.tobacco-related').each(function (d) {
+        if (d.disease) {
+          tobaccoLines.push([{
+            disease: d.disease,
+            x: _this4.x(d.disease) + _this4.x.bandwidth(),
+            y: _this4.y(d.notTobaccoRelated + d.tobaccoRelated / 2)
+          }, {
+            disease: d.disease,
+            x: _this4.x('Tobacco use'),
+            y: _this4.y(d.tobaccoRelated + d.deathsUnder - d.tobaccoRelated / 2)
+          }]);
+        }
+      });
+
       var lineCreator = (0, _d3Shape.line)().x(function (d) {
         return d.x;
       }).y(function (d) {
         return d.y;
-      });
-
-      var tobaccoLines = [];
-      tobaccoRelatedBars.each(function (d, i, nodes) {
-        if (d.disease) {
-          var diseaseRect = nodes[i].getBoundingClientRect();
-          var tobaccoUseRect = tobaccoUseBars.filter(function (tobaccoUseD) {
-            return tobaccoUseD.disease === d.disease;
-          }).node().getBoundingClientRect();
-
-          tobaccoLines.push([{
-            disease: d.disease,
-            x: _this4.x(d.disease) + _this4.x.bandwidth(),
-            y: diseaseRect.top - 10 + diseaseRect.height / 2
-          }, {
-            disease: d.disease,
-            x: _this4.x('Tobacco use'),
-            y: tobaccoUseRect.top - 10 + tobaccoUseRect.height / 2
-          }]);
-        }
       });
 
       var lineGroup = this.root.append('g').classed('tobacco-death-lines', true);
@@ -34758,6 +34756,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _d3Array = __webpack_require__(5);
+
 var _d3Format = __webpack_require__(6);
 
 var _d3Request = __webpack_require__(0);
@@ -34787,17 +34787,34 @@ var Map = function (_WorldMap) {
     var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, parent, options));
 
     _this.valueField = 'Percent of DALYs due to tobacco';
+    _this.colorScaleType = 'linear';
     _this.colorScale = (0, _d3Scale.scaleLinear)().domain([0, 1]).range([_colors.schemeCategoryProblemMap[0], _colors.schemeCategoryProblemMap.slice(-1)[0]]);
     return _this;
   }
 
   _createClass(Map, [{
-    key: 'loadJoinData',
-    value: function loadJoinData() {
+    key: 'formatExtent',
+    value: function formatExtent() {
       var _this2 = this;
 
+      var valueExtent = (0, _d3Array.extent)(this.countriesGeojson.features.filter(function (d) {
+        return d.properties.joined;
+      }), function (d) {
+        return d.properties.joined[_this2.valueField];
+      });
+      return valueExtent.map(function (d) {
+        return (0, _d3Format.format)('.1%')(d);
+      }).map(function (d) {
+        return d === '0.0%' ? '0%' : d;
+      });
+    }
+  }, {
+    key: 'loadJoinData',
+    value: function loadJoinData() {
+      var _this3 = this;
+
       return new Promise(function (resolve, reject) {
-        (0, _d3Request.csv)(_this2.dataFileUrl('6-map.csv'), function (csvData) {
+        (0, _d3Request.csv)(_this3.dataFileUrl('6-map.csv'), function (csvData) {
           resolve(csvData);
         });
       });
@@ -34805,11 +34822,11 @@ var Map = function (_WorldMap) {
   }, {
     key: 'join',
     value: function join(countries, joinData) {
-      var _this3 = this;
+      var _this4 = this;
 
       countries.features.forEach(function (feature) {
         var countryData = joinData.filter(function (row) {
-          return row.ISO3 === _this3.getISO3(feature);
+          return row.ISO3 === _this4.getISO3(feature);
         });
         if (countryData.length > 0) {
           feature.properties.joined = countryData[0];
@@ -35738,7 +35755,7 @@ var Chart4 = exports.Chart4 = function (_BarChart) {
     _this.yLabel = _this.getTranslation('Lung cancer mortality rate (per 100,000)');
     _this.yTicks = 6;
     _this.legendItems = [{ label: _this.getTranslation('Poland (2011)'), value: 'Poland (2011)' }, { label: _this.getTranslation('United States, non-Hispanic whites (2010)'), value: 'United States, non-Hispanic whites (2010)' }];
-    _this.legendYOffset = 50;
+    _this.legendYOffset = _this.options.web ? 120 : 50;
     _this.yLabelOffset = 10;
     return _this;
   }
@@ -35777,6 +35794,7 @@ var Chart4 = exports.Chart4 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart4.prototype.__proto__ || Object.getPrototypeOf(Chart4.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 52 : 60;
+      if (this.options.web) margin.bottom = 110;
       return margin;
     }
   }, {
@@ -36768,6 +36786,7 @@ var Chart1 = function (_BarChart) {
     _this.legendItems = [{ label: '2007', value: '2007' }, { label: '2014', value: '2014' }];
     _this.xAxisTickFormat = _this.getTranslation.bind(_this);
     _this.yAxisTickFormat = (0, _d3Format.format)('d');
+    _this.legendYOffset = null;
     return _this;
   }
 
@@ -36791,6 +36810,7 @@ var Chart1 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart1.prototype.__proto__ || Object.getPrototypeOf(Chart1.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 60;
+      if (this.options.web) margin.bottom = 120;
       return margin;
     }
   }, {
@@ -36836,6 +36856,13 @@ var Chart1 = function (_BarChart) {
       var colors = _colors.schemeCategorySolution.slice();
       colors[1] = '#00a792';
       return (0, _d3Scale.scaleOrdinal)(colors);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      _get(Chart1.prototype.__proto__ || Object.getPrototypeOf(Chart1.prototype), 'render', this).call(this);
+
+      this.root.selectAll('.axis-x .tick').style('font-size', '14px');
     }
   }]);
 
@@ -36920,6 +36947,7 @@ var Chart3 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart3.prototype.__proto__ || Object.getPrototypeOf(Chart3.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 30 : 30;
+      if (this.options.web) margin.bottom = 80;
       return margin;
     }
   }, {
@@ -38014,6 +38042,7 @@ var Chart3 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart3.prototype.__proto__ || Object.getPrototypeOf(Chart3.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 43 : 50;
+      if (this.options.web) margin.bottom = 80;
       return margin;
     }
   }, {
@@ -38322,6 +38351,7 @@ var Chart5 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart5.prototype.__proto__ || Object.getPrototypeOf(Chart5.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 50;
+      if (this.options.web) margin.bottom = 80;
       margin.top = 5;
       return margin;
     }
@@ -38468,6 +38498,10 @@ var Chart6 = function (_LineChart) {
       margin.right = 30;
       margin.bottom = this.legendOrientation() === 'horizontal' ? 42 : 60;
       margin.top = 5;
+      if (this.options.web) {
+        margin.bottom = 80;
+        margin.right = 60;
+      }
       return margin;
     }
   }, {
@@ -38667,6 +38701,7 @@ var Chart7 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart7.prototype.__proto__ || Object.getPrototypeOf(Chart7.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 43 : 50;
+      if (this.options.web) margin.bottom = 80;
       return margin;
     }
   }, {
@@ -39273,6 +39308,7 @@ var Chart5 = function (_BarChart) {
     value: function createMargin() {
       var margin = _get(Chart5.prototype.__proto__ || Object.getPrototypeOf(Chart5.prototype), 'createMargin', this).call(this);
       margin.bottom = this.legendOrientation() === 'horizontal' ? 10 : 10;
+      if (this.options.web) margin.bottom = 40;
       return margin;
     }
   }, {
@@ -40225,6 +40261,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _d3Array = __webpack_require__(5);
+
 var _d3Format = __webpack_require__(6);
 
 var _d3Request = __webpack_require__(0);
@@ -40255,19 +40293,34 @@ var Map = function (_WorldMap) {
 
     _this.valueField = 'Average score for POWER';
     _this.symbolField = 'Symbol - prevalence decline in the highest-performing countries';
+    _this.colorScaleType = 'linear';
     _this.colorScale = (0, _d3Scale.scaleLinear)().domain([0, 1]).range([_colors.schemeCategorySolutionMap[0], _colors.schemeCategorySolutionMap.slice(-1)[0]]);
     return _this;
   }
 
   _createClass(Map, [{
-    key: 'loadJoinData',
-    value: function loadJoinData() {
+    key: 'formatExtent',
+    value: function formatExtent() {
       var _this2 = this;
 
+      var valueExtent = (0, _d3Array.extent)(this.countriesGeojson.features.filter(function (d) {
+        return d.properties.joined;
+      }), function (d) {
+        return d.properties.joined[_this2.valueField];
+      });
+      return valueExtent.map(function (d) {
+        return (0, _d3Format.format)('.1f')(d);
+      });
+    }
+  }, {
+    key: 'loadJoinData',
+    value: function loadJoinData() {
+      var _this3 = this;
+
       return new Promise(function (resolve, reject) {
-        (0, _d3Request.csv)(_this2.dataFileUrl('19-map.csv'), function (csvData) {
+        (0, _d3Request.csv)(_this3.dataFileUrl('19-map.csv'), function (csvData) {
           var mappedData = csvData.map(function (d) {
-            d[_this2.valueField] = +d[_this2.valueField];
+            d[_this3.valueField] = +d[_this3.valueField];
             return d;
           });
           resolve(mappedData);
@@ -40277,11 +40330,11 @@ var Map = function (_WorldMap) {
   }, {
     key: 'join',
     value: function join(countries, joinData) {
-      var _this3 = this;
+      var _this4 = this;
 
       countries.features.forEach(function (feature) {
         var countryData = joinData.filter(function (row) {
-          return row.iso3code === _this3.getISO3(feature);
+          return row.iso3code === _this4.getISO3(feature);
         });
         if (countryData.length > 0) {
           feature.properties.joined = countryData[0];
@@ -42595,13 +42648,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Map3a = function (_WorldMap) {
-  _inherits(Map3a, _WorldMap);
+var Map = function (_WorldMap) {
+  _inherits(Map, _WorldMap);
 
-  function Map3a(parent, options) {
-    _classCallCheck(this, Map3a);
+  function Map(parent, options) {
+    _classCallCheck(this, Map);
 
-    var _this = _possibleConstructorReturn(this, (Map3a.__proto__ || Object.getPrototypeOf(Map3a)).call(this, parent, options));
+    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, parent, options));
 
     _this.colorScaleType = 'linear';
     _this.colorScale = (0, _d3Scale.scaleLinear)().domain([0, 1]).range([_colors.schemeCategoryProblemMap[0], _colors.schemeCategoryProblemMap.slice(-1)[0]]);
@@ -42609,7 +42662,7 @@ var Map3a = function (_WorldMap) {
     return _this;
   }
 
-  _createClass(Map3a, [{
+  _createClass(Map, [{
     key: 'formatExtent',
     value: function formatExtent() {
       var _this2 = this;
@@ -42677,10 +42730,10 @@ var Map3a = function (_WorldMap) {
     }
   }]);
 
-  return Map3a;
+  return Map;
 }(_WorldMap3.default);
 
-exports.default = Map3a;
+exports.default = Map;
 
 /***/ }),
 /* 632 */
