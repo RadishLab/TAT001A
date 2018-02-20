@@ -30,6 +30,10 @@ export default class Chart6 extends LineChart {
     margin.right = 30;
     margin.bottom = this.legendOrientation() === 'horizontal' ? 42 : 60;
     margin.top = 5;
+    if (this.options.web) {
+      margin.bottom = 80;
+      margin.right = 60;
+    }
     return margin;
   }
 
