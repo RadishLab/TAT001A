@@ -6,7 +6,7 @@ import { scaleLinear } from 'd3-scale';
 import { schemeCategoryProblemMap } from '../../colors';
 import WorldMap from '../../maps/WorldMap';
 
-export default class Map3a extends WorldMap {
+export default class Map extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
     this.colorScaleType = 'linear';
