@@ -19,6 +19,7 @@ export default class Chart1 extends BarChart {
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
     this.yAxisTickFormat = format('d');
+    this.legendYOffset = null;
   }
 
   loadData() {
@@ -36,6 +37,7 @@ export default class Chart1 extends BarChart {
   createMargin() {
     const margin = super.createMargin();
     margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 60;
+    if (this.options.web) margin.bottom = 120;
     return margin;
   }
 
@@ -79,5 +81,12 @@ export default class Chart1 extends BarChart {
     const colors = schemeCategorySolution.slice();
     colors[1] = '#00a792';
     return scaleOrdinal(colors);
+  }
+
+  render() {
+    super.render();
+
+    this.root.selectAll('.axis-x .tick')
+      .style('font-size', '14px');
   }
 }
