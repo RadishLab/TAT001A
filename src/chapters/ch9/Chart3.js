@@ -18,6 +18,8 @@ export class Chart3 extends BarChart {
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
     this.yAxisTickFormat = format('d')
+    this.legendYOffset = 0;
+    this.legendYPadding = 40;
   }
 
   loadData() {
@@ -30,6 +32,14 @@ export class Chart3 extends BarChart {
         }));
       });
     });
+  }
+
+  createMargin() {
+    const margin = super.createMargin();
+    if (this.options.web) {
+      margin.bottom = 100;
+    }
+    return margin;
   }
 
   createXScale() {
