@@ -71,7 +71,7 @@ export class Chart4 extends BarChart {
       .text(d => `${format('+d')(d.change * 100)}%`)
       .attr('transform', d => `translate(${this.x(d.region) + barWidth * 1.5}, ${this.y(d['2016']) - 2})`)
       .attr('text-anchor', 'middle')
-      .attr('font-size', '4px');
+      .attr('font-size', this.options.web ? '10px' : '4px');
   }
 
   createYScale() {
