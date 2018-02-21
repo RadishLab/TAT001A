@@ -40,6 +40,7 @@ export default class Chart3 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
+    margin.left = 80;
     margin.top = 10;
     return margin;
   }
