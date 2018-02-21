@@ -16,8 +16,8 @@ export default class Chart3 extends BarChart {
     this.yLabel = this.getTranslation('Sales (millions)');
     this.yTicks = 6;
     this.legendItems = [
-      { label: this.getTranslation('cigarette sales'), value: 'cigarette' },
-      { label: this.getTranslation('roll-your-own tobacco sales'), value: 'rollyourown' },
+      { label: this.getTranslation('Cigarette sales'), value: 'cigarette' },
+      { label: this.getTranslation('Roll-your-own tobacco sales'), value: 'rollyourown' },
     ];
     this.yAxisTickFormat = d => format('.2')(d / 1000000);
   }
