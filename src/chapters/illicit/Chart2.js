@@ -66,7 +66,7 @@ export default class Chart2 extends LineChart {
       .style('stroke', '#585857')
       .style('fill', 'none')
       .style('stroke-dasharray', '5,5')
-      .style('stroke-width', 0.25)
+      .style('stroke-width', 0.75)
       .attr('d', d => lineCreator(d));
 
     lineSelection.append('text')
@@ -74,13 +74,13 @@ export default class Chart2 extends LineChart {
       .attr('x', this.x(banYear) + 3)
       .attr('y', 10)
       .style('fill', '#585858')
-      .style('font-size', '8px');
+      .style('font-size', '10px');
   }
 
   createMargin() {
     const margin = super.createMargin();
     margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 60;
-    margin.right = 8;
+    margin.right = 20;
     margin.top = 5;
     return margin;
   }
