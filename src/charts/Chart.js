@@ -28,6 +28,7 @@ export default class Chart extends Visualization {
       .then(data => this.data = data)
       .then(this.onDataLoaded.bind(this));
     this.legendYOffset = this.options.web ? 85 : 40;
+    this.legendYPadding = 25;
     this.yLabelOffset = 0;
   }
 
@@ -222,7 +223,7 @@ export default class Chart extends Visualization {
           yOffset = this.chartHeight + this.legendYOffset;
         }
         else {
-          yOffset = this.chartHeight + 25 + this.root.select('.axis-x').node().getBBox().height;
+          yOffset = this.chartHeight + this.legendYPadding + this.root.select('.axis-x').node().getBBox().height;
         }
         return `translate(${xOffset}, ${yOffset})`;
       });

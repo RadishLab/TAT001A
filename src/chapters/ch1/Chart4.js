@@ -24,11 +24,13 @@ export default class Chart4 extends Chart {
       if (label === 'Other') label = 'Mixed/Other';
       return this.getTranslation(label);
     }
+    this.legendYOffset = 0;
+    this.legendYPadding = 30;
   }
 
   createMargin() {
     const margin = super.createMargin();
-    margin.left = this.options.web ? 180 : 80;
+    margin.left = this.options.web ? 200 : 80;
     margin.top = 10;
     margin.bottom = this.legendOrientation() === 'horizontal' ? 30 : 40;
     if (this.options.web) margin.bottom = 75;
