@@ -18,7 +18,7 @@ export default class Map3b extends EuropeMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(this.dataFileUrl('5-3.csv'), (csvData) => {
+      csv(this.dataFileUrl('5-map3b.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.iso3code = d['ISO Code'];
           d.value = +d['Restaurant (%)'];

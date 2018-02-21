@@ -12,13 +12,13 @@ export const figures = [
     type: 'chart'
   },
   {
-    name: '3a',
+    name: 'map3a',
     figureClass: Map3a,
     type: 'map',
     area: 'Europe'
   },
   {
-    name: '3b',
+    name: 'map3b',
     figureClass: Map3b,
     type: 'map',
     area: 'Europe'
