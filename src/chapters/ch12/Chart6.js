@@ -33,6 +33,7 @@ export default class Chart6 extends LineChart {
     if (this.options.web) {
       margin.bottom = 80;
       margin.right = 60;
+      margin.left = 80;
     }
     return margin;
   }
