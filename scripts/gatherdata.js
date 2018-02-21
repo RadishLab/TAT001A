@@ -76,7 +76,7 @@ const FILES = [
   ['Web Consumption/TA6 Consumption Inset 3.xlsx', 'consumption-3.csv'],
   ['Web Illicit/TA6 Illicit inset 1.1.xlsx', 'illicit-1.csv'],
   ['Web Illicit/TA6 Illicit inset 1.3. Menthol.xlsx', 'illicit-2.csv'],
-  ['Web Illicit/TA6 Illicit inset 3.xlsx', 'illicit-3.csv'],
+  ['Web Illicit/TA6 Illicit inset 3.xlsx', 'illicit-map.csv'],
   ['Web Illicit/TA6 Illicit inset 4.xlsx', 'illicit-4.csv'],
   ['Web Illicit/TA6 Illicit inset 5.xlsx', 'illicit-5.csv'],
   ['Web Illicit/TA6 Illicit inset 6.xlsx', 'illicit-6.csv'],
