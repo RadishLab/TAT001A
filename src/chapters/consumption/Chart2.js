@@ -25,6 +25,9 @@ export default class Chart2 extends LineChart {
       { label: this.getTranslation('WPRO (excluding China)'), value: 'WPRO (excluding China)' },
     ];
     this.yAxisTickFormat = format('.2');
+
+    this.legendYOffset = 0;
+    this.legendYPadding = 30;
   }
 
   loadData() {
@@ -55,6 +58,7 @@ export default class Chart2 extends LineChart {
   createMargin() {
     const margin = super.createMargin();
     margin.top = 5;
+    margin.right = 25;
     return margin;
   }
 
