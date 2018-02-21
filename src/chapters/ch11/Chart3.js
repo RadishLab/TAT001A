@@ -87,7 +87,7 @@ export default class Chart3 extends Chart {
     circleGroups.append('circle')
       .attr('fill', 'none')
       .attr('stroke', d => this.colors(1))
-      .attr('stroke-width', 2)
+      .attr('stroke-width', this.options.web ? 4 : 2)
       .attr('cx', d => this.x(d.age))
       .attr('cy', d => this.y(d.value))
       .attr('r', 20);
