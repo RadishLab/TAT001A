@@ -110,7 +110,9 @@ export default class Chart1 extends Chart {
       .attr('r', 10)
       .attr('cx', d => this.x(d.key))
       .attr('cy', d => this.y(d.value.children.median))
-      .style('fill', this.colors('smokeless'));
+      .style('fill', 'none')
+      .style('stroke-width', 2)
+      .style('stroke', this.colors('smokeless'));
 
     whisker
       .on('mouseover', (d, i, nodes) => {
