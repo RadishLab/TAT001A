@@ -23,6 +23,12 @@ export class Chart1 extends LineChart {
     this.yAxisTickFormat = format('d');
   }
 
+  createMargin() {
+    const margin = super.createMargin();
+    margin.right = 25;
+    return margin;
+  }
+
   loadData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('9-1.csv'), (csvData) => {
