@@ -20,10 +20,7 @@ export default class Chart4 extends Chart {
       { label: this.getTranslation('Farmers still growing tobacco'), value: 'current' },
     ];
     this.xAxisTickFormat = label => {
-      let capitalized = label
-        .split('-')
-        .map(labelPart => labelPart.charAt(0).toUpperCase() + labelPart.slice(1))
-        .join('-');
+      let capitalized = label.charAt(0).toUpperCase() + label.slice(1);
       return this.getTranslation(capitalized);
     };
     this.yAxisTickFormat = (label) => {
