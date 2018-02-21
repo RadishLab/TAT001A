@@ -26,6 +26,12 @@ export default class PointMap extends Visualization {
 
     this.tooltip
       .classed('tooltip-point', true);
+
+    this.forceOptions = {
+      decayRate: 0.3,
+      forceStrength: 0.002,
+      radius: 5
+    };
   }
 
   loadCountries() {
@@ -37,11 +43,6 @@ export default class PointMap extends Visualization {
   }
 
   spreadPoints(features) {
-    // Settings for forces
-    const decayRate = 0.3;
-    const forceStrength = 0.002;
-    const radius = 5;
-
     // Set x and y to initial layer coordinates from lat lng
     features = features.map(d => {
       [d.x, d.y] = this.projection([d.Longitude, d.Latitude]);
@@ -49,14 +50,14 @@ export default class PointMap extends Visualization {
     });
 
     var simulation = forceSimulation(features)
-      .velocityDecay(decayRate)
+      .velocityDecay(this.forceOptions.decayRate)
       .force('x', forceX()
         .x(d => d.x)
-        .strength(forceStrength))
+        .strength(this.forceOptions.forceStrength))
       .force('y', forceY()
         .y(d => d.y)
-        .strength(forceStrength))
-      .force('collide', forceCollide().radius(radius).iterations(2));
+        .strength(this.forceOptions.forceStrength))
+      .force('collide', forceCollide().radius(this.forceOptions.radius).iterations(2));
 
     // Make simulation run now rather than running dynamically
     for (var i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {

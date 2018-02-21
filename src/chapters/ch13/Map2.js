@@ -28,6 +28,8 @@ export default class Map2 extends PointMap {
         legend: this.getTranslation('Municipal policy')
       }
     };
+
+    this.forceOptions.radius = 6;
   }
 
   loadPointData() {
@@ -75,10 +77,7 @@ export default class Map2 extends PointMap {
     legendItems.append('text')
       .attr('x', 4)
       .attr('y', 15)
-      .style('fill', d => {
-        if (d[0] === '0' || d[0] === 'N') return '#e8e8e8';
-        return '#585857';
-      })
+      .style('fill', '#e8e8e8')
       .text(d => d[1].legend);
   }
 
