@@ -111,7 +111,7 @@ export default class Chart1 extends BarChart {
     // Get tobacco use related deaths by disease
     const tobaccoUseDeaths = this.data.filter(d => d.disease !== '' && d.disease !== 'Tobacco use');
     tobaccoUseDeaths.push({
-      disease: 'other',
+      disease: 'Other',
       tobaccoRelated: this.data.filter(d => d.disease === 'Tobacco use')[0].otherTobaccoRelated
     });
     tobaccoUseDeaths.forEach((d, i) => {
