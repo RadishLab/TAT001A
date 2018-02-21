@@ -8,10 +8,9 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map2 extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
-    this.colorScale = scaleOrdinal(schemeCategorySolutionMap.reverse());
+    this.colorScale = scaleOrdinal(schemeCategorySolutionMap);
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
-    this.keyCodeReversed = true;
 
     this.criteria = [
       {
@@ -53,10 +52,10 @@ export default class Map2 extends WorldMap {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('11-map2.csv'), (csvData) => {
         let mappedData = csvData.map(d => {
-          d[this.valueField] = d['CESSATION INDEX'];
+          d[this.valueField] = d['Key Code'];
           return d;
         });
-        mappedData = mappedData.filter(d => d[this.valueField] !== '');
+        mappedData = mappedData.filter(d => d[this.valueField] && d[this.valueField] !== '');
         const domain = set(mappedData.map(d => d[this.valueField])).values().sort();
         this.colorScale.domain(domain);
         resolve(mappedData);
@@ -79,7 +78,6 @@ export default class Map2 extends WorldMap {
     if (country === 'United Kingdom') country = 'UK (England and Scotland only)';
     let content = `<div class="country-name">${country}</div>`;
     if (d.properties.joined) {
-      console.log(d.properties.NAME, d.properties.joined);
       content += '<ul class="tooltip-list tooltip-list-11-map2">';
       this.criteria.forEach(criterion => {
         if (d.properties.joined[criterion.header] === '1') {
