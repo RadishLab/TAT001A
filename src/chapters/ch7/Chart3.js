@@ -54,6 +54,10 @@ export default class Chart3 extends LineChart {
     const margin = super.createMargin();
     margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 60;
     margin.right = 5;
+    if (this.options.web) {
+      margin.bottom = 80;
+      margin.right = 15;
+    }
     return margin;
   }
 
