@@ -19,7 +19,13 @@ export default class Chart4 extends Chart {
       { label: this.getTranslation('Farmers who stopped growing tobacco'), value: 'former' },
       { label: this.getTranslation('Farmers still growing tobacco'), value: 'current' },
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = label => {
+      let capitalized = label
+        .split('-')
+        .map(labelPart => labelPart.charAt(0).toUpperCase() + labelPart.slice(1))
+        .join('-');
+      return this.getTranslation(capitalized);
+    };
     this.yAxisTickFormat = (label) => {
       if (label === 'Other') label = 'Mixed/Other';
       return this.getTranslation(label);
