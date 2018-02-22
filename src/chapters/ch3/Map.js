@@ -12,6 +12,7 @@ export default class Map extends WorldMap {
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';
     this.symbolField = 'TA6 Symbol';
+    this.keyCodeReversed = true;
   }
 
   loadJoinData() {
@@ -23,7 +24,7 @@ export default class Map extends WorldMap {
           return d;
         });
         const filteredData = mappedData.filter(d => d[this.valueField] !== '5' && d[this.valueField] !== '');
-        const domain = set(filteredData.map(d => d[this.valueField])).values().sort();
+        const domain = set(filteredData.map(d => d[this.valueField])).values().sort().reverse();
         this.colorScale.domain(domain);
         resolve(filteredData);
       });
