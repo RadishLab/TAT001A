@@ -18,6 +18,16 @@ export default class Map extends WorldMap {
     this.valueField = 'Map Code';
   }
 
+  getLegendItems() {
+    return [
+      ['Comp Sales Ban', this.getTranslation('Complete Sales Ban')],
+      ['Nicotine Ban', this.getTranslation('Nicotine Ban')],
+      ['Market Authorization Required', this.getTranslation('Market Authorization Required')],
+      ['Sales Permitted, Regulated', this.getTranslation('Sales Permitted, Regulated')],
+      [null, this.getTranslation('No data')]
+    ];
+  }
+
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('16-map.csv'), (csvData) => {

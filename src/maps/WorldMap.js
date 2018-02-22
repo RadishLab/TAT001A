@@ -9,6 +9,7 @@ import * as topojson from 'topojson-client';
 import { mapNoData, mapCircleOverlay } from '../colors';
 import { loadCachedData } from '../dataService';
 import Visualization from '../Visualization';
+import wrap from '../wrap';
 
 export default class WorldMap extends Visualization {
   constructor(parent, options) {
@@ -39,6 +40,12 @@ export default class WorldMap extends Visualization {
     this.defaultStroke = 'none';
     this.tooltip
       .classed('tooltip-country', true);
+
+    this.legendOptions = {
+      width: this.width / 7,
+      height: 18,
+      padding: 3,
+    };
   }
 
   loadData() {
@@ -165,10 +172,24 @@ export default class WorldMap extends Visualization {
   }
 
   getLegendItems() {
-    const legendItemList = this.keyCodeReversed ?
-      Object.entries(this.legend).reverse() :
-      Object.entries(this.legend);
-    legendItemList.unshift([ null, this.getTranslation('No data') ]);
+    let legendItemList = Object.entries(this.legend)
+      .sort((a, b) => {
+        let aKey = a[0],
+          bKey = b[0],
+          aKeyInt = parseInt(aKey, 10),
+          bKeyInt = parseInt(bKey, 10);
+        // Lowest key code goes at the bottom
+        if (!(isNaN(aKeyInt) || isNaN(bKeyInt))) return bKeyInt - aKeyInt;
+        return bKey - aKey;
+      });
+
+    // Very rarely the key code is reversed--lowest key goes at the top
+    if (this.keyCodeReversed) legendItemList = legendItemList.reverse();
+
+    // Either way put No Data at the end
+    legendItemList.push([ null, this.getTranslation('No data') ]);
+
+    console.log(legendItemList);
     return legendItemList;
   }
 
@@ -189,12 +210,11 @@ export default class WorldMap extends Visualization {
       .attr('stop-color', this.colorScale.range()[1]);
 
     // Add a rect with our gradient
-    const legendWidth = this.width / 7;
     this.legendGroup = this.root.append('g')
       .classed('legend', true)
-      .attr('transform', `translate(${this.width - legendWidth}, 10)`);
+      .attr('transform', `translate(${this.width - this.legendOptions.width}, 10)`);
     this.legendGroup.append('rect')
-      .attr('width', legendWidth)
+      .attr('width', this.legendOptions.width)
       .attr('height', 25)
       .attr('fill', `url(#${gradientId})`);
 
@@ -206,39 +226,49 @@ export default class WorldMap extends Visualization {
     this.legendGroup.append('text')
       .text(extent[1])
       .style('text-anchor', 'end')
-      .attr('transform', `translate(${legendWidth - 2}, 18)`);
+      .attr('transform', `translate(${this.legendOptions.width - 2}, 18)`);
   }
 
   renderLegendWithItems(items) {
-    const legendWidth = this.width / 7;
-    const legendHeight = 18;
-    const legendPadding = 3;
-    const legendItemCount = items.length;
-
     this.legendGroup = this.root.append('g')
       .classed('legend', true)
-      .attr('transform', `translate(${this.width - legendWidth}, 0)`);
+      .attr('transform', `translate(${this.width - this.legendOptions.width}, 0)`);
 
     const legendItems = this.legendGroup.selectAll('rect')
       .data(items)
-      .enter().append('g')
-      .attr('transform', (d, i) => {
-        const y = (legendHeight + legendPadding) * (legendItemCount - i);
-        return `translate(0, ${y})`;
-      });
+      .enter().append('g');
 
     legendItems.append('rect')
-      .attr('width', legendWidth)
-      .attr('height', legendHeight)
+      .attr('width', this.legendOptions.width)
+      .attr('height', this.legendOptions.height)
       .attr('fill', d => {
         const keyCode = d[0];
         return keyCode !== null ? this.colorScale(keyCode) : this.noDataColor;
       });
 
     legendItems.append('text')
-      .attr('x', 4)
       .attr('y', 15)
-      .text(d => d[1]);
+      .attr('dy', 0)
+      .text(d => d[1])
+      .call(wrap, this.legendOptions.width);
+
+    legendItems.selectAll('text tspan')
+      .attr('x', 4);
+
+    legendItems.each((d, i, nodes) => {
+      const legendItem = select(nodes[i])
+      legendItem.select('rect')
+        .attr('height', legendItem.select('text').node().getBBox().height + 3);
+    });
+
+    legendItems
+      .attr('transform', (d, i, nodes) => {
+        let y = 0;
+        for (let index = 0; index < i; index++) {
+          y += select(nodes[index]).node().getBBox().height + this.legendOptions.padding;
+        }
+        return `translate(0, ${y})`;
+      });
   }
 
   renderLegend() {

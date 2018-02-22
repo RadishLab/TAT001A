@@ -24,7 +24,7 @@ export default class Map3 extends WorldMap {
   }
 
   getLegendItems() {
-    return Object.entries(this.legend);
+    return Object.entries(this.legend).reverse();
   }
 
   loadJoinData() {

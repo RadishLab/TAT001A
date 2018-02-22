@@ -14,10 +14,6 @@ export default class Map1 extends WorldMap {
     this.noDataColor = schemeCategoryProblemMap[0];
   }
 
-  getLegendItems() {
-    return Object.entries(this.legend);
-  }
-
   loadJoinData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('1-map.csv'), (csvData) => {

@@ -192,7 +192,7 @@ export default class Map2 extends WorldMap {
     // Different legend by selected measure
     const legendItems = Object.entries(this.legends[matchingColumn.measure]);
     legendItems.unshift([ null, this.getTranslation('No data') ]);
-    this.renderLegendWithItems(legendItems);
+    this.renderLegendWithItems(legendItems.reverse());
 
     // Update fill with the matching filters
     if (matchingColumn && matchingColumn.keyCode) {
