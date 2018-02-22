@@ -361,6 +361,10 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .ta-visualization .legend path {
   stroke-width: 2; }
 
+.ta-visualization.ta-visualization-narrow .axis-x .tick,
+.ta-visualization.ta-visualization-narrow .axis-y .tick {
+  font-size: 10px; }
+
 .ta-visualization .pie-chart .arc-label {
   font-size: 16px;
   text-anchor: middle; }
@@ -386,7 +390,9 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     border-right: none;
     color: #b7b7b7;
     cursor: pointer;
-    font-size: 10px; }
+    font-size: 16px;
+    padding: 4px;
+    text-transform: capitalize; }
     .ta-visualization-filters button:first-of-type {
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px; }
@@ -400,15 +406,16 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
       background: #a7a7a7;
       color: black; }
   .ta-visualization-filters .filter-year {
-    max-width: 400px; }
+    max-width: 400px;
+    margin-bottom: 10px; }
 
 .ta-visualization-tooltip {
   background: white;
   border: 1px solid lightgray;
   display: none;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 16px;
-  padding: 3px;
+  font-size: 14px;
+  padding: 5px;
   position: absolute;
   max-width: 250px; }
   .ta-visualization-tooltip.visible {
