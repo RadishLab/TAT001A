@@ -45,7 +45,8 @@ export default class Visualization {
     if (!this.filters) return;
 
     this.filtersContainer = this.parentContainer.append('div')
-      .classed('ta-visualization-filters', true);
+      .classed('ta-visualization-filters', true)
+      .lower();
 
     this.filtersContainer.append('span').text(this.getTranslation('Filters:'));
 

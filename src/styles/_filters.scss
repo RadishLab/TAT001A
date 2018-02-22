@@ -15,7 +15,9 @@
     border-right: none;
     color: #b7b7b7;
     cursor: pointer;
-    font-size: 10px;
+    font-size: $font-size;
+    padding: 4px;
+    text-transform: capitalize;
 
     &:first-of-type {
       border-top-left-radius: 5px;
