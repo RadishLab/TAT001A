@@ -225,6 +225,7 @@ export default class WorldMap extends Visualization {
     this.legendGroup.append('text')
       .text(extent[1])
       .style('text-anchor', 'end')
+      .style('fill', this.textColors.darkBackground)
       .attr('transform', `translate(${this.legendOptions.width - 2}, 18)`);
   }
 
@@ -249,6 +250,7 @@ export default class WorldMap extends Visualization {
       .attr('y', 15)
       .attr('dy', 0)
       .text(d => d[1])
+      .style('fill', this.textColors.lightBackground)
       .call(wrap, this.legendOptions.width);
 
     legendItems.selectAll('text tspan')

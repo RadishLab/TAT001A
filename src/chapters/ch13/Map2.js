@@ -77,12 +77,11 @@ export default class Map2 extends PointMap {
     legendItems.append('text')
       .attr('x', 4)
       .attr('y', 15)
-      .style('fill', '#e8e8e8')
+      .style('fill', this.textColors.darkBackground)
       .text(d => d[1].legend);
   }
 
   tooltipContent(d) {
-    console.log(d);
     let content = `<div class="header">${d.City}</div>`;
     content += `<div class="data">${this.categories[d[this.categoryField]].tooltip}</div>`;
     return content;

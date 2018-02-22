@@ -29,6 +29,11 @@ export default class Visualization {
 
     this.tooltip = this.parentContainer.append('div')
       .classed('ta-visualization-tooltip', true);
+
+    this.textColors = {
+      lightBackground: '#2d2d2d',
+      darkBackground: '#e8e8e8'
+    };
   }
 
   getTranslation(text) {
