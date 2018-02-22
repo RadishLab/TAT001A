@@ -18,7 +18,7 @@ export default class Map4 extends WorldMap {
     this.colorScaleType = 'ordinal';
     this.valueField = 'Production Keycode';
 
-    this.parentContainer.style('padding-bottom', '40px');
+    this.parentContainer.style('padding-top', '25px');
 
     this.noDataColor = schemeCategoryProblemMap[0];
   }
@@ -71,7 +71,8 @@ export default class Map4 extends WorldMap {
 
   renderFilters() {
     this.filtersContainer = this.parentContainer.append('div')
-      .classed('ta-visualization-filters', true);
+      .classed('ta-visualization-filters', true)
+      .lower();
 
     this.filtersContainer.append('span').text(this.getTranslation('Filters:'));
 
