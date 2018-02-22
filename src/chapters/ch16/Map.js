@@ -55,7 +55,7 @@ export default class Map extends WorldMap {
       content += `<div class="data">${this.getTranslation('Public use regulations')}: ${d.properties.joined['Public Use Regulations']}</div>`;
     }
     else {
-      content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
+      content += `<div class="data no-data">${this.noDataLabel}</div>`;
     }
     return content;
   }
