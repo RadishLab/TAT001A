@@ -22,6 +22,7 @@ import { figures as ch16Figures } from './chapters/ch16/Figures';
 import { figures as ch18Figures } from './chapters/ch18/Figures';
 import { figures as ch19Figures } from './chapters/ch19/Figures';
 import { figures as consumptionFigures } from './chapters/consumption/Figures';
+import { figures as environmentFigures } from './chapters/environment/Figures';
 import { figures as illicitFigures } from './chapters/illicit/Figures';
 import { figures as smokelessFigures } from './chapters/smokeless/Figures';
 import { figures as waterpipeFigures } from './chapters/waterpipe/Figures';
@@ -92,6 +93,7 @@ class App extends Component {
         <FigureGroup title='Chapter 18' chapter={18} figures={ch18Figures}/>
         <FigureGroup title='Chapter 19' chapter={19} figures={ch19Figures}/>
         <FigureGroup title='Consumption' chapter={'consumption'} figures={consumptionFigures}/>
+        <FigureGroup title='Environment' chapter={'environment'} figures={environmentFigures}/>
         <FigureGroup title='Illicit' chapter={'illicit'} figures={illicitFigures}/>
         <FigureGroup title='Smokeless' chapter={'smokeless'} figures={smokelessFigures}/>
         <FigureGroup title='Waterpipe' chapter={'waterpipe'} figures={waterpipeFigures}/>
