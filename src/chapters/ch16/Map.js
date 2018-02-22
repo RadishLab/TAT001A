@@ -16,6 +16,7 @@ export default class Map extends WorldMap {
       ]);
     this.colorScaleType = 'ordinal';
     this.valueField = 'Map Code';
+    this.noDataLabel = this.getTranslation('Unclear or No Explicit Policy');
   }
 
   getLegendItems() {
@@ -24,7 +25,7 @@ export default class Map extends WorldMap {
       ['Nicotine Ban', this.getTranslation('Nicotine Ban')],
       ['Market Authorization Required', this.getTranslation('Market Authorization Required')],
       ['Sales Permitted, Regulated', this.getTranslation('Sales Permitted, Regulated')],
-      [null, this.getTranslation('No data')]
+      [null, this.noDataLabel]
     ];
   }
 

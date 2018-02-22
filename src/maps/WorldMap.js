@@ -34,6 +34,7 @@ export default class WorldMap extends Visualization {
     this.root = this.parent.append('g');
 
     this.noDataColor = mapNoData;
+    this.noDataLabel = this.getTranslation('No data');
     this.loadData();
 
     this.mouseoverStroke = '#555';
@@ -187,9 +188,7 @@ export default class WorldMap extends Visualization {
     if (this.keyCodeReversed) legendItemList = legendItemList.reverse();
 
     // Either way put No Data at the end
-    legendItemList.push([ null, this.getTranslation('No data') ]);
-
-    console.log(legendItemList);
+    legendItemList.push([ null, this.noDataLabel ]);
     return legendItemList;
   }
 
