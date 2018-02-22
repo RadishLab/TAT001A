@@ -16,7 +16,7 @@ export class Chart4 extends BarChart {
       { label: this.getTranslation('Poland (2011)'), value: 'Poland (2011)' },
       { label: this.getTranslation('United States, non-Hispanic whites (2010)'), value: 'United States, non-Hispanic whites (2010)' },
     ];
-    this.legendYOffset = this.options.web ? 120 : 50;
+    this.legendYOffset = 0;
     this.yLabelOffset = 10;
   }
 
@@ -53,7 +53,12 @@ export class Chart4 extends BarChart {
   createMargin() {
     const margin = super.createMargin();
     margin.bottom = this.legendOrientation() === 'horizontal' ? 52 : 60;
-    if (this.options.web) margin.bottom = 110;
+    if (this.options.web) {
+      margin.bottom = 110;
+      if (this.width < 500) {
+        margin.bottom = 140;
+      }
+    }
     return margin;
   }
 
