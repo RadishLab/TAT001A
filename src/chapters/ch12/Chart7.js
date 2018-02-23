@@ -82,4 +82,12 @@ export default class Chart7 extends BarChart {
   createZScale() {
     return scaleOrdinal(schemeCategorySolution);
   }
+
+  tooltipContent(d, bar) {
+    const yearFormat = timeFormat('%Y');
+    let content = `<div class="header">${yearFormat(d.year)} - ${d.group}</div>`;
+    const numberFormat = format(',d');
+    content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('Kenyan shillings per pack')}</div>`;
+    return content;
+  }
 }

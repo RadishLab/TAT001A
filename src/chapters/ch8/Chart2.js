@@ -63,15 +63,24 @@ export class Chart2 extends BarChart {
     const barWidth = this.x.bandwidth();
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)))
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d['Number of Deaths']))
-        .attr('height', d => this.chartHeight - this.y(d['Number of Deaths']))
-        .attr('fill', d => this.colors(d['Sex']));
+      .classed('bar', true)
+      .attr('x', d => this.x(this.getXValue(d)))
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d['Number of Deaths']))
+      .attr('height', d => this.chartHeight - this.y(d['Number of Deaths']))
+      .attr('fill', d => this.colors(d['Sex']));
   }
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.Causes} ${this.getTranslation('cancer')} (${d.Sex})</div>`;
+    const numberFormat = d => format(',d')(d * 1000);
+    const percentFormat = format('d');
+    content += `<div class="data">${numberFormat(d['Number of Deaths'])} ${this.getTranslation('deaths')}</div>`;
+    content += `<div class="data">${percentFormat(d['Percent (%)'])}% ${this.getTranslation('of all cancer deaths')}</div>`;
+    return content;
   }
 }

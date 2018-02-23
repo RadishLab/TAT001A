@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -64,31 +65,47 @@ export default class Chart2 extends BarChart {
     const barWidth = this.x.bandwidth() / 3;
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)))
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d.Home))
-        .attr('height', d => this.chartHeight - this.y(d.Home))
-        .attr('fill', this.colors('home'));
+      .classed('bar home', true)
+      .attr('x', d => this.x(this.getXValue(d)))
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d.Home))
+      .attr('height', d => this.chartHeight - this.y(d.Home))
+      .attr('fill', this.colors('home'));
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)) + barWidth)
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d.Work))
-        .attr('height', d => this.chartHeight - this.y(d.Work))
-        .attr('fill', this.colors('work'));
+      .classed('bar work', true)
+      .attr('x', d => this.x(this.getXValue(d)) + barWidth)
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d.Work))
+      .attr('height', d => this.chartHeight - this.y(d.Work))
+      .attr('fill', this.colors('work'));
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)) + barWidth * 2)
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d.Restaurant))
-        .attr('height', d => this.chartHeight - this.y(d.Restaurant))
-        .attr('fill', this.colors('restaurant'));
+      .classed('bar restaurant', true)
+      .attr('x', d => this.x(this.getXValue(d)) + barWidth * 2)
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d.Restaurant))
+      .attr('height', d => this.chartHeight - this.y(d.Restaurant))
+      .attr('fill', this.colors('restaurant'));
   }
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.Country}</div>`;
+    const percentFormat = format('.1f');
+
+    if (bar.classed('home')) {
+      content += `<div class="data">${percentFormat(d.Home)}% ${this.getTranslation('exposure at home')}</div>`;
+    }
+    if (bar.classed('restaurant')) {
+      content += `<div class="data">${percentFormat(d.Restaurant)}% ${this.getTranslation('exposure in restaurants')}</div>`;
+    }
+    if (bar.classed('work')) {
+      content += `<div class="data">${percentFormat(d.Work)}% ${this.getTranslation('exposure at work')}</div>`;
+    }
+    return content;
   }
 }

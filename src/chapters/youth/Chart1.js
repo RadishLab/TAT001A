@@ -57,7 +57,7 @@ export default class Chart1 extends BarChart {
     const barWidth = this.x.bandwidth() / 4;
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar adult-male', true)
       .attr('x', d => this.x(d.country))
       .attr('width', barWidth)
       .attr('y', d => this.y(d.adultMale))
@@ -65,7 +65,7 @@ export default class Chart1 extends BarChart {
       .attr('fill', d => this.colors('adult male'));
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar adult-female', true)
       .attr('x', d => this.x(d.country) + barWidth)
       .attr('width', barWidth)
       .attr('y', d => this.y(d.adultFemale))
@@ -73,7 +73,7 @@ export default class Chart1 extends BarChart {
       .attr('fill', d => this.colors('adult female'));
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar youth-male', true)
       .attr('x', d => this.x(d.country) + barWidth * 2)
       .attr('width', barWidth)
       .attr('y', d => this.y(d.youthMale))
@@ -81,7 +81,7 @@ export default class Chart1 extends BarChart {
       .attr('fill', d => this.colors('youth male'));
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar youth-female', true)
       .attr('x', d => this.x(d.country) + barWidth * 3)
       .attr('width', barWidth)
       .attr('y', d => this.y(d.youthFemale))
@@ -105,5 +105,31 @@ export default class Chart1 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    const numberFormat = format('.1f');
+    let value;
+    let description;
+    if (bar.classed('adult-male')) {
+      value = d.adultMale;
+      description = 'adult males';
+    }
+    if (bar.classed('adult-female')) {
+      value = d.adultFemale;
+      description = 'adult females';
+    }
+    if (bar.classed('youth-male')) {
+      value = d.youthMale;
+      description = 'youth males';
+    }
+    if (bar.classed('youth-female')) {
+      value = d.youthFemale;
+      description = 'youth females';
+    }
+
+    let content = `<div class="header">${d.Country} - ${this.getTranslation(description)}</div>`;
+    content += `<div class="data">${numberFormat(value)}% ${this.getTranslation('prevalence')}</div>`;
+    return content;
   }
 }

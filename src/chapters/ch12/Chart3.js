@@ -55,7 +55,7 @@ export default class Chart3 extends BarChart {
     const barWidth = this.x.bandwidth() / 2;
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar cigarette', true)
       .attr('x', d => this.x(d.year))
       .attr('width', barWidth)
       .attr('y', d => this.y(d.cigarette))
@@ -63,7 +63,7 @@ export default class Chart3 extends BarChart {
       .attr('fill', d => this.colors('cigarette'));
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar rollyourown', true)
       .attr('x', d => this.x(d.year) + barWidth)
       .attr('width', barWidth)
       .attr('y', d => this.y(d.rollyourown))
@@ -86,5 +86,15 @@ export default class Chart3 extends BarChart {
     const colors = schemeCategorySolution.slice();
     colors[1] = '#00a792';
     return scaleOrdinal(colors);
+  }
+
+  tooltipContent(d, bar) {
+    const numberFormat = format(',d');
+    const yearFormat = timeFormat('%Y');
+    let content = `<div class="header">${yearFormat(d.year)}</div>`;
+    const value = bar.classed('cigarette') ? d.cigarette : d.rollyourown;
+    const description = this.getTranslation(bar.classed('cigarette') ? 'cigarette' : 'roll-your-own tobacco');
+    content += `<div class="data">${numberFormat(value)} ${this.getTranslation('USD')} ${description} ${this.getTranslation('sales')}</div>`;
+    return content;
   }
 }

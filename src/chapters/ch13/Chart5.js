@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -75,5 +76,12 @@ export default class Chart5 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategorySolution);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.region}</div>`;
+    const numberFormat = format('.1f');
+    content += `<div class="data">${numberFormat(d.value)}% ${this.getTranslation('of countries implementing smokefree laws at recommended level')}</div>`;
+    return content;
   }
 }

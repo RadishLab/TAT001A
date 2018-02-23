@@ -72,4 +72,11 @@ export default class Chart4 extends BarChartVertical {
   createZScale() {
     return scaleOrdinal(schemeCategorySolution).domain(['facebook users']);
   }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.country}</div>`;
+    const numberFormat = format(',d');
+    content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('million Facebook users')}</div>`;
+    return content;
+  }
 }

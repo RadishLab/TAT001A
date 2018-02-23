@@ -77,16 +77,24 @@ export default class Chart3 extends BarChart {
 
     barLabels.forEach((label, index) => {
       barGroups.append('rect')
-          .classed('bar', true)
-          .attr('x', d => this.x(this.getXValue(d)) + barWidth * index)
-          .attr('width', barWidth)
-          .attr('y', d => this.y(d[label]))
-          .attr('height', d => this.chartHeight - this.y(d[label]))
-          .attr('fill', this.colors(label));
+        .classed(`bar ${label}`, true)
+        .attr('x', d => this.x(this.getXValue(d)) + barWidth * index)
+        .attr('width', barWidth)
+        .attr('y', d => this.y(d[label]))
+        .attr('height', d => this.chartHeight - this.y(d[label]))
+        .attr('fill', this.colors(label));
     });
   }
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    const numberFormat = format(',d');
+    const label = this.legendItems.filter(d => bar.classed(d.value))[0].value;
+    let content = `<div class="header">${d.Country} - ${label} ${this.getTranslation('socioeconomic group')}</div>`;
+    content += `<div class="data">${numberFormat(d[label])} ${this.getTranslation('cigarettes per person')}</div>`;
+    return content;
   }
 }

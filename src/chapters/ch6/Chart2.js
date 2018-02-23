@@ -68,4 +68,17 @@ export default class Chart2 extends BarChart {
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
   }
+
+  render() {
+    super.render();
+    this.root.selectAll('.axis-x .tick')
+      .style('font-size', '10px');
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.age}</div>`;
+    const numberFormat = format('.1f');
+    content += `<div class="data">${numberFormat(d.value)}% ${this.getTranslation('of total DALYs')}</div>`;
+    return content;
+  }
 }

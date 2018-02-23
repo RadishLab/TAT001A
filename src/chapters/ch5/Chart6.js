@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -67,5 +68,12 @@ export default class Chart6 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.region}</div>`;
+    const numberFormat = format('.1f');
+    content += `<div class="data">${numberFormat(d.value)}% ${this.getTranslation('estimated prevalence')}</div>`;
+    return content;
   }
 }

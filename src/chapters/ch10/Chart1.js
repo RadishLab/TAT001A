@@ -89,4 +89,11 @@ export default class Chart1 extends BarChart {
     this.root.selectAll('.axis-x .tick')
       .style('font-size', '14px');
   }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${this.getTranslation(d.policy)}</div>`;
+    const numberFormat = format('d');
+    content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('countries in')} ${d.Year}</div>`;
+    return content;
+  }
 }

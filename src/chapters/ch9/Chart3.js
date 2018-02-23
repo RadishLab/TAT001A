@@ -55,20 +55,20 @@ export class Chart3 extends BarChart {
     const barWidth = this.x.bandwidth() / 2;
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(d['Country']))
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d['Lowest Wealth Group']))
-        .attr('height', d => this.chartHeight - this.y(d['Lowest Wealth Group']))
-        .attr('fill', this.colors('Lowest Wealth Group'));
+      .classed('bar lowest', true)
+      .attr('x', d => this.x(d['Country']))
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d['Lowest Wealth Group']))
+      .attr('height', d => this.chartHeight - this.y(d['Lowest Wealth Group']))
+      .attr('fill', this.colors('Lowest Wealth Group'));
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(d['Country']) + barWidth + 2)
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d['Highest Wealth Group']))
-        .attr('height', d => this.chartHeight - this.y(d['Highest Wealth Group']))
-        .attr('fill', this.colors('Highest Wealth Group'));
+      .classed('bar highest', true)
+      .attr('x', d => this.x(d['Country']) + barWidth + 2)
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d['Highest Wealth Group']))
+      .attr('height', d => this.chartHeight - this.y(d['Highest Wealth Group']))
+      .attr('fill', this.colors('Highest Wealth Group'));
   }
 
   createYScale() {
@@ -84,5 +84,13 @@ export class Chart3 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.Country}</div>`;
+    const value = bar.classed('lowest') ? d['Lowest Wealth Group'] : d['Highest Wealth Group'];
+    const numberFormat = format('.1f');
+    content += `<div class="data">${numberFormat(value)}% ${this.getTranslation('smoking prevalence among')} ${this.getTranslation(d.Gender.toLowerCase())}</div>`;
+    return content;
   }
 }

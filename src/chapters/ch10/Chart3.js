@@ -64,15 +64,22 @@ export default class Chart3 extends BarChart {
     const barWidth = this.x.bandwidth();
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)))
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d.value))
-        .attr('height', d => this.chartHeight - this.y(d.value))
-        .attr('fill', this.colors(1));
+      .classed('bar', true)
+      .attr('x', d => this.x(this.getXValue(d)))
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d.value))
+      .attr('height', d => this.chartHeight - this.y(d.value))
+      .attr('fill', this.colors(1));
   }
 
   createZScale() {
     return scaleOrdinal(schemeCategorySolution);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.region}</div>`;
+    const numberFormat = d => format(',d')(d / 1000);
+    content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('billion 2014 PPP dollars revenue growth')}</div>`;
+    return content;
   }
 }

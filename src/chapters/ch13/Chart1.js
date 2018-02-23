@@ -145,4 +145,13 @@ export default class Chart3 extends BarChart {
     colors[1] = '#00a792';
     return scaleOrdinal(colors);
   }
+
+  tooltipContent(d, bar) {
+    const yearFormat = timeFormat('%Y');
+    let content = `<div class="header">${yearFormat(d.year)}</div>`;
+    const countriesFormat = format(',d');
+    const populationFormat = format('.1f');
+    content += `<div class="data">${countriesFormat(d.countries)} ${this.getTranslation('countries protected')} (${populationFormat(d.population)} ${this.getTranslation('billion people')})</div>`;
+    return content;
+  }
 }

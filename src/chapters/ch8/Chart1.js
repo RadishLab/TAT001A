@@ -45,7 +45,7 @@ export class Chart1 extends BarChart {
     const barWidth = this.x.bandwidth() / 2;
 
     barGroups.append('rect')
-        .classed('bar', true)
+        .classed('bar male', true)
         .attr('x', d => this.x(d['WHO Region']))
         .attr('width', barWidth)
         .attr('y', d => this.y(d['Male deaths']))
@@ -53,7 +53,7 @@ export class Chart1 extends BarChart {
         .attr('fill', this.colors('Male deaths'));
 
     barGroups.append('rect')
-        .classed('bar', true)
+        .classed('bar female', true)
         .attr('x', d => this.x(d['WHO Region']) + barWidth + 2)
         .attr('width', barWidth)
         .attr('y', d => this.y(d['Female deaths']))
@@ -74,5 +74,14 @@ export class Chart1 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d['WHO Region']}</div>`;
+    const numberFormat = format('.1f');
+
+    const value = bar.classed('male') ? d['Male deaths'] : d['Female deaths'];
+    content += `<div class="data">${numberFormat(value)} ${this.getTranslation('million deaths')}</div>`;
+    return content;
   }
 }

@@ -1,4 +1,5 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 
@@ -75,15 +76,23 @@ export class Chart4 extends BarChart {
     const barWidth = this.x.bandwidth();
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)))
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d['Mortality rate']))
-        .attr('height', d => this.chartHeight - this.y(d['Mortality rate']))
-        .attr('fill', d => this.colors(d['Country']));
+      .classed('bar', true)
+      .attr('x', d => this.x(this.getXValue(d)))
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d['Mortality rate']))
+      .attr('height', d => this.chartHeight - this.y(d['Mortality rate']))
+      .attr('fill', d => this.colors(d['Country']));
   }
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.Country}</div>`;
+    const numberFormat = format('.1f');
+    content += `<div class="data">${this.getTranslation('Education level attained:')} ${this.getTranslation(d['Education level'])}</div>`;
+    content += `<div class="data">${numberFormat(d['Mortality rate'])} ${this.getTranslation('lung cancer mortality per 100,000')}</div>`;
+    return content;
   }
 }

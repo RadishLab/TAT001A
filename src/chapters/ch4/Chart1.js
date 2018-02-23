@@ -109,7 +109,7 @@ export class Chart1 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div>${d['HDI Category']} HDI</div>`;
+    let content = `<div class="header">${d['HDI Category']} HDI</div>`;
     if (bar.classed('male')) {
       content += `<div>${this.yAxisTickFormat(d.male)}%</div>`;
     }

@@ -54,7 +54,7 @@ export default class Chart5 extends BarChart {
     const barWidth = this.x.bandwidth() / 2;
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar tax', true)
       .attr('x', d => this.x(d.xValue))
       .attr('width', barWidth)
       .attr('y', d => this.y(Math.max(0, d.tax)))
@@ -67,7 +67,7 @@ export default class Chart5 extends BarChart {
       .attr('fill', this.colors('tax'));
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar tax-health', true)
       .attr('x', d => this.x(d.xValue) + barWidth)
       .attr('width', barWidth)
       .attr('y', d => this.y(d.taxHealth))
@@ -85,5 +85,14 @@ export default class Chart5 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategorySolution);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.quintile}</div>`;
+    const numberFormat = format('.1f');
+    const value = bar.classed('tax') ? d.tax : d.taxHealth;
+    const description = this.getTranslation(bar.classed('tax') ? 'tax benefits' : 'tax plus health benefits');
+    content += `<div class="data">${numberFormat(value)} ${description}</div>`;
+    return content;
   }
 }

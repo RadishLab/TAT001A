@@ -67,4 +67,11 @@ export default class Chart5 extends BarChart {
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
   }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.type}</div>`;
+    const numberFormat = format(',d');
+    content += `<div class="data">${numberFormat(d.value)}£</div>`;
+    return content;
+  }
 }

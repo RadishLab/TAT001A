@@ -64,7 +64,7 @@ export default class Chart2 extends BarChartVertical {
     const barHeight = this.y.bandwidth() / 2;
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar intend', true)
       .attr('x', 0)
       .attr('width', d => this.x(d.intendToQuit))
       .attr('y', d => this.y(d.country))
@@ -72,7 +72,7 @@ export default class Chart2 extends BarChartVertical {
       .attr('fill', d => this.colors('intend'));
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar attempted', true)
       .attr('x', 0)
       .attr('width', d => this.x(d.attemptedToQuit))
       .attr('y', d => this.y(d.country) + barHeight)
@@ -84,5 +84,14 @@ export default class Chart2 extends BarChartVertical {
     const colors = schemeCategorySolution.slice();
     colors[1] = '#00a792';
     return scaleOrdinal(colors).domain(['attempted', 'intend']);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d['Country and Year']}</div>`;
+    const numberFormat = format('.1f');
+    const value = bar.classed('intend') ? d.intendToQuit : d.attemptedToQuit;
+    const description = bar.classed('intend') ? this.getTranslation('intend to quit') : this.getTranslation('attempted to quit in past 12 months');
+    content += `<div class="data">${numberFormat(value)}% ${description}</div>`;
+    return content;
   }
 }

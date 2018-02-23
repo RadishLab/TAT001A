@@ -97,20 +97,20 @@ export default class Chart6 extends BarChart {
     const barWidth = this.x.bandwidth() / 2;
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)))
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d.legalConsumption))
-        .attr('height', d => this.chartHeight - this.y(d.legalConsumption))
-        .attr('fill', this.colors('legal-consumption'));
+      .classed('bar legal', true)
+      .attr('x', d => this.x(this.getXValue(d)))
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d.legalConsumption))
+      .attr('height', d => this.chartHeight - this.y(d.legalConsumption))
+      .attr('fill', this.colors('legal-consumption'));
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)) + barWidth)
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d.illicitConsumption))
-        .attr('height', d => this.chartHeight - this.y(d.illicitConsumption))
-        .attr('fill', this.colors('illicit-consumption'));
+      .classed('bar illicit', true)
+      .attr('x', d => this.x(this.getXValue(d)) + barWidth)
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d.illicitConsumption))
+      .attr('height', d => this.chartHeight - this.y(d.illicitConsumption))
+      .attr('fill', this.colors('illicit-consumption'));
   }
 
   renderLines() {
@@ -121,7 +121,7 @@ export default class Chart6 extends BarChart {
     let lineSelection = this.root.selectAll('.line.illicit-share')
       .data([this.data.map(d => ({ year: d.year, value: d.illicitShare }))])
       .enter().append('g')
-        .classed('line illicit-share', true);
+      .classed('line illicit-share', true);
 
     lineSelection.append('path')
       .style('stroke', this.colors('illicit-share'))
@@ -132,5 +132,16 @@ export default class Chart6 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    const yearFormat = timeFormat('%Y');
+    const numberFormat = d => format('.1f')(d / 1000000000);
+    const value = bar.classed('legal') ? d.legalConsumption : d.illicitConsumption;
+    const description = this.getTranslation(bar.classed('legal') ? 'legal consumption' : 'illicit consumption');
+
+    let content = `<div class="header">${yearFormat(d.year)} - ${description}</div>`;
+    content += `<div class="data">${numberFormat(value)} ${this.getTranslation('billion cigarettes')}</div>`;
+    return content;
   }
 }

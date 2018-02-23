@@ -72,31 +72,55 @@ export class Chart3 extends BarChart {
     const barWidth = this.x.bandwidth() / 3;
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)))
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d['Deaths: 0-9.9%']))
-        .attr('height', d => this.chartHeight - this.y(d['Deaths: 0-9.9%']))
-        .attr('fill', this.colors('Deaths: 0-9.9%'));
+      .classed('bar low', true)
+      .attr('x', d => this.x(this.getXValue(d)))
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d['Deaths: 0-9.9%']))
+      .attr('height', d => this.chartHeight - this.y(d['Deaths: 0-9.9%']))
+      .attr('fill', this.colors('Deaths: 0-9.9%'));
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)) + barWidth)
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d['Deaths: 10-19.9%']))
-        .attr('height', d => this.chartHeight - this.y(d['Deaths: 10-19.9%']))
-        .attr('fill', this.colors('Deaths: 10-19.9%'));
+      .classed('bar medium', true)
+      .attr('x', d => this.x(this.getXValue(d)) + barWidth)
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d['Deaths: 10-19.9%']))
+      .attr('height', d => this.chartHeight - this.y(d['Deaths: 10-19.9%']))
+      .attr('fill', this.colors('Deaths: 10-19.9%'));
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)) + barWidth * 2)
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d['Deaths: 20%+']))
-        .attr('height', d => this.chartHeight - this.y(d['Deaths: 20%+']))
-        .attr('fill', this.colors('Deaths: 20%+'));
+      .classed('bar high', true)
+      .attr('x', d => this.x(this.getXValue(d)) + barWidth * 2)
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d['Deaths: 20%+']))
+      .attr('height', d => this.chartHeight - this.y(d['Deaths: 20%+']))
+      .attr('fill', this.colors('Deaths: 20%+'));
   }
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d['WHO Region']}</div>`;
+    const numberFormat = format(',d');
+
+    let value;
+    let description;
+    if (bar.classed('low')) {
+      value = d['Deaths: 0-9.9%'];
+      description = this.getTranslation('0 to 9.9%');
+    }
+    if (bar.classed('medium')) {
+      value = d['Deaths: 10-19.9%'];
+      description = this.getTranslation('10 to 19.9%');
+    }
+    if (bar.classed('high')) {
+      value = d['Deaths: 20%+'];
+      description = this.getTranslation('20% or more');
+    }
+    let countries = this.getTranslation('countries');
+    if (value === 1) countries = this.getTranslation('country');
+    content += `<div class="data">${numberFormat(value)} ${countries} ${this.getTranslation('with')} ${description} ${this.getTranslation('of deaths attributable to tobacco use')}</div>`;
+    return content;
   }
 }

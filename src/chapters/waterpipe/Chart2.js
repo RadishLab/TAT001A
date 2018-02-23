@@ -53,7 +53,7 @@ export default class Chart3 extends BarChart {
     const barWidth = this.x.bandwidth() / 2;
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar women', true)
       .attr('x', d => this.x(d.country))
       .attr('width', barWidth)
       .attr('y', d => this.y(d.women))
@@ -61,7 +61,7 @@ export default class Chart3 extends BarChart {
       .attr('fill', d => this.colors('women'));
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar men', true)
       .attr('x', d => this.x(d.country) + barWidth)
       .attr('width', barWidth)
       .attr('y', d => this.y(d.men))
@@ -82,5 +82,14 @@ export default class Chart3 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    const value = bar.classed('women') ? d.women : d.men;
+    const description = this.getTranslation(bar.classed('women') ? 'Women' : 'Men');
+    let content = `<div class="header">${d.Country} - ${description}</div>`;
+    const numberFormat = format('.1f');
+    content += `<div class="data">${numberFormat(value)}% ${this.getTranslation('of tobacco users used waterpipe')}</div>`;
+    return content;
   }
 }

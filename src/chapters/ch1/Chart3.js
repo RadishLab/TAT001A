@@ -158,4 +158,18 @@ export default class Chart3 extends BarChart {
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
   }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.Country}</div>`;
+    const numberFormat = format(',d');
+    content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('USD profit per acre')}</div>`;
+    content += `<div class="data">${this.getTranslation(d['Contract versus Independent'])}</div>`;
+    if (d.profitType === 'adjusted') {
+      content += `<div class="data">${this.getTranslation('Adjusted for labor costs')}</div>`;
+    }
+    else if (d.profitType === 'unadjusted') {
+      content += `<div class="data">${this.getTranslation('Not adjusted for labor costs')}</div>`;
+    }
+    return content;
+  }
 }
