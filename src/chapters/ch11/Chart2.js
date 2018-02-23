@@ -18,6 +18,8 @@ export default class Chart2 extends BarChartVertical {
     ];
     this.xAxisTickFormat = format('d');
     this.yAxisTickFormat = this.getTranslation.bind(this);
+    this.legendYOffset = 0;
+    this.legendYPadding = 15;
   }
 
   loadData() {
@@ -37,6 +39,10 @@ export default class Chart2 extends BarChartVertical {
     const margin = super.createMargin();
     margin.left = this.options.web ? 200 : 80;
     margin.bottom = this.options.web ? 75 : 38;
+    if (this.parentContainer.classed('ta-visualization-narrow') || this.parentContainer.classed('.ta-visualization-narrowest')) {
+      margin.left = 120;
+      margin.bottom = 50;
+    }
     return margin;
   }
 
@@ -93,5 +99,13 @@ export default class Chart2 extends BarChartVertical {
     const description = bar.classed('intend') ? this.getTranslation('intend to quit') : this.getTranslation('attempted to quit in past 12 months');
     content += `<div class="data">${numberFormat(value)}% ${description}</div>`;
     return content;
+  }
+
+  render() {
+    super.render();
+    if (this.parentContainer.classed('ta-visualization-narrow') || this.parentContainer.classed('.ta-visualization-narrowest')) {
+      this.root.selectAll('.axis-x .tick')
+        .style('font-size', '8px');
+    }
   }
 }
