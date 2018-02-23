@@ -83,6 +83,7 @@ const FILES = [
   ['Web Illicit/TA6 Illicit inset 6.xlsx', 'illicit-6.csv'],
   ['Web Smokeless/TA6 Smokeless Map.xlsx', 'smokeless-map.csv'],
   ['Web Smokeless/TA6 Smokeless Inset-YouthUse - edit.xlsx', 'smokeless-1.csv'],
+  ['Web Smokeless/TA6 Smokeless Inset Carcinogens.xlsx', 'smokeless-2.csv'],
   ['Web Waterpipe/TA6 Waterpipe Data Inset 1.xlsx', 'waterpipe-1.csv'],
   ['Web Waterpipe/TA6 Waterpipe Data Inset 2.xlsx', 'waterpipe-2.csv'],
   ['Web Waterpipe/TA6 Waterpipe Data Inset 3.xlsx', 'waterpipe-3.csv'],
