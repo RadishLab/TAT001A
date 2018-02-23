@@ -363,7 +363,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .ta-visualization.ta-visualization-narrow .axis-x .tick,
 .ta-visualization.ta-visualization-narrow .axis-y .tick {
-  font-size: 9px; }
+  font-size: 8px; }
 
 .ta-visualization.ta-visualization-narrow .legend {
   font-size: 12px; }
