@@ -27,7 +27,6 @@ export default class Chart2 extends Chart {
           d.max = parseInt(d['High TSNA'], 10);
           return d;
         });
-        console.log(mappedData);
         resolve(mappedData);
       });
     });
