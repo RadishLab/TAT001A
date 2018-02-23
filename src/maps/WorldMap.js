@@ -21,12 +21,12 @@ export default class WorldMap extends Visualization {
       .append('pattern')
         .attr('id', 'dots')
         .attr('patternUnits', 'userSpaceOnUse')
-        .attr('width', this.options.web ? 5 : 2)
-        .attr('height', this.options.web ? 5 : 2)
+        .attr('width', this.options.web ? 6 : 2)
+        .attr('height', this.options.web ? 6 : 2)
       .append('circle')
-        .attr('cx', this.options.web ? 5 : 2)
-        .attr('cy', this.options.web ? 5 : 2)
-        .attr('r', this.options.web ? 3 : 0.22)
+        .attr('cx', this.options.web ? 3 : 2)
+        .attr('cy', this.options.web ? 3 : 2)
+        .attr('r', this.options.web ? 0.75 : 0.22)
         .attr('fill', mapCircleOverlay);
     this.projection = geoGinzburg5();
     this.path = geoPath()
