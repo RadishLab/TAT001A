@@ -29,7 +29,7 @@ export default class Map3 extends WorldMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(this.dataFileUrl('1-map2.csv'), (csvData) => {
+      csv(this.dataFileUrl('1-map3.csv'), (csvData) => {
         const domain = set(csvData.map(d => d[this.valueField])).values().filter(d => d !== '').sort();
         this.colorScale.domain(domain);
         this.yearRange = extent(csvData, d => +d['Year']);
