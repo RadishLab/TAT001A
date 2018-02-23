@@ -77,6 +77,7 @@ const FILES = [
   ['Web Environment/map data environment.xlsx', 'environment-map.csv'],
   ['Web Illicit/TA6 Illicit inset 1.1.xlsx', 'illicit-1.csv'],
   ['Web Illicit/TA6 Illicit inset 1.3. Menthol.xlsx', 'illicit-2.csv'],
+  ['Web Illicit/TA6 Illicit inset 2 - edit.xlsx', 'illicit-2a.csv'],
   ['Web Illicit/TA6 Illicit inset 3.xlsx', 'illicit-map.csv'],
   ['Web Illicit/TA6 Illicit inset 4.xlsx', 'illicit-4.csv'],
   ['Web Illicit/TA6 Illicit inset 5.xlsx', 'illicit-5.csv'],

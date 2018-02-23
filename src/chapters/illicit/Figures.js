@@ -1,5 +1,6 @@
 import Chart1 from './Chart1';
 import Chart2 from './Chart2';
+import Chart2a from './Chart2a';
 import Map from './Map';
 import Chart4 from './Chart4';
 import Chart5 from './Chart5';
@@ -14,6 +15,11 @@ export const figures = [
   {
     name: '2',
     figureClass: Chart2,
+    type: 'chart'
+  },
+  {
+    name: '2a',
+    figureClass: Chart2a,
     type: 'chart'
   },
   {

@@ -1,0 +1,11 @@
+location,year,type,description,value
+"Warsaw, Poland",2011,Academic study,Survey of packs presented by smokers,0.146
+"Warsaw, Poland",2011,Academic study,Survey of littered packs,0.156
+"Warsaw, Poland",2011,Industry estimate,Survey of littered packs,0.229
+Hong Kong,2012,Academic study,Gap method,0.119
+Hong Kong,2012,Industry estimate,Survey of littered packs,0.359
+Colombia,2016,Academic study,Survey of smokers and packs presented by smokers,0.035
+Colombia,2016,Industry estimate,Method unknown,0.14
+India,2016,Academic study,Survey of packs from single-cigarette sellers,0.0273
+India,2016,Industry estimate,Method unknown,0.2
+,,,,
