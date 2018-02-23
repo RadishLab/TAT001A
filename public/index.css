@@ -361,6 +361,13 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .ta-visualization .legend path {
   stroke-width: 2; }
 
+.ta-visualization.ta-visualization-narrow .axis-x .tick,
+.ta-visualization.ta-visualization-narrow .axis-y .tick {
+  font-size: 9px; }
+
+.ta-visualization.ta-visualization-narrow .legend {
+  font-size: 12px; }
+
 .ta-visualization .pie-chart .arc-label {
   font-size: 6px;
   text-anchor: middle; }
