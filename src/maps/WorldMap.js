@@ -21,12 +21,12 @@ export default class WorldMap extends Visualization {
       .append('pattern')
         .attr('id', 'dots')
         .attr('patternUnits', 'userSpaceOnUse')
-        .attr('width', 2)
-        .attr('height', 2)
+        .attr('width', this.options.web ? 5 : 2)
+        .attr('height', this.options.web ? 5 : 2)
       .append('circle')
-        .attr('cx', 2)
-        .attr('cy', 2)
-        .attr('r', 0.22)
+        .attr('cx', this.options.web ? 5 : 2)
+        .attr('cy', this.options.web ? 5 : 2)
+        .attr('r', this.options.web ? 3 : 0.22)
         .attr('fill', mapCircleOverlay);
     this.projection = geoGinzburg5();
     this.path = geoPath()
@@ -153,7 +153,7 @@ export default class WorldMap extends Visualization {
 
     smallCountries.append('circle')
       .classed('country-symbol', true)
-      .style('fill', d => (d => d.properties.joined && d.properties.joined[this.symbolField]) ? 'url(#dots)' : 'none')
+      .style('fill', d => (d.properties.joined && d.properties.joined[this.symbolField]) ? 'url(#dots)' : 'none')
       .attr('r', this.options.web ? 4 : 1)
       .attr('cx', d => this.path.centroid(d)[0])
       .attr('cy', d => this.path.centroid(d)[1]);
