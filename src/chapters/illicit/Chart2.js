@@ -2,8 +2,8 @@ import { extent } from 'd3-array';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
-import { curveBasis, line } from 'd3-shape';
-import { timeParse } from 'd3-time-format';
+import { line } from 'd3-shape';
+import { timeFormat, timeParse } from 'd3-time-format';
 
 import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
@@ -36,7 +36,6 @@ export default class Chart2 extends LineChart {
     this.y = this.createYScale();
     this.colors = this.createZScale();
     this.line = line()
-      .curve(curveBasis)
       .x(this.lineXAccessor.bind(this))
       .y(this.lineYAccessor.bind(this));
     this.render();
@@ -60,7 +59,7 @@ export default class Chart2 extends LineChart {
         [banYear, yExtent[1]]
       ]])
       .enter().append('g')
-        .classed('line ban', true);
+        .classed('line ban not-data', true);
 
     lineSelection.append('path')
       .style('stroke', '#585857')
@@ -81,7 +80,7 @@ export default class Chart2 extends LineChart {
     const margin = super.createMargin();
     margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 60;
     margin.right = 20;
-    margin.top = 5;
+    margin.top = this.options.web ? 10 : 5;
     return margin;
   }
 
@@ -115,5 +114,23 @@ export default class Chart2 extends LineChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  getVoronoiData() {
+    return this.data[0].values.map(row => {
+      return {
+        category: 'cartons',
+        value: row.value,
+        year: row.year
+      };
+    });
+  }
+
+  tooltipContent(d, line) {
+    const yearFormat = timeFormat('%Y');
+    const valueFormat = format(',d');
+    let content = `<div class="header">${yearFormat(d.year)}</div>`;
+    content += `<div class="data">${valueFormat(d.value)} ${this.getTranslation('cartons (or equivalent)')}</div>`;
+    return content;
   }
 }

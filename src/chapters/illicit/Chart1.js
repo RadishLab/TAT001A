@@ -2,8 +2,8 @@ import { extent } from 'd3-array';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
-import { curveBasis, line } from 'd3-shape';
-import { timeParse } from 'd3-time-format';
+import { line } from 'd3-shape';
+import { timeFormat, timeParse } from 'd3-time-format';
 
 import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
@@ -13,7 +13,7 @@ export default class Chart1 extends LineChart {
     super(parent, options);
     this.figurePrefix = 'illicit-1';
     this.yLabel = this.getTranslation('Price (£)');
-    this.yLabelRight = this.getTranslation('Deaths Caused by Smoking (%)');
+    this.yLabelRight = this.getTranslation('Cigarettes (billions)');
     this.yAxisTickFormat = format('d');
     this.yAxisRightTickFormat = format('d');
     this.legendItems = [
@@ -57,11 +57,11 @@ export default class Chart1 extends LineChart {
   }
 
   lineYAccessor(d) {
-    return this.y(d.price);
+    return this.y(d.value);
   }
 
   lineY2Accessor(d) {
-    return this.yRight(d.consumption);
+    return this.yRight(d.value);
   }
 
   createXScale() {
@@ -95,32 +95,73 @@ export default class Chart1 extends LineChart {
   renderLines() {
     // Price
     let lineCreator = line()
-      .curve(curveBasis)
       .x(this.lineXAccessor.bind(this))
-      .y(d => this.y(d.price));
+      .y(this.lineYAccessor.bind(this));
 
     let lineSelection = this.root.selectAll('.line.price')
-      .data([this.data])
+      .data([{
+        key: 'price',
+        values: this.data.map(d => ({ year: d.year, value: d.price }))
+      }])
       .enter().append('g')
         .classed('line price', true);
 
     lineSelection.append('path')
       .style('stroke', d => this.colors('price'))
-      .attr('d', d => lineCreator(d));
+      .attr('d', d => lineCreator(d.values));
 
     // Consumption
     lineSelection = this.root.selectAll('.line.consumption')
-      .data([this.data])
+      .data([{
+        key: 'consumption',
+        values: this.data.map(d => ({ year: d.year, value: d.consumption }))
+      }])
       .enter().append('g')
         .classed('line consumption', true);
 
     lineCreator = line()
-      .curve(curveBasis)
       .x(this.lineXAccessor.bind(this))
       .y(this.lineY2Accessor.bind(this));
 
     lineSelection.append('path')
       .style('stroke', d => this.colors('consumption'))
-      .attr('d', d => lineCreator(d));
+      .attr('d', d => lineCreator(d.values));
+  }
+
+  getVoronoiData() {
+    const voronoiData = [];
+    this.data.forEach(row => {
+      ['consumption', 'price'].forEach(variable => {
+        voronoiData.push({
+          category: variable,
+          value: row[variable],
+          year: row.year
+        });
+      });
+    });
+    return voronoiData;
+  }
+
+  voronoiYAccessor(d) {
+    if (d.category === 'consumption') return this.lineY2Accessor(d);
+    return this.lineYAccessor(d);
+  }
+
+  tooltipContent(d, line) {
+    const yearFormat = timeFormat('%Y');
+    const title = this.legendItems.filter(item => item.value === d.category)[0].label;
+
+    let content = `<div class="header">${title}</div>`;
+    content += `<div class="data">${yearFormat(d.year)}</div>`;
+
+    if (d.category === 'price') {
+      const valueFormat = format('.2f');
+      content += `<div class="data">£${valueFormat(d.value)}</div>`;
+    }
+    if (d.category === 'consumption') {
+      const valueFormat = format('.1f');
+      content += `<div class="data">${valueFormat(d.value)} billion cigarettes</div>`;
+    }
+    return content;
   }
 }

@@ -1,9 +1,9 @@
-import { extent } from 'd3-array';
+import { extent, merge } from 'd3-array';
 import { nest } from 'd3-collection';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
-import { timeParse } from 'd3-time-format';
+import { timeFormat, timeParse } from 'd3-time-format';
 
 import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
@@ -72,5 +72,21 @@ export class Chart1 extends LineChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  getVoronoiData() {
+    return merge(this.data.map(d => d.values)).map(d => {
+      d.category = d.HDI;
+      return d;
+    });
+  }
+
+  tooltipContent(d, line) {
+    const yearFormat = timeFormat('%Y');
+    const valueFormat = format('.1f');
+    let content = `<div class="header">${d.HDI}</div>`;
+    content += `<div class="data">${yearFormat(d.year)}</div>`;
+    content += `<div class="data">${valueFormat(d.value)} ${this.getTranslation('million smokers')}</div>`;
+    return content;
   }
 }

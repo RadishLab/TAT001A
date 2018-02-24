@@ -1,9 +1,9 @@
-import { extent } from 'd3-array';
+import { extent, merge } from 'd3-array';
 import { nest } from 'd3-collection';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
-import { timeParse } from 'd3-time-format';
+import { timeFormat, timeParse } from 'd3-time-format';
 
 import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
@@ -28,6 +28,10 @@ export default class Chart2 extends LineChart {
     margin.top = 10;
     margin.right = 10;
     margin.bottom = this.legendOrientation() === 'horizontal' ? 32 : 58;
+    if (this.options.web) {
+      margin.bottom = 80;
+      margin.right = 20;
+    }
     return margin;
   }
 
@@ -94,5 +98,21 @@ export default class Chart2 extends LineChart {
     let xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().height + 18;
     this.parent.select('.axis-x .axis-title')
       .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
+  }
+
+  getVoronoiData() {
+    return merge(this.data.map(d => d.values)).map(d => {
+      d.category = d.country;
+      return d;
+    });
+  }
+
+  tooltipContent(d, line) {
+    const yearFormat = timeFormat('%Y');
+    const valueFormat = format('.1f');
+    let content = `<div class="header">${d.country}</div>`;
+    content += `<div class="data">${yearFormat(d.year)}</div>`;
+    content += `<div class="data">${valueFormat(d.value)}% ${this.getTranslation('smoking prevalence')}</div>`;
+    return content;
   }
 }

@@ -36,7 +36,8 @@ export default class Visualization {
     this.dataOverrideUrl = options.dataOverrideUrl;
 
     this.tooltip = this.parentContainer.append('div')
-      .classed('ta-visualization-tooltip', true);
+      .classed('ta-visualization-tooltip', true)
+      .on('mouseover', () => this.tooltip.classed('visible', true));
 
     this.textColors = {
       lightBackground: '#2d2d2d',

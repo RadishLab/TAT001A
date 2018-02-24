@@ -1,9 +1,9 @@
-import { extent } from 'd3-array';
+import { extent, merge } from 'd3-array';
 import { nest } from 'd3-collection';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
-import { timeParse } from 'd3-time-format';
+import { timeFormat, timeParse } from 'd3-time-format';
 
 import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
@@ -57,7 +57,7 @@ export default class Chart2 extends LineChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.top = 5;
+    margin.top = this.options.web ? 10 : 5;
     margin.right = 25;
     return margin;
   }
@@ -80,5 +80,26 @@ export default class Chart2 extends LineChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  getVoronoiData() {
+    return merge(this.data.map(d => {
+      return d.values.map(value => {
+        return {
+          category: d.key,
+          year: new Date(value.year),
+          value: value.value
+        };
+      })
+    }));
+  }
+
+  tooltipContent(d, line) {
+    const yearFormat = timeFormat('%Y');
+    const valueFormat = format('.1f');
+    let content = `<div class="header">${d.category}</div>`;
+    content += `<div class="data">${yearFormat(d.year)}</div>`;
+    content += `<div class="data">${valueFormat(d.value)} trillion cigarettes</div>`;
+    return content;
   }
 }

@@ -3,8 +3,8 @@ import { nest } from 'd3-collection';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
-import { curveBasis, line } from 'd3-shape';
-import { timeParse } from 'd3-time-format';
+import { line } from 'd3-shape';
+import { timeFormat, timeParse } from 'd3-time-format';
 
 import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
@@ -31,7 +31,7 @@ export class Chart2 extends LineChart {
     const margin = super.createMargin();
     margin.right = this.options.web ? 60 : 40;
     margin.bottom = this.options.web ? 115 : 50;
-    margin.top = 2;
+    margin.top = this.options.web ? 10 : 2;
     return margin;
   }
 
@@ -185,7 +185,6 @@ export class Chart2 extends LineChart {
 
     // Prevalence
     let lineCreator = line()
-      .curve(curveBasis)
       .x(this.lineXAccessor.bind(this))
       .y(d => this.y(d.value));
 
@@ -208,7 +207,6 @@ export class Chart2 extends LineChart {
         .classed('line death-rate', true);
 
     lineCreator = line()
-      .curve(curveBasis)
       .x(this.lineXAccessor.bind(this))
       .y(this.lineY2Accessor.bind(this));
 
@@ -219,5 +217,32 @@ export class Chart2 extends LineChart {
       })
       .style('stroke-dasharray', '5,5')
       .attr('d', d => lineCreator(d.values.filter(row => row.value > 0)));
+  }
+
+  getVoronoiData() {
+    return this.data.map(d => {
+      d.category = d.variable;
+      d.valueType = d.variable.indexOf('death rate') >= 0 ? 'death rate' : 'prevalence';
+      return d;
+    });
+  }
+
+  voronoiYAccessor(d) {
+    if (d.valueType === 'death rate') return this.lineY2Accessor(d);
+    return this.lineYAccessor(d);
+  }
+
+  tooltipContent(d, line) {
+    const yearFormat = timeFormat('%Y');
+    const valueFormat = format('.1f');
+
+    const title = d.variable[0].toUpperCase() + d.variable.slice(1);
+    let content = `<div class="header">${title}</div>`;
+    content += `<div class="data">${yearFormat(d.year)}</div>`;
+
+    let value = d.value;
+    if (d.valueType === 'prevalence') value *= 100;
+    content += `<div class="data">${valueFormat(value)}%</div>`;
+    return content;
   }
 }

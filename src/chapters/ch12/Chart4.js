@@ -3,7 +3,7 @@ import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
 import { line } from 'd3-shape';
-import { timeParse } from 'd3-time-format';
+import { timeFormat, timeParse } from 'd3-time-format';
 
 import { schemeCategorySolution } from '../../colors';
 import LineChart from '../../charts/LineChart';
@@ -30,6 +30,7 @@ export default class Chart4 extends LineChart {
     margin.bottom = this.legendOrientation() === 'horizontal' ? 42 : 60;
     if (this.options.web) {
       margin.bottom = 80;
+      margin.top = 10;
     }
     return margin;
   }
@@ -104,13 +105,16 @@ export default class Chart4 extends LineChart {
       .y(this.lineYAccessor.bind(this));
 
     let lineSelection = this.root.selectAll('.line.price')
-      .data([this.data.map(d => ({ year: d.year, value: d.price }))])
+      .data([{
+        key: 'price',
+        values: this.data.map(d => ({ year: d.year, value: d.price }))
+      }])
       .enter().append('g')
         .classed('line price', true);
 
     lineSelection.append('path')
       .style('stroke', this.colors('price'))
-      .attr('d', d => lineCreator(d));
+      .attr('d', d => lineCreator(d.values));
 
     // Tax-paid
     lineCreator = line()
@@ -118,22 +122,66 @@ export default class Chart4 extends LineChart {
       .y(this.lineY2Accessor.bind(this));
 
     lineSelection = this.root.selectAll('.line.taxpaid')
-      .data([this.data.map(d => ({ year: d.year, value: d.taxpaid }))])
+      .data([{
+        key: 'taxpaid',
+        values: this.data.map(d => ({ year: d.year, value: d.taxpaid }))
+      }])
       .enter().append('g')
         .classed('line taxpaid', true);
 
     lineSelection.append('path')
       .style('stroke', this.colors('taxpaid'))
-      .attr('d', d => lineCreator(d));
+      .attr('d', d => lineCreator(d.values));
 
     // Illicit
     lineSelection = this.root.selectAll('.line.illicit')
-      .data([this.data.map(d => ({ year: d.year, value: d.illicit }))])
+      .data([{
+        key: 'illicit',
+        values: this.data.map(d => ({ year: d.year, value: d.illicit }))
+      }])
       .enter().append('g')
         .classed('line illicit', true);
 
     lineSelection.append('path')
       .style('stroke', this.colors('illicit'))
-      .attr('d', d => lineCreator(d));
+      .attr('d', d => lineCreator(d.values));
+  }
+
+  getVoronoiData() {
+    const voronoiData = [];
+    this.data.forEach(row => {
+      ['illicit', 'taxpaid', 'price'].forEach(variable => {
+        voronoiData.push({
+          category: variable,
+          value: row[variable],
+          year: row.year
+        });
+      });
+    });
+    return voronoiData;
+  }
+
+  voronoiYAccessor(d) {
+    if (d.category === 'illicit' || d.category === 'taxpaid') return this.lineY2Accessor(d);
+    return this.lineYAccessor(d);
+  }
+
+  tooltipContent(d, line) {
+    const yearFormat = timeFormat('%Y');
+    const title = this.legendItems.filter(item => item.value === d.category)[0].label;
+
+
+    let content = `<div class="header">${title}</div>`;
+    content += `<div class="data">${yearFormat(d.year)}</div>`;
+
+    if (d.category === 'price') {
+      const valueFormat = format('.2f');
+      content += `<div class="data">£${valueFormat(d.value)}</div>`;
+    }
+    else if (d.category === 'illicit' || d.category === 'taxpaid') {
+      const valueFormat = format('.1f');
+      content += `<div class="data">${valueFormat(d.value)} ${this.getTranslation('billion cigarettes')}</div>`;
+    }
+    return content;
   }
 }

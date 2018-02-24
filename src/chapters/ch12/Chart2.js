@@ -3,7 +3,7 @@ import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
 import { curveBasis, line } from 'd3-shape';
-import { timeParse } from 'd3-time-format';
+import { timeFormat, timeParse } from 'd3-time-format';
 
 import { schemeCategorySolution } from '../../colors';
 import LineChart from '../../charts/LineChart';
@@ -27,6 +27,9 @@ export default class Chart2 extends LineChart {
   createMargin() {
     const margin = super.createMargin();
     margin.right = this.options.web ? 60 : 30;
+    if (this.options.web) {
+      margin.top = 10;
+    }
     return margin;
   }
 
@@ -101,23 +104,29 @@ export default class Chart2 extends LineChart {
       .y(this.lineYAccessor.bind(this));
 
     let lineSelection = this.root.selectAll('.line.price')
-      .data([this.data.map(d => ({ year: d.year, value: d.price }))])
+      .data([{
+        key: 'price',
+        values: this.data.map(d => ({ year: d.year, value: d.price }))
+      }])
       .enter().append('g')
         .classed('line price', true);
 
     lineSelection.append('path')
       .style('stroke', this.colors('price'))
-      .attr('d', d => lineCreator(d));
+      .attr('d', d => lineCreator(d.values));
 
     // Tax
     lineSelection = this.root.selectAll('.line.tax')
-      .data([this.data.map(d => ({ year: d.year, value: d.tax }))])
+      .data([{
+        key: 'tax',
+        values: this.data.map(d => ({ year: d.year, value: d.tax }))
+      }])
       .enter().append('g')
         .classed('line tax', true);
 
     lineSelection.append('path')
       .style('stroke', this.colors('tax'))
-      .attr('d', d => lineCreator(d));
+      .attr('d', d => lineCreator(d.values));
 
     // Prevalence
     lineCreator = line()
@@ -126,12 +135,52 @@ export default class Chart2 extends LineChart {
       .y(this.lineY2Accessor.bind(this));
 
     lineSelection = this.root.selectAll('.line.prevalence')
-      .data([this.data.map(d => ({ year: d.year, value: d.prevalence }))])
+      .data([{
+        key: 'prevalence',
+        values: this.data.map(d => ({ year: d.year, value: d.prevalence }))
+      }])
       .enter().append('g')
         .classed('line prevalence', true);
 
     lineSelection.append('path')
       .style('stroke', this.colors('prevalence'))
-      .attr('d', d => lineCreator(d));
+      .attr('d', d => lineCreator(d.values));
+  }
+
+  getVoronoiData() {
+    const voronoiData = [];
+    this.data.forEach(row => {
+      ['prevalence', 'tax', 'price'].forEach(variable => {
+        voronoiData.push({
+          category: variable,
+          value: row[variable],
+          year: row.year
+        });
+      });
+    });
+    return voronoiData;
+  }
+
+  voronoiYAccessor(d) {
+    if (d.category === 'prevalence') return this.lineY2Accessor(d);
+    return this.lineYAccessor(d);
+  }
+
+  tooltipContent(d, line) {
+    const yearFormat = timeFormat('%Y');
+    const title = d.category[0].toUpperCase() + d.category.slice(1);
+
+    let content = `<div class="header">${title}</div>`;
+    content += `<div class="data">${yearFormat(d.year)}</div>`;
+
+    if (d.category === 'tax' || d.category === 'price') {
+      const valueFormat = format('.1f');
+      content += `<div class="data">${valueFormat(d.value)} ${this.getTranslation('price/tax index')}</div>`;
+    }
+    else if (d.category === 'prevalence') {
+      const valueFormat = d => format('.1f')(d * 100);
+      content += `<div class="data">${valueFormat(d.value)}% ${this.getTranslation('smoking prevalence')}</div>`;
+    }
+    return content;
   }
 }
