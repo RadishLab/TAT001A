@@ -36,8 +36,6 @@ export default class BaseMap extends Visualization {
       }
     });
 
-    console.log(legendItemList);
-
     // Either way put No Data at the end
     legendItemList.push([ null, this.noDataLabel ]);
     return legendItemList;
