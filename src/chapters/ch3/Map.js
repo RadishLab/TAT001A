@@ -45,7 +45,7 @@ export default class Map extends WorldMap {
     const country = super.renderPaths();
     const outlinedCountries = country.filter(d => d.properties.joined && d.properties.joined.outlined);
     outlinedCountries.selectAll('path')
-      .style('stroke', '#585857')
+      .style('stroke', this.symbolOutlineColor)
       .style('stroke-width', 0.5);
     outlinedCountries.each((d, i, nodes) => {
       nodes[i].parentNode.appendChild(nodes[i]);

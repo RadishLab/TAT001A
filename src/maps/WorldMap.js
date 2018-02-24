@@ -16,8 +16,8 @@ export default class WorldMap extends Visualization {
     super(parent, options);
     this.legend = options.legend;
     this.parent.classed('world-map', true);
-    this.parent
-      .append('defs')
+    const defs = this.parent.append('defs');
+    defs
       .append('pattern')
         .attr('id', 'dots')
         .attr('patternUnits', 'userSpaceOnUse')
@@ -28,6 +28,18 @@ export default class WorldMap extends Visualization {
         .attr('cy', this.options.web ? 3 : 2)
         .attr('r', this.options.web ? 0.75 : 0.22)
         .attr('fill', mapCircleOverlay);
+    defs
+      .append('pattern')
+        .attr('id', 'dots-legend')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', this.options.web ? 6 : 2)
+        .attr('height', this.options.web ? 6 : 2)
+      .append('circle')
+        .attr('cx', this.options.web ? 3 : 2)
+        .attr('cy', this.options.web ? 3 : 2)
+        .attr('r', this.options.web ? 0.75 : 0.22)
+        .attr('fill', '#aaa');
+
     this.projection = geoGinzburg5();
     this.path = geoPath()
       .projection(this.projection);
@@ -42,6 +54,7 @@ export default class WorldMap extends Visualization {
     this.tooltip
       .classed('tooltip-country', true);
 
+    this.symbolOutlineColor = '#585857';
     this.legendOptions = {
       width: this.width / 7,
       height: 18,
@@ -187,6 +200,12 @@ export default class WorldMap extends Visualization {
     // Very rarely the key code is reversed--lowest key goes at the top
     if (this.keyCodeReversed) legendItemList = legendItemList.reverse();
 
+    ['symbol-1', 'symbol-2'].forEach(symbolName => {
+      if (this.options[symbolName]) {
+        legendItemList.push([symbolName, this.options[symbolName]]);
+      }
+    });
+
     // Either way put No Data at the end
     legendItemList.push([ null, this.noDataLabel ]);
     return legendItemList;
@@ -243,7 +262,13 @@ export default class WorldMap extends Visualization {
       .attr('height', this.legendOptions.height)
       .attr('fill', d => {
         const keyCode = d[0];
+        if (keyCode === 'symbol-1') return 'url(#dots-legend)';
+        if (keyCode === 'symbol-2') return 'none';
         return keyCode !== null ? this.colorScale(keyCode) : this.noDataColor;
+      })
+      .attr('stroke', d => {
+        if (d[0] === 'symbol-2') return this.symbolOutlineColor;
+        return 'none';
       });
 
     legendItems.append('text')
