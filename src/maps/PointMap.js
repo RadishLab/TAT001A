@@ -7,9 +7,9 @@ import * as topojson from 'topojson-client';
 
 import { mapNoData } from '../colors';
 import { loadCachedData } from '../dataService';
-import Visualization from '../Visualization';
+import BaseMap from './BaseMap';
 
-export default class PointMap extends Visualization {
+export default class PointMap extends BaseMap {
   constructor(parent, options) {
     super(parent, options);
     this.projection = geoGinzburg5();
@@ -111,5 +111,6 @@ export default class PointMap extends Visualization {
     ], this.countriesGeojson);
 
     this.renderPaths();
+    this.renderLegend();
   }
 }

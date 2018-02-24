@@ -13,7 +13,6 @@ import BaseMap from './BaseMap';
 export default class WorldMap extends BaseMap {
   constructor(parent, options) {
     super(parent, options);
-    this.legend = options.legend;
     this.parent.classed('world-map', true);
     const defs = this.parent.append('defs');
     defs
@@ -52,13 +51,6 @@ export default class WorldMap extends BaseMap {
     this.defaultStroke = 'none';
     this.tooltip
       .classed('tooltip-country', true);
-
-    this.symbolOutlineColor = '#585857';
-    this.legendOptions = {
-      width: this.width / 7,
-      height: 18,
-      padding: 3,
-    };
   }
 
   loadData() {
@@ -182,32 +174,6 @@ export default class WorldMap extends BaseMap {
         .attr('font-size', '10px')
         .attr('text-anchor', 'middle')
         .attr('transform', d => `translate(${this.path.centroid(d)})`);
-  }
-
-  getLegendItems() {
-    let legendItemList = Object.entries(this.legend)
-      .sort((a, b) => {
-        let aKey = a[0],
-          bKey = b[0],
-          aKeyInt = parseInt(aKey, 10),
-          bKeyInt = parseInt(bKey, 10);
-        // Lowest key code goes at the bottom
-        if (!(isNaN(aKeyInt) || isNaN(bKeyInt))) return bKeyInt - aKeyInt;
-        return bKey - aKey;
-      });
-
-    // Very rarely the key code is reversed--lowest key goes at the top
-    if (this.keyCodeReversed) legendItemList = legendItemList.reverse();
-
-    ['symbol-1', 'symbol-2'].forEach(symbolName => {
-      if (this.options[symbolName]) {
-        legendItemList.push([symbolName, this.options[symbolName]]);
-      }
-    });
-
-    // Either way put No Data at the end
-    legendItemList.push([ null, this.noDataLabel ]);
-    return legendItemList;
   }
 
   render() {
