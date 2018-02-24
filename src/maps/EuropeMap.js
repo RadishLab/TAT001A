@@ -59,5 +59,6 @@ export default class EuropeMap extends WorldMap {
       [this.parent.node().clientWidth - this.padding, this.parent.node().clientHeight - this.padding]
     ], this.europeGeojson);
     this.renderPaths();
+    this.renderLegend();
   }
 }
