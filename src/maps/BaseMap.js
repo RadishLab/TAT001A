@@ -1,4 +1,6 @@
 import { select } from 'd3-selection';
+import tinycolor from 'tinycolor2';
+
 import Visualization from '../Visualization';
 import wrap from '../wrap';
 
@@ -55,6 +57,13 @@ export default class BaseMap extends Visualization {
       .classed('legend', true)
       .attr('transform', `translate(${this.width - this.legendOptions.width}, 0)`);
 
+    const legendItemFill = d => {
+      const keyCode = d[0];
+      if (keyCode === 'symbol-1') return 'url(#dots-legend)';
+      if (keyCode === 'symbol-2') return 'none';
+      return keyCode !== null ? this.colorScale(keyCode) : this.noDataColor;
+    };
+
     const legendItems = this.legendGroup.selectAll('rect')
       .data(items)
       .enter().append('g');
@@ -62,12 +71,7 @@ export default class BaseMap extends Visualization {
     legendItems.append('rect')
       .attr('width', this.legendOptions.width)
       .attr('height', this.legendOptions.height)
-      .attr('fill', d => {
-        const keyCode = d[0];
-        if (keyCode === 'symbol-1') return 'url(#dots-legend)';
-        if (keyCode === 'symbol-2') return 'none';
-        return keyCode !== null ? this.colorScale(keyCode) : this.noDataColor;
-      })
+      .attr('fill', legendItemFill)
       .attr('stroke', d => {
         if (d[0] === 'symbol-2') return this.symbolOutlineColor;
         return 'none';
@@ -77,7 +81,19 @@ export default class BaseMap extends Visualization {
       .attr('y', 15)
       .attr('dy', 0)
       .text(d => d[1])
-      .style('fill', this.textColors.lightBackground)
+      .style('fill', d => {
+        // If symbol, treat as a light background
+        if (d[0] && d[0].indexOf('symbol-') === 0) {
+          return this.textColors.lightBackground;
+        }
+
+        // Otherwise find the fill color and ask tinycolor if it is dark
+        const fillColor = tinycolor(legendItemFill(d));
+        if (fillColor.isDark()) {
+          return this.textColors.darkBackground;
+        }
+        return this.textColors.lightBackground;
+      })
       .call(wrap, this.legendOptions.width);
 
     legendItems.selectAll('text tspan')
