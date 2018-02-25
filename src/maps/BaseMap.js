@@ -18,19 +18,22 @@ export default class BaseMap extends Visualization {
   }
 
   getLegendItems() {
-    let legendItemList = Object.entries(this.legend)
-      .sort((a, b) => {
-        let aKey = a[0],
-          bKey = b[0],
-          aKeyInt = parseInt(aKey, 10),
-          bKeyInt = parseInt(bKey, 10);
-        // Lowest key code goes at the bottom
-        if (!(isNaN(aKeyInt) || isNaN(bKeyInt))) return bKeyInt - aKeyInt;
-        return bKey - aKey;
-      });
+    let legendItemList = [];
+    if (this.legend) {
+      legendItemList = Object.entries(this.legend)
+        .sort((a, b) => {
+          let aKey = a[0],
+            bKey = b[0],
+            aKeyInt = parseInt(aKey, 10),
+            bKeyInt = parseInt(bKey, 10);
+          // Lowest key code goes at the bottom
+          if (!(isNaN(aKeyInt) || isNaN(bKeyInt))) return bKeyInt - aKeyInt;
+          return bKey - aKey;
+        });
 
-    // Very rarely the key code is reversed--lowest key goes at the top
-    if (this.keyCodeReversed) legendItemList = legendItemList.reverse();
+      // Very rarely the key code is reversed--lowest key goes at the top
+      if (this.keyCodeReversed) legendItemList = legendItemList.reverse();
+    }
 
     ['symbol-1', 'symbol-2'].forEach(symbolName => {
       if (this.options[symbolName]) {
@@ -44,8 +47,13 @@ export default class BaseMap extends Visualization {
   }
 
   renderLegend() {
+    this.legendGroup = this.root.append('g')
+      .classed('legend', true)
+      .attr('transform', `translate(${this.width - this.legendOptions.width}, 0)`);
+
     if (this.colorScaleType === 'linear') {
       this.renderLinearLegend();
+      this.renderLegendWithItems(this.getLegendItems());
       return;
     }
     if (!this.legend) return;
@@ -53,10 +61,6 @@ export default class BaseMap extends Visualization {
   }
 
   renderLegendWithItems(items) {
-    this.legendGroup = this.root.append('g')
-      .classed('legend', true)
-      .attr('transform', `translate(${this.width - this.legendOptions.width}, 0)`);
-
     const legendItemFill = d => {
       const keyCode = d[0];
       if (keyCode === 'symbol-1') return 'url(#dots-legend)';
@@ -64,9 +68,10 @@ export default class BaseMap extends Visualization {
       return keyCode !== null ? this.colorScale(keyCode) : this.noDataColor;
     };
 
-    const legendItems = this.legendGroup.selectAll('rect')
+    const legendItems = this.legendGroup.selectAll('g.legend-item')
       .data(items)
-      .enter().append('g');
+      .enter().append('g')
+      .classed('legend-item', true);
 
     legendItems.append('rect')
       .attr('width', this.legendOptions.width)
@@ -108,8 +113,17 @@ export default class BaseMap extends Visualization {
     legendItems
       .attr('transform', (d, i, nodes) => {
         let y = 0;
+
+        // There might be a linear legend, add room for it if so
+        const linearLegend = this.legendGroup.select('.linear-legend');
+        if (!linearLegend.empty()) {
+          y += linearLegend.node().getBBox().height + this.legendOptions.padding;
+        }
+
+        // Else look for all previous nodes, add room for those
         for (let index = 0; index < i; index++) {
-          y += select(nodes[index]).node().getBBox().height + this.legendOptions.padding;
+          const node = nodes[index];
+          y += node.getBBox().height + this.legendOptions.padding;
         }
         return `translate(0, ${y})`;
       });
@@ -131,21 +145,20 @@ export default class BaseMap extends Visualization {
       .attr('offset', '100%')
       .attr('stop-color', this.colorScale.range()[1]);
 
+    const linearLegend = this.legendGroup.append('g').classed('linear-legend', true);
+
     // Add a rect with our gradient
-    this.legendGroup = this.root.append('g')
-      .classed('legend', true)
-      .attr('transform', `translate(${this.width - this.legendOptions.width}, 10)`);
-    this.legendGroup.append('rect')
+    linearLegend.append('rect')
       .attr('width', this.legendOptions.width)
       .attr('height', 25)
       .attr('fill', `url(#${gradientId})`);
 
     // Add labels
     const extent = this.formatExtent();
-    this.legendGroup.append('text')
+    linearLegend.append('text')
       .text(extent[0])
       .attr('transform', 'translate(2, 18)');
-    this.legendGroup.append('text')
+    linearLegend.append('text')
       .text(extent[1])
       .style('text-anchor', 'end')
       .style('fill', this.textColors.darkBackground)
