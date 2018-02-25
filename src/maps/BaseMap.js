@@ -123,7 +123,9 @@ export default class BaseMap extends Visualization {
         // Else look for all previous nodes, add room for those
         for (let index = 0; index < i; index++) {
           const node = nodes[index];
-          y += node.getBBox().height + this.legendOptions.padding;
+          if (node) {
+            y += node.getBBox().height + this.legendOptions.padding;
+          }
         }
         return `translate(0, ${y})`;
       });
