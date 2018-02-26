@@ -67,4 +67,10 @@ export class Chart3 extends BarChart {
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
   }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d['Row Labels']}</div>`;
+    content += `<div>${d['With monitoring']}%</div>`;
+    return content;
+  }
 }

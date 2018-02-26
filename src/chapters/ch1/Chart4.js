@@ -1,8 +1,10 @@
 import { max, min } from 'd3-array';
 import { set } from 'd3-collection';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scalePoint } from 'd3-scale';
 import { line } from 'd3-shape';
+import { event as currentEvent, select } from 'd3-selection';
 
 import { schemeCategoryProblem } from '../../colors';
 import Chart from '../../charts/Chart';
@@ -84,7 +86,7 @@ export default class Chart4 extends Chart {
         min(values.concat(0)),
         max(values)
       ])
-      .range(this.options.web ? [5, 25] : [1, 15]);
+      .range(this.options.web ? [3, 30] : [1, 15]);
   }
 
   createColorScale() {
@@ -99,13 +101,19 @@ export default class Chart4 extends Chart {
     circleGroups.append('circle')
       .attr('fill', 'none')
       .attr('stroke', d => this.colors(d.when))
-      .attr('stroke-width', 2)
+      .attr('stroke-width', this.options.web ? 4 : 2)
       .attr('cx', d => this.x(`${d.where}-${d.season}`))
       .attr('cy', d => this.y(d.crop))
       .attr('r', d => {
         const size = this.sizes(d.sales);
         if (!size) return 0;
         return size;
+      })
+      .on('mouseover', (d, i, nodes) => {
+        this.onMouseOver(d, select(nodes[i]));
+      })
+      .on('mouseout', (d, i, nodes) => {
+        this.onMouseOut(d, select(nodes[i]));
       });
   }
 
@@ -134,5 +142,60 @@ export default class Chart4 extends Chart {
   render() {
     super.render();
     this.renderCircles();
+  }
+
+  onMouseOver(d, selection) {
+    this.root.selectAll('circle')
+      .style('stroke-opacity', circleData => {
+        return (
+          circleData.crop === d.crop &&
+          circleData.season === d.season &&
+          circleData.when === d.when &&
+          circleData.where === d.where
+        ) ? 1 : 0.2;
+      });
+
+    if (this.tooltipContent) {
+      const x = currentEvent.layerX;
+      this.tooltip
+        .html(this.tooltipContent(d))
+        .classed('visible', true)
+        .style('top', `${currentEvent.layerY - 10}px`);
+
+      if (x + 100 < this.width) {
+        this.tooltip
+          .style('right', 'inherit')
+          .style('left', `${x + 20}px`);
+      }
+      else {
+        this.tooltip
+          .style('left', 'inherit')
+          .style('right', `${this.width - x + 20}px`);
+      }
+    }
+  }
+
+  onMouseOut(d, selection) {
+    this.root.selectAll('circle')
+      .style('stroke-opacity', 1);
+
+    if (this.tooltipContent) {
+      this.tooltip.classed('visible', false);
+    }
+  }
+
+  tooltipContent(d, selection) {
+    const region = d.where[0].toUpperCase() + d.where.slice(1);
+    const numberFormat = format('.1f');
+    const farmers =  this.getTranslation(
+      d.when === 'former' ?
+        'Farmers who stopped growing tobacco' :
+        'Farmers still growing tobacco'
+    );
+    let content = `<div class="header">${d.crop}</div>`;
+    content += `<div>${region}, ${d.season} season</div>`;
+    content += `<div>${farmers}</div>`;
+    content += `<div>${this.getTranslation('Sales')}: ${numberFormat(d.sales)}</div>`;
+    return content;
   }
 }

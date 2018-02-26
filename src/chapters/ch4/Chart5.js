@@ -38,11 +38,14 @@ export default class Chart5 extends BarChartVertical {
     const margin = super.createMargin();
     margin.left = this.options.web ? 100 : 50;
     margin.bottom = this.options.web ? 80 : 38;
+    if (this.options.web) {
+      margin.right = 10;
+    }
     return margin;
   }
 
   createXScale() {
-    const values = this.data.map(d => d.male).concat(this.data.map(d => d.female));
+    const values = this.data.map(d => d.male + d.female);
     const xExtent = [
       min(values.concat(0)),
       max(values)
@@ -69,7 +72,7 @@ export default class Chart5 extends BarChartVertical {
     const barHeight = this.y.bandwidth();
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar male', true)
       .attr('x', 0)
       .attr('width', d => this.x(d.male))
       .attr('y', d => this.y(d.country))
@@ -77,7 +80,7 @@ export default class Chart5 extends BarChartVertical {
       .attr('fill', d => this.colors('male'));
 
     barGroups.append('rect')
-      .classed('bar', true)
+      .classed('bar female', true)
       .attr('x', d => this.x(d.male))
       .attr('width', d => this.x(d.female))
       .attr('y', d => this.y(d.country))
@@ -87,5 +90,21 @@ export default class Chart5 extends BarChartVertical {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem).domain(['male', 'female']);
+  }
+
+  tooltipContent(d, bar) {
+    let content = `<div class="header">${d.country}</div>`;
+    let value;
+    let gender;
+    if (bar.classed('male')) {
+      value = d.male;
+      gender = this.getTranslation('male');
+    }
+    if (bar.classed('female')) {
+      value = d.female;
+      gender = this.getTranslation('female');
+    }
+    content += `<div>${this.yAxisTickFormat(value)} ${this.getTranslation('million')} ${gender} ${this.getTranslation('daily smokers')}</div>`;
+    return content;
   }
 }

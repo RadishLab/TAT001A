@@ -52,7 +52,7 @@ export class Chart4 extends BarChart {
     const barWidth = this.x.bandwidth() / 2;
 
     barGroups.append('rect')
-        .classed('bar', true)
+        .classed('bar year-1980', true)
         .attr('x', d => this.x(d['region']))
         .attr('width', barWidth)
         .attr('y', d => this.y(d['1980']))
@@ -60,7 +60,7 @@ export class Chart4 extends BarChart {
         .attr('fill', this.colors('1980'));
 
     barGroups.append('rect')
-        .classed('bar', true)
+        .classed('bar year-2016', true)
         .attr('x', d => this.x(d['region']) + barWidth)
         .attr('width', barWidth)
         .attr('y', d => this.y(d['2016']))
@@ -87,5 +87,17 @@ export class Chart4 extends BarChart {
 
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
+  }
+
+  tooltipContent(d, bar) {
+    const year = bar.classed('year-1980') ? '1980' : '2016';
+    let content = `<div class="header">${d.region} (${year})</div>`;
+    const numberFormat = format('.2f');
+    const percentFormat = d => format('+.1f')(d * 100);
+    content += `<div>${numberFormat(d[year])} ${this.getTranslation('trillion cigarettes')}</div>`;
+    if (bar.classed('year-2016')) {
+      content += `<div>${percentFormat(d.change)}% ${this.getTranslation('compared to 1980')}</div>`;
+    }
+    return content;
   }
 }

@@ -1,6 +1,8 @@
 import { max, min } from 'd3-array';
+import { format } from 'd3-format';
 import { csv } from 'd3-request';
 import { scaleLinear, scaleOrdinal, scalePoint } from 'd3-scale';
+import { event as currentEvent, select } from 'd3-selection';
 
 import { schemeCategorySolution } from '../../colors';
 import Chart from '../../charts/Chart';
@@ -19,6 +21,7 @@ export default class Chart3 extends Chart {
       .classed('circle-chart', true);
     this.legendItems = [];
     this.xAxisTickFormat = (label) => label !== 'Never' ? label : this.getTranslation(label);
+    this.yAxisTickFormat = format('d');
   }
 
   createMargin() {
@@ -85,12 +88,53 @@ export default class Chart3 extends Chart {
       .enter().append('g');
 
     circleGroups.append('circle')
-      .attr('fill', 'none')
+      .attr('fill', 'transparent')
       .attr('stroke', d => this.colors(1))
       .attr('stroke-width', this.options.web ? 4 : 2)
       .attr('cx', d => this.x(d.age))
       .attr('cy', d => this.y(d.value))
-      .attr('r', 20);
+      .attr('r', 20)
+      .on('mouseover', (d, i, nodes) => {
+        this.onMouseOver(d, select(nodes[i]));
+      })
+      .on('mouseout', (d, i, nodes) => {
+        this.onMouseOut(d, select(nodes[i]));
+      });
+  }
+
+  onMouseOver(d, selection) {
+    this.root.selectAll('circle')
+      .style('stroke-opacity', circleData => {
+        return circleData.age === d.age ? 1 : 0.2;
+      });
+
+    if (this.tooltipContent) {
+      const x = currentEvent.layerX;
+      this.tooltip
+        .html(this.tooltipContent(d))
+        .classed('visible', true)
+        .style('top', `${currentEvent.layerY - 10}px`);
+
+      if (x + 100 < this.width) {
+        this.tooltip
+          .style('right', 'inherit')
+          .style('left', `${x + 20}px`);
+      }
+      else {
+        this.tooltip
+          .style('left', 'inherit')
+          .style('right', `${this.width - x + 20}px`);
+      }
+    }
+  }
+
+  onMouseOut(d, selection) {
+    this.root.selectAll('circle')
+      .style('stroke-opacity', 1);
+
+    if (this.tooltipContent) {
+      this.tooltip.classed('visible', false);
+    }
   }
 
   renderGuidelines() {
@@ -100,5 +144,12 @@ export default class Chart3 extends Chart {
   render() {
     super.render();
     this.renderCircles();
+  }
+
+  tooltipContent(d, selection) {
+    let ageLabel = d.age === 'Never' ? this.getTranslation('Never quitting') : `${this.getTranslation('Quitting at')} ${d.age}`;
+    let content = `<div class="header">${ageLabel}</div>`;
+    content += `<div>${d.value} ${this.getTranslation('times more likely to die before age 65')}</div>`;
+    return content;
   }
 }
