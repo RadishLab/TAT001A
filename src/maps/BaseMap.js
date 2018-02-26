@@ -15,6 +15,10 @@ export default class BaseMap extends Visualization {
       height: 18,
       padding: 3,
     };
+
+    if (this.widthCategory === 'narrowest') {
+      this.legendOptions.width = this.width / 4;
+    }
   }
 
   getLegendItems() {
@@ -83,7 +87,7 @@ export default class BaseMap extends Visualization {
       });
 
     legendItems.append('text')
-      .attr('y', 15)
+      .attr('y', (this.widthCategory === 'narrowest') ? 10 : 15)
       .attr('dy', 0)
       .text(d => d[1])
       .style('fill', d => {

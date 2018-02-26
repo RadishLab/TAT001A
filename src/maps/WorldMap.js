@@ -147,20 +147,22 @@ export default class WorldMap extends BaseMap {
       .style('fill', d => (d.properties.joined && d.properties.joined[this.symbolField]) ? 'url(#dots)' : 'none')
       .attr('d', d => this.path(d));
 
-    const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold);
-    smallCountries.append('circle')
-      .classed('country-fill', true)
-      .style('fill', this.countryFill.bind(this))
-      .attr('r', this.options.web ? 4 : 1)
-      .attr('cx', d => this.path.centroid(d)[0])
-      .attr('cy', d => this.path.centroid(d)[1]);
+    if (this.widthCategory !== 'narrowest') {
+      const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold);
+      smallCountries.append('circle')
+        .classed('country-fill', true)
+        .style('fill', this.countryFill.bind(this))
+        .attr('r', this.options.web ? 4 : 1)
+        .attr('cx', d => this.path.centroid(d)[0])
+        .attr('cy', d => this.path.centroid(d)[1]);
 
-    smallCountries.append('circle')
-      .classed('country-symbol', true)
-      .style('fill', d => (d.properties.joined && d.properties.joined[this.symbolField]) ? 'url(#dots)' : 'none')
-      .attr('r', this.options.web ? 4 : 1)
-      .attr('cx', d => this.path.centroid(d)[0])
-      .attr('cy', d => this.path.centroid(d)[1]);
+      smallCountries.append('circle')
+        .classed('country-symbol', true)
+        .style('fill', d => (d.properties.joined && d.properties.joined[this.symbolField]) ? 'url(#dots)' : 'none')
+        .attr('r', this.options.web ? 4 : 1)
+        .attr('cx', d => this.path.centroid(d)[0])
+        .attr('cy', d => this.path.centroid(d)[1]);
+    }
 
     return country;
   }
@@ -178,9 +180,11 @@ export default class WorldMap extends BaseMap {
 
   render() {
     const parentRect = this.parent.node().getBoundingClientRect();
+    const extentYOffset = (this.widthCategory === 'narrowest') ? this.width / 6 : 0;
+
     this.projection.fitExtent([
-      [0, 0],
-      [parentRect.width, parentRect.height]
+      [0 - extentYOffset, 0],
+      [parentRect.width - extentYOffset, parentRect.height]
     ], this.countriesGeojson);
 
     this.renderPaths();
