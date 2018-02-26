@@ -39,9 +39,10 @@ export default class Map extends PointMap {
 
   render() {
     const margin = 15;
+    const parentRect = this.parent.node().getBoundingClientRect();
     this.projection.fitExtent([
       [margin, margin],
-      [this.parent.node().clientWidth - margin, this.parent.node().clientHeight - margin],
+      [parentRect.width - margin, parentRect.height - margin],
     ],
       this.countriesGeojson.features.filter(f => f.properties.NAME === 'Mexico')[0]
     );
