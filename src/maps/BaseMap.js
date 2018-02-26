@@ -156,18 +156,18 @@ export default class BaseMap extends Visualization {
     // Add a rect with our gradient
     linearLegend.append('rect')
       .attr('width', this.legendOptions.width)
-      .attr('height', 25)
+      .attr('height', this.legendOptions.height)
       .attr('fill', `url(#${gradientId})`);
 
     // Add labels
     const extent = this.formatExtent();
     linearLegend.append('text')
       .text(extent[0])
-      .attr('transform', 'translate(2, 18)');
+      .attr('transform', `translate(2, ${this.legendOptions.height - 4})`);
     linearLegend.append('text')
       .text(extent[1])
       .style('text-anchor', 'end')
       .style('fill', this.textColors.darkBackground)
-      .attr('transform', `translate(${this.legendOptions.width - 2}, 18)`);
+      .attr('transform', `translate(${this.legendOptions.width - 2}, ${this.legendOptions.height - 4})`);
   }
 }
