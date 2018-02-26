@@ -43,5 +43,13 @@
   .filter-year {
     max-width: 400px;
     margin-bottom: 10px;
+
+    .ta-visualization-narrowest & {
+      max-width: 90%;
+
+      .noUi-pips {
+        display: none;
+      }
+    }
   }
 }

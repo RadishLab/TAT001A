@@ -85,8 +85,8 @@ export default class Map2 extends WorldMap {
     noUiSlider.create(yearInputNode, {
       start: this.yearRange[1],
       range: {
-		min: this.yearRange[0],
-		max: this.yearRange[1]
+        min: this.yearRange[0],
+        max: this.yearRange[1]
       },
       step: 1,
       tooltips: true,
