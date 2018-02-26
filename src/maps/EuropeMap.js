@@ -54,10 +54,13 @@ export default class EuropeMap extends WorldMap {
   }
 
   render() {
+    const parentRect = this.parent.node().getBoundingClientRect();
+
     this.projection.fitExtent([
       [this.padding, this.padding],
-      [this.parent.node().clientWidth - this.padding, this.parent.node().clientHeight - this.padding]
+      [parentRect.width - this.padding, parentRect.height - this.padding]
     ], this.europeGeojson);
+
     this.renderPaths();
     this.renderLegend();
   }
