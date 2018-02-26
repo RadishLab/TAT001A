@@ -417,6 +417,10 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   .ta-visualization-filters .filter-year {
     max-width: 400px;
     margin-bottom: 10px; }
+    .ta-visualization-narrowest .ta-visualization-filters .filter-year {
+      max-width: 90%; }
+      .ta-visualization-narrowest .ta-visualization-filters .filter-year .noUi-pips {
+        display: none; }
 
 .ta-visualization-tooltip {
   background: white;
