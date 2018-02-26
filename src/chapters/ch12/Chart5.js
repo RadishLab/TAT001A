@@ -17,13 +17,12 @@ export default class Chart5 extends BarChart {
       { label: this.getTranslation('Tax + Health'), value: 'tax + health' },
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickRows = 2;
     this.yAxisTickFormat = format('.2');
   }
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 50;
-    if (this.options.web) margin.bottom = 80;
     margin.top = 5;
     return margin;
   }

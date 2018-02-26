@@ -55,9 +55,9 @@ export class Chart4 extends BarChart {
     const margin = super.createMargin();
     margin.bottom = this.legendOrientation() === 'horizontal' ? 52 : 60;
     if (this.options.web) {
-      margin.bottom = 110;
-      if (this.width < 500) {
-        margin.bottom = 140;
+      margin.bottom = 130;
+      if (this.widthCategory === 'narrowest') {
+        margin.bottom = 95;
       }
     }
     return margin;

@@ -33,7 +33,7 @@ export default class Chart4 extends BarChartVertical {
   createMargin() {
     const margin = super.createMargin();
     margin.left = this.options.web ? 150 : 80;
-    margin.bottom = this.options.web ? 50 : 38;
+    if (this.widthCategory === 'narrowest') margin.left = 80;
     return margin;
   }
 

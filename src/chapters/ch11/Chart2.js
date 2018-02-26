@@ -38,10 +38,8 @@ export default class Chart2 extends BarChartVertical {
   createMargin() {
     const margin = super.createMargin();
     margin.left = this.options.web ? 200 : 80;
-    margin.bottom = this.options.web ? 75 : 38;
-    if (this.parentContainer.classed('ta-visualization-narrow') || this.parentContainer.classed('.ta-visualization-narrowest')) {
-      margin.left = 120;
-      margin.bottom = 50;
+    if (this.widthCategory === 'narrowest') {
+      margin.left = 100;
     }
     return margin;
   }
@@ -103,9 +101,11 @@ export default class Chart2 extends BarChartVertical {
 
   render() {
     super.render();
-    if (this.parentContainer.classed('ta-visualization-narrow') || this.parentContainer.classed('.ta-visualization-narrowest')) {
+    if (this.widthCategory === 'narrowest') {
       this.root.selectAll('.axis-x .tick')
-        .style('font-size', '8px');
+        .style('font-size', '.5rem');
+      this.root.selectAll('.axis-y .tick')
+        .style('font-size', '.4rem');
     }
   }
 }

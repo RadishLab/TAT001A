@@ -23,10 +23,17 @@ export default class Chart3 extends BarChart {
     this.yAxisTickFormat = format('d');
   }
 
+  getLegendRowsCount() {
+    return 3;
+  }
+
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.options.web ? 100 : 45;
-    if (this.options.web) margin.left = 80;
+    margin.bottom += 5;
+    if (this.options.web) {
+      margin.left = 80;
+      if (this.widthCategory === 'narrowest') margin.left = 50;
+    }
     return margin;
   }
 
@@ -56,14 +63,8 @@ export default class Chart3 extends BarChart {
     const legendLine = line()
       .x(d => d[0])
       .y(d => d[1]);
-    const legend = this.parent.append('g')
-      .classed('legend', true)
-      .attr('transform', () => {
-        let xOffset = 15;
-        const yOffset = this.root.node().getBoundingClientRect().height + this.margin.top + 40;
-        return `translate(${xOffset}, ${yOffset})`;
-      });
 
+    const legend = this.createLegendRoot();
     const lineWidth = this.options.web ? 20 : 10;
 
     let xOffset = 0,

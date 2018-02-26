@@ -18,6 +18,7 @@ export default class Chart5 extends BarChart {
       { label: this.getTranslation('Restaurant'), value: 'restaurant' },
     ];
     this.yAxisTickFormat = format('.2');
+    this.xAxisTickRows = 2;
   }
 
   loadData() {
@@ -101,7 +102,12 @@ export default class Chart5 extends BarChart {
 
   render() {
     super.render();
-    this.root.selectAll('.axis-x .tick')
-      .style('font-size', '12px');
+
+    if (this.options.web) {
+      let fontSize = '12px';
+      if (this.widthCategory === 'narrowest') fontSize = '.4rem';
+      this.root.selectAll('.axis-x .tick')
+        .style('font-size', fontSize);
+    }
   }
 }

@@ -33,9 +33,9 @@ export default class Chart2 extends LineChart {
     return margin;
   }
 
-  onDataLoaded(data) {
+  createScales() {
+    super.createScales();
     this.yRight = this.createPrevalenceScale();
-    super.onDataLoaded(data);
   }
 
   loadData() {

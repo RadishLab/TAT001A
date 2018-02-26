@@ -19,15 +19,6 @@ export default class Chart4 extends BarChart {
     this.xAxisTickFormat = this.getTranslation.bind(this);
   }
 
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 42 : 58;
-    if (this.options.web) {
-      margin.bottom = 80;
-    }
-    return margin;
-  }
-
   loadData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('5-4.csv'), (csvData) => {

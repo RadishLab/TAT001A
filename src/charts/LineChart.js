@@ -9,14 +9,6 @@ export default class LineChart extends Chart {
     super(parent, options);
     this.parent
       .classed('line-chart', true);
-
-    this.voronoiGenerator = voronoi()
-      .x(this.voronoiXAccessor.bind(this))
-      .y(this.voronoiYAccessor.bind(this))
-      .extent([
-        [0, 0],
-        [this.width, this.height - this.margin.bottom]
-      ]);
   }
 
   voronoiXAccessor(d) {
@@ -27,13 +19,29 @@ export default class LineChart extends Chart {
     return this.y(d.value);
   }
 
-  onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
+  createScales() {
+    super.createScales();
     this.colors = this.createZScale();
-    this.line = line()
+  }
+
+  getLineGenerator() {
+    return line()
       .x(this.lineXAccessor.bind(this))
       .y(this.lineYAccessor.bind(this));
+  }
+
+  onDataLoaded(data) {
+    super.onDataLoaded(data);
+    this.line = this.getLineGenerator();
+
+    this.voronoiGenerator = voronoi()
+      .x(this.voronoiXAccessor.bind(this))
+      .y(this.voronoiYAccessor.bind(this))
+      .extent([
+        [0, 0],
+        [this.width, this.height - this.margin.bottom]
+      ]);
+
     this.render();
   }
 

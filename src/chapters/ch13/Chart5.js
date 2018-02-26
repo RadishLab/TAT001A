@@ -33,8 +33,7 @@ export default class Chart5 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 10 : 10;
-    if (this.options.web) margin.bottom = 40;
+    if (this.widthCategory === 'narrowest') margin.left = 50;
     return margin;
   }
 

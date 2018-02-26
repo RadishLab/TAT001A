@@ -30,27 +30,25 @@ export class Chart2 extends LineChart {
   createMargin() {
     const margin = super.createMargin();
     margin.right = this.options.web ? 60 : 40;
-    margin.bottom = this.options.web ? 115 : 50;
     margin.top = this.options.web ? 10 : 2;
     return margin;
   }
 
-  onDataLoaded(data) {
+  createScales() {
+    super.createScales();
     this.yRight = this.createDeathRateYScale();
-    super.onDataLoaded(data);
+  }
+
+  getLegendRowsCount() {
+    return 3;
   }
 
   renderLegend() {
+    const legend = this.createLegendRoot();
+
     const legendLine = line()
       .x(d => d[0])
       .y(d => d[1]);
-    const legend = this.parent.append('g')
-      .classed('legend', true)
-      .attr('transform', () => {
-        let xOffset = 15;
-        let yOffset = this.chartHeight + this.legendYOffset;
-        return `translate(${xOffset}, ${yOffset})`;
-      });
 
     const lineWidth = this.options.web ? 20 : 10;
 

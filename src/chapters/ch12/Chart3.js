@@ -35,13 +35,6 @@ export default class Chart3 extends BarChart {
     });
   }
 
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 43 : 50;
-    if (this.options.web) margin.bottom = 80;
-    return margin;
-  }
-
   createXScale() {
     const values = set(this.data.map(d => d.year)).values();
     return scaleBand()

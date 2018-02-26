@@ -58,17 +58,20 @@ export default class Chart1 extends Chart {
     });
   }
 
-  onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
+  createScales() {
+    super.createScales();
     this.colors = this.createZScale();
+  }
+
+  onDataLoaded(data) {
+    super.onDataLoaded(data);
     this.render();
   }
 
   createMargin() {
     const margin = super.createMargin();
     margin.left = this.options.web ? 60 : 80;
-    margin.bottom = this.options.web ? 40 : 38;
+    if (this.widthCategory === 'narrowest') margin.left = 40;
     return margin;
   }
 

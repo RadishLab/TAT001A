@@ -12,35 +12,77 @@ export default class Chart extends Visualization {
   constructor(parent, options) {
     super(parent, options);
 
-    // TODO make legend height dynamic (and over-rideable) based on the number
-    // of items and orientation, subtract this from chartHeight
-
-    this.legendHeight = 15;
-
-    this.margin = this.createMargin();
-    this.chartWidth = this.width - this.margin.left - this.margin.right;
-    this.chartHeight = this.height - this.margin.top - this.margin.bottom - this.legendHeight;
-    this.root = this.parent.append('g')
-      .classed('chart', true)
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+    this.xAxisTickRows = 1;
+    this.legendRows = 0;
 
     this.loadData()
       .then(data => this.data = data)
       .then(this.onDataLoaded.bind(this));
+  }
+
+  getLegendRowsCount() {
+    if (this.legendItems) return 1;
+    return 0;
+  }
+
+  onDataLoaded(data) {
+    let legendRowHeight = 20;
+    if (this.widthCategory === 'narrowest') legendRowHeight = 10;
+    this.legendHeight = this.getLegendRowsCount() * legendRowHeight;
+
     this.legendYOffset = this.options.web ? 85 : 40;
-    this.legendYPadding = 25;
+
+    this.legendYPadding = 10;
     this.yLabelOffset = 0;
+
+    if (this.options.web) {
+      this.legendYOffset = 0;
+      this.legendYPadding = 25;
+      if (this.widthCategory === 'narrowest') {
+        this.legendYPadding = 15;
+      }
+    }
+
+    this.margin = this.createMargin();
+    this.chartWidth = this.width - this.margin.left - this.margin.right;
+    this.chartHeight = this.height - this.margin.top - this.margin.bottom;
+
+    this.root = this.parent.append('g')
+      .classed('chart', true)
+      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+    this.createScales();
+  }
+
+  createScales() {
+    this.x = this.createXScale();
+    this.y = this.createYScale();
   }
 
   createMargin() {
     let bottom = 40;
+    let left = this.options.web ? 60 : 40;
     if (this.options.web) {
+      let xAxisTickRowHeight = 25;
+
       if (this.legendOrientation() === 'horizontal') {
-        bottom = 80;
+        bottom = 40;
       }
       else {
         bottom = 120;
       }
+      if (this.widthCategory === 'narrowest') {
+        bottom = 25;
+        left = 40;
+        xAxisTickRowHeight = 10;
+      }
+      if (this.legendHeight > 0) {
+        bottom = this.legendHeight + this.legendYPadding;
+      }
+      if (this.xLabel) {
+        bottom += 25;
+      }
+
+      bottom += this.xAxisTickRows * xAxisTickRowHeight;
     }
     else if (this.legendOrientation() === 'horizontal') {
       bottom = 60;
@@ -49,7 +91,7 @@ export default class Chart extends Visualization {
     return {
       top: 0,
       right: 0,
-      left: this.options.web ? 60 : 40,
+      left,
       bottom
     };
   }
@@ -87,7 +129,10 @@ export default class Chart extends Visualization {
       .attr('transform', `translate(0, ${this.chartHeight})`)
       .call(xAxis);
 
-    const tickMarginTop = this.options.web ? 20 : 2.5;
+    let tickMarginTop = this.options.web ? 20 : 2.5;
+    if (this.widthCategory === 'narrowest') {
+      tickMarginTop = 5;
+    }
     this.parent.select('.axis-x .domain');
     this.parent.select('.axis-x').selectAll('.tick')
       .attr('transform', (d, e) => {
@@ -110,7 +155,9 @@ export default class Chart extends Visualization {
 
     if (this.xLabel) {
       let yOffset = this.parent.select('.axis-x').node().getBBox().height;
-      yOffset += (this.options.web ? 25 : 10);
+      let padding = (this.options.web ? 25 : 10);
+      if (this.widthCategory === 'narrowest') padding = 15;
+      yOffset += padding;
       xAxisGroup.append('text')
         .classed('axis-title', true)
         .text(this.xLabel)
@@ -145,8 +192,6 @@ export default class Chart extends Visualization {
   }
 
   renderYAxis() {
-    // TODO x translate based on size of y-axis and y label rather than 25
-    // (magic number)
     const yAxis = axisLeft(this.y)
       .ticks(this.yTicks)
       .tickFormat(this.yAxisTickFormat ? this.yAxisTickFormat : this.defaultYAxisTickFormat);
@@ -210,10 +255,7 @@ export default class Chart extends Visualization {
     return this.x.ticks(this.xTicks);
   }
 
-  renderLegend() {
-    const legendLine = line()
-      .x(d => d[0])
-      .y(d => d[1]);
+  createLegendRoot() {
     const legend = this.parent.append('g')
       .classed('legend', true)
       .attr('transform', () => {
@@ -223,10 +265,21 @@ export default class Chart extends Visualization {
           yOffset = this.chartHeight + this.legendYOffset;
         }
         else {
-          yOffset = this.chartHeight + this.legendYPadding + this.root.select('.axis-x').node().getBBox().height;
+          yOffset = this.margin.top + this.chartHeight + this.legendYPadding;
+          const xAxis = this.root.select('.axis-x');
+          if(xAxis.node()) yOffset += xAxis.node().getBBox().height;
         }
         return `translate(${xOffset}, ${yOffset})`;
       });
+    return legend;
+  }
+
+  renderLegend() {
+    const legend = this.createLegendRoot();
+
+    const legendLine = line()
+      .x(d => d[0])
+      .y(d => d[1]);
 
     const legendHeight = this.options.web ? 20 : 8;
     const lineWidth = this.options.web ? 20 : 10;

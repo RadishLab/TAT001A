@@ -13,6 +13,7 @@ export class Chart3 extends BarChart {
     this.yTicks = 6;
     this.legendItems = [];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickRows = 3;
   }
 
   loadData() {

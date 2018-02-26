@@ -22,6 +22,13 @@ export default class Chart3 extends LineChart {
     ];
   }
 
+  getLineGenerator() {
+    return line()
+      .curve(curveBasis)
+      .x(this.lineXAccessor.bind(this))
+      .y(this.lineYAccessor.bind(this));
+  }
+
   loadData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('7-3.csv'), (csvData) => {
@@ -39,23 +46,15 @@ export default class Chart3 extends LineChart {
     });
   }
 
-  onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
+  createScales() {
+    super.createScales();
     this.colors = this.createZScale();
-    this.line = line()
-      .curve(curveBasis)
-      .x(this.lineXAccessor.bind(this))
-      .y(this.lineYAccessor.bind(this));
-    this.render();
   }
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 60;
     margin.right = 5;
     if (this.options.web) {
-      margin.bottom = 80;
       margin.right = 15;
     }
     return margin;

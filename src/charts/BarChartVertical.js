@@ -14,10 +14,13 @@ export default class BarChartVertical extends Chart {
     this.defaultStroke = 'none';
   }
 
-  onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
+  createScales() {
+    super.createScales();
     this.colors = this.createZScale();
+  }
+
+  onDataLoaded() {
+    super.onDataLoaded();
     this.render();
   }
 

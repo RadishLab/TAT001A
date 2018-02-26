@@ -27,17 +27,15 @@ export default class Chart4 extends LineChart {
   createMargin() {
     const margin = super.createMargin();
     margin.right = this.options.web ? 60 : 30;
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 42 : 60;
     if (this.options.web) {
-      margin.bottom = 80;
       margin.top = 10;
     }
     return margin;
   }
 
-  onDataLoaded(data) {
+  createScales() {
+    super.createScales();
     this.yRight = this.createCigaretteScale();
-    super.onDataLoaded(data);
   }
 
   loadData() {

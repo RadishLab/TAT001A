@@ -29,11 +29,6 @@ export default class Chart4 extends LineChart {
     return margin;
   }
 
-  onDataLoaded(data) {
-    this.yRight = this.createDividendScale();
-    super.onDataLoaded(data);
-  }
-
   loadData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('2-4.csv'), (csvData) => {
@@ -59,6 +54,11 @@ export default class Chart4 extends LineChart {
 
   lineY2Accessor(d) {
     return this.yRight(d.dividend);
+  }
+
+  createScales() {
+    super.createScales();
+    this.yRight = this.createDividendScale();
   }
 
   createXScale() {

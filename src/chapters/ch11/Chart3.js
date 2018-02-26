@@ -50,10 +50,13 @@ export default class Chart3 extends Chart {
   }
 
   onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
-    this.colors = this.createZScale();
+    super.onDataLoaded(data);
     this.render();
+  }
+
+  createScales() {
+    super.createScales();
+    this.colors = this.createZScale();
   }
 
   createXScale() {
@@ -93,7 +96,10 @@ export default class Chart3 extends Chart {
       .attr('stroke-width', this.options.web ? 4 : 2)
       .attr('cx', d => this.x(d.age))
       .attr('cy', d => this.y(d.value))
-      .attr('r', 20)
+      .attr('r', () => {
+        if (this.widthCategory === 'narrowest') return 10;
+        return 20;
+      })
       .on('mouseover', (d, i, nodes) => {
         this.onMouseOver(d, select(nodes[i]));
       })

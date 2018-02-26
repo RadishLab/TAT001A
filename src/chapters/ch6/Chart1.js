@@ -20,6 +20,7 @@ export default class Chart1 extends BarChart {
       { label: this.getTranslation('Not tobacco-related'), value: 'other' },
       { label: this.getTranslation('Tobacco-related'), value: 'tobacco' },
     ];
+    this.xAxisTickRows = 5;
   }
 
   loadData() {
@@ -53,13 +54,14 @@ export default class Chart1 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = 50;
     margin.right = 30;
     margin.top = 5;
 
     if (this.options.web) {
-      margin.bottom = 150;
       margin.top = 10;
+    }
+    if (this.widthCategory === 'narrowest') {
+      margin.right = 0;
     }
     return margin;
   }

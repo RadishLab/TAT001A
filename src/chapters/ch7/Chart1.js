@@ -37,21 +37,16 @@ export default class Chart1 extends LineChart {
     });
   }
 
-  onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
-    this.colors = this.createZScale();
-    this.line = line()
+  getLineGenerator() {
+    return line()
       .curve(curveBasis)
       .x(this.lineXAccessor.bind(this))
       .y(this.lineYAccessor.bind(this));
-    this.render();
   }
 
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 60;
-    return margin;
+  createScales() {
+    super.createScales();
+    this.colors = this.createZScale();
   }
 
   lineXAccessor(d) {

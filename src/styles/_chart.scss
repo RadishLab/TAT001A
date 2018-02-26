@@ -100,6 +100,20 @@
     stroke-width: 2;
   }
 
+  &.ta-visualization-narrowest {
+    .axis-x .tick,
+    .axis-y .tick {
+      font-size: .6rem;
+    }
+
+    .axis-title {
+      font-size: .8rem;
+    }
+
+    .legend {
+      font-size: .6rem;
+    }
+  }
   &.ta-visualization-narrow {
     .legend {
       font-size: 12px;

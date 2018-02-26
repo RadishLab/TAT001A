@@ -27,9 +27,7 @@ export default class Chart2 extends LineChart {
     const margin = super.createMargin();
     margin.top = 10;
     margin.right = 10;
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 32 : 58;
     if (this.options.web) {
-      margin.bottom = 80;
       margin.right = 20;
     }
     return margin;
@@ -94,10 +92,6 @@ export default class Chart2 extends LineChart {
   render() {
     super.render();
     this.renderCircles();
-
-    let xAxisHeight = this.parent.select('.axis-x .tick').node().getBBox().height + 18;
-    this.parent.select('.axis-x .axis-title')
-      .attr('transform', `translate(${this.chartWidth / 2}, ${xAxisHeight})`);
   }
 
   getVoronoiData() {

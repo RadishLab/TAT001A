@@ -37,7 +37,6 @@ export default class Chart5 extends BarChartVertical {
   createMargin() {
     const margin = super.createMargin();
     margin.left = this.options.web ? 100 : 50;
-    margin.bottom = this.options.web ? 80 : 38;
     if (this.options.web) {
       margin.right = 10;
     }

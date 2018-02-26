@@ -12,8 +12,7 @@ export default class BarChart extends Chart {
   }
 
   onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
+    super.onDataLoaded(data);
     this.colors = this.createZScale();
     this.render();
   }

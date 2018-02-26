@@ -17,6 +17,7 @@ export class Chart4 extends BarChart {
       { label: '2016', value: '2016' },
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickRows = 3;
     this.yAxisTickFormat = format('.2');
   }
 

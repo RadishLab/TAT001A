@@ -15,6 +15,7 @@ export default class Chart5 extends BarChart {
     this.yAxisTickFormat = d => format('d')(d / 1000000);
     this.legendItems = [];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickRows = 3;
   }
 
   loadData() {
@@ -56,12 +57,12 @@ export default class Chart5 extends BarChart {
     const barWidth = this.x.bandwidth();
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => this.x(this.getXValue(d)))
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d.value))
-        .attr('height', d => this.chartHeight - this.y(d.value))
-        .attr('fill', d => this.colors(this.getXValue(d)));
+      .classed('bar', true)
+      .attr('x', d => this.x(this.getXValue(d)))
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d.value))
+      .attr('height', d => this.chartHeight - this.y(d.value))
+      .attr('fill', d => this.colors(this.getXValue(d)));
   }
 
   createZScale() {

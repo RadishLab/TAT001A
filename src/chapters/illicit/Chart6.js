@@ -40,15 +40,13 @@ export default class Chart6 extends BarChart {
     });
   }
 
-  onDataLoaded(data) {
+  createScales() {
+    super.createScales();
     this.yRight = this.createShareScale();
-    super.onDataLoaded(data);
   }
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 32 : 40;
-    if (this.options.web) margin.bottom = 70;
     margin.right = this.options.web ? 50 : 30;
     margin.top = 10;
     return margin;

@@ -29,16 +29,16 @@ export default class Chart4 extends Chart {
       if (label === 'Other') label = 'Mixed/Other';
       return this.getTranslation(label);
     }
-    this.legendYOffset = 0;
-    this.legendYPadding = 30;
   }
 
   createMargin() {
     const margin = super.createMargin();
     margin.left = this.options.web ? 200 : 80;
     margin.top = 10;
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 30 : 40;
-    if (this.options.web) margin.bottom = 75;
+
+    if (this.widthCategory === 'narrowest') {
+      margin.left = 120;
+    }
     return margin;
   }
 
@@ -58,11 +58,14 @@ export default class Chart4 extends Chart {
     });
   }
 
-  onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
+  createScales() {
+    super.createScales();
     this.sizes = this.createSizeScale();
     this.colors = this.createColorScale();
+  }
+
+  onDataLoaded(data) {
+    super.onDataLoaded(data);
     this.render();
   }
 
@@ -98,10 +101,12 @@ export default class Chart4 extends Chart {
       .data(this.data)
       .enter().append('g');
 
+    let strokeWidth = this.options.web ? 4 : 2;
+    if (this.widthCategory === 'narrowest') strokeWidth = 2;
     circleGroups.append('circle')
       .attr('fill', 'none')
       .attr('stroke', d => this.colors(d.when))
-      .attr('stroke-width', this.options.web ? 4 : 2)
+      .attr('stroke-width', strokeWidth)
       .attr('cx', d => this.x(`${d.where}-${d.season}`))
       .attr('cy', d => this.y(d.crop))
       .attr('r', d => {

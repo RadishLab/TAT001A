@@ -31,14 +31,16 @@ export default class Chart2 extends LineChart {
     });
   }
 
-  onDataLoaded(data) {
-    this.x = this.createXScale();
-    this.y = this.createYScale();
+  createScales() {
+    super.createScales();
     this.colors = this.createZScale();
+  }
+
+  onDataLoaded(data) {
     this.line = line()
       .x(this.lineXAccessor.bind(this))
       .y(this.lineYAccessor.bind(this));
-    this.render();
+    super.onDataLoaded(data);
   }
 
   render() {

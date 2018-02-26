@@ -18,6 +18,7 @@ export default class Chart1 extends BarChart {
       { label: '2014', value: '2014' },
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickRows = 4;
     this.yAxisTickFormat = format('d');
     this.legendYOffset = null;
   }
@@ -34,13 +35,6 @@ export default class Chart1 extends BarChart {
     });
   }
 
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 45 : 60;
-    if (this.options.web) margin.bottom = 120;
-    return margin;
-  }
-
   createXScale() {
     const values = set(this.data.map(d => d.policy)).values();
     return scaleBand()
@@ -54,16 +48,16 @@ export default class Chart1 extends BarChart {
     const barWidth = this.x.bandwidth() / 2;
 
     barGroups.append('rect')
-        .classed('bar', true)
-        .attr('x', d => {
-          let x = this.x(d.policy);
-          if (d.Year === '2014') x += barWidth;
-          return x;
-        })
-        .attr('width', barWidth)
-        .attr('y', d => this.y(d.value))
-        .attr('height', d => this.chartHeight - this.y(d.value))
-        .attr('fill', d => this.colors(d.Year));
+      .classed('bar', true)
+      .attr('x', d => {
+        let x = this.x(d.policy);
+        if (d.Year === '2014') x += barWidth;
+        return x;
+      })
+      .attr('width', barWidth)
+      .attr('y', d => this.y(d.value))
+      .attr('height', d => this.chartHeight - this.y(d.value))
+      .attr('fill', d => this.colors(d.Year));
   }
 
   createYScale() {
@@ -86,8 +80,10 @@ export default class Chart1 extends BarChart {
   render() {
     super.render();
 
+    let fontSize = '14px';
+    if (this.widthCategory === 'narrowest') fontSize = '.5rem';
     this.root.selectAll('.axis-x .tick')
-      .style('font-size', '14px');
+      .style('font-size', fontSize);
   }
 
   tooltipContent(d, bar) {

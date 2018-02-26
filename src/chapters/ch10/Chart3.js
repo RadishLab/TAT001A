@@ -14,6 +14,7 @@ export default class Chart3 extends BarChart {
     this.yTicks = 6;
     this.legendItems = [];
     this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickRows = 3;
     this.yAxisTickFormat = d => format('d')(d / 1000);
   }
 
@@ -27,13 +28,6 @@ export default class Chart3 extends BarChart {
         }));
       });
     });
-  }
-
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 30 : 30;
-    if (this.options.web) margin.bottom = 80;
-    return margin;
   }
 
   createXScale() {

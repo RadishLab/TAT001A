@@ -8,17 +8,6 @@ export default class PieChart extends Chart {
     super(parent, options);
     this.parent
       .classed('pie-chart', true);
-    this.radius = this.options.web ? 200 : 100;
-    this.margin = this.createMargin();
-    this.root
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
-    this.chartWidth = 2 * this.radius;
-    this.chartHeight = 2 * this.radius;
-
-    this.height = this.radius * 2 + 100;
-    this.parent
-      .attr('preserveAspectRatio', 'xMinYMin meet')
-      .attr('viewBox', `0 0 ${this.width} ${this.height}`);
 
     this.mouseoverStroke = '#555';
   }
@@ -32,10 +21,29 @@ export default class PieChart extends Chart {
     return margin;
   }
 
+  createScales() {
+    this.colors = this.createZScale();
+  }
+
   onDataLoaded(data) {
+    super.onDataLoaded(data);
+    this.radius = this.options.web ? 200 : 100;
+    if (this.radius * 2 > this.width) {
+      this.radius = this.width / 3;
+    }
+    this.margin = this.createMargin();
+    this.root
+      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+    this.chartWidth = 2 * this.radius;
+    this.chartHeight = 2 * this.radius;
+
+    this.height = this.radius * 2 + 100;
+    this.parent
+      .attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', `0 0 ${this.width} ${this.height}`);
+
     this.pie = pie()
       .value(this.valueAccessor)(data);
-    this.colors = this.createZScale();
     this.render();
   }
 
@@ -107,7 +115,7 @@ export default class PieChart extends Chart {
     legend
       .attr('transform', () => {
         let xOffset = (this.width / 2) - (legend.node().getBoundingClientRect().width / 2);
-        let yOffset = this.chartHeight + this.legendYOffset;
+        let yOffset = this.chartHeight + this.legendYPadding;
         return `translate(${xOffset}, ${yOffset})`;
       });
   }

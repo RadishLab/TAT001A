@@ -30,20 +30,23 @@ export default class Chart6 extends LineChart {
   createMargin() {
     const margin = super.createMargin();
     margin.right = 30;
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 42 : 60;
     margin.top = 5;
     if (this.options.web) {
-      margin.bottom = 80;
       margin.right = 60;
       margin.left = 80;
       margin.top = 10;
+
+      if (this.widthCategory === 'narrowest') {
+        margin.left = 60;
+        margin.right = 50;
+      }
     }
     return margin;
   }
 
-  onDataLoaded(data) {
+  createScales() {
+    super.createScales();
     this.yRight = this.createAffordabilityScale();
-    super.onDataLoaded(data);
   }
 
   loadData() {

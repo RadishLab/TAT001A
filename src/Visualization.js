@@ -10,12 +10,14 @@ export default class Visualization {
     this.parentContainer = select(this.parent.node().parentNode);
 
     const parentContainerWidth = this.parentContainer.node().getBoundingClientRect().width;
+    this.widthCategory = 'large';
     if (parentContainerWidth < 400) {
-      this.parentContainer.classed('ta-visualization-narrowest', true);
+      this.widthCategory = 'narrowest';
     }
     else if (parentContainerWidth < 650) {
-      this.parentContainer.classed('ta-visualization-narrow', true);
+      this.widthCategory = 'narrow';
     }
+    this.parentContainer.classed(`ta-visualization-${this.widthCategory}`, true);
 
     if (options.aspect) {
       this.parent

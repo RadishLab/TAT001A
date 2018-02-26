@@ -20,6 +20,7 @@ export default class Chart1 extends BarChart {
       { label: this.getTranslation('Youth Female'), value: 'youth female' },
     ];
     this.yAxisTickFormat = format('d');
+    this.xAxisTickRows = 2;
   }
 
   loadData() {
@@ -35,13 +36,6 @@ export default class Chart1 extends BarChart {
         }));
       });
     });
-  }
-
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 43 : 50;
-    if (this.options.web) margin.bottom = 80;
-    return margin;
   }
 
   createXScale() {

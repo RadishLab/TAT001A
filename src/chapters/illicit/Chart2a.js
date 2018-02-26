@@ -18,21 +18,19 @@ export default class Chart2a extends BarChart {
       { label: this.getTranslation('Industry estimate'), value: 'Industry estimate' }
     ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
-  }
-
-  createMargin() {
-    const margin = super.createMargin();
-    margin.bottom = 90;
-    return margin;
+    this.xAxisTickRows = 2;
   }
 
   loadData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('illicit-2a.csv'), (csvData) => {
-        resolve(csvData.map(d => {
-          d.value = +d.value;
-          return d;
-        }));
+        const mapped = csvData
+          .map(d => {
+            d.value = +d.value;
+            return d;
+          })
+          .filter(d => d.value > 0);
+        resolve(mapped);
       });
     });
   }

@@ -36,9 +36,9 @@ export default class Chart3 extends BarChart {
     });
   }
 
-  onDataLoaded(data) {
+  createScales() {
+    super.createScales();
     this.yRight = this.createCountryScale();
-    super.onDataLoaded(data);
   }
 
   xAxisTickValues() {
@@ -48,9 +48,8 @@ export default class Chart3 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.bottom = this.legendOrientation() === 'horizontal' ? 32 : 40;
-    if (this.options.web) margin.bottom = 65;
     margin.right = this.options.web ? 60 : 30;
+    if (this.widthCategory === 'narrowest') margin.right = 50;
     margin.top = 10;
     return margin;
   }
