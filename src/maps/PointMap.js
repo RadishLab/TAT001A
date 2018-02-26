@@ -105,9 +105,11 @@ export default class PointMap extends BaseMap {
 
   render() {
     const parentRect = this.parent.node().getBoundingClientRect();
+    const extentYOffset = (this.widthCategory === 'narrowest') ? this.width / 6 : 0;
+
     this.projection.fitExtent([
-      [0, 0],
-      [parentRect.width, parentRect.height]
+      [0 - extentYOffset, 0],
+      [parentRect.width - extentYOffset, parentRect.height]
     ], this.countriesGeojson);
 
     this.renderPaths();
