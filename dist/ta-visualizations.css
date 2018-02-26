@@ -361,6 +361,16 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .ta-visualization .legend path {
   stroke-width: 2; }
 
+.ta-visualization.ta-visualization-narrowest .axis-x .tick,
+.ta-visualization.ta-visualization-narrowest .axis-y .tick {
+  font-size: .6rem; }
+
+.ta-visualization.ta-visualization-narrowest .axis-title {
+  font-size: .8rem; }
+
+.ta-visualization.ta-visualization-narrowest .legend {
+  font-size: .6rem; }
+
 .ta-visualization.ta-visualization-narrow .legend {
   font-size: 12px; }
 
