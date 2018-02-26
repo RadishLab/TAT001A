@@ -33,7 +33,7 @@ export default class Map3a extends EuropeMap {
 
   join(countries, joinData) {
     countries.features.forEach(feature => {
-      const countryData = joinData.filter(row => row.iso3code === feature.properties.ADM0_A3_IS);
+      const countryData = joinData.filter(row => row.iso3code === this.getISO3(feature));
       if (countryData.length > 0) {
         feature.properties.joined = countryData[0];
       }
