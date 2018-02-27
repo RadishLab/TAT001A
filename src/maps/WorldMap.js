@@ -148,7 +148,7 @@ export default class WorldMap extends BaseMap {
       .attr('d', d => this.path(d));
 
     if (this.widthCategory !== 'narrowest') {
-      const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold);
+      const smallCountries = country.filter(d => d.properties.areakm < smallCountryThreshold && d.properties.TA6_COUNTRY);
       smallCountries.append('circle')
         .classed('country-fill', true)
         .style('fill', this.countryFill.bind(this))
