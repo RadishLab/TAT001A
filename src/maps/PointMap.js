@@ -32,6 +32,7 @@ export default class PointMap extends BaseMap {
       forceStrength: 0.002,
       radius: 5
     };
+    this.pointRadius = this.options.web ? 7 : 3;
   }
 
   loadCountries() {
@@ -87,7 +88,7 @@ export default class PointMap extends BaseMap {
         .classed('point', true);
     point.append('circle')
       .style('fill', d => this.colorScale(d[this.categoryField]))
-      .attr('r', this.options.web ? 7 : 3)
+      .attr('r', this.pointRadius)
       .attr('transform', d => `translate(${d.x}, ${d.y})`)
       .on('mouseover', (d) => {
         if (this.tooltipContent) {

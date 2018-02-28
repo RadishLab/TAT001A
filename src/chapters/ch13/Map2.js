@@ -30,6 +30,11 @@ export default class Map2 extends PointMap {
     };
 
     this.forceOptions.radius = 6;
+
+    if (this.widthCategory === 'narrowest') {
+      this.pointRadius = 5;
+      this.forceOptions.radius = 3;
+    }
   }
 
   loadPointData() {
@@ -47,38 +52,10 @@ export default class Map2 extends PointMap {
     });
   }
 
-  renderLegend() {
-    const legendWidth = this.width / 7;
-    const legendHeight = 18;
-    const legendPadding = 3;
-    const legendItemList = Object.entries(this.categories);
-    const legendItemCount = legendItemList.length;
-
-    this.legendGroup = this.root.append('g')
-      .classed('legend', true)
-      .attr('transform', `translate(${this.width - legendWidth}, 0)`);
-
-    const legendItems = this.legendGroup.selectAll('rect')
-      .data(legendItemList)
-      .enter().append('g')
-      .attr('transform', (d, i) => {
-        const y = (legendHeight + legendPadding) * (legendItemCount - i);
-        return `translate(0, ${y})`;
-      });
-
-    legendItems.append('rect')
-      .attr('width', legendWidth)
-      .attr('height', legendHeight)
-      .attr('fill', d => {
-        const keyCode = d[0];
-        return keyCode !== null ? this.colorScale(keyCode) : this.noDataColor;
-      });
-
-    legendItems.append('text')
-      .attr('x', 4)
-      .attr('y', 15)
-      .style('fill', this.textColors.darkBackground)
-      .text(d => d[1].legend);
+  getLegendItems() {
+    const legendItemList = super.getLegendItems();
+    legendItemList.pop();
+    return legendItemList;
   }
 
   tooltipContent(d) {
