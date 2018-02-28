@@ -20,7 +20,10 @@ export default class Chart1 extends BarChart {
       { label: this.getTranslation('Not tobacco-related'), value: 'other' },
       { label: this.getTranslation('Tobacco-related'), value: 'tobacco' },
     ];
-    this.xAxisTickRows = 5;
+    this.xAxisTickRows = 3;
+    if (this.widthCategory === 'narrowest') {
+      this.xAxisTickRows = 3.5;
+    }
   }
 
   loadData() {
