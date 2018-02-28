@@ -18,6 +18,7 @@ export default class Chart3 extends BarChart {
       { label: this.getTranslation('Men'), value: 'men' },
     ];
     this.yAxisTickFormat = format('d');
+    this.xAxisTickRows = 2;
   }
 
   loadData() {
@@ -26,7 +27,8 @@ export default class Chart3 extends BarChart {
         resolve(csvData.map(d => {
           d.men = +d.Men * 100;
           d.women = +d.Women * 100;
-          d.country = d.ISO3;
+          d.country = d.Country;
+          d.iso = d.ISO3;
           return d;
         }));
       });
