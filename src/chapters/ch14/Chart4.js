@@ -16,6 +16,9 @@ export default class Chart4 extends BarChartVertical {
     this.xAxisTickFormat = format('d');
     this.yAxisTickFormat = this.getTranslation.bind(this);
     this.legendItems = [];
+    if (this.widthCategory === 'narrowest') {
+      this.xAxisTickArguments = 6;
+    }
   }
 
   loadData() {
@@ -33,7 +36,10 @@ export default class Chart4 extends BarChartVertical {
   createMargin() {
     const margin = super.createMargin();
     margin.left = this.options.web ? 150 : 80;
-    if (this.widthCategory === 'narrowest') margin.left = 80;
+    if (this.widthCategory === 'narrowest') {
+      margin.left = 80;
+      margin.right = 10;
+    }
     return margin;
   }
 

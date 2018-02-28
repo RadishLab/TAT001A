@@ -23,12 +23,6 @@ export default class Chart4 extends LineChart {
     this.yAxisTickFormat = this.defaultYAxisTickFormat;
   }
 
-  createMargin() {
-    const margin = super.createMargin();
-    margin.right = this.options.web ? 60 : 40;
-    return margin;
-  }
-
   loadData() {
     return new Promise((resolve, reject) => {
       csv(this.dataFileUrl('2-4.csv'), (csvData) => {

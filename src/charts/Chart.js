@@ -61,6 +61,12 @@ export default class Chart extends Visualization {
   createMargin() {
     let bottom = 40;
     let left = this.options.web ? 60 : 40;
+    let right = 0;
+
+    if (this.yLabelRight) {
+      right = this.options.web ? 50 : 30;
+    }
+
     if (this.options.web) {
       let xAxisTickRowHeight = 25;
 
@@ -74,6 +80,10 @@ export default class Chart extends Visualization {
         bottom = 25;
         left = 40;
         xAxisTickRowHeight = 10;
+
+        if (this.yLabelRight) {
+          right = 45;
+        }
       }
       if (this.legendHeight > 0) {
         bottom = this.legendHeight + this.legendYPadding;
@@ -90,7 +100,7 @@ export default class Chart extends Visualization {
 
     return {
       top: 0,
-      right: 0,
+      right,
       left,
       bottom
     };

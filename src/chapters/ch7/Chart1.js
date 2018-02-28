@@ -76,4 +76,10 @@ export default class Chart1 extends LineChart {
   createZScale() {
     return scaleOrdinal(schemeCategoryProblem);
   }
+
+  createMargin() {
+    const margin = super.createMargin();
+    margin.right = 10;
+    return margin;
+  }
 }

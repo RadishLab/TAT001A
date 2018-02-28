@@ -33,7 +33,10 @@ export default class Chart5 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
-    if (this.widthCategory === 'narrowest') margin.left = 50;
+    if (this.widthCategory === 'narrowest') {
+      margin.left = 50;
+      margin.bottom = 20;
+    }
     return margin;
   }
 

@@ -48,8 +48,6 @@ export default class Chart3 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.right = this.options.web ? 60 : 30;
-    if (this.widthCategory === 'narrowest') margin.right = 50;
     margin.top = 10;
     return margin;
   }

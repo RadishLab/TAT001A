@@ -19,6 +19,10 @@ export default class Chart5 extends BarChartVertical {
     ];
     this.xAxisTickFormat = format('d');
     this.yAxisTickFormat = this.getTranslation.bind(this);
+
+    if (this.widthCategory === 'narrowest') {
+      this.xAxisTickArguments = 6;
+    }
   }
 
   loadData() {
@@ -39,6 +43,10 @@ export default class Chart5 extends BarChartVertical {
     margin.left = this.options.web ? 100 : 50;
     if (this.options.web) {
       margin.right = 10;
+
+      if (this.widthCategory === 'narrowest') {
+        margin.left = 70;
+      }
     }
     return margin;
   }

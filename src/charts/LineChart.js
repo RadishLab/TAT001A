@@ -9,6 +9,10 @@ export default class LineChart extends Chart {
     super(parent, options);
     this.parent
       .classed('line-chart', true);
+
+    if (this.widthCategory === 'narrowest') {
+      this.xAxisTickArguments = 4;
+    }
   }
 
   voronoiXAccessor(d) {

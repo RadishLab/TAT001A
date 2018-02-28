@@ -33,6 +33,10 @@ export default class Chart3 extends Chart {
       margin.top = 25;
       margin.left = 65;
       margin.bottom = 50;
+
+      if (this.widthCategory === 'narrowest') {
+        margin.bottom = 40;
+      }
     }
     return margin;
   }
