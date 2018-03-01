@@ -35,9 +35,8 @@ export default class BarChartVertical extends Chart {
     if (this.tooltipContent) {
       this.tooltip
         .html(this.tooltipContent(d, bar))
-        .classed('visible', true)
-        .style('top', `${currentEvent.layerY - 10}px`)
-        .style('left', `${currentEvent.layerX + 10}px`);
+        .classed('visible', true);
+      this.positionTooltip(currentEvent.layerX, currentEvent.layerY);
     }
   }
 

@@ -119,24 +119,10 @@ export default class WorldMap extends BaseMap {
             y = currentEvent.clientY - rect.top;
           }
 
-          const tooltipY = y + 10;
-          let tooltipX = x + 10;
-
           this.tooltip
             .html(this.tooltipContent(d))
-            .classed('visible', true)
-            .style('top', `${tooltipY}px`);
-
-          if (tooltipX + 100 < this.width) {
-            this.tooltip
-              .style('right', 'inherit')
-              .style('left', `${tooltipX}px`);
-          }
-          else {
-            this.tooltip
-              .style('left', 'inherit')
-              .style('right', `${this.width - x}px`);
-          }
+            .classed('visible', true);
+          this.positionTooltip(x + 10, y + 10);
         }
       })
       .on('mouseout', (d, i, nodes) => {

@@ -74,23 +74,10 @@ export default class LineChart extends Chart {
       .attr('cy', y);
 
     if (this.tooltipContent) {
-      const tooltipY = y + this.margin.top - 10;
-      let tooltipX = x + this.margin.left;
       this.tooltip
         .html(this.tooltipContent(d.data))
-        .classed('visible', true)
-        .style('top', `${tooltipY}px`);
-
-      if (tooltipX + 100 < this.width) {
-        this.tooltip
-          .style('right', 'inherit')
-          .style('left', `${tooltipX + 20}px`);
-      }
-      else {
-        this.tooltip
-          .style('left', 'inherit')
-          .style('right', `${this.width - x - 20}px`);
-      }
+        .classed('visible', true);
+      this.positionTooltip(x + this.margin.left, y + this.margin.top);
     }
   }
 

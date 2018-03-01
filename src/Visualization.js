@@ -87,4 +87,30 @@ export default class Visualization {
     // On init select initial key
     this.updateFilters(this.filterState);
   }
+
+  positionTooltip(x, y) {
+    let tooltipY = y - 10;
+    let tooltipX = x + 20;
+
+    const tooltipHeight = this.tooltip.node().offsetHeight;
+    const tooltipWidth = this.tooltip.node().offsetWidth;
+
+    if (tooltipY < 0) tooltipY = 0;
+    if (tooltipY + tooltipHeight > this.height) {
+      tooltipY = this.height - tooltipHeight - 25;
+    }
+    this.tooltip
+      .style('top', `${tooltipY}px`);
+
+    if (tooltipX + tooltipWidth < this.width) {
+      this.tooltip
+        .style('right', 'inherit')
+        .style('left', `${tooltipX}px`);
+    }
+    else {
+      this.tooltip
+        .style('left', 'inherit')
+        .style('right', `${this.width - x + 20}px`);
+    }
+  }
 }
