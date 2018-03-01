@@ -29,6 +29,12 @@ export default class Chart5 extends BarChart {
     });
   }
 
+  createMargin() {
+    const margin = super.createMargin();
+    margin.top = 15;
+    return margin;
+  }
+
   createXScale() {
     const values = this.data.map(this.getXValue);
     return scaleBand()
@@ -63,6 +69,14 @@ export default class Chart5 extends BarChart {
       .attr('y', d => this.y(d.value))
       .attr('height', d => this.chartHeight - this.y(d.value))
       .attr('fill', d => this.colors(this.getXValue(d)));
+
+    const numberFormat = format(',d');
+    barGroups.append('text')
+      .attr('x', d => this.x(this.getXValue(d)) + barWidth / 2)
+      .attr('y', d => this.y(d.value) - 2)
+      .style('font-size', '.7rem')
+      .style('text-anchor', 'middle')
+      .text(d => `£${numberFormat(d.value)}`);
   }
 
   createZScale() {
