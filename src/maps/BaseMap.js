@@ -64,6 +64,11 @@ export default class BaseMap extends Visualization {
     this.renderLegendWithItems(this.getLegendItems());
   }
 
+  sortLegendItems(items) {
+    // NOOP, implement in subclass as needed
+    return items;
+  }
+
   renderLegendWithItems(items) {
     const legendItemFill = d => {
       const keyCode = d[0];
@@ -72,10 +77,13 @@ export default class BaseMap extends Visualization {
       return keyCode !== null ? this.colorScale(keyCode) : this.noDataColor;
     };
 
-    const legendItems = this.legendGroup.selectAll('g.legend-item')
-      .data(items)
-      .enter().append('g')
+    const legendItemsSelection = this.legendGroup.selectAll('g.legend-item')
+      .data(items, d => `${d[0]}:${d[1]}`)
+    
+    let legendItems = legendItemsSelection.enter().append('g')
       .classed('legend-item', true);
+
+    legendItemsSelection.exit().remove();
 
     legendItems.append('rect')
       .attr('width', this.legendOptions.width)
@@ -113,6 +121,10 @@ export default class BaseMap extends Visualization {
       legendItem.select('rect')
         .attr('height', legendItem.select('text').node().getBBox().height + 3);
     });
+
+    legendItems = legendItems.merge(legendItemsSelection);
+
+    legendItems = this.sortLegendItems(legendItems);
 
     legendItems
       .attr('transform', (d, i, nodes) => {

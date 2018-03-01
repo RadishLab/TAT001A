@@ -70,6 +70,7 @@ const FILES = [
   ['14 Media/Inset 4 - Countries-with-the-most-facebook-users-as-of-january-2018.xlsx', '14-4.csv'],
   ['15 Partnerships/TA6 Map_Partnerships.xlsx', '15-map.csv'],
   ['16 ENDS/TA6 ENDS Map (Updated and Expanded).xlsx', '16-map.csv'],
+  ['16 ENDS/TA6 ENDS Map (Updated and Expanded).xlsx', '16-map2.csv'],
   ['18 Countering the Industry/Map - Countering the Industry - Country litigation.xlsx', '18-map.csv'],
   ['19 Optimism/TA6 Optimism Map.xlsx', '19-map.csv'],
   ['Web Consumption/TA6 Consumption Map.xlsx', 'consumption-map.csv'],
