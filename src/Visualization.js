@@ -39,7 +39,10 @@ export default class Visualization {
 
     this.tooltip = this.parentContainer.append('div')
       .classed('ta-visualization-tooltip', true)
-      .on('mouseover', () => this.tooltip.classed('visible', true));
+      .on('mouseover', () => this.tooltip.classed('visible', true))
+      .on('mouseleave', () => this.tooltip.classed('visible', false));
+    this.parentContainer
+      .on('mouseleave', () => this.tooltip.classed('visible', false));
 
     this.textColors = {
       lightBackground: '#2d2d2d',
