@@ -1,3 +1,7 @@
+// Compatibility for older browsers
+import 'core-js/es6/promise';
+import 'core-js/es7/object';
+
 import { select } from 'd3-selection';
 import i18next from 'i18next';
 

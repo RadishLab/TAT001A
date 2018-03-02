@@ -3,7 +3,7 @@ import { set } from 'd3-collection';
 import { geoPath } from 'd3-geo';
 import { geoGinzburg5 } from 'd3-geo-projection';
 import { json as d3json } from 'd3-request';
-import { event as currentEvent, select } from 'd3-selection';
+import { event as currentEvent, select, selectAll } from 'd3-selection';
 import * as topojson from 'topojson-client';
 
 import { mapNoData, mapCircleOverlay } from '../colors';
@@ -37,6 +37,14 @@ export default class WorldMap extends BaseMap {
         .attr('cy', this.options.web ? 3 : 2)
         .attr('r', this.options.web ? 0.75 : 0.22)
         .attr('fill', '#aaa');
+
+    this.background = this.parent.append('rect')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', this.width)
+      .attr('height', this.height)
+      .style('fill', 'transparent')
+      .on('mouseover', this.onCountryMouseout.bind(this));
 
     this.projection = geoGinzburg5();
     this.path = geoPath()
@@ -91,6 +99,16 @@ export default class WorldMap extends BaseMap {
     return this.noDataColor;
   }
 
+  onCountryMouseout(d, i, nodes) {
+    selectAll('.country-hover')
+      .classed('country-hover', false)
+      .style('stroke', this.defaultStroke);
+
+    if (this.tooltipContent) {
+      this.tooltip.classed('visible', false);
+    }
+  }
+
   renderPaths() {
     const smallCountryThreshold = 20000;
 
@@ -103,8 +121,15 @@ export default class WorldMap extends BaseMap {
 
     country
       .on('mouseover', (d, i, nodes) => {
+        // Remove hover state on previous country
+        selectAll('.country-hover')
+          .classed('country-hover', false)
+          .style('stroke', this.defaultStroke);
+
         const overCountry = select(nodes[i]);
-        overCountry.style('stroke', this.mouseoverStroke);
+        overCountry
+          .style('stroke', this.mouseoverStroke)
+          .classed('country-hover', true);
         overCountry.node().parentNode.appendChild(overCountry.node());
 
         if (this.tooltipContent) {
@@ -125,13 +150,7 @@ export default class WorldMap extends BaseMap {
           this.positionTooltip(x + 10, y + 10);
         }
       })
-      .on('mouseout', (d, i, nodes) => {
-        select(nodes[i]).style('stroke', this.defaultStroke);
-
-        if (this.tooltipContent) {
-          this.tooltip.classed('visible', false);
-        }
-      });
+      .on('mouseout', this.onCountryMouseout.bind(this));
 
     let largeCountries = country.filter(d => d.properties.areakm >= smallCountryThreshold);
     if (largeCountries.empty()) {

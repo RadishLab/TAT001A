@@ -1,6 +1,8 @@
 import { select } from 'd3-selection';
 import i18next from 'i18next';
 
+import { isIE } from './common/browsers';
+
 export default class Visualization {
   constructor(parent, options) {
     this.options = options;
@@ -23,6 +25,20 @@ export default class Visualization {
       this.parent
         .attr('preserveAspectRatio', 'xMinYMin meet')
         .attr('viewBox', `0 0 ${this.width} ${this.height}`);
+
+      // IE isn't great at scaling SVGs, let's do it manually
+      if (isIE()) {
+        this.parent
+          .style('height', `${this.height}px`)
+          .style('max-width', '100%');
+
+        select(window)
+          .on('resize', () => {
+            const newHeight = this.parent.node().clientWidth * (options.aspect[1] / options.aspect[0]);
+            this.parent
+              .style('height', `${newHeight}px`);
+          });
+      }
     }
     else {
       this.parent

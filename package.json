@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "comma-separated-values": "^3.6.4",
+    "core-js": "^2.5.3",
     "d3-array": "^1.2.1",
     "d3-axis": "^1.0.8",
     "d3-collection": "^1.0.4",
