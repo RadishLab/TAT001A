@@ -13,7 +13,11 @@ export default class Chart3 extends BarChart {
     this.yLabel = this.getTranslation('Revenue growth (in Billion 2014 PPP dollars)');
     this.yTicks = 6;
     this.legendItems = [];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = d => {
+      let label = d;
+      if (label === 'Americas' && this.widthCategory === 'narrowest') label = 'Amer.';
+      return this.getTranslation(label);
+    };
     this.xAxisTickRows = 3;
     this.yAxisTickFormat = d => format('d')(d / 1000);
   }
