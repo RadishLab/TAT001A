@@ -1,10 +1,12 @@
 import { axisBottom, axisLeft, axisRight } from 'd3-axis';
 import { format } from 'd3-format';
+import { select } from 'd3-selection';
 import { line } from 'd3-shape';
 import isDate from 'lodash.isdate';
 import isNumber from 'lodash.isnumber';
 import isString from 'lodash.isstring';
 
+import ellipsify from '../common/ellipsify';
 import Visualization from '../Visualization';
 import wrap from '../wrap';
 
@@ -199,6 +201,9 @@ export default class Chart extends Visualization {
           .text(this.yLabel[1])
           .attr('transform', `translate(-${(this.margin.left - (this.options.web ? 30 : 13))}, ${this.chartHeight / 2}) rotate(-90)`);
     }
+
+    axisGroup.selectAll('.axis-title')
+      .each((d, i, nodes) => ellipsify(select(nodes[i]), this.chartHeight));
   }
 
   renderYAxis() {
@@ -231,6 +236,9 @@ export default class Chart extends Visualization {
           return `translate(${yAxisWidth + (this.options.web ? 16 : 10)}, ${this.chartHeight / 2}) rotate(-90)`;
         })
         .text(this.yLabelRight);
+
+    yAxisGroup.selectAll('.axis-title')
+      .each((d, i, nodes) => ellipsify(select(nodes[i]), this.chartHeight));
   }
 
   renderGuidelines() {
