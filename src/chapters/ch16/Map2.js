@@ -47,13 +47,13 @@ export default class Map2 extends WorldMap {
         ['Comp Sales Ban', this.getTranslation('E-cigarettes Banned')]
       ],
       'marketing regulations': [
-        ['None', this.getTranslation('None')],
+        ['None', this.getTranslation('Unclear or No Explicit Policy')],
         ['Marketing Regulations Only', this.getTranslation('Marketing Regulations Only')],
         ['Sales Ban Only', this.getTranslation('Sales Ban Only')],
         ['Sales Ban and Marketing Regulations', this.getTranslation('Sales Ban and Marketing Regulations')]
       ],
       'public use regulations': [
-        ['None', this.getTranslation('None')],
+        ['None', this.getTranslation('Unclear or No Explicit Policy')],
         ['Public Use Restricted Only', this.getTranslation('Public Use Restricted Only')],
         ['Sales Ban Only', this.getTranslation('Sales Ban Only')],
         ['Sales Ban, Public Use Restricted', this.getTranslation('Sales Ban, Public Use Restricted')],
