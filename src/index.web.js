@@ -2,9 +2,10 @@
 import 'core-js/es6/promise';
 import 'core-js/es7/object';
 
-import { select } from 'd3-selection';
+import { select, selectAll } from 'd3-selection';
 import i18next from 'i18next';
 
+import UserGeneratedFigure from './usergenerated/UserGeneratedFigure';
 import figures from './chapters/Figures';
 
 const prefix = 'ta-visualization';
@@ -63,7 +64,17 @@ function initializeVisualizations() {
   });
 }
 
+function initializeCustomVisualizations() {
+  selectAll('.ta-visualization-custom-visualization')
+    .each((d, i, nodes) => {
+      const container = select(nodes[i]);
+      container.classed('ta-visualization ta-visualization-standalone', true);
+      new UserGeneratedFigure(container.append('svg').node(), createOptions(container.node()));
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initializeTranslations();
   initializeVisualizations();
+  initializeCustomVisualizations();
 });

@@ -292,7 +292,7 @@ export default class Chart extends Visualization {
     return legend;
   }
 
-  renderLegend() {
+  renderLegend(columns = null) {
     const legend = this.createLegendRoot();
 
     const legendLine = line()
@@ -305,8 +305,30 @@ export default class Chart extends Visualization {
     let xOffset = 0,
       yOffset = 0;
 
+    let currentColumn;
+    let itemsPerColumn;
+    let itemsAdded = 0;
+    let columnXOffset = 0;
+    if (columns) {
+      itemsPerColumn = this.legendItems.length / columns;
+    }
+
     this.legendItems.forEach(({ label, value }) => {
-      const legendItem = legend.append('g')
+      let targetContainer = legend;
+      if (columns) {
+        if (itemsAdded % itemsPerColumn === 0) {
+          if (currentColumn) {
+            columnXOffset += currentColumn.node().getBBox().width;
+          }
+          currentColumn = legend.append('g')
+            .classed('legend-column', true)
+            .attr('transform', `translate(${columnXOffset}, 0)`);
+          xOffset = yOffset = 0;
+        }
+        targetContainer = currentColumn;
+      }
+
+      const legendItem = targetContainer.append('g')
         .attr('transform', `translate(${xOffset}, ${yOffset})`);
       legendItem.append('text')
         .text(label)
@@ -317,11 +339,13 @@ export default class Chart extends Visualization {
         .attr('transform', `translate(0, -${legendHeight / 4})`)
         .attr('d', d => legendLine(d));
 
-      if (this.legendOrientation() === 'horizontal') {
+      if (this.legendOrientation() === 'horizontal' && !columns) {
         xOffset += legendItem.node().getBBox().width + 5;
-      } else {
+      }
+      else {
         yOffset += legendItem.node().getBBox().height + 1;
       }
+      itemsAdded++;
     });
   }
 

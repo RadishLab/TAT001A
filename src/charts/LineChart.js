@@ -92,10 +92,7 @@ export default class LineChart extends Chart {
       .attr('cy', -100);
   }
 
-  render() {
-    super.render();
-    this.renderLines();
-
+  addInteractivity() {
     if (this.getVoronoiData && this.tooltipContent) {
       this.mouseOverCircle = this.root.append('circle')
         .classed('mouseover-circle', true)
@@ -117,5 +114,11 @@ export default class LineChart extends Chart {
           .on('mouseover', this.onVoronoiMouseOver.bind(this))
           .on('mouseout', this.onVoronoiMouseOut.bind(this));
     }
+  }
+
+  render() {
+    super.render();
+    this.renderLines();
+    this.addInteractivity();
   }
 }
