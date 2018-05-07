@@ -1,0 +1,21 @@
+Country,Label,Profit Type (per Acre),Contract versus Independent,Profit Per Acre - USD,USD Profit Per Hectare
+Kenya,Adjusted Profit per Acre Contractor,Adjusted Profit per Acre,Contractor,-13.7,
+Kenya,Adjusted Profit per Acre Independent ,Adjusted Profit per Acre,Independent ,41,
+Kenya,Unadjusted Profit per Acre Contractor,Unadjusted Profit per Acre,Contractor,252.9,
+Kenya,Unadjusted Profit per Acre Independent ,Unadjusted Profit per Acre,Independent ,392.6,
+Malawi,Adjusted Profit per Acre Contractor,Adjusted Profit per Acre,Contractor,224.3,
+Malawi,Adjusted Profit per Acre Independent ,Adjusted Profit per Acre,Independent ,-37.3,
+Malawi,Unadjusted Profit per Acre Contractor,Unadjusted Profit per Acre,Contractor,630.1,
+Malawi,Unadjusted Profit per Acre Independent ,Unadjusted Profit per Acre,Independent ,417,
+Zambia,Adjusted Profit per Acre Contractor,Adjusted Profit per Acre,Contractor,-1915.3,
+Zambia,Adjusted Profit per Acre Independent ,Adjusted Profit per Acre,Independent ,-579.1,
+Zambia,Unadjusted Profit per Acre Contractor,Unadjusted Profit per Acre,Contractor,-285.6,
+Zambia,Unadjusted Profit per Acre Independent ,Unadjusted Profit per Acre,Independent ,227.3,
+Philippines ,Adjusted Profit per Acre Contractor,Adjusted Profit per Acre,Contractor,266.846077578357,659.39
+Philippines ,Adjusted Profit per Acre Independent ,Adjusted Profit per Acre,Independent ,-146.573319034419,-362.19
+Philippines ,Unadjusted Profit per Acre Contractor,Unadjusted Profit per Acre,Contractor,981.153760547136,2424.48
+Philippines ,Unadjusted Profit per Acre Independent ,Unadjusted Profit per Acre,Independent ,687.092531514943,1697.84
+Indonesia,Adjusted Profit per Acre Contractor,Adjusted Profit per Acre,Contractor,-1399.11333238907,-3457.279
+Indonesia,Adjusted Profit per Acre Independent ,Adjusted Profit per Acre,Independent ,-1436.94745148823,-3550.769
+Indonesia,Unadjusted Profit per Acre Contractor,Unadjusted Profit per Acre,Contractor,-64.2764411889683,-158.8303
+Indonesia,Unadjusted Profit per Acre Independent ,Unadjusted Profit per Acre,Independent ,12.2449201756338,30.25781
