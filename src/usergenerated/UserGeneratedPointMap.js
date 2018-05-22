@@ -1,9 +1,5 @@
-import { extent, max, min } from 'd3-array';
-import { set } from 'd3-collection';
-import { format } from 'd3-format';
 import { csv, json as d3json } from 'd3-request';
-import { scaleLinear, scaleOrdinal } from 'd3-scale';
-import { select } from 'd3-selection';
+import { scaleOrdinal } from 'd3-scale';
 import * as topojson from 'topojson-client';
 
 import { schemeCategoryProblem, schemeCategorySolution } from '../colors';
