@@ -65,12 +65,10 @@ export default class UserGeneratedPointMap extends PointMap {
   }
 
   tooltipContent(d) {
-    let content = '';
-    let details;
     if (this.tooltipColumn) {
-      details = d[this.tooltipColumn];
-      content += `<div>${details ? details : this.getTranslation('No data')}</div>`;
+      const details = d[this.tooltipColumn];
+      return `<div>${details ? details : this.getTranslation('No data')}</div>`;
     }
-    return content;
+    return null;
   }
 }

@@ -92,8 +92,11 @@ export default class PointMap extends BaseMap {
       .attr('transform', d => `translate(${d.x}, ${d.y})`)
       .on('mouseover', (d) => {
         if (this.tooltipContent) {
+          const content = this.tooltipContent(d);
+          if (!content) return;
+
           this.tooltip
-            .html(this.tooltipContent(d))
+            .html(content)
             .classed('visible', true);
 
           this.positionTooltip(currentEvent.layerX, currentEvent.layerY);
