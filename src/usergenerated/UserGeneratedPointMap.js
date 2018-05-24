@@ -1,3 +1,4 @@
+import { set } from 'd3-collection';
 import { csv, json as d3json } from 'd3-request';
 import { scaleOrdinal } from 'd3-scale';
 import * as topojson from 'topojson-client';
