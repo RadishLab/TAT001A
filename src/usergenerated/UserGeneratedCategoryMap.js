@@ -73,11 +73,13 @@ export default class UserGeneratedCategoryMap extends WorldMap {
 
   tooltipContent(d) {
     let content = `<div class="country-name">${d.properties.NAME}</div>`;
-    let details;
-    if (this.tooltipColumn && d.properties.joined) {
-      details = d.properties.joined[this.tooltipColumn];
+    if (this.tooltipColumn) {
+      let details;
+      if (d.properties.joined) {
+        details = d.properties.joined[this.tooltipColumn];
+      }
+      content += `<div>${details ? details : this.getTranslation('No data')}</div>`;
     }
-    content += `<div>${details ? details : this.getTranslation('No data')}</div>`;
     return content;
   }
 }
