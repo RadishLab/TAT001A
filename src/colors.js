@@ -1,7 +1,7 @@
 // Chapters 1 through 9
 export const schemeCategoryProblem = [
   '#F0393A',
-  '#BEE5D9',
+  '#87BEB8',
   '#DAD1C2',
   '#505152',
   '#6D8094',
