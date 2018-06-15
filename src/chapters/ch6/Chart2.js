@@ -72,6 +72,7 @@ export default class Chart2 extends BarChart {
   render() {
     super.render();
     this.root.selectAll('.axis-x .tick')
+      .style('font-weight', 'bold')
       .style('font-size', () => {
         if (this.widthCategory === 'narrowest') return '.4rem';
         return '10px';
