@@ -44,7 +44,7 @@ export class Chart4 extends BarChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.top = 10;
+    margin.top = 15;
     return margin;
   }
 
@@ -72,7 +72,7 @@ export class Chart4 extends BarChart {
       .text(d => `${format('+d')(d.change * 100)}%`)
       .attr('transform', d => `translate(${this.x(d.region) + barWidth * 1.5}, ${this.y(d['2016']) - 2})`)
       .attr('text-anchor', 'middle')
-      .attr('font-size', this.options.web ? '10px' : '4px');
+      .attr('font-size', this.options.web ? '14px' : '4px');
   }
 
   createYScale() {
