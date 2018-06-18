@@ -73,8 +73,8 @@ export default class PieChart extends Chart {
       .append('path')
         .classed('arc', true)
         .attr('d',  arcGenerator)
-        .style('stroke-width', 2)
-        .style('stroke', d => this.colors(this.colorAccessor(d)))
+        .style('stroke-width', 0.5)
+        .style('stroke', 'white')
         .style('fill', d => this.colors(this.colorAccessor(d)));
 
     arcGroup
@@ -99,7 +99,7 @@ export default class PieChart extends Chart {
       })
       .on('mouseout', (d, i, nodes) => {
         select(nodes[i]).select('path')
-          .style('stroke', d => this.colors(this.colorAccessor(d)));
+          .style('stroke', 'white');
 
         if (this.tooltipContent) {
           this.tooltip.classed('visible', false);
