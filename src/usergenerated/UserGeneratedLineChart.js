@@ -2,7 +2,7 @@ import { ascending, extent, merge, sum } from 'd3-array';
 import { nest, set } from 'd3-collection';
 import { format } from 'd3-format';
 import { csv } from 'd3-request';
-import { scaleLinear, scaleOrdinal, scaleBand, scaleTime } from 'd3-scale';
+import { scaleLinear, scaleOrdinal, scaleBand, scalePoint, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
 import { timeFormat, timeParse } from 'd3-time-format';
 import { voronoi } from 'd3-voronoi';
@@ -23,6 +23,10 @@ export default class UserGeneratedLineChart extends LineChart {
 
     this.xAxisColumn = this.options.xAxisColumn;
     this.xLabel = this.options.xAxisLabel;
+    this.interpretXAxisValuesAsDates = true;
+    if (this.options.interpretXAxisValuesAsDates) {
+      this.interpretXAxisValuesAsDates = (this.options.interpretXAxisValuesAsDates === 'true');
+    }
 
     this.yAxisColumn = this.options.yAxisColumn;
     this.yLabel = this.options.yAxisLabel;
@@ -31,7 +35,7 @@ export default class UserGeneratedLineChart extends LineChart {
 
   createMargin() {
     const margin = super.createMargin();
-    margin.right = 15;
+    margin.right = 20;
     margin.top = 15;
     return margin;
   }
@@ -90,7 +94,10 @@ export default class UserGeneratedLineChart extends LineChart {
       csv(this.options.dataUrl, (csvData) => {
         const mappedData = csvData.map(d => {
           d.value = +d[this.yAxisColumn];
-          d.year = timeParse('%Y')(d[this.xAxisColumn]);
+          d.xValue = d[this.xAxisColumn];
+          if (this.interpretXAxisValuesAsDates) {
+            d.year = timeParse('%Y')(d.xValue);
+          }
           return d;
         });
 
@@ -99,9 +106,14 @@ export default class UserGeneratedLineChart extends LineChart {
           return { label: d, value: d };
         });
 
-        const nestedData = nest()
+        let nestedData = nest()
           .key(d => d[this.groupColumn])
-          .key(d => d.year)
+          .key(d => {
+            if (this.interpretXAxisValuesAsDates) {
+              return d.year;
+            }
+            return d.xValue;
+          })
             .rollup(leaves => sum(leaves, d => d.value))
           .entries(mappedData);
         resolve(nestedData);
@@ -110,7 +122,8 @@ export default class UserGeneratedLineChart extends LineChart {
   }
 
   lineXAccessor(d) {
-    return this.x(new Date(d.key));
+    const xValue = this.interpretXAxisValuesAsDates ? new Date(d.key) : d.key;
+    return this.x(xValue);
   }
 
   lineYAccessor(d) {
@@ -118,17 +131,22 @@ export default class UserGeneratedLineChart extends LineChart {
   }
 
   getXValues() {
-    const values = this.data.reduce((valueArray, value) => valueArray.concat(value.values), []);
-    const dates = set(values, d => d.key).values().map(d => new Date(d));
-    dates.sort(ascending);
-    return dates;
+    let values = this.data.reduce((valueArray, value) => valueArray.concat(value.values), []);
+    values = set(values, d => d.key).values();
+
+    if (this.interpretXAxisValuesAsDates) {
+      values = values.map(d => new Date(d));
+      values.sort(ascending);
+    }
+    return values;
   }
 
   createXScale() {
-    // TODO make scale configurable?
-    return scaleTime()
+    const scale = this.interpretXAxisValuesAsDates ? scaleTime : scalePoint;
+    const domain = this.interpretXAxisValuesAsDates ? extent(this.getXValues()) : this.getXValues();
+    return scale()
       .range([0, this.chartWidth])
-      .domain(extent(this.getXValues()));
+      .domain(domain);
   }
 
   getYValues() {
@@ -171,18 +189,30 @@ export default class UserGeneratedLineChart extends LineChart {
       return d.values.map(value => {
         return {
           category: d.key,
-          year: new Date(value.key),
+          xValue: value.key,
           value: value.value
         };
       })
     }));
   }
 
+  voronoiXAccessor(d) {
+    if (this.interpretXAxisValuesAsDates) {
+      return this.x(new Date(d.xValue));
+    }
+    return this.x(d.xValue);
+  }
+
   tooltipContent(d, line) {
     const yearFormat = timeFormat('%Y');
     const valueFormat = format('.1f');
     let content = `<div class="header">${d.category}</div>`;
-    content += `<div class="data">${yearFormat(d.year)}</div>`;
+    if (this.interpretXAxisValuesAsDates) {
+      content += `<div class="data">${yearFormat(new Date(d.xValue))}</div>`;
+    }
+    else {
+      content += `<div class="data">${d.xValue}</div>`;
+    }
     content += `<div class="data">${valueFormat(d.value)}</div>`;
     return content;
   }
