@@ -5,6 +5,7 @@ import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 import { line } from 'd3-shape';
 
 import BarChart from '../../charts/BarChart';
+import { schemeCategoryProblem } from '../../colors';
 import wrap from '../../wrap';
 
 export default class Chart1 extends BarChart {
@@ -176,7 +177,7 @@ export default class Chart1 extends BarChart {
   }
 
   createZScale() {
-    return scaleOrdinal(['#bcdeda', '#f04f41'])
+    return scaleOrdinal([schemeCategoryProblem[1], schemeCategoryProblem[0]])
       .domain(['other', 'tobacco']);
   }
 
