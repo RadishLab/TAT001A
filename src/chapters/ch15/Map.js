@@ -9,6 +9,7 @@ export default class Map extends WorldMap {
     this.colorScale = scaleOrdinal(['#00a792', '#1b70b2'])
       .domain(['Friend', 'Member']);
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = '15-map';
     this.valueField = 'value';
   }
 

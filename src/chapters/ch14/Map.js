@@ -10,6 +10,7 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategorySolutionMap.slice(1));
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = '14-map';
     this.valueField = 'W-MM_Group_16';
 
     this.keyCodeText = {

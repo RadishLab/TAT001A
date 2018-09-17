@@ -11,7 +11,7 @@ import LineChart from '../../charts/LineChart';
 export default class Chart2 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'illicit-inset2';
+    this.figurePrefix = 'illicit-2';
     this.yLabel = this.getTranslation('Cartons or carton equivalent (thousands)');
     this.yAxisTickFormat = d => format('d')(d / 1000);
     this.legendItems = [];

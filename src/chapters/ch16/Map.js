@@ -15,6 +15,7 @@ export default class Map extends WorldMap {
         'Comp Sales Ban'
       ]);
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = '16-map';
     this.valueField = 'Map Code';
     this.noDataLabel = this.getTranslation('Unclear or No Explicit Policy');
   }

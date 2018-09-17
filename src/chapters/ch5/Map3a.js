@@ -9,6 +9,7 @@ import EuropeMap from '../../maps/EuropeMap';
 export default class Map3a extends EuropeMap {
   constructor(parent, options) {
     super(parent, options);
+    this.figurePrefix = '5-map3a';
     this.colorScaleType = 'linear';
     this.colorScale = scaleLinear()
       .domain([0, 1])

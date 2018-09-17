@@ -10,6 +10,7 @@ export default class Map2 extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = '4-map2';
 
     this.filters = [
       {

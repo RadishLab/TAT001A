@@ -11,6 +11,7 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategorySolutionMap);
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = '10-map';
     this.valueField = 'Key Code';
     this.symbolField = 'Symbol';
     this.keyCodeReversed = true;

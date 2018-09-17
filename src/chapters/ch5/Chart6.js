@@ -9,7 +9,7 @@ import BarChart from '../../charts/BarChart';
 export default class Chart6 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '5-inset6';
+    this.figurePrefix = '5-6';
     this.yLabel = this.getTranslation('Estimated Prevalence (%)');
     this.yTicks = 6;
     this.legendItems = [];

@@ -9,7 +9,7 @@ import BarChart from '../../charts/BarChart';
 export default class Chart5 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'illicit-inset5';
+    this.figurePrefix = 'illicit-5';
     this.yLabel = this.getTranslation('Millions of £');
     this.yTicks = 6;
     this.yAxisTickFormat = d => format('d')(d / 1000000);

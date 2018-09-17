@@ -11,7 +11,7 @@ import LineChart from '../../charts/LineChart';
 export default class Chart3 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '7-inset3';
+    this.figurePrefix = '7-3';
     this.xLabel = this.getTranslation('Age');
     this.xAxisTickFormat = format('d');
     this.yLabel = this.getTranslation('Life Years Lost');

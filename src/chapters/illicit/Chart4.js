@@ -9,7 +9,7 @@ import PieChart from '../../charts/PieChart';
 export default class Chart4 extends PieChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'illicit-inset4';
+    this.figurePrefix = 'illicit-4';
     this.legendItems = [
       { label: this.getTranslation('Counterfeit'), value: 'Counterfeit' },
       { label: this.getTranslation('All other illicit'), value: 'All other illicit' }

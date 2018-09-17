@@ -12,7 +12,7 @@ import Chart from '../../charts/Chart';
 export default class Chart2 extends Chart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'smokeless-inset2';
+    this.figurePrefix = 'smokeless-2';
     this.yLabel = this.getTranslation('Tobacco-Specific Nitrosamines (ng/g)');
     this.legendItems = [];
     this.yAxisTickFormat = format('d');

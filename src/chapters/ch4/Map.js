@@ -10,6 +10,7 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = '4-map';
     this.valueField = 'Key Code';
     this.symbolField = 'Symbol';
   }

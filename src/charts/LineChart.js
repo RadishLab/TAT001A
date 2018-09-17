@@ -113,6 +113,13 @@ export default class LineChart extends Chart {
           .style('fill', 'transparent')
           .on('mouseover', this.onVoronoiMouseOver.bind(this))
           .on('mouseout', this.onVoronoiMouseOut.bind(this));
+
+      this.root.selectAll('.voronoi path')
+        .each(d => {
+          if (d && d.data) {
+            this.tooltipContent(d.data);
+          }
+        });
     }
   }
 

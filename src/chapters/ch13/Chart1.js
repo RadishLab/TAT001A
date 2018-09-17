@@ -10,7 +10,7 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '13-inset3';
+    this.figurePrefix = '13-3';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
     this.yLabel = this.getTranslation('Population protected (billions)');
     this.yLabelRight = this.getTranslation('Countries');

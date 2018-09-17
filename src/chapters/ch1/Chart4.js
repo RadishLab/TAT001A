@@ -12,7 +12,7 @@ import Chart from '../../charts/Chart';
 export default class Chart4 extends Chart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '1-inset4';
+    this.figurePrefix = '1-4';
     this.xLabel = this.getTranslation('Region');
     this.yLabel = this.getTranslation('Crop');
     this.parent

@@ -8,6 +8,7 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map1 extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
+    this.figurePrefix = '1-map';
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
     this.valueField = 'Key Code';

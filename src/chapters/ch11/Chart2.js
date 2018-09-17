@@ -10,7 +10,7 @@ import BarChartVertical from '../../charts/BarChartVertical';
 export default class Chart2 extends BarChartVertical {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '11-inset2';
+    this.figurePrefix = '11-2';
     this.yLabel = null;
     this.legendItems = [
       { label: this.getTranslation('% of current smokers who intend to quit'), value: 'intend' },

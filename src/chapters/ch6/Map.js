@@ -9,6 +9,7 @@ import WorldMap from '../../maps/WorldMap';
 export default class Map extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
+    this.figurePrefix = '6-map';
     this.valueField = 'Percent of DALYs due to tobacco';
     this.colorScaleType = 'linear';
     this.colorScale = scaleLinear()

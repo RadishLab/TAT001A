@@ -11,6 +11,7 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = 'consumption-map';
     this.symbolField = 'Symbol';
     this.valueField = 'Key code';
   }

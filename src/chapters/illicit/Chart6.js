@@ -11,7 +11,7 @@ import BarChart from '../../charts/BarChart';
 export default class Chart6 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'illicit-inset6';
+    this.figurePrefix = 'illicit-6';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
     this.yLabel = this.getTranslation('Cigarettes consumed (billions)');
     this.yLabelRight = this.getTranslation('Illicit market share (%)');

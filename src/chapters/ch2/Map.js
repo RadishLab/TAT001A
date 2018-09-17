@@ -9,6 +9,7 @@ export default class Map extends PointMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblem);
     this.categoryField = 'Products';
+    this.figurePrefix = '2-map';
   }
 
   loadPointData() {

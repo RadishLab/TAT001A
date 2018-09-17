@@ -18,6 +18,7 @@ export default class Map extends WorldMap {
         schemeCategorySolutionMap[0],
         schemeCategorySolutionMap.slice(-1)[0],
       ]);
+    this.figurePrefix = '19-map';
   }
 
   formatExtent() {

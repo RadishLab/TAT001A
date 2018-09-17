@@ -11,6 +11,7 @@ export default class Map9 extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = '9-map';
     this.valueField = 'Key Code';
     this.symbolField = 'Symbol (Total economic cost>10000 PPP$ million)';
     this.keyCodeReversed = true;

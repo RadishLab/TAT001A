@@ -66,9 +66,13 @@ export default class Visualization {
     };
   }
 
-  getTranslation(text) {
+  getTranslation(text, defaultPrefix) {
+    let prefix = this.figurePrefix;
+    if (this.figurePrefix === undefined && defaultPrefix) {
+      prefix = defaultPrefix;
+    }
     if (!text || text === '') return text;
-    return i18next.t(`${this.figurePrefix}.${text}`, text);
+    return i18next.t(`${prefix}.${text}`, text);
   }
 
   dataFileUrl(filename) {

@@ -9,6 +9,7 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
+    this.figurePrefix = 'youth-map';
 
     // All possible filters, these are what we make buttons for
     this.filters = [

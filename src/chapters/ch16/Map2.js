@@ -9,6 +9,7 @@ export default class Map2 extends WorldMap {
     super(parent, options);
     this.colorScaleType = 'ordinal';
     this.noDataLabel = this.getTranslation('Unclear or No Explicit Policy');
+    this.figurePrefix = '16-map2';
 
     this.filters = [
       {

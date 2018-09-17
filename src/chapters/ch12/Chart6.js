@@ -11,7 +11,7 @@ import LineChart from '../../charts/LineChart';
 export default class Chart6 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '12-inset6';
+    this.figurePrefix = '12-6';
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Price per Pack (Colombian peso)');
     this.yLabelRight = this.getTranslation('Relative income price (%)');

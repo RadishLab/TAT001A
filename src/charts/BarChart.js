@@ -48,6 +48,11 @@ export default class BarChart extends Chart {
   render() {
     super.render();
     this.renderBars();
+    if (this.tooltipContent) {
+      this.root.selectAll('.bar').each((d, i, nodes) => {
+        this.tooltipContent(d, select(nodes[i]));
+      });
+    }
     this.root.selectAll('.bar')
       .on('mouseover', (d, i, nodes) => {
         this.onMouseOverBar(d, select(nodes[i]));

@@ -11,7 +11,7 @@ import BarChart from '../../charts/BarChart';
 export default class Chart7 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '12-inset7';
+    this.figurePrefix = '12-7';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
     this.yLabel = this.getTranslation('Price per Pack (Kenyan Shillings)');
     this.yTicks = 6;

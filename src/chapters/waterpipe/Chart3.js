@@ -12,7 +12,7 @@ import LineChart from '../../charts/LineChart';
 export default class Chart3 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'waterpipe-inset3';
+    this.figurePrefix = 'waterpipe-3';
     this.xAxisTickArguments = timeYear.every(1);
     this.yLabel = this.getTranslation('Ever Use of Waterpipe (%)');
     this.yTicks = 6;

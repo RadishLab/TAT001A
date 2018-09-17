@@ -11,7 +11,7 @@ import wrap from '../../wrap';
 export default class Chart1 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '6-inset1';
+    this.figurePrefix = '6-1';
     this.xLabel = this.getTranslation('Cause of Death');
     this.yLabel = this.getTranslation('Deaths (millions)');
     this.yTicks = 6;

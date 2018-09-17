@@ -9,7 +9,7 @@ import PieChart from '../../charts/PieChart';
 export default class Chart1 extends PieChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'consumption-inset1';
+    this.figurePrefix = 'consumption-1';
     this.legendItems = [
       { label: this.getTranslation('Low HDI'), value: 'Low' },
       { label: this.getTranslation('Medium HDI'), value: 'Medium' },

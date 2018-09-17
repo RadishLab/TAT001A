@@ -12,6 +12,7 @@ export default class Map extends PointMap {
   constructor(parent, options) {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblem);
+    this.figurePrefix = 'illicit-map';
     this.projection = geoNaturalEarth1();
     this.path = geoPath()
       .projection(this.projection);

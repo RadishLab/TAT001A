@@ -10,7 +10,7 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'waterpipe-inset2';
+    this.figurePrefix = 'waterpipe-2';
     this.yLabel = this.getTranslation('Tobacco Users That Used Waterpipe (%)');
     this.yTicks = 6;
     this.legendItems = [

@@ -12,7 +12,7 @@ import Chart from '../../charts/Chart';
 export default class Chart1 extends Chart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'smokeless-inset1';
+    this.figurePrefix = 'smokeless-1';
     this.yLabel = this.getTranslation('Prevalence of smokeless tobacco use among youth (%)');
     this.legendItems = [];
     this.yAxisTickFormat = format('d');

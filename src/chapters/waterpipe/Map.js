@@ -16,6 +16,7 @@ export default class Map extends WorldMap {
         schemeCategoryProblemMap[0],
         schemeCategoryProblemMap.slice(-1)[0],
       ]);
+    this.figurePrefix = 'waterpipe-map';
     this.valueField = 'value';
   }
 

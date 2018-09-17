@@ -10,7 +10,7 @@ import Chart from '../../charts/Chart';
 export default class Chart3 extends Chart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '11-inset3';
+    this.figurePrefix = '11-3';
     this.xLabel = this.getTranslation('Age of Smokers at Quitting');
     this.yLabel = [
       this.getTranslation('Relative Risk of Death Before Age 65'),

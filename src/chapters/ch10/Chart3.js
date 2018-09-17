@@ -9,7 +9,7 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '10-inset3';
+    this.figurePrefix = '10-3';
     this.yLabel = this.getTranslation('Revenue growth (in Billion 2014 PPP dollars)');
     this.yTicks = 6;
     this.legendItems = [];

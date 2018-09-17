@@ -9,6 +9,7 @@ export default class Map2 extends PointMap {
     this.colorScale = scaleOrdinal(['#356CB9', '#F79311', '#38AC90', '#505152'])
       .domain(['N', 'S', 'C', '0']);
     this.categoryField = 'Smokefree';
+    this.figurePrefix = '13-map2';
 
     this.categories = {
       '0': {

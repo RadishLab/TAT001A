@@ -52,7 +52,7 @@ export default class WorldMap extends BaseMap {
     this.root = this.parent.append('g');
 
     this.noDataColor = mapNoData;
-    this.noDataLabel = this.getTranslation('No data');
+    this.noDataLabel = this.getTranslation('No data', 'WorldMap');
     this.loadData();
 
     this.mouseoverStroke = '#555';
@@ -118,6 +118,10 @@ export default class WorldMap extends BaseMap {
       .enter()
         .append('g')
         .classed('country', true);
+
+    if (this.tooltipContent) {
+      country.each(d => this.tooltipContent(d));
+    }
 
     country
       .on('mouseover', (d, i, nodes) => {
