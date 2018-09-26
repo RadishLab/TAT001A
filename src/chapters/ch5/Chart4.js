@@ -9,14 +9,21 @@ import BarChart from '../../charts/BarChart';
 export default class Chart4 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '5-4';
-    this.yLabel = this.getTranslation('Prevalence (%)');
     this.yTicks = 6;
+    this.xAxisTickFormat = this.getTranslation.bind(this);
+  }
+
+  getFigurePrefix() {
+    return '5-4';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Prevalence (%)');
     this.legendItems = [
       { label: this.getTranslation('No university degree'), value: 'Below university' },
       { label: this.getTranslation('University'), value: 'University' }
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    super.onTranslationsLoaded();
   }
 
   loadData() {

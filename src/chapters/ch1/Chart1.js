@@ -11,8 +11,16 @@ import LineChart from '../../charts/LineChart';
 export default class Chart1 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '1-1';
+    this.yAxisTickFormat = format('.2');
+    this.legendYOffset = 0;
+    this.legendYPadding = 45;
+  }
 
+  getFigurePrefix() {
+    return '1-1';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Metric tons (millions)');
     this.legendItems = [
@@ -22,9 +30,7 @@ export default class Chart1 extends LineChart {
       { label: this.getTranslation('Very high HDI'), value: 'Very high-HDI' },
       { label: this.getTranslation('China'), value: 'China' },
     ];
-    this.yAxisTickFormat = format('.2');
-    this.legendYOffset = 0;
-    this.legendYPadding = 45;
+    super.onTranslationsLoaded();
   }
 
   createMargin() {

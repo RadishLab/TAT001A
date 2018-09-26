@@ -9,8 +9,20 @@ export default class Map2 extends PointMap {
     this.colorScale = scaleOrdinal(['#356CB9', '#F79311', '#38AC90', '#505152'])
       .domain(['N', 'S', 'C', '0']);
     this.categoryField = 'Smokefree';
-    this.figurePrefix = '13-map2';
 
+    this.forceOptions.radius = 6;
+
+    if (this.widthCategory === 'narrowest') {
+      this.pointRadius = 5;
+      this.forceOptions.radius = 3;
+    }
+  }
+
+  getFigurePrefix() {
+    return '13-map2';
+  }
+
+  onTranslationsLoaded() {
     this.categories = {
       '0': {
         tooltip: this.getTranslation('No comprehensive policy'),
@@ -29,13 +41,7 @@ export default class Map2 extends PointMap {
         legend: this.getTranslation('Municipal policy')
       }
     };
-
-    this.forceOptions.radius = 6;
-
-    if (this.widthCategory === 'narrowest') {
-      this.pointRadius = 5;
-      this.forceOptions.radius = 3;
-    }
+    super.onTranslationsLoaded();
   }
 
   loadPointData() {

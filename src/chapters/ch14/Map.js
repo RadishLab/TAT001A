@@ -10,9 +10,14 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategorySolutionMap.slice(1));
     this.colorScaleType = 'ordinal';
-    this.figurePrefix = '14-map';
     this.valueField = 'W-MM_Group_16';
+  }
 
+  getFigurePrefix() {
+    return '14-map';
+  }
+
+  onTranslationsLoaded() {
     this.keyCodeText = {
       '1': this.getTranslation('Data not reported'),
       '2': this.getTranslation('No national campaign implemented between July 2014 and June 2016 with duration of at least three weeks'),
@@ -20,6 +25,7 @@ export default class Map extends WorldMap {
       '4': this.getTranslation('Campaign conducted with five to six appropriate characteristics, or with seven characteristics excluding airing on television and/or radio'),
       '5': this.getTranslation('Campaign conducted with at least seven appropriate characteristics including airing on television and/or radio')
     };
+    super.onTranslationsLoaded();
   }
 
   loadJoinData() {

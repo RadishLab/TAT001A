@@ -17,7 +17,15 @@ export default class Map extends WorldMap {
     this.colorScaleType = 'ordinal';
     this.figurePrefix = '16-map';
     this.valueField = 'Map Code';
+  }
+
+  getFigurePrefix() {
+    return '16-map';
+  }
+
+  onTranslationsLoaded() {
     this.noDataLabel = this.getTranslation('Unclear or No Explicit Policy');
+    super.onTranslationsLoaded();
   }
 
   getLegendItems() {

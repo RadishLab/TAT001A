@@ -13,8 +13,11 @@ export default class Map extends WorldMap {
       .range([this.colorWorst, this.colorPositive, this.colorBoth])
       .domain(['suing government', 'suing industry', 'both']);
     this.colorScaleType = 'ordinal';
-    this.figurePrefix = '18-map';
     this.valueField = 'value';
+  }
+
+  getFigurePrefix() {
+    return '18-map';
   }
 
   loadJoinData() {

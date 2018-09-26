@@ -12,14 +12,22 @@ export default class Chart2 extends BarChartVertical {
     super(parent, options);
     this.figurePrefix = '11-2';
     this.yLabel = null;
-    this.legendItems = [
-      { label: this.getTranslation('% of current smokers who intend to quit'), value: 'intend' },
-      { label: this.getTranslation('% of current smokers who attempted to quit in past 12 months'), value: 'attempted' },
-    ];
     this.xAxisTickFormat = format('d');
     this.yAxisTickFormat = this.getTranslation.bind(this);
     this.legendYOffset = 0;
     this.legendYPadding = 15;
+  }
+
+  getFigurePrefix() {
+    return '11-2';
+  }
+
+  onTranslationsLoaded() {
+    this.legendItems = [
+      { label: this.getTranslation('% of current smokers who intend to quit'), value: 'intend' },
+      { label: this.getTranslation('% of current smokers who attempted to quit in past 12 months'), value: 'attempted' },
+    ];
+    super.onTranslationsLoaded();
   }
 
   loadData() {

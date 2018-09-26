@@ -11,28 +11,6 @@ export default class Map2 extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategorySolutionMap);
     this.colorScaleType = 'ordinal';
-    this.figurePrefix = '12-map2';
-
-    this.filters = [
-      {
-        group: 'measure',
-        values: [
-          { label: this.getTranslation('price'), value: 'price' },
-          { label: this.getTranslation('tax'), value: 'tax' },
-          { label: this.getTranslation('affordability'), value: 'afford' }
-        ]
-      },
-      {
-        group: 'year',
-        values: [
-          { label: '2008', value: '2008' },
-          { label: '2010', value: '2010' },
-          { label: '2012', value: '2012' },
-          { label: '2014', value: '2014' },
-          { label: '2016', value: '2016' },
-        ]
-      }
-    ];
 
     this.filterColumns = [
       {
@@ -154,6 +132,34 @@ export default class Map2 extends WorldMap {
         '6': '0.096%+',
       }
     }
+  }
+
+  getFigurePrefix() {
+    return '12-map2';
+  }
+
+  onTranslationsLoaded() {
+    this.filters = [
+      {
+        group: 'measure',
+        values: [
+          { label: this.getTranslation('price'), value: 'price' },
+          { label: this.getTranslation('tax'), value: 'tax' },
+          { label: this.getTranslation('affordability'), value: 'afford' }
+        ]
+      },
+      {
+        group: 'year',
+        values: [
+          { label: '2008', value: '2008' },
+          { label: '2010', value: '2010' },
+          { label: '2012', value: '2012' },
+          { label: '2014', value: '2014' },
+          { label: '2016', value: '2016' },
+        ]
+      }
+    ];
+    super.onTranslationsLoaded();
   }
 
   loadJoinData() {

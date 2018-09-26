@@ -11,18 +11,26 @@ export default class Chart5 extends BarChartVertical {
   constructor(parent, options) {
     super(parent, options);
     this.figurePrefix = '4-5';
-    this.xLabel = this.getTranslation('Daily Smokers (millions)');
     this.yLabel = null;
-    this.legendItems = [
-      { label: this.getTranslation('Male'), value: 'male' },
-      { label: this.getTranslation('Female'), value: 'female' },
-    ];
     this.xAxisTickFormat = format('d');
     this.yAxisTickFormat = this.getTranslation.bind(this);
 
     if (this.widthCategory === 'narrowest') {
       this.xAxisTickArguments = 6;
     }
+  }
+
+  getFigurePrefix() {
+    return '4-5';
+  }
+
+  onTranslationsLoaded() {
+    this.xLabel = this.getTranslation('Daily Smokers (millions)');
+    this.legendItems = [
+      { label: this.getTranslation('Male'), value: 'male' },
+      { label: this.getTranslation('Female'), value: 'female' },
+    ];
+    super.onTranslationsLoaded();
   }
 
   loadData() {

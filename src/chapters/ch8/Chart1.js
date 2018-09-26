@@ -9,15 +9,22 @@ import BarChart from '../../charts/BarChart';
 export class Chart1 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '8-1';
-    this.yLabel = this.getTranslation('Deaths (millions)');
     this.yTicks = 6;
+    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = format('.2');
+  }
+
+  getFigurePrefix() {
+    return '8-1';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Deaths (millions)');
     this.legendItems = [
       { label: this.getTranslation('Male deaths'), value: 'Male deaths' },
       { label: this.getTranslation('Female deaths'), value: 'Female deaths' },
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
-    this.yAxisTickFormat = format('.2');
+    super.onTranslationsLoaded();
   }
 
   loadData() {

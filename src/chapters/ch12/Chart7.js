@@ -11,15 +11,22 @@ import BarChart from '../../charts/BarChart';
 export default class Chart7 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '12-7';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
-    this.yLabel = this.getTranslation('Price per Pack (Kenyan Shillings)');
     this.yTicks = 6;
+    this.yAxisTickFormat = format('d');
+  }
+
+  getFigurePrefix() {
+    return '12-7';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Price per Pack (Kenyan Shillings)');
     this.legendItems = [
       { label: this.getTranslation('Lowest-cost brand'), value: 'Lowest-cost brand' },
       { label: this.getTranslation('Most-sold brand'), value: 'Most-sold brand' },
     ];
-    this.yAxisTickFormat = format('d');
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -78,7 +85,7 @@ export default class Chart7 extends BarChart {
 
   tooltipContent(d, bar) {
     const yearFormat = timeFormat('%Y');
-    let content = `<div class="header">${yearFormat(d.year)} - ${d.group}</div>`;
+    let content = `<div class="header">${yearFormat(d.year)} - ${this.getTranslation(d.group)}</div>`;
     const numberFormat = format(',d');
     content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('Kenyan shillings per pack')}</div>`;
     return content;

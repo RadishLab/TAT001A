@@ -11,18 +11,25 @@ import BarChart from '../../charts/BarChart';
 export default class Chart6 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'illicit-6';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
-    this.yLabel = this.getTranslation('Cigarettes consumed (billions)');
-    this.yLabelRight = this.getTranslation('Illicit market share (%)');
     this.yAxisTickFormat = d => format('.2')(d / 1000000000);
     this.yAxisRightTickFormat = format('d');
     this.yTicks = 6;
+  }
+
+  getFigurePrefix() {
+    return 'illicit-6';
+  }
+
+  onTranslationsLoaded() {
     this.legendItems = [
       { label: this.getTranslation('Legal cigarette consumption'), value: 'legal-consumption' },
       { label: this.getTranslation('Industry-estimated illicit consumption'), value: 'illicit-consumption' },
       { label: this.getTranslation('Illicit market share'), value: 'illicit-share' }
     ];
+    this.yLabel = this.getTranslation('Cigarettes consumed (billions)');
+    this.yLabelRight = this.getTranslation('Illicit market share (%)');
+    super.onTranslationsLoaded();
   }
 
   loadData() {

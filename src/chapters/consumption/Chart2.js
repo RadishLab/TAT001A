@@ -11,10 +11,20 @@ import LineChart from '../../charts/LineChart';
 export default class Chart2 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'consumption-2';
+    this.yTicks = 6;
+    this.yAxisTickFormat = format('.2');
+
+    this.legendYOffset = 0;
+    this.legendYPadding = 30;
+  }
+
+  getFigurePrefix() {
+    return 'consumption-2';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Cigarette Consumption (trillions)');
-    this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('AFRO'), value: 'AFRO' },
       { label: this.getTranslation('AMRO'), value: 'AMRO' },
@@ -24,10 +34,7 @@ export default class Chart2 extends LineChart {
       { label: this.getTranslation('SEARO'), value: 'SEARO' },
       { label: this.getTranslation('WPRO (excluding China)'), value: 'WPRO (excluding China)' },
     ];
-    this.yAxisTickFormat = format('.2');
-
-    this.legendYOffset = 0;
-    this.legendYPadding = 30;
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -99,7 +106,7 @@ export default class Chart2 extends LineChart {
     const valueFormat = format('.1f');
     let content = `<div class="header">${d.category}</div>`;
     content += `<div class="data">${yearFormat(d.year)}</div>`;
-    content += `<div class="data">${valueFormat(d.value)} trillion cigarettes</div>`;
+    content += `<div class="data">${valueFormat(d.value)} ${this.getTranslation('trillion cigarettes')}</div>`;
     return content;
   }
 }

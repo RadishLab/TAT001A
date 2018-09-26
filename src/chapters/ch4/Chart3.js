@@ -8,12 +8,19 @@ import BarChart from '../../charts/BarChart';
 export class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '4-3';
-    this.yLabel = this.getTranslation('Percentage with Monitoring');
     this.yTicks = 6;
     this.legendItems = [];
     this.xAxisTickFormat = this.getTranslation.bind(this);
     this.xAxisTickRows = 3;
+  }
+
+  getFigurePrefix() {
+    return '4-3';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Percentage with Monitoring');
+    super.onTranslationsLoaded();
   }
 
   loadData() {

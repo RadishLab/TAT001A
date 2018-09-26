@@ -8,19 +8,6 @@ export default class Map2 extends WorldMap {
   constructor(parent, options) {
     super(parent, options);
     this.colorScaleType = 'ordinal';
-    this.noDataLabel = this.getTranslation('Unclear or No Explicit Policy');
-    this.figurePrefix = '16-map2';
-
-    this.filters = [
-      {
-        group: 'measure',
-        values: [
-          { label: this.getTranslation('Market Access'), value: 'market access' },
-          { label: this.getTranslation('Marketing Regulations'), value: 'marketing regulations' },
-          { label: this.getTranslation('Public Use Regulations'), value: 'public use regulations' }
-        ]
-      }
-    ];
 
     this.filterColumns = [
       {
@@ -38,6 +25,25 @@ export default class Map2 extends WorldMap {
     ];
 
     this.filterState = { measure: 'market access' };
+  }
+
+  getFigurePrefix() {
+    return '16-map2';
+  }
+
+  onTranslationsLoaded() {
+    this.noDataLabel = this.getTranslation('Unclear or No Explicit Policy');
+
+    this.filters = [
+      {
+        group: 'measure',
+        values: [
+          { label: this.getTranslation('Market Access'), value: 'market access' },
+          { label: this.getTranslation('Marketing Regulations'), value: 'marketing regulations' },
+          { label: this.getTranslation('Public Use Regulations'), value: 'public use regulations' }
+        ]
+      }
+    ];
 
     this.legends = {
       'market access': [
@@ -63,6 +69,7 @@ export default class Map2 extends WorldMap {
     };
 
     this.createColorScale();
+    super.onTranslationsLoaded();
   }
 
   createColorScale() {

@@ -10,9 +10,12 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
-    this.figurePrefix = '8-map';
     this.valueField = 'KeyCode';
     this.symbolField = 'Symbol (Female ≥15%)';
+  }
+
+  getFigurePrefix() {
+    return '8-map';
   }
 
   loadJoinData() {

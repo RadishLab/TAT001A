@@ -10,15 +10,22 @@ import BarChartVertical from '../../charts/BarChartVertical';
 export default class Chart4 extends BarChartVertical {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '14-4';
     this.yLabel = null;
-    this.xLabel = this.getTranslation('Number of Facebook users (millions)');
     this.xAxisTickFormat = format('d');
     this.yAxisTickFormat = this.getTranslation.bind(this);
     this.legendItems = [];
     if (this.widthCategory === 'narrowest') {
       this.xAxisTickArguments = 6;
     }
+  }
+
+  getFigurePrefix() {
+    return '14-4';
+  }
+
+  onTranslationsLoaded() {
+    this.xLabel = this.getTranslation('Number of Facebook users (millions)');
+    super.onTranslationsLoaded();
   }
 
   loadData() {

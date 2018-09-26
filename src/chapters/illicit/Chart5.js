@@ -9,13 +9,20 @@ import BarChart from '../../charts/BarChart';
 export default class Chart5 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'illicit-5';
-    this.yLabel = this.getTranslation('Millions of £');
     this.yTicks = 6;
     this.yAxisTickFormat = d => format('d')(d / 1000000);
     this.legendItems = [];
     this.xAxisTickFormat = this.getTranslation.bind(this);
     this.xAxisTickRows = 3;
+  }
+
+  getFigurePrefix() {
+    return 'illicit-5';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Millions of £');
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -84,7 +91,7 @@ export default class Chart5 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.type}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.type)}</div>`;
     const numberFormat = format(',d');
     content += `<div class="data">${numberFormat(d.value)}£</div>`;
     return content;

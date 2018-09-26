@@ -9,20 +9,27 @@ import BarChart from '../../charts/BarChart';
 export class Chart1 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '4-1';
-    this.yLabel = this.getTranslation('Daily Smokers (%)');
     this.yTicks = 6;
+    this.xAxisTickFormat = d => {
+      let capitalized = d.charAt(0).toUpperCase() + d.slice(1);
+      return this.getTranslation(capitalized);
+    };
+    this.yAxisTickFormat = format('.2');
+  }
+
+  getFigurePrefix() {
+    return '4-1';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Daily Smokers (%)');
     this.legendItems = [
       { label: this.getTranslation('Low HDI'), value: 'Low' },
       { label: this.getTranslation('Medium HDI'), value: 'Medium' },
       { label: this.getTranslation('High HDI'), value: 'High' },
       { label: this.getTranslation('Very High HDI'), value: 'Very High' },
     ];
-    this.xAxisTickFormat = d => {
-      let capitalized = d.charAt(0).toUpperCase() + d.slice(1);
-      return this.getTranslation(capitalized);
-    };
-    this.yAxisTickFormat = format('.2');
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -109,7 +116,7 @@ export class Chart1 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d['HDI Category']} HDI</div>`;
+    let content = `<div class="header">${this.getTranslation(d['HDI Category'] + ' HDI')}</div>`;
     if (bar.classed('male')) {
       content += `<div>${this.yAxisTickFormat(d.male)}%</div>`;
     }

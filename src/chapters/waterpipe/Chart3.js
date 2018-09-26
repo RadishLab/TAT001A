@@ -12,16 +12,23 @@ import LineChart from '../../charts/LineChart';
 export default class Chart3 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'waterpipe-3';
     this.xAxisTickArguments = timeYear.every(1);
-    this.yLabel = this.getTranslation('Ever Use of Waterpipe (%)');
     this.yTicks = 6;
+    this.yAxisTickFormat = format('d');
+  }
+
+  getFigurePrefix() {
+    return 'waterpipe-3';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Ever Use of Waterpipe (%)');
     this.legendItems = [
       { label: this.getTranslation('Jordanian Boys'), value: 'Jordanian Boys' },
       { label: this.getTranslation('Jordanian Girls'), value: 'Jordanian Girls' },
       { label: this.getTranslation('Florida Boys and Girls'), value: 'Florida Boys and Girls' },
     ];
-    this.yAxisTickFormat = format('d');
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -51,6 +58,7 @@ export default class Chart3 extends LineChart {
 
   createMargin() {
     const margin = super.createMargin();
+    margin.bottom = 90;
     margin.right = this.options.web ? 25 : 10;
     margin.top = this.options.web ? 10 : 5;
     return margin;
@@ -91,7 +99,7 @@ export default class Chart3 extends LineChart {
   tooltipContent(d, line) {
     const yearFormat = timeFormat('%Y');
     const valueFormat = format('.1f');
-    let content = `<div class="header">${d.category}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.category)}</div>`;
     content += `<div class="data">${yearFormat(d.year)}</div>`;
     content += `<div class="data">${valueFormat(d.value)}%</div>`;
     return content;

@@ -11,15 +11,22 @@ import LineChart from '../../charts/LineChart';
 export default class Chart1 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'illicit-1';
-    this.yLabel = this.getTranslation('Price (£)');
-    this.yLabelRight = this.getTranslation('Cigarettes (billions)');
     this.yAxisTickFormat = format('d');
     this.yAxisRightTickFormat = format('d');
+  }
+
+  getFigurePrefix() {
+    return 'illicit-1';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Price (£)');
+    this.yLabelRight = this.getTranslation('Cigarettes (billions)');
     this.legendItems = [
       { label: this.getTranslation('Price per pack, inflation-adjusted'), value: 'price' },
       { label: this.getTranslation('Illicit consumption'), value: 'consumption' }
     ];
+    super.onTranslationsLoaded();
   }
 
   createMargin() {

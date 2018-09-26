@@ -12,15 +12,8 @@ import Chart from '../../charts/Chart';
 export default class Chart4 extends Chart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '1-4';
-    this.xLabel = this.getTranslation('Region');
-    this.yLabel = this.getTranslation('Crop');
     this.parent
       .classed('circle-chart', true);
-    this.legendItems = [
-      { label: this.getTranslation('Farmers who stopped growing tobacco'), value: 'former' },
-      { label: this.getTranslation('Farmers still growing tobacco'), value: 'current' },
-    ];
     this.xAxisTickFormat = label => {
       let capitalized = label.charAt(0).toUpperCase() + label.slice(1);
       return this.getTranslation(capitalized);
@@ -29,6 +22,20 @@ export default class Chart4 extends Chart {
       if (label === 'Other') label = 'Mixed/Other';
       return this.getTranslation(label);
     }
+  }
+
+  getFigurePrefix() {
+    return '1-4';
+  }
+
+  onTranslationsLoaded() {
+    this.xLabel = this.getTranslation('Region');
+    this.yLabel = this.getTranslation('Crop');
+    this.legendItems = [
+      { label: this.getTranslation('Farmers who stopped growing tobacco'), value: 'former' },
+      { label: this.getTranslation('Farmers still growing tobacco'), value: 'current' },
+    ];
+    super.onTranslationsLoaded();
   }
 
   createMargin() {

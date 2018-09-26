@@ -9,25 +9,6 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
-    this.figurePrefix = 'youth-map';
-
-    // All possible filters, these are what we make buttons for
-    this.filters = [
-      {
-        group: 'gender',
-        values: [
-          { label: this.getTranslation('boys'), value: 'boys' },
-          { label: this.getTranslation('girls'), value: 'girls' }
-        ]
-      },
-      {
-        group: 'measure',
-        values: [
-          { label: this.getTranslation('cigarette'), value: 'cigarette' },
-          { label: this.getTranslation('tobacco'), value: 'tobacco' }
-        ]
-      }
-    ];
 
     // Columns in the data that are associated with each filter combination
     this.filterColumns = [
@@ -55,6 +36,31 @@ export default class Map extends WorldMap {
 
     // Start with this filter state
     this.filterState = { gender: 'boys', measure: 'cigarette' };
+  }
+
+  getFigurePrefix() {
+    return 'youth-map';
+  }
+
+  onTranslationsLoaded() {
+    // All possible filters, these are what we make buttons for
+    this.filters = [
+      {
+        group: 'gender',
+        values: [
+          { label: this.getTranslation('boys'), value: 'boys' },
+          { label: this.getTranslation('girls'), value: 'girls' }
+        ]
+      },
+      {
+        group: 'measure',
+        values: [
+          { label: this.getTranslation('cigarette'), value: 'cigarette' },
+          { label: this.getTranslation('tobacco'), value: 'tobacco' }
+        ]
+      }
+    ];
+    super.onTranslationsLoaded();
   }
 
   loadJoinData() {

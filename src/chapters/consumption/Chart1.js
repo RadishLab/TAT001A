@@ -7,15 +7,18 @@ import { schemeCategoryProblem } from '../../colors';
 import PieChart from '../../charts/PieChart';
 
 export default class Chart1 extends PieChart {
-  constructor(parent, options) {
-    super(parent, options);
-    this.figurePrefix = 'consumption-1';
+  getFigurePrefix() {
+    return 'consumption-1';
+  }
+
+  onTranslationsLoaded() {
     this.legendItems = [
       { label: this.getTranslation('Low HDI'), value: 'Low' },
       { label: this.getTranslation('Medium HDI'), value: 'Medium' },
       { label: this.getTranslation('High HDI'), value: 'High' },
       { label: this.getTranslation('Very High HDI'), value: 'Very high' },
     ];
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -45,7 +48,7 @@ export default class Chart1 extends PieChart {
     const percentFormat = format('.1%');
     const cigaretteFormat = format(',d');
     let content = `<div class="header">${d.data.location}</div>`;
-    content += `<div>${d.data.HDI} HDI</div>`;
+    content += `<div>${this.getTranslation(d.data.HDI + ' HDI')}</div>`;
     content += `<div>${percentFormat(d.data.percent)} ${this.getTranslation('of cigarettes')}</div>`;
     content += `<div>${cigaretteFormat(d.data.value)} ${this.getTranslation('cigarettes')}</div>`;
     return content;

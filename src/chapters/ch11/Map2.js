@@ -10,9 +10,15 @@ export default class Map2 extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategorySolutionMap);
     this.colorScaleType = 'ordinal';
-    this.figurePrefix = '11-map2';
     this.valueField = 'Key Code';
+  }
 
+  getFigurePrefix() {
+    return '11-map2';
+  }
+
+  onTranslationsLoaded() {
+    super.onTranslationsLoaded();
     this.criteria = [
       {
         header: 'Officially identified person in government or contracted by government  who is responsible for tobacco dependence treatment',
@@ -47,6 +53,9 @@ export default class Map2 extends WorldMap {
         label: this.getTranslation('Specialised tobacco dependence treatment services (experts or units/clinics) offering individual or group support delivered by trained professionals')
       }
     ];
+    if (this.dataLoaded) {
+      this.render();
+    }
   }
 
   loadJoinData() {

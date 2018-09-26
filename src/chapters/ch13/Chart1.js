@@ -10,16 +10,23 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '13-3';
     this.xAxisTickFormat = (d) => timeFormat('%Y')(new Date(d));
-    this.yLabel = this.getTranslation('Population protected (billions)');
-    this.yLabelRight = this.getTranslation('Countries');
     this.yAxisRightTickFormat = format('d');
     this.yTicks = 6;
+  }
+
+  getFigurePrefix() {
+    return '13-3';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Population protected (billions)');
+    this.yLabelRight = this.getTranslation('Countries');
     this.legendItems = [
       { label: this.getTranslation('Countries'), value: 'countries' },
       { label: this.getTranslation('Population'), value: 'population' },
     ];
+    super.onTranslationsLoaded();
   }
 
   loadData() {

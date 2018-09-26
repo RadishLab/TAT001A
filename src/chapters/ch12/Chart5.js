@@ -9,16 +9,23 @@ import BarChart from '../../charts/BarChart';
 export default class Chart5 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '12-5';
-    this.yLabel = this.getTranslation('Tax Benefits (% of Pre-tax Income)');
     this.yTicks = 6;
+    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickRows = 2;
+    this.yAxisTickFormat = format('.2');
+  }
+
+  getFigurePrefix() {
+    return '12-5';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Tax Benefits (% of Pre-tax Income)');
     this.legendItems = [
       { label: this.getTranslation('Tax'), value: 'tax' },
       { label: this.getTranslation('Tax + Health'), value: 'tax + health' },
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
-    this.xAxisTickRows = 2;
-    this.yAxisTickFormat = format('.2');
+    super.onTranslationsLoaded();
   }
 
   createMargin() {
@@ -87,7 +94,7 @@ export default class Chart5 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.quintile}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.quintile)}</div>`;
     const numberFormat = format('.1f');
     const value = bar.classed('tax') ? d.tax : d.taxHealth;
     const description = this.getTranslation(bar.classed('tax') ? 'tax benefits' : 'tax plus health benefits');

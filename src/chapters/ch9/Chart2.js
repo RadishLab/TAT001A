@@ -12,19 +12,26 @@ import LineChart from '../../charts/LineChart';
 export class Chart2 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '9-2';
+    this.yAxisRightTickFormat = format('d');
+    this.yAxisTickFormat = d => format('d')(d * 100);
+    this.legendYOffset = 90;
+  }
+
+  getFigurePrefix() {
+    return '9-2';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Smoking Prevalence (%)');
     this.yLabelRight = this.getTranslation('Deaths Caused by Smoking (%)');
-    this.yAxisRightTickFormat = format('d');
     this.legendItems = [
       { label: this.getTranslation('Male'), value: 'male' },
       { label: this.getTranslation('Male'), value: 'male' },
       { label: this.getTranslation('Female'), value: 'female' },
       { label: this.getTranslation('Female'), value: 'female' },
     ];
-    this.yAxisTickFormat = d => format('d')(d * 100);
-    this.legendYOffset = 90;
+    super.onTranslationsLoaded();
   }
 
   createMargin() {
@@ -234,7 +241,7 @@ export class Chart2 extends LineChart {
     const valueFormat = format('.1f');
 
     const title = d.variable[0].toUpperCase() + d.variable.slice(1);
-    let content = `<div class="header">${title}</div>`;
+    let content = `<div class="header">${this.getTranslation(title)}</div>`;
     content += `<div class="data">${yearFormat(d.year)}</div>`;
 
     let value = d.value;

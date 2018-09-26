@@ -11,15 +11,22 @@ import LineChart from '../../charts/LineChart';
 export default class Chart3 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '7-3';
-    this.xLabel = this.getTranslation('Age');
     this.xAxisTickFormat = format('d');
-    this.yLabel = this.getTranslation('Life Years Lost');
     this.yAxisTickFormat = format('.1s');
+  }
+
+  getFigurePrefix() {
+    return '7-3';
+  }
+
+  onTranslationsLoaded() {
+    this.xLabel = this.getTranslation('Age');
+    this.yLabel = this.getTranslation('Life Years Lost');
     this.legendItems = [
       { label: this.getTranslation('Smoking'), value: 'smoking' },
       { label: this.getTranslation('HIV-related'), value: 'HIV' }
     ];
+    super.onTranslationsLoaded();
   }
 
   getLineGenerator() {

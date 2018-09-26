@@ -9,16 +9,23 @@ import BarChart from '../../charts/BarChart';
 export class Chart4 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '8-4';
+    this.yTicks = 6;
+    this.legendYOffset = 0;
+    this.yLabelOffset = 10;
+  }
+
+  getFigurePrefix() {
+    return '8-4';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Education Level Attained');
     this.yLabel = this.getTranslation('Lung cancer mortality rate (per 100,000)');
-    this.yTicks = 6;
     this.legendItems = [
       { label: this.getTranslation('Poland (2011)'), value: 'Poland (2011)' },
       { label: this.getTranslation('United States, non-Hispanic whites (2010)'), value: 'United States, non-Hispanic whites (2010)' },
     ];
-    this.legendYOffset = 0;
-    this.yLabelOffset = 10;
+    super.onTranslationsLoaded();
   }
 
   loadData() {

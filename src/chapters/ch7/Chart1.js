@@ -9,15 +9,18 @@ import { schemeCategoryProblem } from '../../colors';
 import LineChart from '../../charts/LineChart';
 
 export default class Chart1 extends LineChart {
-  constructor(parent, options) {
-    super(parent, options);
-    this.figurePrefix = '7-1';
+  getFigurePrefix() {
+    return '7-1';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Tuberculosis mortality per 10,000');
     this.legendItems = [
       { label: this.getTranslation('Baseline scenario'), value: 'including smoking' },
       { label: this.getTranslation('Without smoking'), value: 'not including smoking' }
     ];
+    super.onTranslationsLoaded();
   }
 
   loadData() {

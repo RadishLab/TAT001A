@@ -9,8 +9,6 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '10-3';
-    this.yLabel = this.getTranslation('Revenue growth (in Billion 2014 PPP dollars)');
     this.yTicks = 6;
     this.legendItems = [];
     this.xAxisTickFormat = d => {
@@ -20,6 +18,18 @@ export default class Chart3 extends BarChart {
     };
     this.xAxisTickRows = 3;
     this.yAxisTickFormat = d => format('d')(d / 1000);
+  }
+
+  getFigurePrefix() {
+    return '10-3';
+  }
+
+  onTranslationsLoaded() {
+    super.onTranslationsLoaded();
+    this.yLabel = this.getTranslation('Revenue growth (in Billion 2014 PPP dollars)');
+    if (this.dataLoaded) {
+      this.render();
+    }
   }
 
   loadData() {

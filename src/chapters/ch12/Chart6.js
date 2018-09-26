@@ -11,7 +11,17 @@ import LineChart from '../../charts/LineChart';
 export default class Chart6 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '12-6';
+    this.yTicks = 6;
+    this.yAxisTickFormat = format('d');
+    this.legendYOffset = 0;
+    this.legendYPadding = 35;
+  }
+
+  getFigurePrefix() {
+    return '12-6';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Price per Pack (Colombian peso)');
     this.yLabelRight = this.getTranslation('Relative income price (%)');
@@ -21,10 +31,7 @@ export default class Chart6 extends LineChart {
       { label: this.getTranslation('Inflation-adjusted cigarette price per pack'), value: 'priceInflation' },
       { label: this.getTranslation('Cigarette affordability'), value: 'affordability' },
     ];
-    this.yTicks = 6;
-    this.yAxisTickFormat = format('d');
-    this.legendYOffset = 0;
-    this.legendYPadding = 35;
+    super.onTranslationsLoaded();
   }
 
   createMargin() {

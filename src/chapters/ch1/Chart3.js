@@ -10,17 +10,24 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '1-3';
-    this.yLabel = this.getTranslation('Annual Profit per Acre (USD)');
     this.yTicks = 6;
+    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = format('d');
+  }
+
+  getFigurePrefix() {
+    return '1-3';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Annual Profit per Acre (USD)');
     this.legendItems = [
       { label: this.getTranslation('Contractor'), value: 'contractor-adjusted' },
       { label: this.getTranslation('Contractor'), value: 'contractor-unadjusted' },
       { label: this.getTranslation('Independent'), value: 'independent-adjusted' },
       { label: this.getTranslation('Independent'), value: 'independent-unadjusted' },
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
-    this.yAxisTickFormat = format('d');
+    super.onTranslationsLoaded();
   }
 
   getLegendRowsCount() {

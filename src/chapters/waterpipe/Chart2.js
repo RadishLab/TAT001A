@@ -10,15 +10,22 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'waterpipe-2';
-    this.yLabel = this.getTranslation('Tobacco Users That Used Waterpipe (%)');
     this.yTicks = 6;
+    this.yAxisTickFormat = format('d');
+    this.xAxisTickRows = 2;
+  }
+
+  getFigurePrefix() {
+    return 'waterpipe-2';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Tobacco Users That Used Waterpipe (%)');
     this.legendItems = [
       { label: this.getTranslation('Women'), value: 'women' },
       { label: this.getTranslation('Men'), value: 'men' },
     ];
-    this.yAxisTickFormat = format('d');
-    this.xAxisTickRows = 2;
+    super.onTranslationsLoaded();
   }
 
   loadData() {

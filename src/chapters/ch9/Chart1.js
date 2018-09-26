@@ -11,7 +11,14 @@ import LineChart from '../../charts/LineChart';
 export class Chart1 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '9-1';
+    this.yAxisTickFormat = format('d');
+  }
+
+  getFigurePrefix() {
+    return '9-1';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Smokers (millions)');
     this.legendItems = [
@@ -20,7 +27,7 @@ export class Chart1 extends LineChart {
       { label: this.getTranslation('High HDI'), value: 'High HDI' },
       { label: this.getTranslation('Very High HDI'), value: 'Very High HDI' },
     ];
-    this.yAxisTickFormat = format('d');
+    super.onTranslationsLoaded();
   }
 
   createMargin() {
@@ -84,7 +91,7 @@ export class Chart1 extends LineChart {
   tooltipContent(d, line) {
     const yearFormat = timeFormat('%Y');
     const valueFormat = format('.1f');
-    let content = `<div class="header">${d.HDI}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.HDI)}</div>`;
     content += `<div class="data">${yearFormat(d.year)}</div>`;
     content += `<div class="data">${valueFormat(d.value)} ${this.getTranslation('million smokers')}</div>`;
     return content;

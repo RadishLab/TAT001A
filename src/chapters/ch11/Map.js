@@ -10,9 +10,15 @@ export default class Map extends WorldMap {
     super(parent, options);
     this.colorScale = scaleOrdinal(schemeCategorySolutionMap);
     this.colorScaleType = 'ordinal';
-    this.figurePrefix = '11-map';
     this.valueField = 'Key Code';
+  }
 
+  getFigurePrefix() {
+    return '11-map';
+  }
+
+  onTranslationsLoaded() {
+    super.onTranslationsLoaded();
     this.keyCodeMapping = {
       '1': this.getTranslation('Data not reported'),
       '2': this.getTranslation('None'),
@@ -20,6 +26,9 @@ export default class Map extends WorldMap {
       '4': this.getTranslation('Nicotine replacement therapy and/or some cessation services (at least one cost-covered)'),
       '5': this.getTranslation('National quit line, and both nicotine replacement therapy and some cessation services cost-covered')
     };
+    if (this.dataLoaded) {
+      this.render();
+    }
   }
 
   loadJoinData() {

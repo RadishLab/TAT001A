@@ -7,13 +7,16 @@ import { schemeCategoryProblem } from '../../colors';
 import PieChart from '../../charts/PieChart';
 
 export default class Chart4 extends PieChart {
-  constructor(parent, options) {
-    super(parent, options);
-    this.figurePrefix = 'illicit-4';
+  getFigurePrefix() {
+    return 'illicit-4';
+  }
+
+  onTranslationsLoaded() {
     this.legendItems = [
       { label: this.getTranslation('Counterfeit'), value: 'Counterfeit' },
       { label: this.getTranslation('All other illicit'), value: 'All other illicit' }
     ];
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -42,7 +45,7 @@ export default class Chart4 extends PieChart {
   tooltipContent(d) {
     const percentFormat = format('.1%');
     const cigaretteFormat = format(',d');
-    let content = `<div class="header">${d.data.type}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.data.type)}</div>`;
     content += `<div>${percentFormat(d.data.percent)} ${this.getTranslation('of cigarettes')}</div>`;
     content += `<div>${cigaretteFormat(d.data.value)} ${this.getTranslation('cigarettes')}</div>`;
     return content;

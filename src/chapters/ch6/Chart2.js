@@ -9,12 +9,19 @@ import BarChart from '../../charts/BarChart';
 export default class Chart2 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '6-2';
-    this.yLabel = this.getTranslation('Percent of Total DALYs');
     this.yTicks = 6;
     this.legendItems = [];
     this.xAxisTickFormat = this.getTranslation.bind(this);
     this.yAxisTickFormat = format('d');
+  }
+
+  getFigurePrefix() {
+    return '6-2';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Percent of Total DALYs');
+    super.onTranslationsLoaded();
   }
 
   loadData() {

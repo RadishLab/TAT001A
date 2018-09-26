@@ -10,15 +10,23 @@ export class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
     this.figurePrefix = '9-3';
-    this.yLabel = this.getTranslation('Smoking Prevalence (%)');
     this.yTicks = 6;
+    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = format('d')
+    this.xAxisTickRows = 3;
+  }
+
+  getFigurePrefix() {
+    return '9-3';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Smoking Prevalence (%)');
     this.legendItems = [
       { label: this.getTranslation('Lowest Wealth Group'), value: 'Lowest Wealth Group' },
       { label: this.getTranslation('Highest Wealth Group'), value: 'Highest Wealth Group' },
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
-    this.yAxisTickFormat = format('d')
-    this.xAxisTickRows = 3;
+    super.onTranslationsLoaded();
   }
 
   createMargin() {
@@ -84,7 +92,7 @@ export class Chart3 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.Country}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.Country)}</div>`;
     const value = bar.classed('lowest') ? d['Lowest Wealth Group'] : d['Highest Wealth Group'];
     const numberFormat = format('.1f');
     content += `<div class="data">${numberFormat(value)}% ${this.getTranslation('smoking prevalence among')} ${this.getTranslation(d.Gender.toLowerCase())}</div>`;

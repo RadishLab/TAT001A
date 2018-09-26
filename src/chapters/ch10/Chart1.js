@@ -10,8 +10,6 @@ import BarChart from '../../charts/BarChart';
 export default class Chart1 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '10-1';
-    this.yLabel = this.getTranslation('Number of Countries');
     this.yTicks = 6;
     this.legendItems = [
       { label: '2007', value: '2007' },
@@ -21,6 +19,18 @@ export default class Chart1 extends BarChart {
     this.xAxisTickRows = 4;
     this.yAxisTickFormat = format('d');
     this.legendYOffset = null;
+  }
+
+  getFigurePrefix() {
+    return '10-1';
+  }
+
+  onTranslationsLoaded() {
+    super.onTranslationsLoaded();
+    this.yLabel = this.getTranslation('Number of Countries');
+    if (this.dataLoaded) {
+      this.render();
+    }
   }
 
   loadData() {

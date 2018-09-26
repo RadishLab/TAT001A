@@ -11,17 +11,24 @@ import LineChart from '../../charts/LineChart';
 export default class Chart2 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '12-2';
+    this.yAxisRightTickFormat = d => format('d')(d * 100);
+    this.yAxisTickFormat = format('.2');
+  }
+
+  getFigurePrefix() {
+    return '12-2';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Price / Tax Index');
     this.yLabelRight = this.getTranslation('Smoking Prevalence (%)');
-    this.yAxisRightTickFormat = d => format('d')(d * 100);
     this.legendItems = [
       { label: this.getTranslation('Price'), value: 'price' },
       { label: this.getTranslation('Tax'), value: 'tax' },
       { label: this.getTranslation('Prevalence'), value: 'prevalence' },
     ];
-    this.yAxisTickFormat = format('.2');
+    super.onTranslationsLoaded();
   }
 
   createMargin() {
@@ -169,7 +176,7 @@ export default class Chart2 extends LineChart {
     const yearFormat = timeFormat('%Y');
     const title = d.category[0].toUpperCase() + d.category.slice(1);
 
-    let content = `<div class="header">${title}</div>`;
+    let content = `<div class="header">${this.getTranslation(title)}</div>`;
     content += `<div class="data">${yearFormat(d.year)}</div>`;
 
     if (d.category === 'tax' || d.category === 'price') {

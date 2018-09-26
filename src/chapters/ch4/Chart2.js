@@ -11,7 +11,14 @@ import LineChart from '../../charts/LineChart';
 export default class Chart2 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '4-2';
+    this.yAxisTickFormat = format('.2d');
+  }
+
+  getFigurePrefix() {
+    return '4-2';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Smoking Prevalence (%)');
     this.legendItems = [
@@ -20,7 +27,7 @@ export default class Chart2 extends LineChart {
       { label: this.getTranslation('Lesotho'), value: 'Lesotho' },
       { label: this.getTranslation('Mauritania'), value: 'Mauritania' },
     ];
-    this.yAxisTickFormat = format('.2d');
+    super.onTranslationsLoaded();
   }
 
   createMargin() {

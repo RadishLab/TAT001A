@@ -11,17 +11,24 @@ import LineChart from '../../charts/LineChart';
 export default class Chart4 extends LineChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '12-4';
+    this.yAxisRightTickFormat = format('d');
+    this.yAxisTickFormat = format('.2');
+  }
+
+  getFigurePrefix() {
+    return '12-4';
+  }
+
+  onTranslationsLoaded() {
     this.xLabel = this.getTranslation('Year');
     this.yLabel = this.getTranslation('Price (£)');
     this.yLabelRight = this.getTranslation('Cigarettes (billions)');
-    this.yAxisRightTickFormat = format('d');
     this.legendItems = [
       { label: this.getTranslation('Price per pack, inflation-adjusted'), value: 'price' },
       { label: this.getTranslation('Tax-paid consumption'), value: 'taxpaid' },
       { label: this.getTranslation('Illicit consumption'), value: 'illicit' },
     ];
-    this.yAxisTickFormat = format('.2');
+    super.onTranslationsLoaded();
   }
 
   createMargin() {

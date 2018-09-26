@@ -12,10 +12,17 @@ import Chart from '../../charts/Chart';
 export default class Chart2 extends Chart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'smokeless-2';
-    this.yLabel = this.getTranslation('Tobacco-Specific Nitrosamines (ng/g)');
     this.legendItems = [];
     this.yAxisTickFormat = format('d');
+  }
+
+  getFigurePrefix() {
+    return 'smokeless-2';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Tobacco-Specific Nitrosamines (ng/g)');
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -115,7 +122,7 @@ export default class Chart2 extends Chart {
   tooltipContent(d, whisker) {
     let content = `<div class="header">${d.type}</div>`;
     const numberFormat = format(',d');
-    content += `<div class="data">${this.getTranslation('Tobacco-Specific Nitrosamines')}: ${numberFormat(d.min)} to ${numberFormat(d.max)} ng/g</div>`;
+    content += `<div class="data">${this.getTranslation('Tobacco-Specific Nitrosamines')}: ${numberFormat(d.min)} ${this.getTranslation('to')} ${numberFormat(d.max)} ng/g</div>`;
     return content;
   }
 

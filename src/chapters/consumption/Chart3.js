@@ -9,18 +9,25 @@ import BarChart from '../../charts/BarChart';
 export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'consumption-3';
-    this.yLabel = this.getTranslation('Average Number of Cigarettes per Person');
     this.yTicks = 6;
-    this.legendItems = [
-      { label: 'Lowest', value: 'lowest' },
-      { label: 'Low', value: 'low' },
-      { label: 'Middle', value: 'middle' },
-      { label: 'High', value: 'high' },
-      { label: 'Highest', value: 'highest' }
-    ];
     this.xAxisTickFormat = this.getTranslation.bind(this);
     this.yAxisTickFormat = format('d');
+  }
+
+  getFigurePrefix() {
+    return 'consumption-3';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Average Number of Cigarettes per Person');
+    this.legendItems = [
+      { label: this.getTranslation('Lowest'), value: 'lowest' },
+      { label: this.getTranslation('Low'), value: 'low' },
+      { label: this.getTranslation('Middle'), value: 'middle' },
+      { label: this.getTranslation('High'), value: 'high' },
+      { label: this.getTranslation('Highest'), value: 'highest' }
+    ];
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -98,7 +105,7 @@ export default class Chart3 extends BarChart {
   tooltipContent(d, bar) {
     const numberFormat = format(',d');
     const label = this.legendItems.filter(d => bar.classed(d.value))[0].value;
-    let content = `<div class="header">${d.Country} - ${label} ${this.getTranslation('socioeconomic group')}</div>`;
+    let content = `<div class="header">${d.Country} - ${this.getTranslation(label)} ${this.getTranslation('socioeconomic group')}</div>`;
     content += `<div class="data">${numberFormat(d[label])} ${this.getTranslation('cigarettes per person')}</div>`;
     return content;
   }

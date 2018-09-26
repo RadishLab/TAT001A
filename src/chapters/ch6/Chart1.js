@@ -11,20 +11,27 @@ import wrap from '../../wrap';
 export default class Chart1 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '6-1';
-    this.xLabel = this.getTranslation('Cause of Death');
-    this.yLabel = this.getTranslation('Deaths (millions)');
     this.yTicks = 6;
     this.xAxisTickFormat = this.getTranslation.bind(this);
     this.yAxisTickFormat = d => d / 1000000;
-    this.legendItems = [
-      { label: this.getTranslation('Not tobacco-related'), value: 'other' },
-      { label: this.getTranslation('Tobacco-related'), value: 'tobacco' },
-    ];
     this.xAxisTickRows = 3;
     if (this.widthCategory === 'narrowest') {
       this.xAxisTickRows = 3.5;
     }
+  }
+
+  getFigurePrefix() {
+    return '6-1';
+  }
+
+  onTranslationsLoaded() {
+    this.xLabel = this.getTranslation('Cause of Death');
+    this.yLabel = this.getTranslation('Deaths (millions)');
+    this.legendItems = [
+      { label: this.getTranslation('Not tobacco-related'), value: 'other' },
+      { label: this.getTranslation('Tobacco-related'), value: 'tobacco' },
+    ];
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -244,7 +251,7 @@ export default class Chart1 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.disease}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.disease)}</div>`;
     const deathsFormat = format(',d');
     const percentFormat = format('.1%');
 

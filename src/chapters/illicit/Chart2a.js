@@ -9,16 +9,23 @@ import BarChart from '../../charts/BarChart';
 export default class Chart2a extends BarChart {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = 'illicit-2a';
-    this.yLabel = this.getTranslation('Illicit cigarette trade (%)');
     this.yTicks = 6;
     this.yAxisTickFormat = d => format('d')(d * 100);
+    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickRows = 2;
+  }
+
+  getFigurePrefix() {
+    return 'illicit-2a';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Illicit cigarette trade (%)');
     this.legendItems = [
       { label: this.getTranslation('Academic study estimate'), value: 'Academic study' },
       { label: this.getTranslation('Industry estimate'), value: 'Industry estimate' }
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
-    this.xAxisTickRows = 2;
+    super.onTranslationsLoaded();
   }
 
   loadData() {

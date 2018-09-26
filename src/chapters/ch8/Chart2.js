@@ -10,13 +10,21 @@ export class Chart2 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
     this.figurePrefix = '8-2';
-    this.yLabel = this.getTranslation('Deaths (thousands)');
     this.yTicks = 6;
+    this.yAxisTickFormat = format('.2');
+  }
+
+  getFigurePrefix() {
+    return '8-2';
+  }
+
+  onTranslationsLoaded() {
+    this.yLabel = this.getTranslation('Deaths (thousands)');
     this.legendItems = [
       { label: this.getTranslation('Male deaths'), value: 'Males' },
       { label: this.getTranslation('Female deaths'), value: 'Females' },
     ];
-    this.yAxisTickFormat = format('.2');
+    super.onTranslationsLoaded();
   }
 
   loadData() {
@@ -76,7 +84,7 @@ export class Chart2 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.Causes} ${this.getTranslation('cancer')} (${d.Sex})</div>`;
+    let content = `<div class="header">${this.getTranslation(d.Causes)} ${this.getTranslation('cancer')} (${this.getTranslation(d.Sex)})</div>`;
     const numberFormat = d => format(',d')(d * 1000);
     const percentFormat = format('d');
     content += `<div class="data">${numberFormat(d['Number of Deaths'])} ${this.getTranslation('deaths')}</div>`;
