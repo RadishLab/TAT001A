@@ -21,7 +21,16 @@ export default class BarChartVertical extends Chart {
 
   onDataLoaded() {
     super.onDataLoaded();
-    this.render();
+    if (this.translationsLoaded) {
+      this.render();
+    }
+  }
+
+  onTranslationsLoaded() {
+    super.onTranslationsLoaded();
+    if (this.dataLoaded) {
+      this.render();
+    }
   }
 
   createBarGroups() {

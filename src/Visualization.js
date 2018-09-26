@@ -1,7 +1,16 @@
+import { csv } from 'd3-request';
 import { select } from 'd3-selection';
 import i18next from 'i18next';
 
 import { isIE } from './common/browsers';
+
+const languageShortNames = {
+  arabic: 'ar',
+  chinese: 'zh',
+  english: 'en',
+  portuguese: 'pt',
+  spanish: 'es'
+};
 
 export default class Visualization {
   constructor(parent, options) {
@@ -10,6 +19,21 @@ export default class Visualization {
     this.height = options.height;
     this.parent = select(parent);
     this.parentContainer = select(this.parent.node().parentNode);
+
+    this.dataLoaded = false;
+
+    if (this.options.language && this.options.translationUrl) {
+      if (languageShortNames[this.options.language]) {
+        this.options.language = languageShortNames[this.options.language];
+      }
+
+      this.translationsLoaded = false;
+      this.loadTranslations(this.options.translationUrl);
+      i18next.changeLanguage(this.options.language);
+    }
+    else {
+      this.translationsLoaded = true;
+    }
 
     const parentContainerWidth = this.parentContainer.node().getBoundingClientRect().width;
     this.widthCategory = 'large';
@@ -66,13 +90,49 @@ export default class Visualization {
     };
   }
 
+  loadTranslations(url) {
+    csv(url, translations => {
+      const bundles = {};
+
+      translations.forEach(translation => {
+        Object.keys(languageShortNames).forEach(language => {
+          const translatedPhrase = translation[language];
+          if (translatedPhrase) {
+            if (!bundles[languageShortNames[language]]) {
+              bundles[languageShortNames[language]] = {};
+            }
+            bundles[languageShortNames[language]][`${translation.figure}|${translation.english.replace(/\./g, '-')}`] = translatedPhrase;
+          }
+        });
+      });
+
+      Object.keys(languageShortNames).forEach(language => {
+        i18next.addResourceBundle(languageShortNames[language], 'tat', bundles[languageShortNames[language]]);
+      });
+      i18next.setDefaultNamespace('tat');
+      this.onTranslationsLoaded();
+    });
+  }
+
+  getFigurePrefix() {
+    return this.figurePrefix;
+  }
+
+  onDataLoaded() {
+    this.dataLoaded = true;
+  }
+
+  onTranslationsLoaded() {
+    this.translationsLoaded = true;
+  }
+
   getTranslation(text, defaultPrefix) {
-    let prefix = this.figurePrefix;
-    if (this.figurePrefix === undefined && defaultPrefix) {
+    let prefix = this.getFigurePrefix();
+    if (prefix === undefined && defaultPrefix) {
       prefix = defaultPrefix;
     }
-    if (!text || text === '') return text;
-    return i18next.t(`${prefix}.${text}`, text);
+    if (!text || text === '' || !text.replace) return text;
+    return i18next.t(`${prefix}|${text.replace(/\./g, '-')}`, text);
   }
 
   dataFileUrl(filename) {

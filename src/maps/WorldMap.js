@@ -52,13 +52,17 @@ export default class WorldMap extends BaseMap {
     this.root = this.parent.append('g');
 
     this.noDataColor = mapNoData;
-    this.noDataLabel = this.getTranslation('No data', 'WorldMap');
     this.loadData();
 
     this.mouseoverStroke = '#555';
     this.defaultStroke = 'none';
     this.tooltip
       .classed('tooltip-country', true);
+  }
+
+  onTranslationsLoaded() {
+    super.onTranslationsLoaded();
+    this.noDataLabel = this.getTranslation('No data', 'WorldMap');
   }
 
   loadData() {

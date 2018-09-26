@@ -28,6 +28,7 @@ export default class Chart extends Visualization {
   }
 
   onDataLoaded(data) {
+    super.onDataLoaded(data);
     let legendRowHeight = 20;
     if (this.widthCategory === 'narrowest') legendRowHeight = 10;
     this.legendHeight = this.getLegendRowsCount() * legendRowHeight;

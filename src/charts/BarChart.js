@@ -14,7 +14,16 @@ export default class BarChart extends Chart {
   onDataLoaded(data) {
     super.onDataLoaded(data);
     this.colors = this.createZScale();
-    this.render();
+    if (this.translationsLoaded) {
+      this.render();
+    }
+  }
+
+  onTranslationsLoaded() {
+    super.onTranslationsLoaded();
+    if (this.dataLoaded) {
+      this.render();
+    }
   }
 
   createBarGroups() {
