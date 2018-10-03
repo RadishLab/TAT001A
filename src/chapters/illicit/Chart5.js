@@ -12,7 +12,7 @@ export default class Chart5 extends BarChart {
     this.yTicks = 6;
     this.yAxisTickFormat = d => format('d')(d / 1000000);
     this.legendItems = [];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 3;
   }
 

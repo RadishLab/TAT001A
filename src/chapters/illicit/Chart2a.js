@@ -11,7 +11,7 @@ export default class Chart2a extends BarChart {
     super(parent, options);
     this.yTicks = 6;
     this.yAxisTickFormat = d => format('d')(d * 100);
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 2;
   }
 
@@ -83,7 +83,7 @@ export default class Chart2a extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.location}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.location)}</div>`;
     const percentFormat = d => format('.1f')(d * 100);
     content += `<div class="data">${percentFormat(d.value)}% ${this.getTranslation('illicit trade')}</div>`;
     content += `<div class="data">${this.getTranslation(d.type)} (${d.year})</div>`;
