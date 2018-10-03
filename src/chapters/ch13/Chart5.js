@@ -11,7 +11,7 @@ export default class Chart5 extends BarChart {
     super(parent, options);
     this.yTicks = 6;
     this.legendItems = [];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
   }
 
   getFigurePrefix() {
