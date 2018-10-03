@@ -47,7 +47,7 @@ export default class Chart1 extends PieChart {
   tooltipContent(d) {
     const percentFormat = format('.1%');
     const cigaretteFormat = format(',d');
-    let content = `<div class="header">${d.data.location}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.data.location)}</div>`;
     content += `<div>${this.getTranslation(d.data.HDI + ' HDI')}</div>`;
     content += `<div>${percentFormat(d.data.percent)} ${this.getTranslation('of cigarettes')}</div>`;
     content += `<div>${cigaretteFormat(d.data.value)} ${this.getTranslation('cigarettes')}</div>`;

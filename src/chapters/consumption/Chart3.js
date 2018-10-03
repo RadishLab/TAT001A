@@ -10,7 +10,7 @@ export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
     this.yTicks = 6;
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.yAxisTickFormat = format('d');
   }
 
@@ -105,7 +105,7 @@ export default class Chart3 extends BarChart {
   tooltipContent(d, bar) {
     const numberFormat = format(',d');
     const label = this.legendItems.filter(d => bar.classed(d.value))[0].value;
-    let content = `<div class="header">${d.Country} - ${this.getTranslation(label)} ${this.getTranslation('socioeconomic group')}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.Country)} - ${this.getTranslation(label)} ${this.getTranslation('socioeconomic group')}</div>`;
     content += `<div class="data">${numberFormat(d[label])} ${this.getTranslation('cigarettes per person')}</div>`;
     return content;
   }

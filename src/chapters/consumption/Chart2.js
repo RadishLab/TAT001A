@@ -104,7 +104,7 @@ export default class Chart2 extends LineChart {
   tooltipContent(d, line) {
     const yearFormat = timeFormat('%Y');
     const valueFormat = format('.1f');
-    let content = `<div class="header">${d.category}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.category)}</div>`;
     content += `<div class="data">${yearFormat(d.year)}</div>`;
     content += `<div class="data">${valueFormat(d.value)} ${this.getTranslation('trillion cigarettes')}</div>`;
     return content;
