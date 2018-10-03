@@ -12,7 +12,7 @@ export default class Chart1 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
     this.yTicks = 6;
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.yAxisTickFormat = d => d / 1000000;
     this.xAxisTickRows = 3;
     if (this.widthCategory === 'narrowest') {

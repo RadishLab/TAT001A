@@ -11,7 +11,7 @@ export default class Chart2 extends BarChart {
     super(parent, options);
     this.yTicks = 6;
     this.legendItems = [];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.yAxisTickFormat = format('d');
   }
 
@@ -89,7 +89,7 @@ export default class Chart2 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.age}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.age)}</div>`;
     const numberFormat = format('.1f');
     content += `<div class="data">${numberFormat(d.value)}% ${this.getTranslation('of total DALYs')}</div>`;
     return content;
