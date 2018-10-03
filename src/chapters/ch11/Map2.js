@@ -91,10 +91,10 @@ export default class Map2 extends WorldMap {
       content += '<ul class="tooltip-list tooltip-list-11-map2">';
       this.criteria.forEach(criterion => {
         if (d.properties.joined[criterion.header] === '1') {
-          content += `<li>${criterion.label}</li>`;
+          content += `<li>${this.getTranslation(criterion.label)}</li>`;
         }
         if (d.properties.joined[criterion.header] === '0.5') {
-          content += `<li>${criterion.label} (${this.getTranslation('partial')})</li>`;
+          content += `<li>${this.getTranslation(criterion.label)} (${this.getTranslation('partial')})</li>`;
         }
       });
       content += '</ul>';

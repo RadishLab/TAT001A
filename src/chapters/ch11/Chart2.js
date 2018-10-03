@@ -13,7 +13,7 @@ export default class Chart2 extends BarChartVertical {
     this.figurePrefix = '11-2';
     this.yLabel = null;
     this.xAxisTickFormat = format('d');
-    this.yAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = (d) => this.getTranslation(d);
     this.legendYOffset = 0;
     this.legendYPadding = 15;
   }
@@ -99,7 +99,7 @@ export default class Chart2 extends BarChartVertical {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d['Country and Year']}</div>`;
+    let content = `<div class="header">${this.getTranslation(d['Country and Year'])}</div>`;
     const numberFormat = format('.1f');
     const value = bar.classed('intend') ? d.intendToQuit : d.attemptedToQuit;
     const description = bar.classed('intend') ? this.getTranslation('intend to quit') : this.getTranslation('attempted to quit in past 12 months');

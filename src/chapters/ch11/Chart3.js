@@ -39,7 +39,7 @@ export default class Chart3 extends Chart {
     if (this.options.web) {
       margin.top = 25;
       margin.left = 65;
-      margin.bottom = 50;
+      margin.bottom = 60;
 
       if (this.widthCategory === 'narrowest') {
         margin.bottom = 40;
