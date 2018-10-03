@@ -12,6 +12,7 @@ export default class Chart3 extends BarChart {
     super(parent, options);
     this.yTicks = 6;
     this.yAxisTickFormat = format('d');
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 2;
   }
 
@@ -89,7 +90,7 @@ export default class Chart3 extends BarChart {
   tooltipContent(d, bar) {
     const value = bar.classed('women') ? d.women : d.men;
     const description = this.getTranslation(bar.classed('women') ? 'Women' : 'Men');
-    let content = `<div class="header">${d.Country} - ${description}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.Country)} - ${description}</div>`;
     const numberFormat = format('.1f');
     content += `<div class="data">${numberFormat(value)}% ${this.getTranslation('of tobacco users used waterpipe')}</div>`;
     return content;
