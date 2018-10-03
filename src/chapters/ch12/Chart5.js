@@ -10,7 +10,7 @@ export default class Chart5 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
     this.yTicks = 6;
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 2;
     this.yAxisTickFormat = format('.2');
   }
@@ -98,7 +98,7 @@ export default class Chart5 extends BarChart {
     const numberFormat = format('.1f');
     const value = bar.classed('tax') ? d.tax : d.taxHealth;
     const description = this.getTranslation(bar.classed('tax') ? 'tax benefits' : 'tax plus health benefits');
-    content += `<div class="data">${numberFormat(value)} ${description}</div>`;
+    content += `<div class="data">${numberFormat(value)} ${this.getTranslation(description)}</div>`;
     return content;
   }
 }

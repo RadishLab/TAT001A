@@ -232,7 +232,7 @@ export default class Map2 extends WorldMap {
     };
 
     if (d.properties.joined && matchingColumn) {
-      content += `<div class="data">${labels[matchingColumn.measure]}: ${formatters[matchingColumn.measure](d.properties.joined[matchingColumn.tooltipColumn])}</div>`;
+      content += `<div class="data">${this.getTranslation(labels[matchingColumn.measure])}: ${formatters[matchingColumn.measure](d.properties.joined[matchingColumn.tooltipColumn])}</div>`;
     }
     else {
       content += `<div class="data no-data">${this.getTranslation('No data')}</div>`;
