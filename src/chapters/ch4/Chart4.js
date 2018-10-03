@@ -14,7 +14,7 @@ export class Chart4 extends BarChart {
       { label: '1980', value: '1980' },
       { label: '2016', value: '2016' },
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 3;
     this.yAxisTickFormat = format('.2');
   }
@@ -99,7 +99,7 @@ export class Chart4 extends BarChart {
 
   tooltipContent(d, bar) {
     const year = bar.classed('year-1980') ? '1980' : '2016';
-    let content = `<div class="header">${d.region} (${year})</div>`;
+    let content = `<div class="header">${this.getTranslation(d.region)} (${year})</div>`;
     const numberFormat = format('.2f');
     const percentFormat = d => format('+.1f')(d * 100);
     content += `<div>${numberFormat(d[year])} ${this.getTranslation('trillion cigarettes')}</div>`;

@@ -13,7 +13,7 @@ export default class Chart5 extends BarChartVertical {
     this.figurePrefix = '4-5';
     this.yLabel = null;
     this.xAxisTickFormat = format('d');
-    this.yAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = (d) => this.getTranslation(d);
 
     if (this.widthCategory === 'narrowest') {
       this.xAxisTickArguments = 6;
@@ -108,7 +108,7 @@ export default class Chart5 extends BarChartVertical {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.country}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.country)}</div>`;
     let value;
     let gender;
     if (bar.classed('male')) {

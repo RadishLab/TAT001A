@@ -10,7 +10,7 @@ export class Chart3 extends BarChart {
     super(parent, options);
     this.yTicks = 6;
     this.legendItems = [];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 3;
   }
 
@@ -77,7 +77,7 @@ export class Chart3 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d['Row Labels']}</div>`;
+    let content = `<div class="header">${this.getTranslation(d['Row Labels'])}</div>`;
     content += `<div>${d['With monitoring']}%</div>`;
     return content;
   }
