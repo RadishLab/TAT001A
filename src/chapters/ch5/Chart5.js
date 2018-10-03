@@ -11,6 +11,7 @@ export default class Chart5 extends BarChart {
     super(parent, options);
     this.yTicks = 6;
     this.yAxisTickFormat = format('.2');
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 2;
   }
 
@@ -94,7 +95,7 @@ export default class Chart5 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.country}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.country)}</div>`;
     if (bar.classed('home')) {
       content += `<div>${this.getTranslation('Home exposure')}: ${this.yAxisTickFormat(d.home)}%</div>`;
     }

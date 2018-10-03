@@ -11,7 +11,7 @@ export default class Chart6 extends BarChart {
     super(parent, options);
     this.yTicks = 6;
     this.legendItems = [];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
   }
 
   getFigurePrefix() {
@@ -78,7 +78,7 @@ export default class Chart6 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.region}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.region)}</div>`;
     const numberFormat = format('.1f');
     content += `<div class="data">${numberFormat(d.value)}% ${this.getTranslation('estimated prevalence')}</div>`;
     return content;

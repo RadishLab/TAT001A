@@ -10,7 +10,7 @@ export default class Chart2 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
     this.yTicks = 6;
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
   }
 
   getFigurePrefix() {
@@ -101,7 +101,7 @@ export default class Chart2 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.Country}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.Country)}</div>`;
     const percentFormat = format('.1f');
 
     if (bar.classed('home')) {

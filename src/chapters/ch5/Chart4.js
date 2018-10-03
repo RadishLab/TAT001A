@@ -10,7 +10,7 @@ export default class Chart4 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
     this.yTicks = 6;
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
   }
 
   getFigurePrefix() {
