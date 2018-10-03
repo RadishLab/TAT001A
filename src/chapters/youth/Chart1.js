@@ -12,6 +12,7 @@ export default class Chart1 extends BarChart {
     super(parent, options);
     this.yTicks = 6;
     this.yAxisTickFormat = format('d');
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 2;
   }
 
@@ -129,7 +130,7 @@ export default class Chart1 extends BarChart {
       description = 'youth females';
     }
 
-    let content = `<div class="header">${d.Country} - ${this.getTranslation(description)}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.Country)} - ${this.getTranslation(description)}</div>`;
     content += `<div class="data">${numberFormat(value)}% ${this.getTranslation('prevalence')}</div>`;
     return content;
   }
