@@ -13,6 +13,7 @@ export default class Chart2 extends Chart {
   constructor(parent, options) {
     super(parent, options);
     this.legendItems = [];
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.yAxisTickFormat = format('d');
   }
 
