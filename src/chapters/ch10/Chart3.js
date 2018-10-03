@@ -85,7 +85,7 @@ export default class Chart3 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.region}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.region)}</div>`;
     const numberFormat = d => format(',d')(d / 1000);
     content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('billion 2014 PPP dollars revenue growth')}</div>`;
     return content;

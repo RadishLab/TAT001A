@@ -15,7 +15,7 @@ export default class Chart1 extends BarChart {
       { label: '2007', value: '2007' },
       { label: '2014', value: '2014' },
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.xAxisTickRows = 4;
     this.yAxisTickFormat = format('d');
     this.legendYOffset = null;
