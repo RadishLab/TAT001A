@@ -11,7 +11,7 @@ export class Chart3 extends BarChart {
     super(parent, options);
     this.figurePrefix = '9-3';
     this.yTicks = 6;
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.yAxisTickFormat = format('d')
     this.xAxisTickRows = 3;
   }
