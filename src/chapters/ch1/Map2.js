@@ -75,7 +75,7 @@ export default class Map2 extends WorldMap {
       .classed('ta-visualization-filters', true)
       .lower();
 
-    this.filtersContainer.append('span').text(this.getTranslation('Filters:'));
+    this.filtersContainer.append('span').text(this.getTranslation('Filters:', null, 'Visualization'));
 
     const yearInput = this.filtersContainer
       .append('div').classed('filter-group', true)

@@ -112,7 +112,7 @@ export default class Chart1 extends LineChart {
     const valueFormat = format('.1f');
     let content = `<div class="header">${d.category}</div>`;
     content += `<div class="data">${yearFormat(d.year)}</div>`;
-    content += `<div class="data">${valueFormat(d.value)} million metric tons</div>`;
+    content += `<div class="data">${valueFormat(d.value)} ${this.getTranslation('million metric tons')}</div>`;
     return content;
   }
 }

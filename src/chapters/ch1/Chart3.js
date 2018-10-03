@@ -11,7 +11,7 @@ export default class Chart3 extends BarChart {
   constructor(parent, options) {
     super(parent, options);
     this.yTicks = 6;
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.yAxisTickFormat = format('d');
   }
 
@@ -168,7 +168,7 @@ export default class Chart3 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.Country}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.Country)}</div>`;
     const numberFormat = format(',d');
     content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('USD profit per acre')}</div>`;
     content += `<div class="data">${this.getTranslation(d['Contract versus Independent'])}</div>`;

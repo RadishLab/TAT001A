@@ -205,7 +205,7 @@ export default class Chart4 extends Chart {
         'Farmers still growing tobacco'
     );
     let content = `<div class="header">${d.crop}</div>`;
-    content += `<div>${region}, ${d.season} season</div>`;
+    content += `<div>${this.getTranslation(region)}, ${this.getTranslation(d.season)} ${this.getTranslation('season')}</div>`;
     content += `<div>${farmers}</div>`;
     content += `<div>${this.getTranslation('Sales')}: ${numberFormat(d.sales)}</div>`;
     return content;

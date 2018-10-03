@@ -101,7 +101,8 @@ export default class Visualization {
             if (!bundles[languageShortNames[language]]) {
               bundles[languageShortNames[language]] = {};
             }
-            bundles[languageShortNames[language]][`${translation.figure}|${translation.english.replace(/\./g, '-')}`] = translatedPhrase;
+            const textKey = translation.english.replace(/\./g, '-').replace(/:/g, '-').trim();
+            bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = translatedPhrase;
           }
         });
       });
@@ -126,13 +127,17 @@ export default class Visualization {
     this.translationsLoaded = true;
   }
 
-  getTranslation(text, defaultPrefix) {
+  getTranslation(text, defaultPrefix, overridePrefix) {
     let prefix = this.getFigurePrefix();
+    if (overridePrefix) {
+      prefix = overridePrefix;
+    }
     if (prefix === undefined && defaultPrefix) {
       prefix = defaultPrefix;
     }
     if (!text || text === '' || !text.replace) return text;
-    return i18next.t(`${prefix}|${text.replace(/\./g, '-')}`, text);
+    const textKey = text.replace(/\./g, '-').replace(/:/g, '-').trim();
+    return i18next.t(`${prefix}|${textKey}`, text);
   }
 
   dataFileUrl(filename) {
@@ -147,7 +152,7 @@ export default class Visualization {
       .classed('ta-visualization-filters', true)
       .lower();
 
-    this.filtersContainer.append('span').text(this.getTranslation('Filters:'));
+    this.filtersContainer.append('span').text(this.getTranslation('Filters:', null, 'Visualization'));
 
     this.filters.forEach(filter => {
       const filterValues = filter.values.map(f => ({ ...f, ...{ group: filter.group } }));
