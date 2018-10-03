@@ -96,7 +96,7 @@ export class Chart4 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.Country}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.Country)}</div>`;
     const numberFormat = format('.1f');
     content += `<div class="data">${this.getTranslation('Education level attained:')} ${this.getTranslation(d['Education level'])}</div>`;
     content += `<div class="data">${numberFormat(d['Mortality rate'])} ${this.getTranslation('lung cancer mortality per 100,000')}</div>`;

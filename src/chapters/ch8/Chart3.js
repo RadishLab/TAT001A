@@ -15,7 +15,7 @@ export class Chart3 extends BarChart {
       { label: '10-19.9%', value: 'Deaths: 10-19.9%' },
       { label: '20%+', value: 'Deaths: 20%+' }
     ];
-    this.xAxisTickFormat = this.getTranslation.bind(this);
+    this.xAxisTickFormat = (d) => this.getTranslation(d);
     this.yAxisTickFormat = format('d');
   }
 
@@ -108,7 +108,7 @@ export class Chart3 extends BarChart {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d['WHO Region']}</div>`;
+    let content = `<div class="header">${this.getTranslation(d['WHO Region'])}</div>`;
     const numberFormat = format(',d');
 
     let value;
