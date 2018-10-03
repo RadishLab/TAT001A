@@ -12,7 +12,7 @@ export default class Chart4 extends BarChartVertical {
     super(parent, options);
     this.yLabel = null;
     this.xAxisTickFormat = format('d');
-    this.yAxisTickFormat = this.getTranslation.bind(this);
+    this.yAxisTickFormat = (d) => this.getTranslation(d);
     this.legendItems = [];
     if (this.widthCategory === 'narrowest') {
       this.xAxisTickArguments = 6;
@@ -87,7 +87,7 @@ export default class Chart4 extends BarChartVertical {
   }
 
   tooltipContent(d, bar) {
-    let content = `<div class="header">${d.country}</div>`;
+    let content = `<div class="header">${this.getTranslation(d.country)}</div>`;
     const numberFormat = format(',d');
     content += `<div class="data">${numberFormat(d.value)} ${this.getTranslation('million Facebook users')}</div>`;
     return content;
