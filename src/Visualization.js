@@ -8,6 +8,7 @@ const languageShortNames = {
   arabic: 'ar',
   chinese: 'zh',
   english: 'en',
+  french: 'fr',
   portuguese: 'pt',
   spanish: 'es'
 };
