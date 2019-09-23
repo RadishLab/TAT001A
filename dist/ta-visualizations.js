@@ -48185,7 +48185,7 @@ var Map = function (_WorldMap) {
     value: function onTranslationsLoaded() {
       this.keyCodeText = {
         '1': this.getTranslation('Data not reported'),
-        '2': this.getTranslation('No national campaign implemented between July 2014 and June 2016 with duration of at least three weeks'),
+        '2': this.getTranslation('No national campaign implemented between July 2016 and June 2018 with duration of at least three weeks'),
         '3': this.getTranslation('Campaign conducted with one to four appropriate characteristics'),
         '4': this.getTranslation('Campaign conducted with five to six appropriate characteristics, or with seven characteristics excluding airing on television and/or radio'),
         '5': this.getTranslation('Campaign conducted with at least seven appropriate characteristics including airing on television and/or radio')
