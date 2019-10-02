@@ -13,6 +13,11 @@ const languageShortNames = {
   spanish: 'es'
 };
 
+const rtlLanguages = [
+  'ar',
+  'zh'
+]
+
 export default class Visualization {
   constructor(parent, options) {
     this.options = options;
@@ -103,7 +108,12 @@ export default class Visualization {
               bundles[languageShortNames[language]] = {};
             }
             const textKey = translation.english.replace(/\./g, '-').replace(/:/g, '-').trim();
-            bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = translatedPhrase;
+            if(rtlLanguages.includes(language)){
+              bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = 'reverse phrase here';
+            } else {
+              bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = translatedPhrase;
+            }
+            
           }
         });
       });
