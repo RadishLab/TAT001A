@@ -20,6 +20,7 @@ const rtlLanguages = [
 
 export default class Visualization {
   constructor(parent, options) {
+    console.log('Viz constructior');
     this.options = options;
     this.width = options.width;
     this.height = options.height;
