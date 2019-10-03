@@ -14,8 +14,8 @@ const languageShortNames = {
 };
 
 const rtlLanguages = [
-  'ar',
-  'zh'
+  'arabic',
+  'chinese'
 ]
 
 export default class Visualization {
@@ -97,23 +97,30 @@ export default class Visualization {
     };
   }
 
+  reverseSentence(sentence){
+    return sentence.split(" ").reverse().join(" ")
+  }
+
   loadTranslations(url) {
     csv(url, translations => {
       const bundles = {};
 
       translations.forEach(translation => {
         Object.keys(languageShortNames).forEach(language => {
+          
           const translatedPhrase = translation[language];
           if (translatedPhrase) {
             if (!bundles[languageShortNames[language]]) {
               bundles[languageShortNames[language]] = {};
             }
             const textKey = translation.english.replace(/\./g, '-').replace(/:/g, '-').trim();
-            if(rtlLanguages.includes(language)){
-              bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = 'reverse phrase here';
-            } else {
+            // if(rtlLanguages.includes(language)){
+            //   console.log("Language: " + language);
+            //   console.log("phrase: " + translatedPhrase);
+            //   bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = this.reverseSentence(translatedPhrase);
+            // } else {
               bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = translatedPhrase;
-            }
+            // }
             
           }
         });

@@ -40,7 +40,6 @@ export default class BarChartVertical extends Chart {
   }
 
   onMouseOverBar(d, bar) {
-    console.log('ASODIU');
     bar.style('stroke', this.mouseoverStroke);
     if (this.tooltipContent) {
       this.tooltip

@@ -314,6 +314,7 @@ export default class Chart extends Visualization {
       itemsPerColumn = this.legendItems.length / columns;
     }
 
+    if (legendItems) {
     this.legendItems.forEach(({ label, value }) => {
       let targetContainer = legend;
       if (columns) {
@@ -348,6 +349,7 @@ export default class Chart extends Visualization {
       }
       itemsAdded++;
     });
+  }
   }
 
   render() {
