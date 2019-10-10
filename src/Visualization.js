@@ -13,14 +13,8 @@ const languageShortNames = {
   spanish: 'es'
 };
 
-const rtlLanguages = [
-  'arabic',
-  'chinese'
-]
-
 export default class Visualization {
   constructor(parent, options) {
-    console.log('Viz constructior');
     this.options = options;
     this.width = options.width;
     this.height = options.height;
@@ -114,13 +108,7 @@ export default class Visualization {
               bundles[languageShortNames[language]] = {};
             }
             const textKey = translation.english.replace(/\./g, '-').replace(/:/g, '-').trim();
-            // if(rtlLanguages.includes(language)){
-            //   console.log("Language: " + language);
-            //   console.log("phrase: " + translatedPhrase);
-            //   bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = this.reverseSentence(translatedPhrase);
-            // } else {
-              bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = translatedPhrase;
-            // }
+            bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = translatedPhrase;
             
           }
         });
