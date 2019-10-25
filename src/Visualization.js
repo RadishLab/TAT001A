@@ -94,12 +94,17 @@ export default class Visualization {
     };
   }
 
+  reverseSentence(sentence){
+    return sentence.split(" ").reverse().join(" ")
+  }
+
   loadTranslations(url) {
     csv(url, translations => {
       const bundles = {};
 
       translations.forEach(translation => {
         Object.keys(languageShortNames).forEach(language => {
+          
           const translatedPhrase = translation[language];
           if (translatedPhrase) {
             if (!bundles[languageShortNames[language]]) {
@@ -107,6 +112,7 @@ export default class Visualization {
             }
             const textKey = translation.english.replace(/\./g, '-').replace(/:/g, '-').trim();
             bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = translatedPhrase;
+            
           }
         });
       });
