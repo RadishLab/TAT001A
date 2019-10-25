@@ -111,7 +111,7 @@ export default class BaseMap extends Visualization {
         }
         return this.textColors.lightBackground;
       })
-      .call(wrap, this.legendOptions.width);
+      .call(wrap, this.legendOptions.width, this.rtl);
 
     legendItems.selectAll('text tspan')
       .attr('x', 4);

@@ -36,6 +36,9 @@ export default class Visualization {
       this.translationsLoaded = true;
     }
 
+    // If Arabic, set rtl (right-to-left)
+    this.rtl = this.options.language === 'ar';
+
     const parentContainerWidth = this.parentContainer.node().getBoundingClientRect().width;
     this.widthCategory = 'large';
     if (parentContainerWidth < 400) {

@@ -163,7 +163,7 @@ export default class Chart extends Visualization {
         return `translate(0, -${nodes[i].getBBox().height / 2})`;
       });
     if (this.x.bandwidth) {
-      tickText.call(wrap, this.x.bandwidth())
+      tickText.call(wrap, this.x.bandwidth(), this.rtl)
     }
 
     if (this.xLabel) {

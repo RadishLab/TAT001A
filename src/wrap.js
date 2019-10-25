@@ -1,16 +1,20 @@
 import { select } from 'd3-selection';
 
-export default function wrap(text, width) {
+export default function wrap(text, width, rtl = false) {
   text.each(function() {
-    var text = select(this),
-      words = text.text() === 'Viet Nam' ? ['Viet Nam'] : text.text().split(/\s+/).reverse(),
-      word = words.pop(),
-      line = [],
-      lineNumber = 0,
-      lineHeight = 1.1, // ems
-      y = text.attr('y'),
-      dy = parseFloat(text.attr('dy')),
-      tspan = text.text(null).append('tspan').attr('x', 0).attr('y', y).attr('dy', dy + 'em');
+    var text = select(this);
+    var words = text.text() === 'Viet Nam' ?
+      ['Viet Nam'] : text.text().split(/\s+/);
+    if (!rtl) {
+      words = words.reverse();
+    }
+    var word = words.pop();
+    var line = [];
+    var lineNumber = 0;
+    var lineHeight = 1.1; // ems
+    var y = text.attr('y');
+    var dy = parseFloat(text.attr('dy'));
+    var tspan = text.text(null).append('tspan').attr('x', 0).attr('y', y).attr('dy', dy + 'em');
     while (word) {
       line.push(word);
       tspan.text(line.join(' '));
