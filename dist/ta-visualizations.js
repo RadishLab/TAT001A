@@ -2437,7 +2437,7 @@ var Chart = function (_Visualization) {
         return 'translate(0, -' + nodes[i].getBBox().height / 2 + ')';
       });
       if (this.x.bandwidth) {
-        tickText.call(_wrap2.default, this.x.bandwidth());
+        tickText.call(_wrap2.default, this.x.bandwidth(), this.rtl);
       }
 
       if (this.xLabel) {
@@ -7068,17 +7068,21 @@ exports.default = wrap;
 var _d3Selection = __webpack_require__(10);
 
 function wrap(text, width) {
+  var rtl = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
   text.each(function () {
-    var text = (0, _d3Selection.select)(this),
-        words = text.text() === 'Viet Nam' ? ['Viet Nam'] : text.text().split(/\s+/).reverse(),
-        word = words.pop(),
-        line = [],
-        lineNumber = 0,
-        lineHeight = 1.1,
-        // ems
-    y = text.attr('y'),
-        dy = parseFloat(text.attr('dy')),
-        tspan = text.text(null).append('tspan').attr('x', 0).attr('y', y).attr('dy', dy + 'em');
+    var text = (0, _d3Selection.select)(this);
+    var words = text.text() === 'Viet Nam' ? ['Viet Nam'] : text.text().split(/\s+/);
+    if (!rtl) {
+      words = words.reverse();
+    }
+    var word = words.pop();
+    var line = [];
+    var lineNumber = 0;
+    var lineHeight = 1.1; // ems
+    var y = text.attr('y');
+    var dy = parseFloat(text.attr('dy'));
+    var tspan = text.text(null).append('tspan').attr('x', 0).attr('y', y).attr('dy', dy + 'em');
     while (word) {
       line.push(word);
       tspan.text(line.join(' '));
@@ -13552,6 +13556,9 @@ var Visualization = function () {
       this.translationsLoaded = true;
     }
 
+    // If Arabic, set rtl (right-to-left)
+    this.rtl = this.options.language === 'ar';
+
     var parentContainerWidth = this.parentContainer.node().getBoundingClientRect().width;
     this.widthCategory = 'large';
     if (parentContainerWidth < 400) {
@@ -15961,7 +15968,7 @@ var BaseMap = function (_Visualization) {
           return _this3.textColors.darkBackground;
         }
         return _this3.textColors.lightBackground;
-      }).call(_wrap2.default, this.legendOptions.width);
+      }).call(_wrap2.default, this.legendOptions.width, this.rtl);
 
       legendItems.selectAll('text tspan').attr('x', 4);
 
@@ -42126,7 +42133,7 @@ var Chart1 = function (_BarChart) {
           return _this3.getTranslation(d.disease);
         });
 
-        tobaccoUseDeathBars.selectAll('text').call(_wrap2.default, barWidth * 2);
+        tobaccoUseDeathBars.selectAll('text').call(_wrap2.default, barWidth * 2, this.rtl);
       }
     }
   }, {
