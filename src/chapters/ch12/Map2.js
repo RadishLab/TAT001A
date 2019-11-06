@@ -213,7 +213,7 @@ export default class Map2 extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
 
     const matchingColumn = this.filterColumns.filter(column => {
       return Object.keys(this.filterState).every(key => this.filterState[key] === column[key]);

@@ -40,7 +40,7 @@ export default class Map extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     const percentFormat = d => format('.1f')(d * 100);
     if (d.properties.joined) {
       content += `<div class="data">${percentFormat(d.properties.joined['Percent of TB Cases Due to Smoking'])}% ${this.getTranslation('of tuberculosis-related deaths due to tobacco')}</div>`;

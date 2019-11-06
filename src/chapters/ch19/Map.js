@@ -59,7 +59,7 @@ export default class Map extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     const powerScoreFormat = d => format('.1f')(parseFloat(d, 10));
     if (d.properties.joined) {
       content += `<div class="data">${this.getTranslation('Average POWER score')}: ${powerScoreFormat(d.properties.joined['Average score for POWER'])}</div>`;

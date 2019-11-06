@@ -84,8 +84,14 @@ export default class Map2 extends WorldMap {
   }
 
   tooltipContent(d) {
-    let country = d.properties.NAME;
-    if (country === 'United Kingdom') country = 'UK (England and Scotland only)';
+    let country;
+    if (d.properties.NAME === 'United Kingdom') {
+      country = this.getTranslation('UK (England and Scotland only)');
+    }
+    else {
+      country = this.getCountryName(d);
+    }
+
     let content = `<div class="country-name">${country}</div>`;
     if (d.properties.joined) {
       content += '<ul class="tooltip-list tooltip-list-11-map2">';

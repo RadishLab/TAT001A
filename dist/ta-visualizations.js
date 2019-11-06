@@ -792,6 +792,11 @@ var WorldMap = function (_BaseMap) {
       return this.noDataColor;
     }
   }, {
+    key: 'getCountryName',
+    value: function getCountryName(d) {
+      return this.getTranslation(d.properties.NAME, 'WorldMap', 'WorldMap');
+    }
+  }, {
     key: 'onCountryMouseout',
     value: function onCountryMouseout(d, i, nodes) {
       (0, _d3Selection.selectAll)('.country-hover').classed('country-hover', false).style('stroke', this.defaultStroke);
@@ -2586,35 +2591,37 @@ var Chart = function (_Visualization) {
         itemsPerColumn = this.legendItems.length / columns;
       }
 
-      this.legendItems.forEach(function (_ref) {
-        var label = _ref.label,
-            value = _ref.value;
+      if (this.legendItems) {
+        this.legendItems.forEach(function (_ref) {
+          var label = _ref.label,
+              value = _ref.value;
 
-        var targetContainer = legend;
-        if (columns) {
-          if (itemsAdded % itemsPerColumn === 0) {
-            if (currentColumn) {
-              columnXOffset += currentColumn.node().getBBox().width;
+          var targetContainer = legend;
+          if (columns) {
+            if (itemsAdded % itemsPerColumn === 0) {
+              if (currentColumn) {
+                columnXOffset += currentColumn.node().getBBox().width;
+              }
+              currentColumn = legend.append('g').classed('legend-column', true).attr('transform', 'translate(' + columnXOffset + ', 0)');
+              xOffset = yOffset = 0;
             }
-            currentColumn = legend.append('g').classed('legend-column', true).attr('transform', 'translate(' + columnXOffset + ', 0)');
-            xOffset = yOffset = 0;
+            targetContainer = currentColumn;
           }
-          targetContainer = currentColumn;
-        }
 
-        var legendItem = targetContainer.append('g').attr('transform', 'translate(' + xOffset + ', ' + yOffset + ')');
-        legendItem.append('text').text(label).attr('transform', 'translate(' + (lineWidth + linePadding) + ', 0)');
-        legendItem.append('path').datum([[0, 0], [lineWidth, 0]]).style('stroke', _this8.colors(value)).attr('transform', 'translate(0, -' + legendHeight / 4 + ')').attr('d', function (d) {
-          return legendLine(d);
+          var legendItem = targetContainer.append('g').attr('transform', 'translate(' + xOffset + ', ' + yOffset + ')');
+          legendItem.append('text').text(label).attr('transform', 'translate(' + (lineWidth + linePadding) + ', 0)');
+          legendItem.append('path').datum([[0, 0], [lineWidth, 0]]).style('stroke', _this8.colors(value)).attr('transform', 'translate(0, -' + legendHeight / 4 + ')').attr('d', function (d) {
+            return legendLine(d);
+          });
+
+          if (_this8.legendOrientation() === 'horizontal' && !columns) {
+            xOffset += legendItem.node().getBBox().width + 5;
+          } else {
+            yOffset += legendItem.node().getBBox().height + 1;
+          }
+          itemsAdded++;
         });
-
-        if (_this8.legendOrientation() === 'horizontal' && !columns) {
-          xOffset += legendItem.node().getBBox().width + 5;
-        } else {
-          yOffset += legendItem.node().getBBox().height + 1;
-        }
-        itemsAdded++;
-      });
+      }
     }
   }, {
     key: 'render',
@@ -13607,6 +13614,11 @@ var Visualization = function () {
   }
 
   _createClass(Visualization, [{
+    key: 'reverseSentence',
+    value: function reverseSentence(sentence) {
+      return sentence.split(" ").reverse().join(" ");
+    }
+  }, {
     key: 'loadTranslations',
     value: function loadTranslations(url) {
       var _this2 = this;
@@ -13616,6 +13628,7 @@ var Visualization = function () {
 
         translations.forEach(function (translation) {
           Object.keys(languageShortNames).forEach(function (language) {
+
             var translatedPhrase = translation[language];
             if (translatedPhrase) {
               if (!bundles[languageShortNames[language]]) {
@@ -26242,7 +26255,7 @@ var UserGeneratedCategoryMap = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (this.tooltipColumn) {
         var details = void 0;
         if (d.properties.joined) {
@@ -34541,7 +34554,7 @@ var UserGeneratedChoroplethMap = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (this.tooltipColumn) {
         var details = void 0;
         if (d.properties.joined) {
@@ -37532,7 +37545,7 @@ var Map2 = function (_WorldMap) {
     value: function tooltipContent(d) {
       var _this6 = this;
 
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var valueFormat = (0, _d3Format.format)(',d');
       var value = void 0;
       if (d.properties.joined) {
@@ -37758,7 +37771,7 @@ var Map3 = function (_WorldMap) {
     value: function tooltipContent(d) {
       var _this6 = this;
 
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var valueFormat = (0, _d3Format.format)(',d');
       var value = void 0;
       if (d.properties.joined) {
@@ -37984,7 +37997,7 @@ var Map4 = function (_WorldMap) {
     value: function tooltipContent(d) {
       var _this6 = this;
 
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var valueFormat = (0, _d3Format.format)(',d');
       var value = void 0;
       if (d.properties.joined) {
@@ -38393,7 +38406,7 @@ var Map2 = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         var marketLeader = d.properties.joined['Market Leader (Company Name)'];
         if (marketLeader) {
@@ -38719,7 +38732,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         var label = this.getTranslation('bans on direct and indirect advertising');
         var count = parseInt(d.properties.joined['TA6 Data'], 10);
@@ -39810,7 +39823,7 @@ var Map2 = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         content += '<div class="data">' + this.getTranslation('Male prevalence') + ': ' + d.properties.joined['Male-Prevalence'] + '%</div>';
         content += '<div class="data">' + this.getTranslation('Female prevalence') + ': ' + d.properties.joined['Female-Prevalence'] + '%</div>';
@@ -41282,7 +41295,7 @@ var Map3a = function (_EuropeMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         content += '<div class="data">' + d.properties.joined[this.valueField] + '% ' + this.getTranslation('prevalance of secondhand exposure in bars') + '</div>';
       } else {
@@ -41396,7 +41409,7 @@ var Map3b = function (_EuropeMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         content += '<div class="data">' + d.properties.joined[this.valueField] + '% ' + this.getTranslation('prevalance of secondhand exposure in restaurants') + '</div>';
       } else {
@@ -42475,7 +42488,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var percentFormat = function percentFormat(d) {
         return (0, _d3Format.format)('.1f')(d * 100);
       };
@@ -42918,7 +42931,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var percentFormat = function percentFormat(d) {
         return (0, _d3Format.format)('.1f')(d * 100);
       };
@@ -43810,7 +43823,7 @@ var Map2 = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var deathFormat = (0, _d3Format.format)(',d');
       var percentFormat = (0, _d3Format.format)('.1f');
       if (d.properties.joined) {
@@ -44577,7 +44590,7 @@ var Map9 = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var valueFormat = (0, _d3Format.format)(',d');
       if (d.properties.joined) {
         content += '<div class="data">' + valueFormat(d.properties.joined['Total economic cost (2016 PPP$ million)']) + ' ' + this.getTranslation('million USD') + '</div>';
@@ -45026,7 +45039,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var percentFormat = (0, _d3Format.format)('.1f');
       if (d.properties.joined) {
         content += '<div class="data">' + percentFormat(d.properties.joined['Share of deaths due to NCDs (%)']) + '% ' + this.getTranslation('of deaths due to NCDs') + '</div>';
@@ -45587,7 +45600,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         content += '<div class="data">' + this.keyCodeMapping[d.properties.joined[this.valueField]] + '</div>';
       } else {
@@ -45731,8 +45744,13 @@ var Map2 = function (_WorldMap) {
     value: function tooltipContent(d) {
       var _this4 = this;
 
-      var country = d.properties.NAME;
-      if (country === 'United Kingdom') country = 'UK (England and Scotland only)';
+      var country = void 0;
+      if (d.properties.NAME === 'United Kingdom') {
+        country = this.getTranslation('UK (England and Scotland only)');
+      } else {
+        country = this.getCountryName(d);
+      }
+
       var content = '<div class="country-name">' + country + '</div>';
       if (d.properties.joined) {
         content += '<ul class="tooltip-list tooltip-list-11-map2">';
@@ -47137,7 +47155,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var currencyFormat = (0, _d3Format.format)('.2f');
       if (d.properties.joined) {
         content += '<div class="data">' + this.getTranslation('Price of 20-cigarette pack of the most-sold brand (USD)') + ': $' + currencyFormat(d.properties.joined.price) + '</div>';
@@ -47396,7 +47414,7 @@ var Map2 = function (_WorldMap) {
     value: function tooltipContent(d) {
       var _this5 = this;
 
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
 
       var matchingColumn = this.filterColumns.filter(function (column) {
         return Object.keys(_this5.filterState).every(function (key) {
@@ -47962,7 +47980,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined && d.properties.joined[this.valueField]) {
         content += '<div class="data">' + this.getTranslation('Has highest level of smoke-free legislation') + '</div>';
       } else {
@@ -48235,7 +48253,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         content += '<div class="data">' + this.keyCodeText[d.properties.joined[this.valueField]] + '</div>';
       } else {
@@ -48507,7 +48525,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var status = this.getTranslation('none');
       if (d.properties.joined) {
         status = d.properties.joined['Prevent20 Status (Members = #fc0d1b; Friends = #fd9426)'].toLowerCase();
@@ -48650,7 +48668,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         content += '<div class="data">' + this.getTranslation('Marketing regulations') + ': ' + this.getTranslation(d.properties.joined['Marketing Regulations']) + '</div>';
         content += '<div class="data">' + this.getTranslation('Public use regulations') + ': ' + this.getTranslation(d.properties.joined['Public Use Regulations']) + '</div>';
@@ -48796,7 +48814,7 @@ var Map2 = function (_WorldMap) {
         });
       })[0];
 
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined && matchingColumn) {
         var matchingLegendEntry = this.legends[this.filterState.measure].filter(function (legendEntry) {
           return legendEntry[0] === d.properties.joined[matchingColumn.keyCode];
@@ -48988,7 +49006,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         if (d.properties.joined[this.valueField] === 'both') {
           content += '<div class="data">' + this.getTranslation('Industry suing government and government suing industry') + '</div>';
@@ -49144,7 +49162,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var powerScoreFormat = function powerScoreFormat(d) {
         return (0, _d3Format.format)('.1f')(parseFloat(d, 10));
       };
@@ -49296,7 +49314,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var cigaretteFormat = function cigaretteFormat(d) {
         return (0, _d3Format.format)(',d')(parseFloat(d, 10));
       };
@@ -49852,7 +49870,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var tonnesFormat = (0, _d3Format.format)(',d');
       if (d.properties.joined) {
         content += '<div class="data">' + tonnesFormat(d.properties.joined['Packaging & Butt Waste']) + ' ' + this.getTranslation('total tonnes of waste') + '</div>';
@@ -51701,7 +51719,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var percentFormat = function percentFormat(d) {
         return (0, _d3Format.format)('.1f')(d * 100);
       };
@@ -52324,7 +52342,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       var percentFormat = function percentFormat(d) {
         return (0, _d3Format.format)('.1f')(d * 100);
       };
@@ -52496,7 +52514,7 @@ var Map = function (_WorldMap) {
   }, {
     key: 'tooltipContent',
     value: function tooltipContent(d) {
-      var content = '<div class="country-name">' + d.properties.NAME + '</div>';
+      var content = '<div class="country-name">' + this.getCountryName(d) + '</div>';
       if (d.properties.joined) {
         content += '<div class="data">' + this.getTranslation('Boys cigarette prevalence') + ': ' + d.properties.joined['Boys-Cigarette Prevalence'] + '%</div>';
         content += '<div class="data">' + this.getTranslation('Boys tobacco prevalence') + ': ' + d.properties.joined['Boys- Tobacco Prevalence %'] + '%</div>';

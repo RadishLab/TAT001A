@@ -37,7 +37,7 @@ export default class Map extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     const tonnesFormat = format(',d');
     if (d.properties.joined) {
       content += `<div class="data">${tonnesFormat(d.properties.joined['Packaging & Butt Waste'])} ${this.getTranslation('total tonnes of waste')}</div>`;

@@ -66,7 +66,7 @@ export default class Map2 extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     const deathFormat = format(',d');
     const percentFormat = format('.1f');
     if (d.properties.joined) {

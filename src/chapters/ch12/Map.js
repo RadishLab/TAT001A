@@ -43,7 +43,7 @@ export default class Map extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     const currencyFormat = format('.2f');
     if (d.properties.joined) {
       content += `<div class="data">${this.getTranslation('Price of 20-cigarette pack of the most-sold brand (USD)')}: $${currencyFormat(d.properties.joined.price)}</div>`;

@@ -50,7 +50,7 @@ export default class Map3a extends EuropeMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     if (d.properties.joined) {
       content += `<div class="data">${d.properties.joined[this.valueField]}% ${this.getTranslation('prevalance of secondhand exposure in bars')}</div>`;
     }

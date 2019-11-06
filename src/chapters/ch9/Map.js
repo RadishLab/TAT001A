@@ -46,7 +46,7 @@ export default class Map9 extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     const valueFormat = format(',d');
     if (d.properties.joined) {
       content += `<div class="data">${valueFormat(d.properties.joined['Total economic cost (2016 PPP$ million)'])} ${this.getTranslation('million USD')}</div>`;
