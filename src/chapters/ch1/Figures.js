@@ -3,7 +3,9 @@ import Chart3 from './Chart3';
 import Chart4 from './Chart4';
 import Map from './Map';
 import Map2 from './Map2';
+import Map2Treemap from './Map2Treemap';
 import Map3 from './Map3';
+import Map3Cartogram from './Map3Cartogram';
 import Map4 from './Map4';
 
 export const figures = [
@@ -41,5 +43,15 @@ export const figures = [
     name: '4',
     figureClass: Chart4,
     type: 'chart'
+  },
+  {
+    name: 'map2treemap',
+    figureClass: Map2Treemap,
+    type: 'map'
+  },
+  {
+    name: 'map3cartogram',
+    figureClass: Map3Cartogram,
+    type: 'map'
   }
 ];
