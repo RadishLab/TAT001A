@@ -31,7 +31,7 @@ export default class Chart5 extends BarChart {
       csv(this.dataFileUrl('13-5.csv'), (csvData) => {
         resolve(csvData.map(d => {
           d.region = d.Region;
-          d.value = +d['Percent (%)'];
+          d.value = parseFloat(d['Percent (%)'], 10);
           return d;
         }));
       });
