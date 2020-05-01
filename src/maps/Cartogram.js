@@ -2,6 +2,7 @@ import { max } from 'd3-array';
 import { xml } from 'd3-request';
 import { event as currentEvent, select, selectAll } from 'd3-selection';
 
+import { mapCircleOverlay } from '../colors';
 import WorldMap from './WorldMap';
 
 export default class Cartogram extends WorldMap {
@@ -56,15 +57,32 @@ export default class Cartogram extends WorldMap {
   }
 
   countryFill(d) {
-    // NB: Subclasses should implement
+    if (d.properties.joined) {
+      const value = d.properties.joined[this.valueField];
+      if (this.colorScaleType && this.colorScaleType === 'ordinal') {
+        return this.colorScale(value);
+      }
+
+      if (value == null) return this.noDataColor;
+      return this.colorScale(value / this.maxValue);
+    }
     return this.noDataColor;
   }
 
   updateCountryFills(duration = 0) {
-    this.parent.selectAll('polygon')
+    this.parent.selectAll('.country-fill')
       .transition()
       .duration(duration)
       .style('fill', d => this.countryFill(d));
+  }
+
+  getMatchingFilter() {
+    // Look for columns that should be associated with the given filter state
+    return this.filterColumns
+      .filter(column => {
+        return Object.keys(this.filterState)
+          .every(key => this.filterState[key] === column[key]);
+      })[0];
   }
 
   updateFilters(selectedFilter) {
@@ -73,31 +91,16 @@ export default class Cartogram extends WorldMap {
     this.filtersContainer.selectAll('button')
       .classed('selected', d => this.filterState[d.group] === d.value);
 
-    // Look for columns that should be associated with the given filter state
-    const matchingColumn = this.filterColumns.filter(column => {
-      return Object.keys(this.filterState).every(key => this.filterState[key] === column[key]);
-    })[0];
+    const matchingColumn = this.getMatchingFilter();
 
     // Update fill with the matching filters
     if (matchingColumn && matchingColumn.keyCode) {
-      this.parent.selectAll('polygon')
+      this.parent.selectAll('.country-fill')
         .transition().duration(300)
         .style('fill', d => {
           if (!d || !d.properties) return this.noDataColor;
           if (!d.properties.joined) return this.noDataColor;
           return this.colorScale(d.properties.joined[matchingColumn.keyCode]);
-        });
-    }
-
-    // Update symbol (overlay) with the matching filters
-    if (matchingColumn && matchingColumn.symbol) {
-      this.countries.selectAll('.country .country-symbol')
-        .transition().duration(300)
-        .style('fill', d => {
-          if (d.properties.joined && d.properties.joined[matchingColumn.symbol] === 'Yes') {
-            return 'url(#dots)';
-          }
-          return 'none';
         });
     }
   }
@@ -110,6 +113,7 @@ export default class Cartogram extends WorldMap {
       n.select('svg').classed('cartogram', true);
       n.select('#labels').attr('pointer-events', 'none');
       n.selectAll('polygon')
+        .classed('country-fill', true)
         .style('fill', 'gray')
         .style('stroke', 'white')
         .style('stroke-width', 0.5)
@@ -123,7 +127,6 @@ export default class Cartogram extends WorldMap {
           overCountry
             .style('stroke', this.mouseoverStroke)
             .classed('country-hover', true);
-          overCountry.node().parentNode.appendChild(overCountry.node());
 
           if (this.tooltipContent) {
             let x = currentEvent.layerX,
@@ -146,11 +149,61 @@ export default class Cartogram extends WorldMap {
         .on('mouseout', this.onCountryMouseout.bind(this));
 
       this.parent = n.select('svg');
+
+      this.addSymbolPolygons();
+
       this.root = this.parent.select('g#root');
       this.cartogramInjected = true;
     }
 
     this.updateCountryFills();
+  }
+
+  addSymbolPolygons(field) {
+    const symbolField = field ? field : this.symbolField;
+    if (!symbolField) return;
+
+    this.parent.selectAll('.country-symbol').remove();
+
+    const symbolPolygons = this.parent.selectAll('.country-fill')
+      .filter(d => d.properties.joined && d.properties.joined[symbolField])
+      .clone(true);
+    
+    symbolPolygons
+      .classed('country-fill', false)
+      .classed('country-symbol', true)
+      .attr('pointer-events', 'none')
+      .style('fill', 'url(#cartogram-dots)');
+
+    const defs = this.parent.insert('defs', '#root');
+    defs
+      .append('pattern')
+        .attr('id', 'cartogram-dots')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', this.options.web ? 6 : 2)
+        .attr('height', this.options.web ? 6 : 2)
+      .append('circle')
+        .attr('cx', this.options.web ? 3 : 2)
+        .attr('cy', this.options.web ? 3 : 2)
+        .attr('r', this.options.web ? 1 : 0.22)
+        .attr('opacity', 0.5)
+        .attr('fill', mapCircleOverlay);
+    defs
+      .append('pattern')
+        .attr('id', 'dots-legend')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', this.options.web ? 6 : 2)
+        .attr('height', this.options.web ? 6 : 2)
+      .append('circle')
+        .attr('cx', this.options.web ? 3 : 2)
+        .attr('cy', this.options.web ? 3 : 2)
+        .attr('r', this.options.web ? 0.75 : 0.22)
+        .attr('fill', '#aaa');
+  }
+
+  renderFilters() {
+    if (this.filtersContainer) return;
+    super.renderFilters();
   }
 
   render() {
@@ -161,6 +214,7 @@ export default class Cartogram extends WorldMap {
       this.legendGroup
         .attr('transform', `translate(${svgWidth - this.legendOptions.width}, 0)`);
     }
+    this.renderFilters();
   }
 
 }

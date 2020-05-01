@@ -8,16 +8,13 @@ import noUiSlider from 'nouislider';
 import { schemeCategoryProblemMap } from '../../colors';
 import TreeMap from '../../maps/TreeMap';
 
-/*
- * Hectares planted with tobacco by country with year filters
- */
-export default class Map2Treemap extends TreeMap {
+export default class Map4Treemap extends TreeMap {
   constructor(parent, options) {
     super(parent, options);
-    this.figurePrefix = '1-map2';
+    this.figurePrefix = '1-map4';
     this.colorScale = scaleOrdinal(schemeCategoryProblemMap);
     this.colorScaleType = 'ordinal';
-    this.valueField = 'Hectares - Keycode';
+    this.valueField = 'Production Keycode';
 
     this.parentContainer.style('padding-top', '25px');
 
@@ -30,7 +27,7 @@ export default class Map2Treemap extends TreeMap {
 
   loadJoinData() {
     return new Promise((resolve, reject) => {
-      csv(this.dataFileUrl('1-map2.csv'), (csvData) => {
+      csv(this.dataFileUrl('1-map4.csv'), (csvData) => {
         const domain = set(csvData.map(d => d[this.valueField])).values().filter(d => d !== '').sort();
         this.colorScale.domain(domain);
         this.yearRange = extent(csvData, d => +d['Year']);
@@ -45,7 +42,7 @@ export default class Map2Treemap extends TreeMap {
       const countryData = joinData.filter(row => row.iso3code === this.getISO3(feature));
       if (countryData.length > 0) {
         feature.properties.joined = countryData.map(d => {
-          let value = parseInt(d['Area harvested'], 10);
+          let value = parseInt(d['Production'], 10);
           if (isNaN(value)) value = null;
           return {
             keycode: d[this.valueField],
@@ -75,17 +72,11 @@ export default class Map2Treemap extends TreeMap {
       .data([true])
       .join(enter => {
         if (this.filtersContainer) return;
-        this.filtersContainer = enter.append('div')
+        this.filtersContainer = this.parentContainer.append('div')
           .classed('ta-visualization-filters', true)
-          .style('position', 'absolute')
-          .style('top', 25)
-          .style('left', 0)
-          .style('width', '100%')
           .lower();
 
-        this.filtersContainer
-          .append('span')
-          .text(this.getTranslation('Filters:', null, 'Visualization'));
+        this.filtersContainer.append('span').text(this.getTranslation('Filters:', null, 'Visualization'));
 
         const yearInput = this.filtersContainer
           .append('div').classed('filter-group', true)
@@ -141,17 +132,16 @@ export default class Map2Treemap extends TreeMap {
   tooltipContent(d) {
     let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     const valueFormat = format(',d');
-    let value = d.data.value;
+    const value = d.data.value;
 
-    // Treat 0 different from null/undefined
     if (value === 0) {
-      content += `<div class="data">${this.getTranslation('No reported production', null, '1-map2')}</div>`;
+      content += `<div class="data">${this.getTranslation('No reported production')}</div>`;
     }
     else if (!value) {
-      content += `<div class="data">${this.getTranslation('Data missing', null, '1-map2')}</div>`;
+      content += `<div class="data">${this.getTranslation('No reported production')}</div>`;
     }
     else {
-      content += `<div class="data">${this.getTranslation('Hectares of tobacco planted', null, '1-map2')}: ${valueFormat(value)}</div>`;
+      content += `<div class="data">${valueFormat(value)} ${this.getTranslation('metric tonnes')}</div>`;
     }
     return content;
   }

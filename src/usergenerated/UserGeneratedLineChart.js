@@ -15,8 +15,6 @@ export default class UserGeneratedLineChart extends LineChart {
     super(parent, options);
     this.options = options;
 
-    // TODO should curve type be an option?
-
     this.groupColumn = this.options.groupColumn;
 
     this.legendItems = [];

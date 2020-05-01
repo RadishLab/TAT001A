@@ -127,19 +127,6 @@ export default class TreeMap extends WorldMap {
           .attr('transform', `translate(${this.treemapMargin.left}, ${this.treemapMargin.top})`)
       ));
 
-    this.smallCountries = this.root.selectAll('.small-countries-container')
-      .data([true])
-      .join(enter => (
-        enter
-          .append('g')
-          .classed('small-countries-container', true)
-          .attr('transform', () => {
-            const x = this.width - this.treemapMargin.right + 50;
-            const y = this.legendGroup.node().getBBox().height + 20;
-            return `translate(${x}, ${y})`
-          })
-      ));
-
     const countriesHierarchy = hierarchy({
       children: (
         this.countriesGeojson.features
@@ -147,7 +134,7 @@ export default class TreeMap extends WorldMap {
             let value;
             let keycode = 0;
 
-            if (f.properties.joined) {
+            if (f.properties.joined && f.properties.joined.length) {
               const yearData = f.properties.joined
                 .filter(row => row.year === this.filterState.year)[0];
               if (yearData) {
@@ -155,8 +142,13 @@ export default class TreeMap extends WorldMap {
                 keycode = yearData.keycode;
               }
             }
+            else if (f.properties.joined) {
+              value = f.properties.joined[this.valueField];
+              keycode = f.properties.joined[this.keyCodeField];
+            }
 
             return {
+              joined: f.properties.joined,
               keycode,
               name: f.properties.NAME,
               value
@@ -232,7 +224,7 @@ export default class TreeMap extends WorldMap {
                 this.tooltip
                   .html(this.tooltipContent(d))
                   .classed('visible', true);
-                this.positionTooltip(x + 10, y + 10);
+                this.positionTooltip(x + 10, y + 10, this.width - this.treemapMargin.left - this.treemapMargin.right);
               }
             })
             .on('mouseout', this.onCountryMouseout.bind(this));
@@ -271,7 +263,22 @@ export default class TreeMap extends WorldMap {
       );
 
     let hiddenLabels = [...this.countries.selectAll('.leaf-label.hidden').data()];
-    hiddenLabels = hiddenLabels
+    const availableHeight = this.height - (this.legendGroup.node().getBBox().height + 20);
+
+    this.renderSmallCountryLabels(hiddenLabels);
+    let smallCountriesHeight = this.smallCountries.node().getBBox().height;
+
+    while (smallCountriesHeight > availableHeight) {
+      hiddenLabels = hiddenLabels
+        .sort((a, b) => a.value - b.value)
+        .slice(0, -1);
+      this.renderSmallCountryLabels(hiddenLabels);
+      smallCountriesHeight = this.smallCountries.node().getBBox().height;
+    }
+  }
+
+  renderSmallCountryLabels(labels) {
+    const sortedLabels = labels
       .sort((a, b) => a.data.name.localeCompare(b.data.name))
       .filter(d => {
         const width = Math.abs(d.x0 - d.x1);
@@ -280,8 +287,21 @@ export default class TreeMap extends WorldMap {
       })
       .map((d, i) => ({ ...d, i }))
 
+    this.smallCountries = this.root.selectAll('.small-countries-container')
+      .data([true])
+      .join(enter => (
+        enter
+          .append('g')
+          .classed('small-countries-container', true)
+          .attr('transform', () => {
+            const x = this.width - this.treemapMargin.right + 50;
+            const y = this.legendGroup.node().getBBox().height + 20;
+            return `translate(${x}, ${y})`
+          })
+      ));
+
     this.smallCountries.selectAll('.small-country')
-      .data(hiddenLabels, d => d.data.name)
+      .data(sortedLabels, d => d.data.name)
       .join(
         enter => (
           enter
@@ -299,19 +319,18 @@ export default class TreeMap extends WorldMap {
                 .html(this.tooltipContent(d))
                 .classed('visible', true);
 
-              this.positionTooltip(d.x1 + this.treemapMargin.left, d.y1 + this.treemapMargin.top);
+              this.positionTooltip(
+                d.x1 + this.treemapMargin.left,
+                d.y1 + this.treemapMargin.top,
+                this.width - this.treemapMargin.left - this.treemapMargin.right
+              );
             })
             .on('mouseleave', d => {
               this.countries.selectAll('.leaf').attr('stroke', null);
             })
         ),
-        update => (
-          update
-            .transition()
-            .duration(300)
-            .attr('transform', d => `translate(0, ${d.i * 12})`)
-        )
-      )
+        update => update.attr('transform', d => `translate(0, ${d.i * 12})`)
+      );
   }
 
   render() {

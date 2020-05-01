@@ -1,12 +1,18 @@
 import Chart2 from './Chart2';
 import Chart3 from './Chart3';
 import Map from './Map';
+import MapCartogram from './MapCartogram';
 import Map2 from './Map2';
 
 export const figures = [
   {
     name: 'map',
     figureClass: Map,
+    type: 'map'
+  },
+  {
+    name: 'mapcartogram',
+    figureClass: MapCartogram,
     type: 'map'
   },
   {
