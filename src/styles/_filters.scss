@@ -4,6 +4,10 @@
   font-size: $font-size;
   margin-left: 5%;
 
+  .noUi-pips-horizontal {
+    height: 40px;
+  }
+
   html[dir="rtl"] & {
     direction: ltr;
   }

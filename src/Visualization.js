@@ -183,9 +183,10 @@ export default class Visualization {
     this.updateFilters(this.filterState);
   }
 
-  positionTooltip(x, y) {
+  positionTooltip(x, y, overrideWidth) {
     let tooltipY = y - 10;
     let tooltipX = x + 20;
+    let visibleWidth = overrideWidth ? overrideWidth : this.width;
 
     const tooltipHeight = this.tooltip.node().offsetHeight;
     const tooltipWidth = this.tooltip.node().offsetWidth;
@@ -197,7 +198,7 @@ export default class Visualization {
     this.tooltip
       .style('top', `${tooltipY}px`);
 
-    if (tooltipX + tooltipWidth < this.width) {
+    if (tooltipX + tooltipWidth < visibleWidth) {
       this.tooltip
         .style('right', 'inherit')
         .style('left', `${tooltipX}px`);

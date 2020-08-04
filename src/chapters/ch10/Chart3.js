@@ -25,11 +25,8 @@ export default class Chart3 extends BarChart {
   }
 
   onTranslationsLoaded() {
-    super.onTranslationsLoaded();
     this.yLabel = this.getTranslation('Revenue growth (in Billion 2014 PPP dollars)');
-    if (this.dataLoaded) {
-      this.render();
-    }
+    super.onTranslationsLoaded();
   }
 
   loadData() {
