@@ -293,6 +293,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   top: 50%;
   right: 120%; }
 
+.cartogram #labels {
+  pointer-events: none; }
+
+.cartogram #labels text {
+  font-size: 10px; }
+
 .ta-visualization .tick {
   color: #585857; }
   .ta-visualization .tick text {
@@ -391,6 +397,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 16px;
   margin-left: 5%; }
+  .ta-visualization-filters .noUi-pips-horizontal {
+    height: 40px; }
   html[dir="rtl"] .ta-visualization-filters {
     direction: ltr; }
   .ta-visualization-filters .filter-button-group {
@@ -448,3 +456,23 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
       margin-bottom: 3px; }
     .ta-visualization-tooltip .tooltip-list-11-map2 {
       font-size: 12px; }
+
+.treemap-chart .leaf-label {
+  font-size: 12px;
+  font-weight: normal;
+  pointer-events: none;
+  text-anchor: middle; }
+  .treemap-chart .leaf-label-country {
+    font-weight: bold; }
+  .treemap-chart .leaf-label.hidden {
+    opacity: 0; }
+
+.treemap-chart .small-country {
+  cursor: pointer; }
+  .treemap-chart .small-country text {
+    font-family: sofia-pro, sans-serif; }
+    .treemap-chart .small-country text:hover {
+      font-weight: bold; }
+
+.treemap-chart .country-hover rect {
+  stroke: #555; }

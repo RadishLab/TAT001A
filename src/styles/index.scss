@@ -17,9 +17,11 @@ $font-size: $export-font-size;
 
 @import 'nouislider/distribute/nouislider';
 
+@import '_cartogram';
 @import '_chart';
 @import '_pieChart';
 @import '_lineChart';
 @import '_map';
 @import '_filters';
 @import '_tooltip';
+@import '_treemap';

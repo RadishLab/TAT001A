@@ -5,12 +5,18 @@ import Chart5 from './Chart5';
 import Chart6 from './Chart6';
 import Chart7 from './Chart7';
 import Map from './Map';
+import MapCartogram from './MapCartogram';
 import Map2 from './Map2';
 
 export const figures = [
   {
     name: 'map',
     figureClass: Map,
+    type: 'map'
+  },
+  {
+    name: 'mapcartogram',
+    figureClass: MapCartogram,
     type: 'map'
   },
   {
