@@ -8,6 +8,7 @@ const languageShortNames = {
   arabic: 'ar',
   chinese: 'zh',
   english: 'en',
+  french: 'fr',
   portuguese: 'pt',
   spanish: 'es'
 };
@@ -34,6 +35,9 @@ export default class Visualization {
     else {
       this.translationsLoaded = true;
     }
+
+    // If Arabic, set rtl (right-to-left)
+    this.rtl = this.options.language === 'ar';
 
     const parentContainerWidth = this.parentContainer.node().getBoundingClientRect().width;
     this.widthCategory = 'large';
@@ -90,12 +94,17 @@ export default class Visualization {
     };
   }
 
+  reverseSentence(sentence){
+    return sentence.split(" ").reverse().join(" ")
+  }
+
   loadTranslations(url) {
     csv(url, translations => {
       const bundles = {};
 
       translations.forEach(translation => {
         Object.keys(languageShortNames).forEach(language => {
+          
           const translatedPhrase = translation[language];
           if (translatedPhrase) {
             if (!bundles[languageShortNames[language]]) {
@@ -103,6 +112,7 @@ export default class Visualization {
             }
             const textKey = translation.english.replace(/\./g, '-').replace(/:/g, '-').trim();
             bundles[languageShortNames[language]][`${translation.figure}|${textKey}`] = translatedPhrase;
+            
           }
         });
       });
@@ -173,9 +183,10 @@ export default class Visualization {
     this.updateFilters(this.filterState);
   }
 
-  positionTooltip(x, y) {
+  positionTooltip(x, y, overrideWidth) {
     let tooltipY = y - 10;
     let tooltipX = x + 20;
+    let visibleWidth = overrideWidth ? overrideWidth : this.width;
 
     const tooltipHeight = this.tooltip.node().offsetHeight;
     const tooltipWidth = this.tooltip.node().offsetWidth;
@@ -187,7 +198,7 @@ export default class Visualization {
     this.tooltip
       .style('top', `${tooltipY}px`);
 
-    if (tooltipX + tooltipWidth < this.width) {
+    if (tooltipX + tooltipWidth < visibleWidth) {
       this.tooltip
         .style('right', 'inherit')
         .style('left', `${tooltipX}px`);

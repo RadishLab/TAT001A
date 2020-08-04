@@ -101,7 +101,7 @@ export default class Map2 extends WorldMap {
       return Object.keys(this.filterState).every(key => this.filterState[key] === column[key]);
     })[0];
 
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     if (d.properties.joined && matchingColumn) {
       const matchingLegendEntry = this.legends[this.filterState.measure].filter(legendEntry => {
         return legendEntry[0] === d.properties.joined[matchingColumn.keyCode];

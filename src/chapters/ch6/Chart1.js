@@ -179,7 +179,7 @@ export default class Chart1 extends BarChart {
         .text(d => this.getTranslation(d.disease));
 
       tobaccoUseDeathBars.selectAll('text')
-        .call(wrap, barWidth * 2);
+        .call(wrap, barWidth * 2, this.rtl);
     }
   }
 

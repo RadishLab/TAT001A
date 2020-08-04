@@ -54,7 +54,7 @@ export default class Map extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     if (d.properties.joined) {
       if (d.properties.joined[this.valueField] === 'both') {
         content += `<div class="data">${this.getTranslation('Industry suing government and government suing industry')}</div>`;

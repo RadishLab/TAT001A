@@ -4,6 +4,14 @@
   font-size: $font-size;
   margin-left: 5%;
 
+  .noUi-pips-horizontal {
+    height: 40px;
+  }
+
+  html[dir="rtl"] & {
+    direction: ltr;
+  }
+
   .filter-button-group {
     display: inline-block;
     margin: 0 5px;

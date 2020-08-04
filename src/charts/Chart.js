@@ -163,7 +163,7 @@ export default class Chart extends Visualization {
         return `translate(0, -${nodes[i].getBBox().height / 2})`;
       });
     if (this.x.bandwidth) {
-      tickText.call(wrap, this.x.bandwidth())
+      tickText.call(wrap, this.x.bandwidth(), this.rtl)
     }
 
     if (this.xLabel) {
@@ -314,6 +314,7 @@ export default class Chart extends Visualization {
       itemsPerColumn = this.legendItems.length / columns;
     }
 
+    if (this.legendItems) {
     this.legendItems.forEach(({ label, value }) => {
       let targetContainer = legend;
       if (columns) {
@@ -348,6 +349,7 @@ export default class Chart extends Visualization {
       }
       itemsAdded++;
     });
+  }
   }
 
   render() {

@@ -36,7 +36,7 @@ export default class Map2 extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     if (d.properties.joined) {
       const marketLeader = d.properties.joined['Market Leader (Company Name)'];
       if (marketLeader) {

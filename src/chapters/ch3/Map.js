@@ -55,7 +55,7 @@ export default class Map extends WorldMap {
   }
 
   tooltipContent(d) {
-    let content = `<div class="country-name">${d.properties.NAME}</div>`;
+    let content = `<div class="country-name">${this.getCountryName(d)}</div>`;
     if (d.properties.joined) {
       let label = this.getTranslation('bans on direct and indirect advertising');
       const count = parseInt(d.properties.joined['TA6 Data'], 10);

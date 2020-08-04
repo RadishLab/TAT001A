@@ -103,6 +103,10 @@ export default class WorldMap extends BaseMap {
     return this.noDataColor;
   }
 
+  getCountryName(d) {
+    return this.getTranslation(d.properties.NAME, 'WorldMap', 'WorldMap');
+  }
+
   onCountryMouseout(d, i, nodes) {
     selectAll('.country-hover')
       .classed('country-hover', false)
